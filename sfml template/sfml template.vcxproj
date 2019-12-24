@@ -148,38 +148,68 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Alphabet.cpp" />
+    <ClCompile Include="BronzeWorking.cpp" />
+    <ClCompile Include="Ceremonial_Burial.cpp" />
     <ClCompile Include="Coal.cpp" />
+    <ClCompile Include="Currency.cpp" />
     <ClCompile Include="Forest.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Gold.cpp" />
     <ClCompile Include="Grassland.cpp" />
     <ClCompile Include="Hills.cpp" />
+    <ClCompile Include="Horseback_Riding.cpp" />
     <ClCompile Include="Horses.cpp" />
+    <ClCompile Include="IronWorking.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MapMaking.cpp" />
+    <ClCompile Include="Masonry.cpp" />
+    <ClCompile Include="Mathematics.cpp" />
+    <ClCompile Include="Monarchy.cpp" />
     <ClCompile Include="Mountain.cpp" />
+    <ClCompile Include="Mysticism.cpp" />
     <ClCompile Include="Oasis.cpp" />
     <ClCompile Include="Oil.cpp" />
     <ClCompile Include="Resourses.cpp" />
     <ClCompile Include="River.cpp" />
+    <ClCompile Include="Technologies.cpp" />
     <ClCompile Include="Terrain.cpp" />
+    <ClCompile Include="Trade.cpp" />
+    <ClCompile Include="Writing.cpp" />
+    <ClCompile Include="СodeOfLaws.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Alphabet.h" />
+    <ClInclude Include="BronzeWorking.h" />
+    <ClInclude Include="Ceremonial_Burial.h" />
     <ClInclude Include="Coal.h" />
+    <ClInclude Include="Currency.h" />
     <ClInclude Include="Forest.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Gold.h" />
     <ClInclude Include="Grassland.h" />
     <ClInclude Include="Hills.h" />
+    <ClInclude Include="Horseback_Riding.h" />
     <ClInclude Include="Horses.h" />
+    <ClInclude Include="IronWorking.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="MapMaking.h" />
     <ClInclude Include="Map_I.h" />
+    <ClInclude Include="Masonry.h" />
+    <ClInclude Include="Mathematics.h" />
+    <ClInclude Include="Monarchy.h" />
     <ClInclude Include="Mountain.h" />
+    <ClInclude Include="Mysticism.h" />
     <ClInclude Include="Oasis.h" />
     <ClInclude Include="Oil.h" />
     <ClInclude Include="Resourses.h" />
     <ClInclude Include="River.h" />
+    <ClInclude Include="Technologies.h" />
     <ClInclude Include="Terrain.h" />
+    <ClInclude Include="Trade.h" />
+    <ClInclude Include="Writing.h" />
+    <ClInclude Include="СodeOfLaws.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
