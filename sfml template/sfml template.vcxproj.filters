@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Resourse">
+      <UniqueIdentifier>{da35aa0d-9f0c-4c0a-8eec-e7a7a05e5cd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logic">
+      <UniqueIdentifier>{51b71fb9-b2ce-4bad-932c-bc959424cc69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Files">
+      <UniqueIdentifier>{3d6de615-942e-4c23-a44d-7944ff81d718}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Terrains">
+      <UniqueIdentifier>{180e6789-c533-49cd-a060-b9a17f625e0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Terrains\All">
+      <UniqueIdentifier>{238db791-bc12-4429-b50a-2079c22c2c31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resourse\All">
+      <UniqueIdentifier>{3c0e0e20-e9a4-4e45-9936-4578f689ea39}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Файлы ресурсов</Filter>
+    </ClCompile>
+    <ClCompile Include="Resourses.cpp">
+      <Filter>Resourse</Filter>
+    </ClCompile>
+    <ClCompile Include="Forest.cpp">
+      <Filter>Terrains\All</Filter>
+    </ClCompile>
+    <ClCompile Include="Grassland.cpp">
+      <Filter>Terrains\All</Filter>
+    </ClCompile>
+    <ClCompile Include="Hills.cpp">
+      <Filter>Terrains\All</Filter>
+    </ClCompile>
+    <ClCompile Include="Mountain.cpp">
+      <Filter>Terrains\All</Filter>
+    </ClCompile>
+    <ClCompile Include="River.cpp">
+      <Filter>Terrains\All</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>Terrains</Filter>
+    </ClCompile>
+    <ClCompile Include="Coal.cpp">
+      <Filter>Resourse\All</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Resourse\All</Filter>
+    </ClCompile>
+    <ClCompile Include="Gold.cpp">
+      <Filter>Resourse\All</Filter>
+    </ClCompile>
+    <ClCompile Include="Horses.cpp">
+      <Filter>Resourse\All</Filter>
+    </ClCompile>
+    <ClCompile Include="Oasis.cpp">
+      <Filter>Resourse\All</Filter>
+    </ClCompile>
+    <ClCompile Include="Oil.cpp">
+      <Filter>Resourse\All</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Resourses.h">
+      <Filter>Resourse</Filter>
+    </ClInclude>
+    <ClInclude Include="Forest.h">
+      <Filter>Terrains\All</Filter>
+    </ClInclude>
+    <ClInclude Include="Grassland.h">
+      <Filter>Terrains\All</Filter>
+    </ClInclude>
+    <ClInclude Include="Hills.h">
+      <Filter>Terrains\All</Filter>
+    </ClInclude>
+    <ClInclude Include="Mountain.h">
+      <Filter>Terrains\All</Filter>
+    </ClInclude>
+    <ClInclude Include="River.h">
+      <Filter>Terrains\All</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>Terrains</Filter>
+    </ClInclude>
+    <ClInclude Include="Oil.h">
+      <Filter>Resourse\All</Filter>
+    </ClInclude>
+    <ClInclude Include="Coal.h">
+      <Filter>Resourse\All</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Resourse\All</Filter>
+    </ClInclude>
+    <ClInclude Include="Gold.h">
+      <Filter>Resourse\All</Filter>
+    </ClInclude>
+    <ClInclude Include="Horses.h">
+      <Filter>Resourse\All</Filter>
+    </ClInclude>
+    <ClInclude Include="Oasis.h">
+      <Filter>Resourse\All</Filter>
+    </ClInclude>
+    <ClInclude Include="Map_I.h" />
+    <ClInclude Include="Map.h" />
+  </ItemGroup>
+</Project>
