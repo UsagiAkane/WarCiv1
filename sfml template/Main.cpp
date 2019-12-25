@@ -23,11 +23,12 @@ int main(void) {
 	River testRiver;
 	Mountain testMountain;
 
-	std::cout<<testGrassland.getDefense();
+	std::cout << testGrassland.getDefense();
 
+	std::srand(time(NULL));
 
 	try {
-		RenderWindow w(VideoMode(1000, 600), "TITLE"/*, Style::Fullscreen*/);
+		RenderWindow w(VideoMode(1920, 1080), "TITLE"/*, Style::Fullscreen*/);
 
 		Map test;
 
@@ -38,9 +39,9 @@ int main(void) {
 			while (w.pollEvent(ev)) {
 				if (ev.type == Event::Closed)
 					w.close();
-				if (ev.key.code == Keyboard::Escape) 
+				if (ev.key.code == Keyboard::Escape)
 					w.close();
-				
+
 			}
 
 			w.clear(Color::Black);
