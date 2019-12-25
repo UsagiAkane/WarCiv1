@@ -9,6 +9,6 @@ private:
 	Horses horses;
 public:
 	Grassland();
-	
+	Grassland(int res);
 
 };

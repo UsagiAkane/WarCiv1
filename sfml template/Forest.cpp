@@ -4,17 +4,26 @@ Forest::Forest()
 {
 	texture.loadFromFile("Terrains\\Forest.png");
 	this->sprite.setTexture(this->texture);
-
 	this->move = 1;
 	this->food = 1;
 	this->prodaction = 2;
 	this->trade = 0;
 	this->defense = 1;
-
-	if (!(rand() % 10)) {
-		this->food += this->game.getFood();
-	}
 }
+//any=Game
+Forest::Forest(int res)
+{
+	texture.loadFromFile("Terrains\\Forest.png");
+	this->sprite.setTexture(this->texture);
+	this->move = 1;
+	this->food = 1;
+	this->prodaction = 2;
+	this->trade = 0;
+	this->defense = 1;
+	this->food += this->game.getFood();
+}
+
+
 
 //void Forest::draw(sf::RenderWindow& w)
 //{
