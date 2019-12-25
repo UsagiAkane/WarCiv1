@@ -18,5 +18,13 @@ public:
 	//void saveMap();
 	//void getTile();
 
+	//int getMove(int x, int y);
+	//int getFood(int x, int y);
+	//int getProdaction(int x, int y);
+	//int getTrade(int x, int y);
+	//double getDefense(int x, int y);
+
+	Terrain getTile(int x, int y);
+
 	void draw(sf::RenderWindow& w);
 };

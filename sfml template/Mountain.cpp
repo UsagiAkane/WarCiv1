@@ -10,11 +10,19 @@ Mountain::Mountain()
 	this->prodaction = 1;
 	this->trade = 0;
 	this->defense = 1.5;
+}
+//1=gold, 2=oasis
+Mountain::Mountain(int res)
+{
+	texture.loadFromFile("Terrains\\Mountains.png");
+	this->sprite.setTexture(this->texture);
 
-	if (!(rand() % 15)) {
-		this->trade += this->gold.getTrade();
-	}
-	else if (!(rand() % 11)) {
-		this->food += this->oasis.getFood();
-	}
+	this->move = 1;
+	this->food = 2;
+	this->prodaction = 1;
+	this->trade = 0;
+	this->defense = 1.5;
+
+	if (res == 1) { this->trade += gold.getTrade(); }
+	else if (res == 2) { this->food += oasis.getFood(); }
 }
