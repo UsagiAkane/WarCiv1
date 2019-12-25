@@ -16,21 +16,27 @@
 using namespace sf;
 
 int main(void) {
+	Forest testforest;
+	Grassland testGrassland;
+	Hills testHills;
+	River testRiver;
+	Mountain testMountain;
+
+	Militia m;
+	Militia b;
+	m.setPosition(96, 96);
 
 	std::srand(time(NULL));
 
 	try {
-
-		RenderWindow w(VideoMode(1920, 1080), "TITLE");
-		Militia m;
-
-
-		Map test(40, 20);
+		RenderWindow w(VideoMode(1100,700),"Lol");
+		Event ev;
+		Map test;
 
 
 		std::cout << "x=1" << ", y=1" << ", def = " << test.getTile(1, 1).getDefense() << ", food = " << test.getTile(1, 1).getFood() << ", move = " << test.getTile(1, 1).getMove() << ", prod = " << test.getTile(1, 1).getProdaction() << ", trade = " << test.getTile(1, 1).getTrade();
 		while (w.isOpen()) {
-			Event ev;
+		
 
 			bool __keyPressedReleased = 0;
 			while (w.pollEvent(ev)) {
@@ -47,7 +53,6 @@ int main(void) {
 
 			test.draw(w);
 			m.draw(w);
-
 
 
 			w.display();
