@@ -2,7 +2,9 @@
 
 Hills::Hills()
 {
-	//texture load from file
+	texture.loadFromFile("Terrains\\Hills.png");
+	this->sprite.setTexture(this->texture);
+
 	this->move = 2;
 	this->food = 1;
 	this->prodaction = 2;

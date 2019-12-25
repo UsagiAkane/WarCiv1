@@ -5,7 +5,7 @@
 class Terrain {
 protected:
 	sf::Texture texture;
-	//sf::Sprite map_forest_tile;
+	sf::Sprite sprite;
 
 	int move;
 	int food;
@@ -19,5 +19,8 @@ public:
 	virtual	int getProdaction();
 	virtual	int getTrade();
 	virtual	double getDefense();
-	//virtual void draw(sf::RenderWindow&w)=0;
+
+	virtual void draw(sf::RenderWindow& w) { w.draw(sprite); }
+	virtual void setPosition(float x, float y) { sprite.setPosition(x, y); }
+
 };

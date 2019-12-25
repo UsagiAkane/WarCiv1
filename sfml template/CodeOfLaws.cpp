@@ -1,13 +1,14 @@
-#include "ÑodeOfLaws.h"
+ï»¿#include "CodeOfLaws.h"
 
-ÑodeOfLaws::ÑodeOfLaws(): Technologies("Code of Laws",0,0)
+CodeOfLaws::CodeOfLaws() : Technologies("Code of Laws", 0, 0)
 {
 }
 
-void ÑodeOfLaws::checkPrevTech(std::vector<Technologies>& b)
+void CodeOfLaws::checkPrevTech(std::vector<Technologies>& b)
 {
 	int count = 0;
 	std::for_each(b.begin(), b.end(), [&count](Technologies t)
 		{ if ((t.getName() == "Alphabet" && t.getIsLearned() == true)) { count++; } });
 	count == 1 ? this->canBeBuildiable = 1 : false;
 }
+

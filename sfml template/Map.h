@@ -1,23 +1,22 @@
 #pragma once
 #include<SFML/Graphics.hpp>
-#include"Map_I.h"
-#include"Terrain.h"
 #include<vector>
-#include"Forest.h"
+#include<string>
+#include "Hills.h"
+#include "Forest.h"
+#include "Mountain.h"
+#include "Grassland.h"
 
-class Map : /*public Map_I,*/ public Terrain {
+class Map {
 private:
-	std::vector<std::vector<Terrain>> map;
+	//char map[100][100];
+	int map[100][100];
+	
 public:
-	Map() {
-		std::vector<Terrain> map1;
-		map1.push_back(Forest());
-		map.push_back(map1);
-	}
+	Map();
 
-	void loadMap();
-	void saveMap();
-	void getTile();
+	//void loadMap();
+	//void saveMap();
+	//void getTile();
 	void draw(sf::RenderWindow& w);
 };
-

@@ -3,6 +3,7 @@
 Forest::Forest()
 {
 	texture.loadFromFile("Terrains\\Forest.png");
+	this->sprite.setTexture(this->texture);
 
 	this->move = 1;
 	this->food = 1;

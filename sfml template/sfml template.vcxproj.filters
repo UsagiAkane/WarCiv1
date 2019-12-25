@@ -5,9 +5,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Vova">
-      <UniqueIdentifier>{1457c6a6-802e-4240-958d-0de8cc48064f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Kastet">
       <UniqueIdentifier>{f693efec-8930-4750-956f-c062dc4dc90d}</UniqueIdentifier>
     </Filter>
@@ -22,6 +19,9 @@
     </Filter>
     <Filter Include="Kastet\Resourse\All">
       <UniqueIdentifier>{3c0e0e20-e9a4-4e45-9936-4578f689ea39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TechnologiesV">
+      <UniqueIdentifier>{1457c6a6-802e-4240-958d-0de8cc48064f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -71,49 +71,49 @@
       <Filter>Kastet</Filter>
     </ClCompile>
     <ClCompile Include="MapMaking.cpp">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClCompile>
     <ClCompile Include="Masonry.cpp">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClCompile>
     <ClCompile Include="Mathematics.cpp">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClCompile>
     <ClCompile Include="Monarchy.cpp">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClCompile>
     <ClCompile Include="Mysticism.cpp">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClCompile>
     <ClCompile Include="Technologies.cpp">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClCompile>
     <ClCompile Include="Trade.cpp">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClCompile>
     <ClCompile Include="Writing.cpp">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClCompile>
     <ClCompile Include="СodeOfLaws.cpp">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClCompile>
     <ClCompile Include="Alphabet.cpp">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClCompile>
     <ClCompile Include="BronzeWorking.cpp">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClCompile>
     <ClCompile Include="Ceremonial_Burial.cpp">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClCompile>
     <ClCompile Include="Currency.cpp">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClCompile>
     <ClCompile Include="Horseback_Riding.cpp">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClCompile>
     <ClCompile Include="IronWorking.cpp">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -163,49 +163,49 @@
       <Filter>Kastet</Filter>
     </ClInclude>
     <ClInclude Include="Alphabet.h">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClInclude>
     <ClInclude Include="BronzeWorking.h">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClInclude>
     <ClInclude Include="Ceremonial_Burial.h">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClInclude>
     <ClInclude Include="Currency.h">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClInclude>
     <ClInclude Include="Horseback_Riding.h">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClInclude>
     <ClInclude Include="IronWorking.h">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClInclude>
     <ClInclude Include="MapMaking.h">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClInclude>
     <ClInclude Include="Masonry.h">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClInclude>
     <ClInclude Include="Mathematics.h">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClInclude>
     <ClInclude Include="Monarchy.h">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClInclude>
     <ClInclude Include="Mysticism.h">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClInclude>
     <ClInclude Include="Technologies.h">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClInclude>
     <ClInclude Include="Trade.h">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClInclude>
     <ClInclude Include="Writing.h">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClInclude>
     <ClInclude Include="СodeOfLaws.h">
-      <Filter>Vova</Filter>
+      <Filter>TechnologiesV</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
