@@ -24,7 +24,9 @@ int main(void) {
 		RenderWindow w(VideoMode(1920, 1080), "TITLE");
 		Militia m;
 
+
 		Map test(40, 20);
+
 
 		std::cout << "x=1" << ", y=1" << ", def = " << test.getTile(1, 1).getDefense() << ", food = " << test.getTile(1, 1).getFood() << ", move = " << test.getTile(1, 1).getMove() << ", prod = " << test.getTile(1, 1).getProdaction() << ", trade = " << test.getTile(1, 1).getTrade();
 		while (w.isOpen()) {
@@ -41,9 +43,10 @@ int main(void) {
 			}
 
 			w.clear(Color::Black);
-
+			
 
 			test.draw(w);
+			m.draw(w);
 
 
 
