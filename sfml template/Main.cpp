@@ -21,25 +21,32 @@ int main(void) {
 
 	try {
 
-		RenderWindow w(VideoMode(1920, 1080), "TITLE");
+		RenderWindow w(VideoMode(1100, 720), "TITLE");
 		Militia m;
 
 
-		Map test(40, 20);
-
+		Map test(200, 200);
+		Event ev;
 
 		std::cout << "x=1" << ", y=1" << ", def = " << test.getTile(1, 1).getDefense() << ", food = " << test.getTile(1, 1).getFood() << ", move = " << test.getTile(1, 1).getMove() << ", prod = " << test.getTile(1, 1).getProdaction() << ", trade = " << test.getTile(1, 1).getTrade();
 		while (w.isOpen()) {
-			Event ev;
+		
 
 			bool __keyPressedReleased = 0;
 			while (w.pollEvent(ev)) {
-				//if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-				//	m.move(ev.mouseButton.x,ev.mouseButton.y);
+				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+					m.move(ev.mouseButton.x,ev.mouseButton.y);
 				if (ev.type == Event::Closed)
+				{
 					w.close();
-				if (ev.key.code == Keyboard::Escape)
+					std::cout << "HERE" << std::endl;
+				}
+					
+				/*if (ev.key.code == Keyboard::Escape)
+				{
 					w.close();
+					std::cout << "HERE" << std::endl;
+				}*/
 			}
 
 			w.clear(Color::Black);
