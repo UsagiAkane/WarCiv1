@@ -9,7 +9,6 @@
 
 class Map {
 private:
-	//char map[100][100];
 	int map[100][100];
 	
 public:
