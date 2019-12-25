@@ -1,29 +1,7 @@
 #include "Map.h"
 
-
 Map::Map(int sizeX, int sizeY)
 {
-	////1-hill  2-forest  3-grass  4-mountain
-	//for (int i = 0; i < 100; i++) {
-	//	for (int j = 0; j < 100; j++) {
-	//		map[i][j] = ((1 + rand() % 4) * 100);
-	//	}
-	//}
-	////1-Coal  2-Game  3-Gold  4-Horses  5-Oasis  6-Oil
-	//for (int i = 0; i < 100; i++) {
-	//	for (int j = 0; j < 100; j++) {
-	//		if (!(rand() % 10)) {
-	//			if (map[i][j] == 100) {
-	//				if (rand() % 2)
-	//					map[i][j] += 1;
-	//				else
-	//					map[i][j] += 6;
-	//			}
-	//		}
-	//	}
-	//}
-
-
 	//1-hill  2-forest  3-grass  4-mountain
 	for (int i = 0; i < sizeY; i++) {
 		std::vector<int>maptmp;
@@ -33,8 +11,8 @@ Map::Map(int sizeX, int sizeY)
 		map.push_back(maptmp);
 	}
 	//1-Coal  2-Game  3-Gold  4-Horses  5-Oasis  6-Oil
-	for (int i = 0; i < 100; i++) {
-		for (int j = 0; j < 100; j++) {
+	for (int i = 0; i < sizeY; i++) {
+		for (int j = 0; j < sizeX; j++) {
 			if (!(rand() % 10)) {
 				if (map.at(i).at(j) == 100) {			//HILL
 					if (rand() % 3)
@@ -81,8 +59,8 @@ void Map::draw(sf::RenderWindow& w)
 	sf::Sprite sprite;
 
 	//1-hill  2-forest  3-grass  4-mountain
-	for (int i = 0; i < 100; i++) {
-		for (int j = 0; j < 100; j++) {
+	for (int i = 0; i < map.size(); i++) {
+		for (int j = 0; j < map.at(i).size(); j++) {
 			if (map[i][j] / 100 == 1) {				//HILL DRAW
 				hill.setPosition(i * 32, j * 32);
 				hill.draw(w);
@@ -133,5 +111,4 @@ void Map::draw(sf::RenderWindow& w)
 			}
 		}
 	}
-
 }
