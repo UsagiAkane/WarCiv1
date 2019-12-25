@@ -16,6 +16,7 @@
 using namespace sf;
 
 int main(void) {
+
 	//Forest testforest;
 	//Grassland testGrassland;
 	//Hills testHills;
@@ -28,7 +29,9 @@ int main(void) {
 	std::srand(time(NULL));
 
 	try {
+
 		RenderWindow w(VideoMode(1920, 1080), "TITLE");
+
 
 		Map test;
 
@@ -37,17 +40,19 @@ int main(void) {
 
 			bool __keyPressedReleased = 0;
 			while (w.pollEvent(ev)) {
+				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+					m.move(ev.mouseButton.x,ev.mouseButton.y);
 				if (ev.type == Event::Closed)
 					w.close();
 				if (ev.key.code == Keyboard::Escape)
 					w.close();
-
 			}
 
 			w.clear(Color::Black);
-
+			
 
 			test.draw(w);
+			m.draw(w);
 
 
 			w.display();
