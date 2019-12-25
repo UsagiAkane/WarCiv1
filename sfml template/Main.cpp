@@ -29,12 +29,12 @@ int main(void) {
 	std::srand(time(NULL));
 
 	try {
-		RenderWindow w(VideoMode(1400,1300),"Lol",sf::Style::Fullscreen);
-
+		RenderWindow w(VideoMode(1100,700),"Lol");
+		Event ev;
 		Map test;
 
 		while (w.isOpen()) {
-			Event ev;
+		
 
 			bool __keyPressedReleased = 0;
 			while (w.pollEvent(ev)) {
