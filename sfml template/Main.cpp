@@ -16,20 +16,22 @@
 using namespace sf;
 
 int main(void) {
-	Forest testforest;
-	Grassland testGrassland;
-	Hills testHills;
-	River testRiver;
-	Mountain testMountain;
 
-	Militia m;
-	Militia b;
-	m.setPosition(96, 96);
+	//Forest testforest;
+	//Grassland testGrassland;
+	//Hills testHills;
+	//River testRiver;
+	//Mountain testMountain;
+	//Militia m;
+	//Militia b;
+	//m.attack(b,testforest);
 
 	std::srand(time(NULL));
 
 	try {
-		RenderWindow w(VideoMode(1400,1300),"Lol",sf::Style::Fullscreen);
+
+		RenderWindow w(VideoMode(1920, 1080), "TITLE");
+
 
 		Map test;
 
@@ -51,6 +53,7 @@ int main(void) {
 
 			test.draw(w);
 			m.draw(w);
+
 
 			w.display();
 		}
