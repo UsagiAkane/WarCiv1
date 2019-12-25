@@ -166,6 +166,7 @@
     <ClCompile Include="MapMaking.cpp" />
     <ClCompile Include="Masonry.cpp" />
     <ClCompile Include="Mathematics.cpp" />
+    <ClCompile Include="Militia.cpp" />
     <ClCompile Include="Monarchy.cpp" />
     <ClCompile Include="Mountain.cpp" />
     <ClCompile Include="Mysticism.cpp" />
@@ -176,6 +177,7 @@
     <ClCompile Include="Technologies.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Trade.cpp" />
+    <ClCompile Include="Unit.cpp" />
     <ClCompile Include="Writing.cpp" />
     <ClCompile Include="CodeOfLaws.cpp" />
   </ItemGroup>
@@ -198,6 +200,7 @@
     <ClInclude Include="Map_I.h" />
     <ClInclude Include="Masonry.h" />
     <ClInclude Include="Mathematics.h" />
+    <ClInclude Include="Militia.h" />
     <ClInclude Include="Monarchy.h" />
     <ClInclude Include="Mountain.h" />
     <ClInclude Include="Mysticism.h" />
@@ -208,6 +211,7 @@
     <ClInclude Include="Technologies.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Trade.h" />
+    <ClInclude Include="Unit.h" />
     <ClInclude Include="Writing.h" />
     <ClInclude Include="CodeOfLaws.h" />
   </ItemGroup>

@@ -3,7 +3,6 @@
 #include <vector>
 #include <algorithm>
 
-//свод законо для него нужен алфавит
 class CodeOfLaws :public Technologies
 {
 private:

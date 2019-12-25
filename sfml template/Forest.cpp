@@ -9,7 +9,7 @@ Forest::Forest()
 	this->food = 1;
 	this->prodaction = 2;
 	this->trade = 0;
-	this->defense = 1.5;
+	this->defense = 1;
 
 	if (!(rand() % 10)) {
 		this->food += this->game.getFood();
