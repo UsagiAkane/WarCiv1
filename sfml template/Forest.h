@@ -7,6 +7,8 @@ private:
 	Game game;
 public:
 	Forest();
+	Forest(int res);
+
 	//void draw(sf::RenderWindow& w);
 };
 

@@ -9,6 +9,7 @@ private:
 	Oasis oasis;
 public:
 	Mountain();
+	Mountain(int res);
 	
 
 };

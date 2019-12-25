@@ -33,13 +33,15 @@ int main(void) {
 		Event ev;
 		Map test;
 
+
+		std::cout << "x=1" << ", y=1" << ", def = " << test.getTile(1, 1).getDefense() << ", food = " << test.getTile(1, 1).getFood() << ", move = " << test.getTile(1, 1).getMove() << ", prod = " << test.getTile(1, 1).getProdaction() << ", trade = " << test.getTile(1, 1).getTrade();
 		while (w.isOpen()) {
 		
 
 			bool __keyPressedReleased = 0;
 			while (w.pollEvent(ev)) {
-				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-					m.move(ev.mouseButton.x,ev.mouseButton.y);
+				//if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+				//	m.move(ev.mouseButton.x,ev.mouseButton.y);
 				if (ev.type == Event::Closed)
 					w.close();
 				if (ev.key.code == Keyboard::Escape)
@@ -52,8 +54,10 @@ int main(void) {
 			test.draw(w);
 			m.draw(w);
 
+
 			w.display();
 		}
+	
 
 	}
 	catch (const std::exception & e) {

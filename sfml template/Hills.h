@@ -9,5 +9,6 @@ private:
 	Oil oil;
 public:
 	Hills();
-	void draw(sf::RenderWindow& w);
+	Hills(int res);
+	//void draw(sf::RenderWindow& w);
 };

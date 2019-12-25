@@ -3,16 +3,16 @@
 Map::Map(int sizeX, int sizeY)
 {
 	//1-hill  2-forest  3-grass  4-mountain
-	for (int i = 0; i < sizeY; i++) {
+	for (int i = 0; i < sizeX; i++) {
 		std::vector<int>maptmp;
-		for (int j = 0; j < sizeX; j++) {
+		for (int j = 0; j < sizeY; j++) {
 			maptmp.push_back(((1 + rand() % 4) * 100));
 		}
 		map.push_back(maptmp);
 	}
 	//1-Coal  2-Game  3-Gold  4-Horses  5-Oasis  6-Oil
-	for (int i = 0; i < sizeY; i++) {
-		for (int j = 0; j < sizeX; j++) {
+	for (int i = 0; i < sizeX; i++) {
+		for (int j = 0; j < sizeY; j++) {
 			if (!(rand() % 10)) {
 				if (map.at(i).at(j) == 100) {			//HILL
 					if (rand() % 3)
@@ -41,6 +41,51 @@ Map::Map(int sizeX, int sizeY)
 	}
 }
 
+//int Map::getMove(int x, int y)
+//{
+//	if (x < map.size() && y < map.at(x).size()) {
+//
+//	}
+//}
+
+Terrain Map::getTile(int x, int y)
+{
+	if (map.at(x).at(y) / 100 == 1) {				//HILL DRAW		
+		if (map.at(x).at(y) % 100 == 1) {		//COAL DRAW
+			return Hills(1);
+		}
+		else if (map.at(x).at(y) % 100 == 6) {	//OIL DRAW
+			return Hills(2);
+		}
+		return Hills();
+	}
+	else if (map.at(x).at(y) / 100 == 2) {			//FOREST DRAW		
+		if (map.at(x).at(y) % 100 == 2) {		//GAME DRAW
+			return Forest(1);
+		}
+		return Forest();
+	}
+	else if (map.at(x).at(y) / 100 == 3) {			//GRASSLAND DRAW		
+		if (map.at(x).at(y) % 100 == 4) {		//HORSES DRAW
+			return Grassland(2);
+		}
+		else if (map.at(x).at(y) % 100 == 1) {	//COAL DRAW
+			return Grassland(1);
+		}
+		return Grassland();
+	}
+	else if (map.at(x).at(y) / 100 == 4) {			//MOUNTAIN DRAW		
+		if (map.at(x).at(y) % 100 == 3) {		//GOLD DRAW
+			return Mountain(1);
+		}
+		else if (map.at(x).at(y) % 100 == 5) {	//OASIS DRAW
+			return Mountain(2);
+		}
+		return Mountain();
+	}
+
+}
+
 void Map::draw(sf::RenderWindow& w)
 {
 	Hills hill;
@@ -61,50 +106,50 @@ void Map::draw(sf::RenderWindow& w)
 	//1-hill  2-forest  3-grass  4-mountain
 	for (int i = 0; i < map.size(); i++) {
 		for (int j = 0; j < map.at(i).size(); j++) {
-			if (map[i][j] / 100 == 1) {				//HILL DRAW
+			if (map[i][j] / 100 == 1) {					//HILL DRAW
 				hill.setPosition(i * 32, j * 32);
 				hill.draw(w);
 				//1-Coal  2-Game  3-Gold  4-Horses  5-Oasis  6-Oil
-				if (map[i][j] % 100 == 1) {			//COAL GEN
+				if (map[i][j] % 100 == 1) {			//COAL DRAW
 					coal.setPosition(i * 32, j * 32);
 					coal.draw(w);
 				}
-				else if (map[i][j] % 100 == 6) {	//OIL GEN
+				else if (map[i][j] % 100 == 6) {	//OIL DRAW
 					oil.setPosition(i * 32, j * 32);
 					oil.draw(w);
 				}
 			}
-			else if (map[i][j] / 100 == 2) {		//FOREST DRAW
+			else if (map[i][j] / 100 == 2) {			//FOREST DRAW
 				forest.setPosition(i * 32, j * 32);
 				forest.draw(w);
 				//1-Coal  2-Game  3-Gold  4-Horses  5-Oasis  6-Oil
-				if (map[i][j] % 100 == 2) {			//GAME GEN
+				if (map[i][j] % 100 == 2) {			//GAME DRAW
 					game.setPosition(i * 32, j * 32);
 					game.draw(w);
 				}
 			}
-			else if (map[i][j] / 100 == 3) {		//GRASSLAND DRAW
+			else if (map[i][j] / 100 == 3) {			//GRASSLAND DRAW
 				grass.setPosition(i * 32, j * 32);
 				grass.draw(w);
 				//1-Coal  2-Game  3-Gold  4-Horses  5-Oasis  6-Oil
-				if (map[i][j] % 100 == 4) {			//HORSES GEN
+				if (map[i][j] % 100 == 4) {			//HORSES DRAW
 					horses.setPosition(i * 32, j * 32);
 					horses.draw(w);
 				}
-				else if (map[i][j] % 100 == 1) {	//COAL GEN
+				else if (map[i][j] % 100 == 1) {	//COAL DRAW
 					coal.setPosition(i * 32, j * 32);
 					coal.draw(w);
 				}
 			}
-			else if (map[i][j] / 100 == 4) {		//MOUNTAIN DRAW
+			else if (map[i][j] / 100 == 4) {			//MOUNTAIN DRAW
 				mountain.setPosition(i * 32, j * 32);
 				mountain.draw(w);
 				//1-Coal  2-Game  3-Gold  4-Horses  5-Oasis  6-Oil
-				if (map[i][j] % 100 == 3) {			//GOLD GEN
+				if (map[i][j] % 100 == 3) {			//GOLD DRAW
 					gold.setPosition(i * 32, j * 32);
 					gold.draw(w);
 				}
-				else if (map[i][j] % 100 == 5) {	//OASIS GEN
+				else if (map[i][j] % 100 == 5) {	//OASIS DRAW
 					oasis.setPosition(i * 32, j * 32);
 					oasis.draw(w);
 				}
