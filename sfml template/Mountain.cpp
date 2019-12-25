@@ -13,10 +13,8 @@ Mountain::Mountain()
 
 	if (!(rand() % 15)) {
 		this->trade += this->gold.getTrade();
-		this->gold.setHave(1);
 	}
 	else if (!(rand() % 11)) {
 		this->food += this->oasis.getFood();
-		this->oasis.setHave(1);
 	}
 }

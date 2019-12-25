@@ -13,11 +13,9 @@ Grassland::Grassland()
 
 	if (!(rand() % 15)) {
 		this->prodaction += this->coal.getProdaction();
-		this->coal.setHave(1);
 	}
 	else if (!(rand() % 11)) {
 		this->prodaction += this->horses.getProdaction();
-		this->horses.setHave(1);
 	}
 }
 

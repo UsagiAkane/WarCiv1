@@ -2,9 +2,9 @@
 
 Coal::Coal()
 {
-	//texture
+	this->texture.loadFromFile("Resources\\Coal.png");
+	this->sprite.setTexture(texture);
 	this->prodaction = 2;
-	this->have = 0;
 }
 
 int Coal::getProdaction()

@@ -5,41 +5,41 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Kastet">
+    <Filter Include="Map kastet">
       <UniqueIdentifier>{f693efec-8930-4750-956f-c062dc4dc90d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Kastet\Terrains">
+    <Filter Include="Map kastet\Terrains">
       <UniqueIdentifier>{180e6789-c533-49cd-a060-b9a17f625e0b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Kastet\Terrains\All">
+    <Filter Include="Map kastet\Terrains\All">
       <UniqueIdentifier>{238db791-bc12-4429-b50a-2079c22c2c31}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Kastet\Resourse">
+    <Filter Include="Map kastet\Resourse">
       <UniqueIdentifier>{da35aa0d-9f0c-4c0a-8eec-e7a7a05e5cd0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Kastet\Resourse\All">
+    <Filter Include="Map kastet\Resourse\All">
       <UniqueIdentifier>{3c0e0e20-e9a4-4e45-9936-4578f689ea39}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TechnologiesV">
+    <Filter Include="Technologies Vova">
       <UniqueIdentifier>{1457c6a6-802e-4240-958d-0de8cc48064f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Units">
-      <UniqueIdentifier>{e868262c-a863-48e1-a0d1-f5cb390abf89}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Units\Childs">
-      <UniqueIdentifier>{0b84d046-fa1b-43a6-9da1-fa17827a733d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Units\Parent Unit">
-      <UniqueIdentifier>{d0c4990a-a536-43b8-8b7e-1d59740fd51b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TechnologiesV\Parent">
+    <Filter Include="Technologies Vova\Parent">
       <UniqueIdentifier>{8ea8d13c-bca8-451d-94b4-e928dbfadac6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TechnologiesV\ChildCPP">
+    <Filter Include="Technologies Vova\ChildCPP">
       <UniqueIdentifier>{77fd46ed-2c8a-40d4-b7d4-64fe437fa2f3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TechnologiesV\ChildHeaders">
+    <Filter Include="Technologies Vova\ChildHeaders">
       <UniqueIdentifier>{f1ec2701-535d-49e7-9d18-5a32a56f50c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Units Vova">
+      <UniqueIdentifier>{e868262c-a863-48e1-a0d1-f5cb390abf89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Units Vova\Childs">
+      <UniqueIdentifier>{0b84d046-fa1b-43a6-9da1-fa17827a733d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Units Vova\Parent Unit">
+      <UniqueIdentifier>{d0c4990a-a536-43b8-8b7e-1d59740fd51b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -47,195 +47,195 @@
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
     <ClCompile Include="Resourses.cpp">
-      <Filter>Kastet\Resourse</Filter>
+      <Filter>Map kastet\Resourse</Filter>
     </ClCompile>
     <ClCompile Include="Forest.cpp">
-      <Filter>Kastet\Terrains\All</Filter>
+      <Filter>Map kastet\Terrains\All</Filter>
     </ClCompile>
     <ClCompile Include="Grassland.cpp">
-      <Filter>Kastet\Terrains\All</Filter>
+      <Filter>Map kastet\Terrains\All</Filter>
     </ClCompile>
     <ClCompile Include="Hills.cpp">
-      <Filter>Kastet\Terrains\All</Filter>
+      <Filter>Map kastet\Terrains\All</Filter>
     </ClCompile>
     <ClCompile Include="Mountain.cpp">
-      <Filter>Kastet\Terrains\All</Filter>
+      <Filter>Map kastet\Terrains\All</Filter>
     </ClCompile>
     <ClCompile Include="River.cpp">
-      <Filter>Kastet\Terrains\All</Filter>
+      <Filter>Map kastet\Terrains\All</Filter>
     </ClCompile>
     <ClCompile Include="Terrain.cpp">
-      <Filter>Kastet\Terrains</Filter>
+      <Filter>Map kastet\Terrains</Filter>
     </ClCompile>
     <ClCompile Include="Coal.cpp">
-      <Filter>Kastet\Resourse\All</Filter>
+      <Filter>Map kastet\Resourse\All</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>Kastet\Resourse\All</Filter>
+      <Filter>Map kastet\Resourse\All</Filter>
     </ClCompile>
     <ClCompile Include="Gold.cpp">
-      <Filter>Kastet\Resourse\All</Filter>
+      <Filter>Map kastet\Resourse\All</Filter>
     </ClCompile>
     <ClCompile Include="Horses.cpp">
-      <Filter>Kastet\Resourse\All</Filter>
+      <Filter>Map kastet\Resourse\All</Filter>
     </ClCompile>
     <ClCompile Include="Oasis.cpp">
-      <Filter>Kastet\Resourse\All</Filter>
+      <Filter>Map kastet\Resourse\All</Filter>
     </ClCompile>
     <ClCompile Include="Oil.cpp">
-      <Filter>Kastet\Resourse\All</Filter>
+      <Filter>Map kastet\Resourse\All</Filter>
     </ClCompile>
     <ClCompile Include="Map.cpp">
-      <Filter>Kastet</Filter>
+      <Filter>Map kastet</Filter>
     </ClCompile>
     <ClCompile Include="Alphabet.cpp">
-      <Filter>TechnologiesV\ChildCPP</Filter>
+      <Filter>Technologies Vova\ChildCPP</Filter>
     </ClCompile>
     <ClCompile Include="BronzeWorking.cpp">
-      <Filter>TechnologiesV\ChildCPP</Filter>
+      <Filter>Technologies Vova\ChildCPP</Filter>
     </ClCompile>
     <ClCompile Include="Ceremonial_Burial.cpp">
-      <Filter>TechnologiesV\ChildCPP</Filter>
+      <Filter>Technologies Vova\ChildCPP</Filter>
     </ClCompile>
     <ClCompile Include="Currency.cpp">
-      <Filter>TechnologiesV\ChildCPP</Filter>
+      <Filter>Technologies Vova\ChildCPP</Filter>
     </ClCompile>
     <ClCompile Include="Horseback_Riding.cpp">
-      <Filter>TechnologiesV\ChildCPP</Filter>
+      <Filter>Technologies Vova\ChildCPP</Filter>
     </ClCompile>
     <ClCompile Include="IronWorking.cpp">
-      <Filter>TechnologiesV\ChildCPP</Filter>
+      <Filter>Technologies Vova\ChildCPP</Filter>
     </ClCompile>
     <ClCompile Include="MapMaking.cpp">
-      <Filter>TechnologiesV\ChildCPP</Filter>
+      <Filter>Technologies Vova\ChildCPP</Filter>
     </ClCompile>
     <ClCompile Include="Masonry.cpp">
-      <Filter>TechnologiesV\ChildCPP</Filter>
+      <Filter>Technologies Vova\ChildCPP</Filter>
     </ClCompile>
     <ClCompile Include="Mathematics.cpp">
-      <Filter>TechnologiesV\ChildCPP</Filter>
+      <Filter>Technologies Vova\ChildCPP</Filter>
     </ClCompile>
     <ClCompile Include="Monarchy.cpp">
-      <Filter>TechnologiesV\ChildCPP</Filter>
+      <Filter>Technologies Vova\ChildCPP</Filter>
     </ClCompile>
     <ClCompile Include="Mysticism.cpp">
-      <Filter>TechnologiesV\ChildCPP</Filter>
+      <Filter>Technologies Vova\ChildCPP</Filter>
     </ClCompile>
     <ClCompile Include="Trade.cpp">
-      <Filter>TechnologiesV\ChildCPP</Filter>
+      <Filter>Technologies Vova\ChildCPP</Filter>
     </ClCompile>
     <ClCompile Include="Writing.cpp">
-      <Filter>TechnologiesV\ChildCPP</Filter>
+      <Filter>Technologies Vova\ChildCPP</Filter>
     </ClCompile>
     <ClCompile Include="CodeOfLaws.cpp">
-      <Filter>TechnologiesV\ChildCPP</Filter>
+      <Filter>Technologies Vova\ChildCPP</Filter>
     </ClCompile>
     <ClCompile Include="Unit.cpp">
-      <Filter>Units\Parent Unit</Filter>
+      <Filter>Units Vova\Parent Unit</Filter>
     </ClCompile>
     <ClCompile Include="Militia.cpp">
-      <Filter>Units\Childs</Filter>
+      <Filter>Units Vova\Childs</Filter>
     </ClCompile>
     <ClCompile Include="Technologies.cpp">
-      <Filter>TechnologiesV\Parent</Filter>
+      <Filter>Technologies Vova\Parent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resourses.h">
-      <Filter>Kastet\Resourse</Filter>
+      <Filter>Map kastet\Resourse</Filter>
     </ClInclude>
     <ClInclude Include="Forest.h">
-      <Filter>Kastet\Terrains\All</Filter>
+      <Filter>Map kastet\Terrains\All</Filter>
     </ClInclude>
     <ClInclude Include="Grassland.h">
-      <Filter>Kastet\Terrains\All</Filter>
+      <Filter>Map kastet\Terrains\All</Filter>
     </ClInclude>
     <ClInclude Include="Hills.h">
-      <Filter>Kastet\Terrains\All</Filter>
+      <Filter>Map kastet\Terrains\All</Filter>
     </ClInclude>
     <ClInclude Include="Mountain.h">
-      <Filter>Kastet\Terrains\All</Filter>
+      <Filter>Map kastet\Terrains\All</Filter>
     </ClInclude>
     <ClInclude Include="River.h">
-      <Filter>Kastet\Terrains\All</Filter>
+      <Filter>Map kastet\Terrains\All</Filter>
     </ClInclude>
     <ClInclude Include="Terrain.h">
-      <Filter>Kastet\Terrains</Filter>
+      <Filter>Map kastet\Terrains</Filter>
     </ClInclude>
     <ClInclude Include="Oil.h">
-      <Filter>Kastet\Resourse\All</Filter>
+      <Filter>Map kastet\Resourse\All</Filter>
     </ClInclude>
     <ClInclude Include="Coal.h">
-      <Filter>Kastet\Resourse\All</Filter>
+      <Filter>Map kastet\Resourse\All</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>Kastet\Resourse\All</Filter>
+      <Filter>Map kastet\Resourse\All</Filter>
     </ClInclude>
     <ClInclude Include="Gold.h">
-      <Filter>Kastet\Resourse\All</Filter>
+      <Filter>Map kastet\Resourse\All</Filter>
     </ClInclude>
     <ClInclude Include="Horses.h">
-      <Filter>Kastet\Resourse\All</Filter>
+      <Filter>Map kastet\Resourse\All</Filter>
     </ClInclude>
     <ClInclude Include="Oasis.h">
-      <Filter>Kastet\Resourse\All</Filter>
+      <Filter>Map kastet\Resourse\All</Filter>
     </ClInclude>
     <ClInclude Include="Map.h">
-      <Filter>Kastet</Filter>
+      <Filter>Map kastet</Filter>
     </ClInclude>
     <ClInclude Include="Map_I.h">
-      <Filter>Kastet</Filter>
+      <Filter>Map kastet</Filter>
     </ClInclude>
     <ClInclude Include="Alphabet.h">
-      <Filter>TechnologiesV\ChildHeaders</Filter>
+      <Filter>Technologies Vova\ChildHeaders</Filter>
     </ClInclude>
     <ClInclude Include="BronzeWorking.h">
-      <Filter>TechnologiesV\ChildHeaders</Filter>
+      <Filter>Technologies Vova\ChildHeaders</Filter>
     </ClInclude>
     <ClInclude Include="Ceremonial_Burial.h">
-      <Filter>TechnologiesV\ChildHeaders</Filter>
+      <Filter>Technologies Vova\ChildHeaders</Filter>
     </ClInclude>
     <ClInclude Include="Currency.h">
-      <Filter>TechnologiesV\ChildHeaders</Filter>
+      <Filter>Technologies Vova\ChildHeaders</Filter>
     </ClInclude>
     <ClInclude Include="Horseback_Riding.h">
-      <Filter>TechnologiesV\ChildHeaders</Filter>
+      <Filter>Technologies Vova\ChildHeaders</Filter>
     </ClInclude>
     <ClInclude Include="IronWorking.h">
-      <Filter>TechnologiesV\ChildHeaders</Filter>
+      <Filter>Technologies Vova\ChildHeaders</Filter>
     </ClInclude>
     <ClInclude Include="MapMaking.h">
-      <Filter>TechnologiesV\ChildHeaders</Filter>
+      <Filter>Technologies Vova\ChildHeaders</Filter>
     </ClInclude>
     <ClInclude Include="Masonry.h">
-      <Filter>TechnologiesV\ChildHeaders</Filter>
+      <Filter>Technologies Vova\ChildHeaders</Filter>
     </ClInclude>
     <ClInclude Include="Mathematics.h">
-      <Filter>TechnologiesV\ChildHeaders</Filter>
+      <Filter>Technologies Vova\ChildHeaders</Filter>
     </ClInclude>
     <ClInclude Include="Monarchy.h">
-      <Filter>TechnologiesV\ChildHeaders</Filter>
+      <Filter>Technologies Vova\ChildHeaders</Filter>
     </ClInclude>
     <ClInclude Include="Mysticism.h">
-      <Filter>TechnologiesV\ChildHeaders</Filter>
+      <Filter>Technologies Vova\ChildHeaders</Filter>
     </ClInclude>
     <ClInclude Include="Trade.h">
-      <Filter>TechnologiesV\ChildHeaders</Filter>
+      <Filter>Technologies Vova\ChildHeaders</Filter>
     </ClInclude>
     <ClInclude Include="Writing.h">
-      <Filter>TechnologiesV\ChildHeaders</Filter>
+      <Filter>Technologies Vova\ChildHeaders</Filter>
     </ClInclude>
     <ClInclude Include="CodeOfLaws.h">
-      <Filter>TechnologiesV\ChildHeaders</Filter>
+      <Filter>Technologies Vova\ChildHeaders</Filter>
     </ClInclude>
     <ClInclude Include="Unit.h">
-      <Filter>Units\Parent Unit</Filter>
+      <Filter>Units Vova\Parent Unit</Filter>
     </ClInclude>
     <ClInclude Include="Militia.h">
-      <Filter>Units\Childs</Filter>
+      <Filter>Units Vova\Childs</Filter>
     </ClInclude>
     <ClInclude Include="Technologies.h">
-      <Filter>TechnologiesV\Parent</Filter>
+      <Filter>Technologies Vova\Parent</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
