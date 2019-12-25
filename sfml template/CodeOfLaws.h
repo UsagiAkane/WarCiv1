@@ -4,11 +4,11 @@
 #include <algorithm>
 
 //свод законо для него нужен алфавит
-class СodeOfLaws :public Technologies
+class CodeOfLaws :public Technologies
 {
 private:
 public:
-	СodeOfLaws();
+	CodeOfLaws();
 	void checkPrevTech(std::vector<Technologies>& b);
 };
 

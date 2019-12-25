@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Файлы ресурсов">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Vova">
       <UniqueIdentifier>{1457c6a6-802e-4240-958d-0de8cc48064f}</UniqueIdentifier>
     </Filter>
@@ -22,6 +18,10 @@
     </Filter>
     <Filter Include="Kastet\Resourse\All">
       <UniqueIdentifier>{3c0e0e20-e9a4-4e45-9936-4578f689ea39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -94,9 +94,6 @@
     <ClCompile Include="Writing.cpp">
       <Filter>Vova</Filter>
     </ClCompile>
-    <ClCompile Include="СodeOfLaws.cpp">
-      <Filter>Vova</Filter>
-    </ClCompile>
     <ClCompile Include="Alphabet.cpp">
       <Filter>Vova</Filter>
     </ClCompile>
@@ -113,6 +110,9 @@
       <Filter>Vova</Filter>
     </ClCompile>
     <ClCompile Include="IronWorking.cpp">
+      <Filter>Vova</Filter>
+    </ClCompile>
+    <ClCompile Include="CodeOfLaws.cpp">
       <Filter>Vova</Filter>
     </ClCompile>
   </ItemGroup>
@@ -204,7 +204,7 @@
     <ClInclude Include="Writing.h">
       <Filter>Vova</Filter>
     </ClInclude>
-    <ClInclude Include="СodeOfLaws.h">
+    <ClInclude Include="CodeOfLaws.h">
       <Filter>Vova</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,7 +2,9 @@
 
 Mountain::Mountain()
 {
-	//texture load from file
+	texture.loadFromFile("Terrains\\Mountains.png");
+	this->sprite.setTexture(this->texture);
+
 	this->move = 1;
 	this->food = 2;
 	this->prodaction = 1;

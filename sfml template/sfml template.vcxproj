@@ -177,7 +177,7 @@
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Trade.cpp" />
     <ClCompile Include="Writing.cpp" />
-    <ClCompile Include="СodeOfLaws.cpp" />
+    <ClCompile Include="CodeOfLaws.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Alphabet.h" />
@@ -209,7 +209,7 @@
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Trade.h" />
     <ClInclude Include="Writing.h" />
-    <ClInclude Include="СodeOfLaws.h" />
+    <ClInclude Include="CodeOfLaws.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

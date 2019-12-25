@@ -12,6 +12,8 @@
 
 #include"Map.h"
 
+#include"CodeOfLaws.h"
+
 using namespace sf;
 
 int main(void) {
@@ -27,6 +29,8 @@ int main(void) {
 	try {
 		RenderWindow w(VideoMode(1000, 600), "TITLE"/*, Style::Fullscreen*/);
 
+		Map test;
+
 		while (w.isOpen()) {
 			Event ev;
 
@@ -34,13 +38,15 @@ int main(void) {
 			while (w.pollEvent(ev)) {
 				if (ev.type == Event::Closed)
 					w.close();
-
+				if (ev.key.code == Keyboard::Escape) 
+					w.close();
+				
 			}
 
 			w.clear(Color::Black);
 
 
-			Map test;
+			test.draw(w);
 			//test.draw(w);
 
 			//Texture texture_forest;
@@ -48,8 +54,6 @@ int main(void) {
 			//Sprite map_forest_tile(texture_forest);
 
 			//w.draw(map_forest_tile);//user
-
-
 
 
 			w.display();
