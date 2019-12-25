@@ -2,9 +2,9 @@
 
 Horses::Horses()
 {
-	//tex
+	this->texture.loadFromFile("Resources\\Horses.png");
+	this->sprite.setTexture(texture);
 	this->prodaction = 2;
-	this->have = 0;
 }
 
 int Horses::getProdaction()

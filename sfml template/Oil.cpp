@@ -2,9 +2,9 @@
 
 Oil::Oil()
 {
-	//tex
+	this->texture.loadFromFile("Resources\\Oil.png");
+	this->sprite.setTexture(texture);
 	this->prodaction = 4;
-	this->have = 0;
 }
 
 int Oil::getProdaction()

@@ -2,9 +2,9 @@
 
 Game::Game()
 {
-	//texture
+	this->texture.loadFromFile("Resources\\Game.png");
+	this->sprite.setTexture(texture);
 	this->food = 2;
-	this->have = 0;
 }
 
 int Game::getFood()

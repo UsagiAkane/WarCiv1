@@ -2,9 +2,9 @@
 
 Oasis::Oasis()
 {
-	//tex
+	this->texture.loadFromFile("Resources\\Oasis.png");
+	this->sprite.setTexture(texture);
 	this->food = 3;
-	this->have = 0;
 }
 
 int Oasis::getFood()
