@@ -1,8 +1,6 @@
 #pragma once
 #include "Resourses.h"
-class Coal :
-	public Resourses
-{
+class Coal : public Resourses{
 private:
 	int prodaction;
 public:
@@ -10,4 +8,3 @@ public:
 
 	int getProdaction();
 };
-

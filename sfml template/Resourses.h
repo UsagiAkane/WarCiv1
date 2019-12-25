@@ -5,8 +5,9 @@
 class Resourses
 {
 protected:
-	bool have;
 	sf::Texture texture;
+	sf::Sprite sprite;
 public:
-	void setHave(bool have);
+	void draw(sf::RenderWindow& w);
+	virtual void setPosition(float x, float y) { sprite.setPosition(x, y); }
 };

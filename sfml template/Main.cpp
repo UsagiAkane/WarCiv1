@@ -16,20 +16,19 @@
 using namespace sf;
 
 int main(void) {
-	Forest testforest;
-	Grassland testGrassland;
-	Hills testHills;
-	River testRiver;
-	Mountain testMountain;
-
-	Militia m;
-	Militia b;
-	m.attack(b,testforest);
+	//Forest testforest;
+	//Grassland testGrassland;
+	//Hills testHills;
+	//River testRiver;
+	//Mountain testMountain;
+	//Militia m;
+	//Militia b;
+	//m.attack(b,testforest);
 
 	std::srand(time(NULL));
 
 	try {
-		RenderWindow w(VideoMode(800, 800), "TITLE");
+		RenderWindow w(VideoMode(1920, 1080), "TITLE");
 
 		Map test;
 

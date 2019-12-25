@@ -2,9 +2,9 @@
 
 Gold::Gold()
 {
-	//texture
+	this->texture.loadFromFile("Resources\\Gold.png");
+	this->sprite.setTexture(texture);
 	this->trade = 2;
-	this->have = 0;
 }
 
 int Gold::getTrade()

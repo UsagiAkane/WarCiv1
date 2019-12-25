@@ -1,6 +1,6 @@
 #include "Resourses.h"
 
-void Resourses::setHave(bool have)
+void Resourses::draw(sf::RenderWindow& w)
 {
-	this->have = have;
+	w.draw(sprite);
 }

@@ -13,7 +13,6 @@ Forest::Forest()
 
 	if (!(rand() % 10)) {
 		this->food += this->game.getFood();
-		this->game.setHave(1);
 	}
 }
 
