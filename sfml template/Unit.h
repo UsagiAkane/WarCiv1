@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include "Map.h"
+#include <Windows.h>
 
 #define BORDER_PIXEL_32 32
 #define BORDER_PIXEL_16 16
@@ -36,7 +37,7 @@ protected:
 	bool isActive;
 	bool isAlive;
 	//functions to call inside
-	void CheckForAttackAndAttack(int mouse_x, int mouse_y, Map& map, std::vector<int> enemies_id, std::vector<Unit> enemies);
+	void CheckForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::vector<int> &enemies_id, std::vector<Unit> &enemies);
 
 public:
 	Unit(std::string name,int health,int armor,int damage,int speed,
@@ -44,7 +45,7 @@ public:
 		int index,int PlayerID,int maxspeed);
 
 	//functions that can be changed
-	virtual void move(int mouse_x,int mouse_y, Map& map,std::vector<int> enemiesListId, std::vector<Unit> enemy);
+	virtual void move(int mouse_x,int mouse_y, Map& map,std::vector<int>& enemiesListId, std::vector<Unit>& enemy);
 	virtual void attack(Unit& u, Map& map,int x,int y);
 	virtual void attackTake();
 	//functions ,that can be used by pressed key
@@ -67,6 +68,7 @@ public:
 	void setCountOfKill(unsigned int countOfKill);
 	void setActive(bool active);
 	void setPosition(int x, int y);
+	void setPlayerID(int ID);
 	//needed
 	void draw(sf::RenderWindow& w);
 	void spawn(int x,int y, Map& map);
