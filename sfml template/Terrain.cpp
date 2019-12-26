@@ -16,6 +16,11 @@ sf::Texture Terrain::getTexture()
 	return this->texture;
 }
 
+std::string Terrain::getName()
+{
+	return this->name;
+}
+
 int Terrain::getMove()
 {
 	return this->move;

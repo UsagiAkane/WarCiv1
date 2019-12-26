@@ -17,6 +17,7 @@ public:
 	Terrain();
 
 	virtual sf::Texture getTexture();
+	virtual	std::string getName();
 	virtual	int getMove();
 	virtual	int getFood();
 	virtual	int getProdaction();

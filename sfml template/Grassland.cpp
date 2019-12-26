@@ -5,7 +5,7 @@ Grassland::Grassland(int res)
 {
 	texture.loadFromFile("Terrains\\Grassland.png");
 	this->sprite.setTexture(this->texture);
-
+	this->name = "grassland";
 	this->move = 1;
 	this->food = 2;
 	this->prodaction = 1;

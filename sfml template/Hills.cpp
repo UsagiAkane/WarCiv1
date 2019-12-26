@@ -5,7 +5,7 @@ Hills::Hills(int res)
 {
 	texture.loadFromFile("Terrains\\Hills.png");
 	this->sprite.setTexture(this->texture);
-
+	this->name = "hills";
 	this->move = 2;
 	this->food = 1;
 	this->prodaction = 2;

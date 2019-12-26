@@ -5,7 +5,7 @@ Mountain::Mountain(int res)
 {
 	texture.loadFromFile("Terrains\\Mountains.png");
 	this->sprite.setTexture(this->texture);
-
+	this->name = "mountain";
 	this->move = 3;
 	this->food = 2;
 	this->prodaction = 1;
