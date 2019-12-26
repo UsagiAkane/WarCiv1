@@ -1,14 +1,14 @@
 #include "Unit.h"
-
-void Unit::CheckForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id, std::vector<Unit>& enemies)
+//Checking whether a unit can attack
+void Unit::checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id, std::vector<Unit>& enemies)
 {
-	int time = 0;
-	for (auto i : enemies_id)
+	int time = 0;//trash variable
+	for (auto i : enemies_id)//try to find enemy in enemy vector
 	{
-		if (i == (map.getUnitInd(mouse_x, mouse_y) / 100))
+		if (i == (map.getUnitInd(mouse_x, mouse_y) / 100))//compare id of all playeres and enemies id
 		{
-			//show to ruslan
-			for (auto j : enemies)
+			//show to ruslan debug
+			for (auto j : enemies)//
 			{
 				if (j.getIndex() == (map.getUnitInd(mouse_x, mouse_y) % 100))
 				{
@@ -20,6 +20,17 @@ void Unit::CheckForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::
 			break;
 
 		}
+	}
+}
+
+void Unit::animationOfAttack(int value,sf::RenderWindow & w,Map & map)
+{
+	if (value == 1)
+	{
+		
+		/*
+		warriorSprite.setPosition(positionX, positionY);
+		w.draw(warriorSprite);*/
 	}
 }
 
@@ -36,104 +47,104 @@ Unit::Unit(std::string name, int health, int armor, int damage, int speed, unsig
 	this->price = price;
 	this->index = index;
 	this->playerID = PlayerID;
-	this->isActive = false;
+	this->isActive = true;
 	this->countOfKill = 0;
 	this->isAlive = 1;
 	this->positionX = 0;
 	this->positionY = 0;
-
 }
 
-void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id, std::vector<Unit>& enemies)
+void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id, std::vector<Unit>& enemies,sf::RenderWindow & w)
 {
-
-	//if (isActive != 0)
-	//{
-
+	/*if (isActive != 0)
+	{*/
 		//right
-	if (((mouse_x <= this->positionX + BORDER_PIXEL_64 && mouse_x >= this->positionX + BORDER_PIXEL_32) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_32)))
-	{
-		if ((map.getUnitInd(mouse_x, mouse_y)) == 0)
+		if (((mouse_x <= this->positionX + BORDER_PIXEL_64 && mouse_x >= this->positionX + BORDER_PIXEL_32) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_32)))
 		{
-			positionX += BORDER_PIXEL_32;
-			this->warriorSprite.setPosition(positionX, positionY);
-			this->speed--;
-			map.moveUnit(positionX - BORDER_PIXEL_32, positionY, positionX, positionY);
-		}
-		else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)
-			CheckForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies);
+			if ((map.getUnitInd(mouse_x, mouse_y)) == 0)
+			{
+				positionX += BORDER_PIXEL_32;
+				this->warriorSprite.setPosition(positionX, positionY);
+				this->speed--;
+				map.moveUnit(positionX - BORDER_PIXEL_32, positionY, positionX, positionY);
+			}
+			else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0) //check index of unit
+			{
+				checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies);   //Checking whether a unit can attack
+				animationOfAttack(1, w,map);
+			}
 
+		}
+		//left
+		else if (((mouse_x >= this->positionX - BORDER_PIXEL_32 && mouse_x <= this->positionX) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_32)))
+		{
+			if ((map.getUnitInd(mouse_x, mouse_y)) == 0)
+			{
+				positionX -= BORDER_PIXEL_32;
+				this->warriorSprite.setPosition(positionX, positionY);
+				this->speed--;
+				map.moveUnit(positionX + BORDER_PIXEL_32, positionY, positionX, positionY);
+			}
+			else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
+				checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies); //Checking whether a unit can attack
+		}
+		//down
+		else if ((mouse_y >= positionY - BORDER_PIXEL_32 && mouse_y <= positionY) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_32))
+		{
+			if ((map.getUnitInd(mouse_x, mouse_y)) == 0)
+			{
+				positionY -= BORDER_PIXEL_32;
+				this->warriorSprite.setPosition(positionX, positionY);
+				this->speed--;
+				map.moveUnit(positionX, positionY + BORDER_PIXEL_32, positionX, positionY);
+			}
+			else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
+				checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies); //Checking whether a unit can attack
 
-	}
-	//left
-	else if (((mouse_x >= this->positionX - BORDER_PIXEL_32 && mouse_x <= this->positionX) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_32)))
-	{
-		if ((map.getUnitInd(mouse_x, mouse_y)) == 0)
-		{
-			positionX -= BORDER_PIXEL_32;
-			this->warriorSprite.setPosition(positionX, positionY);
-			this->speed--;
-			map.moveUnit(positionX + BORDER_PIXEL_32, positionY, positionX, positionY);
 		}
-		else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)
-			CheckForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies);
-	}
-	//down
-	else if ((mouse_y >= positionY - BORDER_PIXEL_32 && mouse_y <= positionY) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_32))
-	{
-		if ((map.getUnitInd(mouse_x, mouse_y)) == 0)
+		//top
+		else if ((mouse_y <= positionY + BORDER_PIXEL_64 && mouse_y >= positionY + BORDER_PIXEL_32) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_32))
 		{
-			positionY -= BORDER_PIXEL_32;
-			this->warriorSprite.setPosition(positionX, positionY);
-			this->speed--;
-			map.moveUnit(positionX, positionY + BORDER_PIXEL_32, positionX, positionY);
+			if ((map.getUnitInd(mouse_x, mouse_y)) == 0)
+			{
+				positionY += BORDER_PIXEL_32;
+				this->warriorSprite.setPosition(positionX, positionY);
+				this->speed--;
+				map.moveUnit(positionX, positionY - BORDER_PIXEL_32, positionX, positionY);
+			}
+			else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
+				checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies); //Checking whether a unit can attack
 		}
-		else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)
-			CheckForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies);
+		else {}
+		if (speed <= 0)
+			this->isActive = false;
 
-	}
-	//top
-	else if ((mouse_y <= positionY + BORDER_PIXEL_64 && mouse_y >= positionY + BORDER_PIXEL_32) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_32))
-	{
-		if ((map.getUnitInd(mouse_x, mouse_y)) == 0)
-		{
-			positionY += BORDER_PIXEL_32;
-			this->warriorSprite.setPosition(positionX, positionY);
-			this->speed--;
-			map.moveUnit(positionX, positionY - BORDER_PIXEL_32, positionX, positionY);
-		}
-		else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)
-			CheckForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies);
-	}
-	else {}
-	if (speed <= 0)
-		this->isActive = false;
-	//}
+	/*}*/
 }
 
 void Unit::attack(Unit& uEnemy, Map& map, int x, int y)
 {
+	
 	//damage to attacker
 	this->health -= ((uEnemy.getDamage() + uEnemy.getRank()) - (this->armor));
 	this->setArmor(this->armor - (uEnemy.getDamage() + uEnemy.getRank()));
 	//damage to defender unit
 	uEnemy.health -= ((this->getDamage() + this->getRank()) - (uEnemy.getArmor() + map.getTile(x, y).getDefense()));
 	uEnemy.setArmor(armor - (this->getDamage() + this->getRank()));
-	std::cout << uEnemy.getArmor() << std::endl;
-	std::cout << uEnemy.getHealth() << std::endl;
+
 
 	//debug
 	if (this->getHealth() <= 0)
 		this->death(map);
 
 	if (uEnemy.getHealth() <= 0)
+	{
 		uEnemy.death(map);
+		this->countOfKill += 1;
+	}
+		
 
 
-}
-
-void Unit::attackTake()
-{
 }
 
 void Unit::skipTurn()
@@ -247,6 +258,25 @@ void Unit::death(Map& map)
 	this->isAlive = false;
 	this->isActive = false;
 	this->max_speed = false;
+}
+
+void Unit::setColorByID()
+{
+	if (this->playerID == 1)
+		warriorSprite.setColor(sf::Color(180, 180, 255));//blue
+	else if (this->playerID == 2)
+		warriorSprite.setColor(sf::Color(255, 180, 180));//red
+	else if (this->playerID == 3)
+		warriorSprite.setColor(sf::Color(255, 255, 100));//yellow
+	else if (this->playerID == 4)
+		warriorSprite.setColor(sf::Color(180, 255, 180));//green
+	else if (this->playerID == 5)
+		warriorSprite.setColor(sf::Color(100, 255, 255));//purple
+	else if (this->playerID == 6)
+		warriorSprite.setColor(sf::Color(220, 125, 220));//pink
+	else if (this->playerID > 6)
+		warriorSprite.setColor(sf::Color(50, 50, 50));//dark
+
 }
 
 void Unit::setArmor(int armor)

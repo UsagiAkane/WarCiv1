@@ -37,7 +37,8 @@ protected:
 	bool isActive;
 	bool isAlive;
 	//functions to call inside
-	void CheckForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::vector<int> &enemies_id, std::vector<Unit> &enemies);
+	void checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::vector<int> &enemies_id, std::vector<Unit> &enemies);
+	void animationOfAttack(int value,sf::RenderWindow& w,Map& map);
 
 public:
 	Unit(std::string name,int health,int armor,int damage,int speed,
@@ -45,9 +46,8 @@ public:
 		int index,int PlayerID,int maxspeed);
 
 	//functions that can be changed
-	virtual void move(int mouse_x,int mouse_y, Map& map,std::vector<int>& enemiesListId, std::vector<Unit>& enemy);
+	virtual void move(int mouse_x,int mouse_y, Map& map,std::vector<int>& enemiesListId, std::vector<Unit>& enemy, sf::RenderWindow& w);
 	virtual void attack(Unit& u, Map& map,int x,int y);
-	virtual void attackTake();
 	//functions ,that can be used by pressed key
 	void skipTurn();
 	void burrow();
@@ -74,6 +74,8 @@ public:
 	void draw(sf::RenderWindow& w);
 	void spawn(int x,int y, Map& map);
 	void death(Map& map);
+	void setColorByID();
+
 
 
 	~Unit();
