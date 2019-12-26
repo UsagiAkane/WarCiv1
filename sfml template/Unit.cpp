@@ -1,6 +1,6 @@
 #include "Unit.h"
 
-Unit::Unit(std::string name, int health, int armor, int damage, int speed, unsigned short rank, int salary, int productionPrice, int price, int index, int PlayerID,int maxspeed)
+Unit::Unit(std::string name, int health, int armor, int damage, int speed, unsigned short rank, int salary, int productionPrice, int price, int index, int PlayerID, int maxspeed)
 {
 	this->name = name;
 	this->health = health;
@@ -22,31 +22,31 @@ Unit::Unit(std::string name, int health, int armor, int damage, int speed, unsig
 
 void Unit::move(int mouse_x, int mouse_y)
 {
-	if (isActive !=0)
+	if (isActive != 0)
 	{
 		//right
-		if (((mouse_x <= this->positionX+ BORDER_PIXEL_64 && mouse_x >= this->positionX+ BORDER_PIXEL_32)&& (mouse_y >= positionY && mouse_y <=this->positionY+ BORDER_PIXEL_32)))
+		if (((mouse_x <= this->positionX + BORDER_PIXEL_64 && mouse_x >= this->positionX + BORDER_PIXEL_32) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_32)))
 		{
 			positionX += BORDER_PIXEL_32;
 			this->warriorSprite.setPosition(positionX, positionY);
 			this->speed--;
 		}
 		//left
-		else if (((mouse_x >= this->positionX - BORDER_PIXEL_32 && mouse_x <= this->positionX) && (mouse_y >= positionY && mouse_y <= this->positionY+ BORDER_PIXEL_32)))
+		else if (((mouse_x >= this->positionX - BORDER_PIXEL_32 && mouse_x <= this->positionX) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_32)))
 		{
 			positionX -= BORDER_PIXEL_32;
 			this->warriorSprite.setPosition(positionX, positionY);
 			this->speed--;
 		}
 		//down
-		else if ((mouse_y >= positionY- BORDER_PIXEL_32 && mouse_y <=positionY) && (mouse_x >= positionX && mouse_x <= positionX+ BORDER_PIXEL_32))
+		else if ((mouse_y >= positionY - BORDER_PIXEL_32 && mouse_y <= positionY) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_32))
 		{
 			positionY -= BORDER_PIXEL_32;
 			this->warriorSprite.setPosition(positionX, positionY);
 			this->speed--;
 		}
 		//top
-		else if ((mouse_y <= positionY + BORDER_PIXEL_64 && mouse_y >= positionY+ BORDER_PIXEL_32) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_32))
+		else if ((mouse_y <= positionY + BORDER_PIXEL_64 && mouse_y >= positionY + BORDER_PIXEL_32) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_32))
 		{
 			positionY += BORDER_PIXEL_32;
 			this->warriorSprite.setPosition(positionX, positionY);

@@ -5,10 +5,13 @@ Map::Map(int sizeX, int sizeY)
 	//1-hill  2-forest  3-grass  4-mountain
 	for (int i = 0; i < sizeX; i++) {
 		std::vector<int>maptmp;
+		std::vector<int>unitstmp;
 		for (int j = 0; j < sizeY; j++) {
 			maptmp.push_back(((1 + rand() % 4) * 100));
+			unitstmp.push_back(0);
 		}
-		map.push_back(maptmp);
+		this->map.push_back(maptmp);
+		this->units.push_back(unitstmp);
 	}
 	//1-Coal  2-Game  3-Gold  4-Horses  5-Oasis  6-Oil
 	for (int i = 0; i < sizeX; i++) {
@@ -40,13 +43,6 @@ Map::Map(int sizeX, int sizeY)
 		}
 	}
 }
-
-//int Map::getMove(int x, int y)
-//{
-//	if (x < map.size() && y < map.at(x).size()) {
-//
-//	}
-//}
 
 Terrain Map::getTile(int x, int y)
 {
@@ -84,6 +80,22 @@ Terrain Map::getTile(int x, int y)
 		return Mountain();
 	}
 
+}
+
+int Map::getUnitInd(int x, int y)
+{
+	return this->units.at(x).at(y);
+}
+
+void Map::pushUnit(int x, int y, int unit)
+{
+	this->units.at(x).at(y) = unit;
+}
+
+void Map::moveUnit(int x, int y, int newx, int newy)
+{
+	this->units.at(newx).at(newy) = this->units.at(x).at(y);
+	this->units.at(x).at(y) = 0;
 }
 
 void Map::draw(sf::RenderWindow& w)
