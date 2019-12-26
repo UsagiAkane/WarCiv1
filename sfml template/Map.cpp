@@ -110,6 +110,13 @@ void Map::moveUnit(int x, int y, int newx, int newy) {
 	this->units.at(x).at(y) = 0;
 }
 
+void Map::delUnit(int x, int y)
+{
+	x /= 32;
+	y /= 32;
+	this->units.at(x).at(y) = 0;
+}
+
 void Map::draw(sf::RenderWindow& w) {
 	Hills hill;
 	Forest forest;

@@ -19,28 +19,25 @@ using namespace sf;
 //КОСТЕ СДЕЛАТЬ ДЕЛИТ С КАРТЫ
 int main(void) {
 
-	//std::srand(time(NULL));
+	std::srand(time(NULL));
 	Map test(100, 100);
-	Militia m;
+
+	//enemies units
 	Legion l;
 	Militia m2enemy;
-
 	std::vector<Unit> unites;
-
-	
 	m2enemy.setPlayerID(2);
-
-	m.spawn(192, 192, test);
 	l.spawn(96, 96, test);
 	m2enemy.spawn(128, 128, test);
-
 	unites.push_back(l);
 	unites.push_back(m2enemy);
-
-	std::vector<int> enemiesID;
-	enemiesID.push_back(2);
-
+	//my
 	std::vector<Unit> my;
+	std::vector<int> enemiesID;
+	Militia m;
+	m.setHealth(10);
+	m.spawn(192, 192, test);
+	enemiesID.push_back(2);
 	my.push_back(m);
 
 	//std::cout<<test.getTileVec(1, 1).getMove();
@@ -57,7 +54,8 @@ int main(void) {
 
 
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-					m.move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y, test, enemiesID, unites);
+					std::for_each(my.begin(), my.end(), [&w, &test, &enemiesID, &unites](Unit& u)
+						{u.move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y, test, enemiesID, unites); });
 					test.getTile(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y).__getInfo_DEBUG();
 				}
 

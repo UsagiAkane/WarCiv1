@@ -69,10 +69,12 @@ public:
 	void setActive(bool active);
 	void setPosition(int x, int y);
 	void setPlayerID(int ID);
+	void setArmor(int armor);
 	//needed
 	void draw(sf::RenderWindow& w);
 	void spawn(int x,int y, Map& map);
 	void death(Map& map);
+
 
 	~Unit();
 	
