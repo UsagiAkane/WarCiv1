@@ -1,32 +1,16 @@
 #include "Forest.h"
 
-Forest::Forest()
-{
-	texture.loadFromFile("Terrains\\Forest.png");
-	this->sprite.setTexture(this->texture);
-	this->move = 1;
-	this->food = 1;
-	this->prodaction = 2;
-	this->trade = 0;
-	this->defense = 1;
-}
-//any=Game
 Forest::Forest(int res)
 {
 	texture.loadFromFile("Terrains\\Forest.png");
 	this->sprite.setTexture(this->texture);
+
 	this->move = 1;
 	this->food = 1;
 	this->prodaction = 2;
 	this->trade = 0;
 	this->defense = 1;
-	this->food += this->game.getFood();
+
+	if (res == 1)
+		this->food += this->game.getFood();
 }
-
-
-
-//void Forest::draw(sf::RenderWindow& w)
-//{
-//	sf::Sprite map_forest_tile(this->texture);
-//	w.draw(map_forest_tile);
-//}

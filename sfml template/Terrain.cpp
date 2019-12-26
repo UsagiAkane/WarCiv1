@@ -1,4 +1,15 @@
+#include <iostream>
 #include "Terrain.h";
+
+Terrain::Terrain()
+{
+	this->name = "<Terrain>";
+	this->move = 0;
+	this->food = 0;
+	this->prodaction = 0;
+	this->trade = 0;
+	this->defense = 0;
+}
 
 sf::Texture Terrain::getTexture()
 {
@@ -25,7 +36,19 @@ int Terrain::getTrade()
 	return this->trade;
 }
 
-double Terrain::getDefense()
+int Terrain::getDefense()
 {
 	return this->defense;
+}
+
+void Terrain::__getInfo_DEBUG()
+{
+	std::cout << "\n-----tile-----\n";
+	std::cout << "name = " << this->name << std::endl;
+	std::cout << "move = " << this->move << std::endl;
+	std::cout << "food = " << this->food << std::endl;
+	std::cout << "prodaction = " << this->prodaction << std::endl;
+	std::cout << "trade = " << this->trade << std::endl;
+	std::cout << "defense = " << this->defense;
+	std::cout << "\n---tile-end---\n";
 }

@@ -61,9 +61,6 @@
     <ClCompile Include="Mountain.cpp">
       <Filter>Map kastet\Terrains\All</Filter>
     </ClCompile>
-    <ClCompile Include="River.cpp">
-      <Filter>Map kastet\Terrains\All</Filter>
-    </ClCompile>
     <ClCompile Include="Terrain.cpp">
       <Filter>Map kastet\Terrains</Filter>
     </ClCompile>
@@ -157,9 +154,6 @@
       <Filter>Map kastet\Terrains\All</Filter>
     </ClInclude>
     <ClInclude Include="Mountain.h">
-      <Filter>Map kastet\Terrains\All</Filter>
-    </ClInclude>
-    <ClInclude Include="River.h">
       <Filter>Map kastet\Terrains\All</Filter>
     </ClInclude>
     <ClInclude Include="Terrain.h">
