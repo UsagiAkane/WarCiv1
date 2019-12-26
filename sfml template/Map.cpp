@@ -7,7 +7,7 @@ Map::Map(int sizeX, int sizeY)
 		std::vector<int>maptmp;
 		std::vector<int>unitstmp;
 		for (int j = 0; j < sizeY; j++) {
-			maptmp.push_back(((1 + rand() % 4) * 100));
+			maptmp.push_back(((1 + rand() % 5) * 100));
 			unitstmp.push_back(0);
 		}
 		this->map.push_back(maptmp);
@@ -44,7 +44,13 @@ Map::Map(int sizeX, int sizeY)
 	}
 }
 
-Terrain Map::getTile(int x, int y)
+Terrain Map::getTile(int x, int y) {
+	x /= 32;
+	y /= 32;
+	return getTileVec(x, y);
+}
+
+Terrain Map::getTileVec(int x, int y)
 {
 	if (map.at(x).at(y) / 100 == 1) {				//HILL DRAW		
 		if (map.at(x).at(y) % 100 == 1) {		//COAL DRAW
@@ -79,41 +85,37 @@ Terrain Map::getTile(int x, int y)
 		}
 		return Mountain();
 	}
-
+	else if (map.at(x).at(y) / 100 == 5)			//OCEAN
+		return Ocean();
 }
 
-int Map::getUnitInd(int x, int y)
-{
+int Map::getUnitInd(int x, int y) {
 	x /= 32;
 	y /= 32;
-	//if(x)
 	return this->units.at(x).at(y);
 }
 
-void Map::pushUnit(int x, int y, int unit)
-{
+void Map::pushUnit(int x, int y, int unit) {
 	x /= 32;
 	y /= 32;
 	this->units.at(x).at(y) = unit;
 }
 
-void Map::moveUnit(int x, int y, int newx, int newy)
-{
+void Map::moveUnit(int x, int y, int newx, int newy) {
 	x /= 32;
 	y /= 32;
 	newx /= 32;
 	newy /= 32;
-
 	this->units.at(newx).at(newy) = this->units.at(x).at(y);
 	this->units.at(x).at(y) = 0;
 }
 
-void Map::draw(sf::RenderWindow& w)
-{
+void Map::draw(sf::RenderWindow& w) {
 	Hills hill;
 	Forest forest;
 	Grassland grass;
 	Mountain mountain;
+	Ocean ocean;
 
 	Coal coal;
 	Game game;
@@ -121,9 +123,6 @@ void Map::draw(sf::RenderWindow& w)
 	Horses horses;
 	Oasis oasis;
 	Oil oil;
-
-	sf::Texture resTex;
-	sf::Sprite sprite;
 
 	//1-hill  2-forest  3-grass  4-mountain
 	for (int i = 0; i < map.size(); i++) {
@@ -175,6 +174,10 @@ void Map::draw(sf::RenderWindow& w)
 					oasis.setPosition(i * 32, j * 32);
 					oasis.draw(w);
 				}
+			}
+			else if (map[i][j] / 100 == 5) {			//OCEAN
+				ocean.setPosition(i * 32, j * 32);
+				ocean.draw(w);
 			}
 		}
 	}

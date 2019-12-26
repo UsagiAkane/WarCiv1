@@ -61,9 +61,6 @@
     <ClCompile Include="Mountain.cpp">
       <Filter>Map kastet\Terrains\All</Filter>
     </ClCompile>
-    <ClCompile Include="River.cpp">
-      <Filter>Map kastet\Terrains\All</Filter>
-    </ClCompile>
     <ClCompile Include="Terrain.cpp">
       <Filter>Map kastet\Terrains</Filter>
     </ClCompile>
@@ -142,6 +139,9 @@
     <ClCompile Include="Legion.cpp">
       <Filter>Units Vova\Childs</Filter>
     </ClCompile>
+    <ClCompile Include="Ocean.cpp">
+      <Filter>Map kastet\Terrains\All</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resourses.h">
@@ -157,9 +157,6 @@
       <Filter>Map kastet\Terrains\All</Filter>
     </ClInclude>
     <ClInclude Include="Mountain.h">
-      <Filter>Map kastet\Terrains\All</Filter>
-    </ClInclude>
-    <ClInclude Include="River.h">
       <Filter>Map kastet\Terrains\All</Filter>
     </ClInclude>
     <ClInclude Include="Terrain.h">
@@ -242,6 +239,9 @@
     </ClInclude>
     <ClInclude Include="Legion.h">
       <Filter>Units Vova\Childs</Filter>
+    </ClInclude>
+    <ClInclude Include="Ocean.h">
+      <Filter>Map kastet\Terrains\All</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

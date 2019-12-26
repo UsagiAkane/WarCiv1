@@ -8,8 +8,5 @@ private:
 	Gold gold;
 	Oasis oasis;
 public:
-	Mountain();
-	Mountain(int res);
-	
-
+	Mountain(int res=0);
 };

@@ -7,7 +7,6 @@
 #include "Forest.h"
 #include "Grassland.h"
 #include "Hills.h"
-#include "River.h"
 #include "Mountain.h"
 #include "Map.h"
 #include "CodeofLaws.h"
@@ -44,7 +43,7 @@ int main(void) {
 	std::vector<Unit> my;
 	my.push_back(m);
 
-
+	//std::cout<<test.getTileVec(1, 1).getMove();
 
 
 	try {
@@ -56,8 +55,12 @@ int main(void) {
 			while (w.pollEvent(ev)) {
 
 
-				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-					my.at(0).move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y, test,enemiesID,unites);
+
+				if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+					m.move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y, test, enemiesID, unites);
+					test.getTile(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y).__getInfo_DEBUG();
+				}
+
 				if (ev.type == Event::Closed)
 					w.close();
 

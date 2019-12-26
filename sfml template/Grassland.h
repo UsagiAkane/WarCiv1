@@ -8,7 +8,5 @@ private:
 	Coal coal;
 	Horses horses;
 public:
-	Grassland();
-	Grassland(int res);
-
+	Grassland(int res=0);
 };
