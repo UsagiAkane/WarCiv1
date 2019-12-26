@@ -172,6 +172,7 @@
     <ClCompile Include="Mountain.cpp" />
     <ClCompile Include="Mysticism.cpp" />
     <ClCompile Include="Oasis.cpp" />
+    <ClCompile Include="Ocean.cpp" />
     <ClCompile Include="Oil.cpp" />
     <ClCompile Include="Resourses.cpp" />
     <ClCompile Include="Technologies.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="Mountain.h" />
     <ClInclude Include="Mysticism.h" />
     <ClInclude Include="Oasis.h" />
+    <ClInclude Include="Ocean.h" />
     <ClInclude Include="Oil.h" />
     <ClInclude Include="Resourses.h" />
     <ClInclude Include="Technologies.h" />

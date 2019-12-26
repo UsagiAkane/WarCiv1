@@ -139,6 +139,9 @@
     <ClCompile Include="Legion.cpp">
       <Filter>Units Vova\Childs</Filter>
     </ClCompile>
+    <ClCompile Include="Ocean.cpp">
+      <Filter>Map kastet\Terrains\All</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resourses.h">
@@ -236,6 +239,9 @@
     </ClInclude>
     <ClInclude Include="Legion.h">
       <Filter>Units Vova\Childs</Filter>
+    </ClInclude>
+    <ClInclude Include="Ocean.h">
+      <Filter>Map kastet\Terrains\All</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

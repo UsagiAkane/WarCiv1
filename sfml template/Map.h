@@ -6,6 +6,7 @@
 #include "Forest.h"
 #include "Mountain.h"
 #include "Grassland.h"
+#include "Ocean.h"
 #include "Terrain.h"
 
 class Map {
