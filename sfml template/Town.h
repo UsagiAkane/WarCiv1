@@ -26,6 +26,8 @@ public:
 
 	//functions that can be changed
 	void attackTake();
+	void createUnit(int x, int y, Map& map);
+	void createBuilding(int building);
 	//getters
 	int getHealth();
 	int getArmor();
