@@ -1,5 +1,28 @@
 #include "Unit.h"
 
+void Unit::CheckForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id, std::vector<Unit> &enemies)
+{
+	int time=0;
+	for (auto i : enemies_id)
+	{
+		if (i == (map.getUnitInd(mouse_x, mouse_y) / 100))
+		{
+			//show to ruslan
+			for (auto j : enemies)
+			{
+				if (j.getIndex() == (map.getUnitInd(mouse_x, mouse_y) % 100))
+				{
+					attack(enemies.at(time), map, mouse_x, mouse_y);
+					break;
+				}
+				time++;
+			}
+			break;
+
+		}
+	}
+}
+
 Unit::Unit(std::string name, int health, int armor, int damage, int speed, unsigned short rank, int salary, int productionPrice, int price, int index, int PlayerID, int maxspeed)
 {
 	this->name = name;
@@ -21,7 +44,7 @@ Unit::Unit(std::string name, int health, int armor, int damage, int speed, unsig
 
 }
 
-void Unit::move(int mouse_x, int mouse_y,Map & map,std::vector<int> enemies_id,std::vector<Unit> enemies)
+void Unit::move(int mouse_x, int mouse_y,Map & map,std::vector<int> &enemies_id,std::vector<Unit>& enemies)
 {
 
 	//if (isActive != 0)
@@ -37,27 +60,9 @@ void Unit::move(int mouse_x, int mouse_y,Map & map,std::vector<int> enemies_id,s
 				this->speed--;
 				map.moveUnit(positionX - BORDER_PIXEL_32, positionY, positionX, positionY);
 			}
-			else if ((map.getUnitInd(mouse_x, mouse_y)) != 0)
-			{
-				for (auto i : enemies_id)
-				{
-					//std::cout << <<std::endl;
-					if (i ==(map.getUnitInd(mouse_x,mouse_y)/100))
-					{
-						for (auto j: enemies)
-						{
-							if (j.getIndex() == (map.getUnitInd(mouse_x, mouse_y) % 100))
-							{
-								attack(j,map,mouse_x,mouse_y);
-								break;
-							}
-							
-						}
-						break;
-					    
-					}
-				}
-			}
+			else if ((map.getUnitInd(mouse_x, mouse_y)) %100 != 0)
+				CheckForAttackAndAttackHide(mouse_x,mouse_y,map,enemies_id,enemies);
+	
 		
 		}
 		//left
@@ -70,6 +75,8 @@ void Unit::move(int mouse_x, int mouse_y,Map & map,std::vector<int> enemies_id,s
 				this->speed--;
 				map.moveUnit(positionX + BORDER_PIXEL_32, positionY, positionX, positionY);
 			}
+			else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)
+				CheckForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies);
 		}
 		//down
 		else if ((mouse_y >= positionY - BORDER_PIXEL_32 && mouse_y <= positionY) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_32))
@@ -81,6 +88,8 @@ void Unit::move(int mouse_x, int mouse_y,Map & map,std::vector<int> enemies_id,s
 				this->speed--;
 				map.moveUnit(positionX, positionY + BORDER_PIXEL_32, positionX, positionY);
 			}
+			else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)
+				CheckForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies);
 
 		}
 		//top
@@ -93,26 +102,27 @@ void Unit::move(int mouse_x, int mouse_y,Map & map,std::vector<int> enemies_id,s
 				this->speed--;
 				map.moveUnit(positionX, positionY - BORDER_PIXEL_32, positionX, positionY);
 			}
+			else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)
+				CheckForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies);
 		}
 		else {}
 		if (speed <= 0)
-		{
 			this->isActive = false;
-		}
 	//}
 }
 
 void Unit::attack(Unit& uEnemy, Map & map,int x,int y)
 {
 	//damage to attacker
-	this->health -= (uEnemy.getDamage() + uEnemy.getRank()) - (this->armor /*+ map.getTile(x,y).getDefense()*/);
+	this->health -= ((uEnemy.getDamage() + uEnemy.getRank()) - (this->armor /*+ map.getTile(x,y).getDefense()*/));
 	//damage to attacked unit
-	uEnemy.health -= (getDamage() + getRank()) - (uEnemy.armor/* + map.getTile(x, y).getDefense()*/);
+	uEnemy.health -= ((this->getDamage() + this->getRank()) - (uEnemy.getArmor()/* + map.getTile(x, y).getDefense()*/));
 	//debug
-	if (this->health <= 0)
-		this->isAlive = false;
-	if (uEnemy.health <= 0)
-		uEnemy.isAlive = false;
+	if (this->getHealth() <= 0)
+		this->death(map);
+		
+	if (uEnemy.getHealth() <= 0)
+		uEnemy.death(map);
 
 
 }
@@ -206,13 +216,16 @@ void Unit::setPosition(int x, int y)
 	this->warriorSprite.setPosition(x, y);
 }
 
+void Unit::setPlayerID(int ID)
+{
+	this->playerID = ID;
+}
+
 void Unit::draw(sf::RenderWindow& w)
 {
 	if (this->isAlive)
-	{
 		w.draw(this->warriorSprite);
-	}
-	
+
 }
 
 void Unit::spawn(int x, int y, Map & map)
@@ -223,7 +236,12 @@ void Unit::spawn(int x, int y, Map & map)
 	map.pushUnit(x, y, (this->playerID*100) + this->index);
 }
 
-
+void Unit::death(Map& map)
+{
+		this->isAlive = false;
+		this->isActive = false;
+		this->max_speed = false;
+}
 
 sf::Sprite Unit::getSprite()
 {

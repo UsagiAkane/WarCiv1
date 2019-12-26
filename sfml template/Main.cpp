@@ -12,72 +12,74 @@
 #include "CodeofLaws.h"
 #include "Militia.h"
 #include "Legion.h"
+#include <algorithm>
 
 using namespace sf;
 
+//КОСТЕ СДЕЛАТЬ ДЕЛИТ С КАРТЫ
 int main(void) {
 
 	//std::srand(time(NULL));
 	Map test(100, 100);
 	Militia m;
 	Legion l;
+	Militia m2enemy;
 
 	std::vector<Unit> unites;
 
-	unites.push_back(l);
+	
+	m2enemy.setPlayerID(2);
 
 	m.spawn(192, 192, test);
 	l.spawn(96, 96, test);
+	m2enemy.spawn(128, 128, test);
+
+	unites.push_back(l);
+	unites.push_back(m2enemy);
 
 	std::vector<int> enemiesID;
 	enemiesID.push_back(2);
 
+	std::vector<Unit> my;
+	my.push_back(m);
 
 	//std::cout<<test.getTileVec(1, 1).getMove();
 
+
 	try {
-
-
 		RenderWindow w(VideoMode(1100, 720), "TITLE");
-
-
 
 		while (w.isOpen()) {
 			Event ev;
 
-
-			bool __keyPressedReleased = 0;
 			while (w.pollEvent(ev)) {
+
 
 
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 					m.move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y, test, enemiesID, unites);
 					test.getTile(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y).__getInfo_DEBUG();
 				}
+
 				if (ev.type == Event::Closed)
-				{
 					w.close();
-					std::cout << "HERE12" << std::endl;
-				}
+
 
 			}
-
-
-
-
-
-
-
-
-
-
-
 			w.clear(Color::Black);
 
-
+		
 			test.draw(w);
-			l.draw(w);
-			m.draw(w);
+
+			for (auto i : unites)
+			{
+				i.draw(w);
+			}
+			for (auto i: my)
+			{
+				i.draw(w);
+			}
+	
 
 
 			w.display();
