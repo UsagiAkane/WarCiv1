@@ -35,16 +35,18 @@ int main(void) {
 		Militia m;
 
 
-		Map test(200, 200);
-		Event ev;
+		Map test(100, 100);
 
 
 		std::cout << "x=1" << ", y=1" << ", def = " << test.getTile(1, 1).getDefense() << ", food = " << test.getTile(1, 1).getFood() << ", move = " << test.getTile(1, 1).getMove() << ", prod = " << test.getTile(1, 1).getProdaction() << ", trade = " << test.getTile(1, 1).getTrade();
 		while (w.isOpen()) {
-		
+			Event ev;
+
 
 			bool __keyPressedReleased = 0;
 			while (w.pollEvent(ev)) {
+
+
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 					m.move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y);
 
@@ -54,10 +56,21 @@ int main(void) {
 					w.close();
 					std::cout << "HERE12" << std::endl;
 				}
+
 			}
 
+
+
+
+
+
+
+
+
+
+
 			w.clear(Color::Black);
-			
+
 
 			test.draw(w);
 			m.draw(w);
@@ -65,7 +78,7 @@ int main(void) {
 
 			w.display();
 		}
-	
+
 
 	}
 	catch (const std::exception & e) {
