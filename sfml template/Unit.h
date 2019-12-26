@@ -41,7 +41,7 @@ public:
 		int index,int PlayerID,int maxspeed);
 
 	//functions that can be changed
-	virtual void move(int mouse_x,int mouse_y, Map& map);
+	virtual void move(int mouse_x,int mouse_y, Map& map,std::vector<int> enemiesListId, std::vector<Unit> enemy);
 	virtual void attack(Unit& u, Map& map,int x,int y);
 	virtual void attackTake();
 	//functions ,that can be used by pressed key
@@ -56,6 +56,7 @@ public:
 	bool getIsAlive();
 	bool getIsActive();
 	sf::Sprite getSprite();
+	int getIndex();
 	//setters 
 	void setDamage(int damage);
 	void setHealth(int health);

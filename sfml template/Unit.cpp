@@ -12,7 +12,7 @@ Unit::Unit(std::string name, int health, int armor, int damage, int speed, unsig
 	this->productionPrice = productionPrice;
 	this->price = price;
 	this->index = index;
-	this->playerID = 1;//debug
+	this->playerID = PlayerID;
 	this->isActive = false;
 	this->countOfKill = 0;
 	this->isAlive = 1;
@@ -21,7 +21,7 @@ Unit::Unit(std::string name, int health, int armor, int damage, int speed, unsig
 
 }
 
-void Unit::move(int mouse_x, int mouse_y,Map & map)
+void Unit::move(int mouse_x, int mouse_y,Map & map,std::vector<int> enemies_id,std::vector<Unit> enemies)
 {
 
 	//if (isActive != 0)
@@ -36,6 +36,27 @@ void Unit::move(int mouse_x, int mouse_y,Map & map)
 				this->warriorSprite.setPosition(positionX, positionY);
 				this->speed--;
 				map.moveUnit(positionX - BORDER_PIXEL_32, positionY, positionX, positionY);
+			}
+			else if ((map.getUnitInd(mouse_x, mouse_y)) != 0)
+			{
+				for (auto i : enemies_id)
+				{
+					//std::cout << <<std::endl;
+					if (i ==(map.getUnitInd(mouse_x,mouse_y)/100))
+					{
+						for (auto j: enemies)
+						{
+							if (j.getIndex() == (map.getUnitInd(mouse_x, mouse_y) % 100))
+							{
+								attack(j,map,mouse_x,mouse_y);
+								break;
+							}
+							
+						}
+						break;
+					    
+					}
+				}
 			}
 		
 		}
@@ -84,9 +105,9 @@ void Unit::move(int mouse_x, int mouse_y,Map & map)
 void Unit::attack(Unit& uEnemy, Map & map,int x,int y)
 {
 	//damage to attacker
-	this->health -= (uEnemy.getDamage() + uEnemy.getRank()) - (this->armor + map.getTile(x,y).getDefense());
+	this->health -= (uEnemy.getDamage() + uEnemy.getRank()) - (this->armor /*+ map.getTile(x,y).getDefense()*/);
 	//damage to attacked unit
-	uEnemy.health -= (getDamage() + getRank()) - (uEnemy.armor + map.getTile(x, y).getDefense());
+	uEnemy.health -= (getDamage() + getRank()) - (uEnemy.armor/* + map.getTile(x, y).getDefense()*/);
 	//debug
 	if (this->health <= 0)
 		this->isAlive = false;
@@ -196,8 +217,6 @@ void Unit::draw(sf::RenderWindow& w)
 
 void Unit::spawn(int x, int y, Map & map)
 {
-
-
 	this->positionX = x;
 	this->positionY = y;
 	this->warriorSprite.setPosition(x, y);
@@ -209,6 +228,11 @@ void Unit::spawn(int x, int y, Map & map)
 sf::Sprite Unit::getSprite()
 {
 	return this->warriorSprite;
+}
+
+int Unit::getIndex()
+{
+	return this->index;
 }
 
 Unit::~Unit()
