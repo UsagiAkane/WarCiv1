@@ -29,9 +29,14 @@ int main(void) {
 	std::srand(time(NULL));
 
 	try {
-		RenderWindow w(VideoMode(1100,700),"Lol");
+
+
+		RenderWindow w(VideoMode(1100, 720), "TITLE");
+		Militia m;
+
+
+		Map test(200, 200);
 		Event ev;
-		Map test;
 
 
 		std::cout << "x=1" << ", y=1" << ", def = " << test.getTile(1, 1).getDefense() << ", food = " << test.getTile(1, 1).getFood() << ", move = " << test.getTile(1, 1).getMove() << ", prod = " << test.getTile(1, 1).getProdaction() << ", trade = " << test.getTile(1, 1).getTrade();
@@ -40,12 +45,15 @@ int main(void) {
 
 			bool __keyPressedReleased = 0;
 			while (w.pollEvent(ev)) {
-				//if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-				//	m.move(ev.mouseButton.x,ev.mouseButton.y);
+				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+					m.move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y);
+
+
 				if (ev.type == Event::Closed)
+				{
 					w.close();
-				if (ev.key.code == Keyboard::Escape)
-					w.close();
+					std::cout << "HERE12" << std::endl;
+				}
 			}
 
 			w.clear(Color::Black);
