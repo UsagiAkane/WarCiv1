@@ -12,7 +12,7 @@ Unit::Unit(std::string name, int health, int armor, int damage, int speed, unsig
 	this->productionPrice = productionPrice;
 	this->price = price;
 	this->index = index;
-	this->playerID = PlayerID;
+	this->playerID = 1;//debug
 	this->isActive = false;
 	this->countOfKill = 0;
 	this->isAlive = 1;
@@ -21,58 +21,79 @@ Unit::Unit(std::string name, int health, int armor, int damage, int speed, unsig
 
 }
 
-void Unit::move(int mouse_x, int mouse_y)
+void Unit::move(int mouse_x, int mouse_y,Map & map)
 {
 
-	if (isActive != 0)
-	{
+	//if (isActive != 0)
+	//{
 
 		//right
 		if (((mouse_x <= this->positionX + BORDER_PIXEL_64 && mouse_x >= this->positionX + BORDER_PIXEL_32) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_32)))
 		{
-			positionX += BORDER_PIXEL_32;
-			this->warriorSprite.setPosition(positionX, positionY);
-			this->speed--;
+			if ((map.getUnitInd(mouse_x,mouse_y)) == 0)
+			{
+				positionX += BORDER_PIXEL_32;
+				this->warriorSprite.setPosition(positionX, positionY);
+				this->speed--;
+				map.moveUnit(positionX - BORDER_PIXEL_32, positionY, positionX, positionY);
+			}
+		
 		}
 		//left
 		else if (((mouse_x >= this->positionX - BORDER_PIXEL_32 && mouse_x <= this->positionX) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_32)))
 		{
-			positionX -= BORDER_PIXEL_32;
-			this->warriorSprite.setPosition(positionX, positionY);
-			this->speed--;
+			if ((map.getUnitInd(mouse_x, mouse_y)) == 0)
+			{
+				positionX -= BORDER_PIXEL_32;
+				this->warriorSprite.setPosition(positionX, positionY);
+				this->speed--;
+				map.moveUnit(positionX + BORDER_PIXEL_32, positionY, positionX, positionY);
+			}
 		}
 		//down
 		else if ((mouse_y >= positionY - BORDER_PIXEL_32 && mouse_y <= positionY) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_32))
 		{
-			positionY -= BORDER_PIXEL_32;
-			this->warriorSprite.setPosition(positionX, positionY);
-			this->speed--;
+			if ((map.getUnitInd(mouse_x, mouse_y)) == 0)
+			{
+				positionY -= BORDER_PIXEL_32;
+				this->warriorSprite.setPosition(positionX, positionY);
+				this->speed--;
+				map.moveUnit(positionX, positionY + BORDER_PIXEL_32, positionX, positionY);
+			}
+
 		}
 		//top
 		else if ((mouse_y <= positionY + BORDER_PIXEL_64 && mouse_y >= positionY + BORDER_PIXEL_32) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_32))
 		{
-			positionY += BORDER_PIXEL_32;
-			this->warriorSprite.setPosition(positionX, positionY);
-			this->speed--;
+			if ((map.getUnitInd(mouse_x, mouse_y)) == 0)
+			{
+				positionY += BORDER_PIXEL_32;
+				this->warriorSprite.setPosition(positionX, positionY);
+				this->speed--;
+				map.moveUnit(positionX, positionY - BORDER_PIXEL_32, positionX, positionY);
+			}
 		}
 		else {}
-
 		if (speed <= 0)
 		{
 			this->isActive = false;
 		}
-	/*}*/
+	//}
 }
 
-void Unit::attack(Unit& uEnemy, Terrain t)
+void Unit::attack(Unit& uEnemy, Map & map,int x,int y)
 {
 	//damage to attacker
-	this->health -= (uEnemy.getDamage() + uEnemy.getRank()) - (this->armor + t.getDefense());
+	this->health -= (uEnemy.getDamage() + uEnemy.getRank()) - (this->armor + map.getTile(x,y).getDefense());
 	//damage to attacked unit
-	uEnemy.health -= (getDamage() + getRank()) - (uEnemy.armor + t.getDefense());
+	uEnemy.health -= (getDamage() + getRank()) - (uEnemy.armor + map.getTile(x, y).getDefense());
 	//debug
-	std::cout << getIsAlive();
-	std::cout << uEnemy.getIsAlive();
+	if (this->health <= 0)
+		this->isAlive = false;
+	if (uEnemy.health <= 0)
+		uEnemy.isAlive = false;
+
+
 }
 
 void Unit::attackTake()
@@ -166,13 +187,24 @@ void Unit::setPosition(int x, int y)
 
 void Unit::draw(sf::RenderWindow& w)
 {
-	w.draw(this->warriorSprite);
+	if (this->isAlive)
+	{
+		w.draw(this->warriorSprite);
+	}
+	
 }
 
-void Unit::spawn(int x, int y)
+void Unit::spawn(int x, int y, Map & map)
 {
-	this->setPosition(x, y);
+
+
+	this->positionX = x;
+	this->positionY = y;
+	this->warriorSprite.setPosition(x, y);
+	map.pushUnit(x, y, (this->playerID*100) + this->index);
 }
+
+
 
 sf::Sprite Unit::getSprite()
 {

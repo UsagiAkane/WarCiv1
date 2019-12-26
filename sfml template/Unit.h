@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <string>
+#include "Map.h"
 
 #define BORDER_PIXEL_32 32
 #define BORDER_PIXEL_16 16
@@ -40,8 +41,8 @@ public:
 		int index,int PlayerID,int maxspeed);
 
 	//functions that can be changed
-	virtual void move(int mouse_x,int mouse_y);
-	virtual void attack(Unit& u, Terrain t);
+	virtual void move(int mouse_x,int mouse_y, Map& map);
+	virtual void attack(Unit& u, Map& map,int x,int y);
 	virtual void attackTake();
 	//functions ,that can be used by pressed key
 	void skipTurn();
@@ -64,7 +65,7 @@ public:
 	void setPosition(int x, int y);
 	//needed
 	void draw(sf::RenderWindow& w);
-	void spawn(int x,int y);
+	void spawn(int x,int y, Map& map);
 
 	~Unit();
 	

@@ -84,16 +84,26 @@ Terrain Map::getTile(int x, int y)
 
 int Map::getUnitInd(int x, int y)
 {
+	x /= 32;
+	y /= 32;
+	//if(x)
 	return this->units.at(x).at(y);
 }
 
 void Map::pushUnit(int x, int y, int unit)
 {
+	x /= 32;
+	y /= 32;
 	this->units.at(x).at(y) = unit;
 }
 
 void Map::moveUnit(int x, int y, int newx, int newy)
 {
+	x /= 32;
+	y /= 32;
+	newx /= 32;
+	newy /= 32;
+
 	this->units.at(newx).at(newy) = this->units.at(x).at(y);
 	this->units.at(x).at(y) = 0;
 }

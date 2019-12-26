@@ -12,19 +12,19 @@
 #include "Map.h"
 #include "CodeofLaws.h"
 #include "Militia.h"
+#include "Legion.h"
 
 using namespace sf;
 
 int main(void) {
-	Forest testforest;
-	Grassland testGrassland;
-	Hills testHills;
-	River testRiver;
-	Mountain testMountain;
+
+	Map test(100, 100);
 
 	Militia m;
-	Militia b;
-	m.setPosition(96, 96);
+	Legion l;
+	m.spawn(192,192, test);
+	l.spawn(96, 96, test);
+
 
 	std::srand(time(NULL));
 
@@ -32,10 +32,9 @@ int main(void) {
 
 
 		RenderWindow w(VideoMode(1100, 720), "TITLE");
-		Militia m;
 
 
-		Map test(100, 100);
+
 
 
 		std::cout << "x=1" << ", y=1" << ", def = " << test.getTile(1, 1).getDefense() << ", food = " << test.getTile(1, 1).getFood() << ", move = " << test.getTile(1, 1).getMove() << ", prod = " << test.getTile(1, 1).getProdaction() << ", trade = " << test.getTile(1, 1).getTrade();
@@ -48,7 +47,7 @@ int main(void) {
 
 
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-					m.move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y);
+					m.move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y, test);
 
 
 				if (ev.type == Event::Closed)
@@ -73,6 +72,7 @@ int main(void) {
 
 
 			test.draw(w);
+			l.draw(w);
 			m.draw(w);
 
 
