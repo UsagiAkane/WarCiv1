@@ -8,7 +8,5 @@ private:
 	Coal coal;
 	Oil oil;
 public:
-	Hills();
-	Hills(int res);
-	//void draw(sf::RenderWindow& w);
+	Hills(int res=0);
 };
