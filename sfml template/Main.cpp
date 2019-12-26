@@ -35,18 +35,14 @@ int main(void) {
 			bool __keyPressedReleased = 0;
 			while (w.pollEvent(ev)) {
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-					m.move(ev.mouseButton.x,ev.mouseButton.y);
+					m.move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y);
+
+
 				if (ev.type == Event::Closed)
 				{
 					w.close();
-					std::cout << "HERE" << std::endl;
+					std::cout << "HERE12" << std::endl;
 				}
-					
-				/*if (ev.key.code == Keyboard::Escape)
-				{
-					w.close();
-					std::cout << "HERE" << std::endl;
-				}*/
 			}
 
 			w.clear(Color::Black);

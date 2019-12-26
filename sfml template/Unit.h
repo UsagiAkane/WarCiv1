@@ -22,7 +22,7 @@ protected:
 	int speed;
 	int max_speed;
 	unsigned short rank;
-	unsigned int count_of_kill;
+	unsigned int countOfKill;
 	//cost
 	int salary; //per turn
 	int productionPrice;
@@ -54,6 +54,7 @@ public:
 	int getRank();
 	bool getIsAlive();
 	bool getIsActive();
+	sf::Sprite getSprite();
 	//setters 
 	void setDamage(int damage);
 	void setHealth(int health);
@@ -63,7 +64,8 @@ public:
 	void setPosition(int x, int y);
 	//needed
 	void draw(sf::RenderWindow& w);
-	sf::Sprite getSprite();
+	void spawn(int x,int y);
+
 	~Unit();
 	
 

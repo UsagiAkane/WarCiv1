@@ -161,6 +161,7 @@
     <ClCompile Include="Horseback_Riding.cpp" />
     <ClCompile Include="Horses.cpp" />
     <ClCompile Include="IronWorking.cpp" />
+    <ClCompile Include="Legion.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapMaking.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="Horseback_Riding.h" />
     <ClInclude Include="Horses.h" />
     <ClInclude Include="IronWorking.h" />
+    <ClInclude Include="Legion.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapMaking.h" />
     <ClInclude Include="Map_I.h" />
