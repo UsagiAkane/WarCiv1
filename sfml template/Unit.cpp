@@ -1,5 +1,10 @@
 #include "Unit.h"
 
+void Unit::CheckForAttackAndAttack(int mouse_x, int mouse_y, Map& map, std::vector<int> enemies_id, std::vector<Unit> enemies)
+{
+
+}
+
 Unit::Unit(std::string name, int health, int armor, int damage, int speed, unsigned short rank, int salary, int productionPrice, int price, int index, int PlayerID, int maxspeed)
 {
 	this->name = name;
@@ -41,7 +46,6 @@ void Unit::move(int mouse_x, int mouse_y,Map & map,std::vector<int> enemies_id,s
 			{
 				for (auto i : enemies_id)
 				{
-					//std::cout << <<std::endl;
 					if (i ==(map.getUnitInd(mouse_x,mouse_y)/100))
 					{
 						for (auto j: enemies)
@@ -51,7 +55,6 @@ void Unit::move(int mouse_x, int mouse_y,Map & map,std::vector<int> enemies_id,s
 								attack(j,map,mouse_x,mouse_y);
 								break;
 							}
-							
 						}
 						break;
 					    
@@ -96,9 +99,7 @@ void Unit::move(int mouse_x, int mouse_y,Map & map,std::vector<int> enemies_id,s
 		}
 		else {}
 		if (speed <= 0)
-		{
 			this->isActive = false;
-		}
 	//}
 }
 
@@ -113,8 +114,6 @@ void Unit::attack(Unit& uEnemy, Map & map,int x,int y)
 		this->isAlive = false;
 	if (uEnemy.health <= 0)
 		uEnemy.isAlive = false;
-
-
 }
 
 void Unit::attackTake()
@@ -223,7 +222,15 @@ void Unit::spawn(int x, int y, Map & map)
 	map.pushUnit(x, y, (this->playerID*100) + this->index);
 }
 
+void Unit::death(Map& map)
+{
+	if (this->health <= 0)
+	{
+		this->isAlive = false;
+	}
+		
 
+}
 
 sf::Sprite Unit::getSprite()
 {

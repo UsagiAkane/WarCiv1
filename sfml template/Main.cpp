@@ -16,6 +16,7 @@
 
 using namespace sf;
 
+//КОСТЕ СДЕЛАТЬ ДЕЛИТ С КАРТЫ
 int main(void) {
 
 	//std::srand(time(NULL));
