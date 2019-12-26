@@ -13,17 +13,20 @@ Unit::Unit(std::string name, int health, int armor, int damage, int speed, unsig
 	this->price = price;
 	this->index = index;
 	this->playerID = PlayerID;
-	this->isActive = true;
-	this->count_of_kill = 0;
+	this->isActive = false;
+	this->countOfKill = 0;
 	this->isAlive = 1;
 	this->positionX = 0;
 	this->positionY = 0;
+
 }
 
 void Unit::move(int mouse_x, int mouse_y)
 {
+
 	if (isActive != 0)
 	{
+
 		//right
 		if (((mouse_x <= this->positionX + BORDER_PIXEL_64 && mouse_x >= this->positionX + BORDER_PIXEL_32) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_32)))
 		{
@@ -53,7 +56,12 @@ void Unit::move(int mouse_x, int mouse_y)
 			this->speed--;
 		}
 		else {}
-	}
+
+		if (speed <= 0)
+		{
+			this->isActive = false;
+		}
+	/*}*/
 }
 
 void Unit::attack(Unit& uEnemy, Terrain t)
@@ -74,6 +82,7 @@ void Unit::attackTake()
 void Unit::skipTurn()
 {
 	this->isActive = false;
+	this->speed -= this->speed;
 }
 
 void Unit::burrow()
@@ -140,7 +149,7 @@ void Unit::setRank(int rank)
 
 void Unit::setCountOfKill(unsigned int countOfKill)
 {
-	this->count_of_kill = countOfKill;
+	this->countOfKill = countOfKill;
 }
 
 void Unit::setActive(bool active)
@@ -158,6 +167,11 @@ void Unit::setPosition(int x, int y)
 void Unit::draw(sf::RenderWindow& w)
 {
 	w.draw(this->warriorSprite);
+}
+
+void Unit::spawn(int x, int y)
+{
+	this->setPosition(x, y);
 }
 
 sf::Sprite Unit::getSprite()

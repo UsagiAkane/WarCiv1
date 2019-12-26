@@ -139,6 +139,9 @@
     <ClCompile Include="Technologies.cpp">
       <Filter>Technologies Vova\Parent</Filter>
     </ClCompile>
+    <ClCompile Include="Legion.cpp">
+      <Filter>Units Vova\Childs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resourses.h">
@@ -236,6 +239,9 @@
     </ClInclude>
     <ClInclude Include="Technologies.h">
       <Filter>Technologies Vova\Parent</Filter>
+    </ClInclude>
+    <ClInclude Include="Legion.h">
+      <Filter>Units Vova\Childs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
