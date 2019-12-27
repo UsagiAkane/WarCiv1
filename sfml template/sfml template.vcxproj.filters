@@ -86,6 +86,12 @@
     <Filter Include="Technologies Vova\Childs\Writing">
       <UniqueIdentifier>{192c5e03-44bd-4eb7-bc13-d076802c662b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Units Vova\Childs\Cavalry">
+      <UniqueIdentifier>{89f30964-4007-4b55-b415-873d6218380b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Units Vova\Childs\Settlers">
+      <UniqueIdentifier>{5d7b5a5f-f208-441c-b660-589b4a6e3321}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -187,6 +193,12 @@
     <ClCompile Include="Writing.cpp">
       <Filter>Technologies Vova\Childs\Writing</Filter>
     </ClCompile>
+    <ClCompile Include="Cavalry.cpp">
+      <Filter>Units Vova\Childs\Cavalry</Filter>
+    </ClCompile>
+    <ClCompile Include="Settlers.cpp">
+      <Filter>Units Vova\Childs\Settlers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resourses.h">
@@ -287,6 +299,12 @@
     </ClInclude>
     <ClInclude Include="Writing.h">
       <Filter>Technologies Vova\Childs\Writing</Filter>
+    </ClInclude>
+    <ClInclude Include="Cavalry.h">
+      <Filter>Units Vova\Childs\Cavalry</Filter>
+    </ClInclude>
+    <ClInclude Include="Settlers.h">
+      <Filter>Units Vova\Childs\Settlers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

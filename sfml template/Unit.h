@@ -46,7 +46,7 @@ public:
 		int index,int PlayerID,int maxspeed);
 
 	//functions that can be changed
-	virtual void move(int mouse_x,int mouse_y, Map& map,std::vector<int>& enemiesListId, std::vector<Unit>& enemy, sf::RenderWindow& w);
+	virtual void move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id, std::vector<Unit>& enemies, sf::RenderWindow& w);
 	virtual void attack(Unit& u, Map& map,int x,int y);
 	//functions ,that can be used by pressed key
 	void skipTurn();

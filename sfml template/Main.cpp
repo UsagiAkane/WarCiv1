@@ -13,6 +13,8 @@
 #include "Militia.h"
 #include "Legion.h"
 #include <algorithm>
+#include "Cavalry.h"
+#include "Settlers.h"
 
 using namespace sf;
 
@@ -49,6 +51,14 @@ int main(void) {
 	my.push_back(s);
 
 	int what_unit = 0;
+	Cavalry cavalry;
+	cavalry.spawn(0, 0, test);
+
+	Settlers settlers;
+	settlers.spawn(256, 256,test);
+	settlers.setPlayerID(1);
+	settlers.setColorByID();
+	my.push_back(settlers);
 
 	try {
 		RenderWindow w(VideoMode(1100, 720), "TITLE");
@@ -106,7 +116,7 @@ int main(void) {
 
 
 			test.draw(w);
-
+			cavalry.draw(w);
 			for (auto i : unites)
 			{
 				i.draw(w);

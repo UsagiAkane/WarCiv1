@@ -150,6 +150,7 @@
   <ItemGroup>
     <ClCompile Include="Alphabet.cpp" />
     <ClCompile Include="BronzeWorking.cpp" />
+    <ClCompile Include="Cavalry.cpp" />
     <ClCompile Include="Ceremonial_Burial.cpp" />
     <ClCompile Include="Coal.cpp" />
     <ClCompile Include="Currency.cpp" />
@@ -175,6 +176,7 @@
     <ClCompile Include="Ocean.cpp" />
     <ClCompile Include="Oil.cpp" />
     <ClCompile Include="Resourses.cpp" />
+    <ClCompile Include="Settlers.cpp" />
     <ClCompile Include="Technologies.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Trade.cpp" />
@@ -185,6 +187,7 @@
   <ItemGroup>
     <ClInclude Include="Alphabet.h" />
     <ClInclude Include="BronzeWorking.h" />
+    <ClInclude Include="Cavalry.h" />
     <ClInclude Include="Ceremonial_Burial.h" />
     <ClInclude Include="Coal.h" />
     <ClInclude Include="Currency.h" />
@@ -210,6 +213,7 @@
     <ClInclude Include="Ocean.h" />
     <ClInclude Include="Oil.h" />
     <ClInclude Include="Resourses.h" />
+    <ClInclude Include="Settlers.h" />
     <ClInclude Include="Technologies.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Trade.h" />
