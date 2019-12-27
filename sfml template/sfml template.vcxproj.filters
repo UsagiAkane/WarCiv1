@@ -26,12 +26,6 @@
     <Filter Include="Technologies Vova\Parent">
       <UniqueIdentifier>{8ea8d13c-bca8-451d-94b4-e928dbfadac6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Technologies Vova\ChildCPP">
-      <UniqueIdentifier>{77fd46ed-2c8a-40d4-b7d4-64fe437fa2f3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Technologies Vova\ChildHeaders">
-      <UniqueIdentifier>{f1ec2701-535d-49e7-9d18-5a32a56f50c1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Units Vova">
       <UniqueIdentifier>{e868262c-a863-48e1-a0d1-f5cb390abf89}</UniqueIdentifier>
     </Filter>
@@ -40,6 +34,57 @@
     </Filter>
     <Filter Include="Units Vova\Parent Unit">
       <UniqueIdentifier>{d0c4990a-a536-43b8-8b7e-1d59740fd51b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Units Vova\Childs\Legion">
+      <UniqueIdentifier>{7b4c6142-4f77-4a09-8c9b-ba7a37344a24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Units Vova\Childs\Militia">
+      <UniqueIdentifier>{98431bd5-bd63-484c-830b-68e5d5e23230}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Technologies Vova\Childs">
+      <UniqueIdentifier>{76dbc0fa-0cb5-4f1c-adaa-9c6742b80d4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Technologies Vova\Childs\Alphabet">
+      <UniqueIdentifier>{007eedc5-e7f1-45aa-81a8-239a64a37ef3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Technologies Vova\Childs\BronzeWorking">
+      <UniqueIdentifier>{883e57af-c182-4baa-86e5-fd824074df55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Technologies Vova\Childs\CeremonialBurial">
+      <UniqueIdentifier>{eadd89c3-d2a9-4041-8c64-28196071af34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Technologies Vova\Childs\Currency">
+      <UniqueIdentifier>{a0852d25-35b8-46eb-bc67-a415efe44657}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Technologies Vova\Childs\CodeofLaws">
+      <UniqueIdentifier>{8e81b7b3-5ff6-48ee-a750-531e51f5bd78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Technologies Vova\Childs\HorsebackRiding">
+      <UniqueIdentifier>{b04c0b1c-341b-4f91-a9cb-caa879e81882}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Technologies Vova\Childs\IronWorking">
+      <UniqueIdentifier>{e260bd9c-14ba-4cb8-8865-f5d8ac6b302d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Technologies Vova\Childs\MapMaking">
+      <UniqueIdentifier>{14b6ab82-4431-4e18-a08e-0f7620f2d629}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Technologies Vova\Childs\Masonry">
+      <UniqueIdentifier>{982b5daa-89c4-4ef1-81cf-fc18b7def534}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Technologies Vova\Childs\Mathematics">
+      <UniqueIdentifier>{55e7cb95-2a57-476b-b3a7-3cb1e7a77a9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Technologies Vova\Childs\Monarchy">
+      <UniqueIdentifier>{bc6827dc-c2c8-4c5a-828b-d0d39813f4d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Technologies Vova\Childs\Mysticism">
+      <UniqueIdentifier>{14ef6ce6-c4ed-4d20-863e-44b5b09b14af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Technologies Vova\Childs\Trade">
+      <UniqueIdentifier>{0f06af5c-7c1d-4bf5-b54e-12da4142702b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Technologies Vova\Childs\Writing">
+      <UniqueIdentifier>{192c5e03-44bd-4eb7-bc13-d076802c662b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -85,62 +130,62 @@
     <ClCompile Include="Map.cpp">
       <Filter>Map kastet</Filter>
     </ClCompile>
-    <ClCompile Include="Alphabet.cpp">
-      <Filter>Technologies Vova\ChildCPP</Filter>
-    </ClCompile>
-    <ClCompile Include="BronzeWorking.cpp">
-      <Filter>Technologies Vova\ChildCPP</Filter>
-    </ClCompile>
-    <ClCompile Include="Ceremonial_Burial.cpp">
-      <Filter>Technologies Vova\ChildCPP</Filter>
-    </ClCompile>
-    <ClCompile Include="Currency.cpp">
-      <Filter>Technologies Vova\ChildCPP</Filter>
-    </ClCompile>
-    <ClCompile Include="Horseback_Riding.cpp">
-      <Filter>Technologies Vova\ChildCPP</Filter>
-    </ClCompile>
-    <ClCompile Include="IronWorking.cpp">
-      <Filter>Technologies Vova\ChildCPP</Filter>
-    </ClCompile>
-    <ClCompile Include="MapMaking.cpp">
-      <Filter>Technologies Vova\ChildCPP</Filter>
-    </ClCompile>
-    <ClCompile Include="Masonry.cpp">
-      <Filter>Technologies Vova\ChildCPP</Filter>
-    </ClCompile>
-    <ClCompile Include="Mathematics.cpp">
-      <Filter>Technologies Vova\ChildCPP</Filter>
-    </ClCompile>
-    <ClCompile Include="Monarchy.cpp">
-      <Filter>Technologies Vova\ChildCPP</Filter>
-    </ClCompile>
-    <ClCompile Include="Mysticism.cpp">
-      <Filter>Technologies Vova\ChildCPP</Filter>
-    </ClCompile>
-    <ClCompile Include="Trade.cpp">
-      <Filter>Technologies Vova\ChildCPP</Filter>
-    </ClCompile>
-    <ClCompile Include="Writing.cpp">
-      <Filter>Technologies Vova\ChildCPP</Filter>
-    </ClCompile>
-    <ClCompile Include="CodeOfLaws.cpp">
-      <Filter>Technologies Vova\ChildCPP</Filter>
-    </ClCompile>
     <ClCompile Include="Unit.cpp">
       <Filter>Units Vova\Parent Unit</Filter>
-    </ClCompile>
-    <ClCompile Include="Militia.cpp">
-      <Filter>Units Vova\Childs</Filter>
     </ClCompile>
     <ClCompile Include="Technologies.cpp">
       <Filter>Technologies Vova\Parent</Filter>
     </ClCompile>
-    <ClCompile Include="Legion.cpp">
-      <Filter>Units Vova\Childs</Filter>
-    </ClCompile>
     <ClCompile Include="Ocean.cpp">
       <Filter>Map kastet\Terrains\All</Filter>
+    </ClCompile>
+    <ClCompile Include="Legion.cpp">
+      <Filter>Units Vova\Childs\Legion</Filter>
+    </ClCompile>
+    <ClCompile Include="Militia.cpp">
+      <Filter>Units Vova\Childs\Militia</Filter>
+    </ClCompile>
+    <ClCompile Include="Alphabet.cpp">
+      <Filter>Technologies Vova\Childs\Alphabet</Filter>
+    </ClCompile>
+    <ClCompile Include="Currency.cpp">
+      <Filter>Technologies Vova\Childs\Currency</Filter>
+    </ClCompile>
+    <ClCompile Include="BronzeWorking.cpp">
+      <Filter>Technologies Vova\Childs\BronzeWorking</Filter>
+    </ClCompile>
+    <ClCompile Include="Ceremonial_Burial.cpp">
+      <Filter>Technologies Vova\Childs\CeremonialBurial</Filter>
+    </ClCompile>
+    <ClCompile Include="CodeOfLaws.cpp">
+      <Filter>Technologies Vova\Childs\CodeofLaws</Filter>
+    </ClCompile>
+    <ClCompile Include="Horseback_Riding.cpp">
+      <Filter>Technologies Vova\Childs\HorsebackRiding</Filter>
+    </ClCompile>
+    <ClCompile Include="IronWorking.cpp">
+      <Filter>Technologies Vova\Childs\IronWorking</Filter>
+    </ClCompile>
+    <ClCompile Include="MapMaking.cpp">
+      <Filter>Technologies Vova\Childs\MapMaking</Filter>
+    </ClCompile>
+    <ClCompile Include="Mathematics.cpp">
+      <Filter>Technologies Vova\Childs\Mathematics</Filter>
+    </ClCompile>
+    <ClCompile Include="Masonry.cpp">
+      <Filter>Technologies Vova\Childs\Masonry</Filter>
+    </ClCompile>
+    <ClCompile Include="Monarchy.cpp">
+      <Filter>Technologies Vova\Childs\Monarchy</Filter>
+    </ClCompile>
+    <ClCompile Include="Mysticism.cpp">
+      <Filter>Technologies Vova\Childs\Mysticism</Filter>
+    </ClCompile>
+    <ClCompile Include="Trade.cpp">
+      <Filter>Technologies Vova\Childs\Trade</Filter>
+    </ClCompile>
+    <ClCompile Include="Writing.cpp">
+      <Filter>Technologies Vova\Childs\Writing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -186,62 +231,62 @@
     <ClInclude Include="Map_I.h">
       <Filter>Map kastet</Filter>
     </ClInclude>
-    <ClInclude Include="Alphabet.h">
-      <Filter>Technologies Vova\ChildHeaders</Filter>
-    </ClInclude>
-    <ClInclude Include="BronzeWorking.h">
-      <Filter>Technologies Vova\ChildHeaders</Filter>
-    </ClInclude>
-    <ClInclude Include="Ceremonial_Burial.h">
-      <Filter>Technologies Vova\ChildHeaders</Filter>
-    </ClInclude>
-    <ClInclude Include="Currency.h">
-      <Filter>Technologies Vova\ChildHeaders</Filter>
-    </ClInclude>
-    <ClInclude Include="Horseback_Riding.h">
-      <Filter>Technologies Vova\ChildHeaders</Filter>
-    </ClInclude>
-    <ClInclude Include="IronWorking.h">
-      <Filter>Technologies Vova\ChildHeaders</Filter>
-    </ClInclude>
-    <ClInclude Include="MapMaking.h">
-      <Filter>Technologies Vova\ChildHeaders</Filter>
-    </ClInclude>
-    <ClInclude Include="Masonry.h">
-      <Filter>Technologies Vova\ChildHeaders</Filter>
-    </ClInclude>
-    <ClInclude Include="Mathematics.h">
-      <Filter>Technologies Vova\ChildHeaders</Filter>
-    </ClInclude>
-    <ClInclude Include="Monarchy.h">
-      <Filter>Technologies Vova\ChildHeaders</Filter>
-    </ClInclude>
-    <ClInclude Include="Mysticism.h">
-      <Filter>Technologies Vova\ChildHeaders</Filter>
-    </ClInclude>
-    <ClInclude Include="Trade.h">
-      <Filter>Technologies Vova\ChildHeaders</Filter>
-    </ClInclude>
-    <ClInclude Include="Writing.h">
-      <Filter>Technologies Vova\ChildHeaders</Filter>
-    </ClInclude>
-    <ClInclude Include="CodeOfLaws.h">
-      <Filter>Technologies Vova\ChildHeaders</Filter>
-    </ClInclude>
     <ClInclude Include="Unit.h">
       <Filter>Units Vova\Parent Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="Militia.h">
-      <Filter>Units Vova\Childs</Filter>
     </ClInclude>
     <ClInclude Include="Technologies.h">
       <Filter>Technologies Vova\Parent</Filter>
     </ClInclude>
-    <ClInclude Include="Legion.h">
-      <Filter>Units Vova\Childs</Filter>
-    </ClInclude>
     <ClInclude Include="Ocean.h">
       <Filter>Map kastet\Terrains\All</Filter>
+    </ClInclude>
+    <ClInclude Include="Legion.h">
+      <Filter>Units Vova\Childs\Legion</Filter>
+    </ClInclude>
+    <ClInclude Include="Militia.h">
+      <Filter>Units Vova\Childs\Militia</Filter>
+    </ClInclude>
+    <ClInclude Include="Alphabet.h">
+      <Filter>Technologies Vova\Childs\Alphabet</Filter>
+    </ClInclude>
+    <ClInclude Include="Currency.h">
+      <Filter>Technologies Vova\Childs\Currency</Filter>
+    </ClInclude>
+    <ClInclude Include="BronzeWorking.h">
+      <Filter>Technologies Vova\Childs\BronzeWorking</Filter>
+    </ClInclude>
+    <ClInclude Include="Ceremonial_Burial.h">
+      <Filter>Technologies Vova\Childs\CeremonialBurial</Filter>
+    </ClInclude>
+    <ClInclude Include="CodeOfLaws.h">
+      <Filter>Technologies Vova\Childs\CodeofLaws</Filter>
+    </ClInclude>
+    <ClInclude Include="Horseback_Riding.h">
+      <Filter>Technologies Vova\Childs\HorsebackRiding</Filter>
+    </ClInclude>
+    <ClInclude Include="IronWorking.h">
+      <Filter>Technologies Vova\Childs\IronWorking</Filter>
+    </ClInclude>
+    <ClInclude Include="MapMaking.h">
+      <Filter>Technologies Vova\Childs\MapMaking</Filter>
+    </ClInclude>
+    <ClInclude Include="Masonry.h">
+      <Filter>Technologies Vova\Childs\Masonry</Filter>
+    </ClInclude>
+    <ClInclude Include="Mathematics.h">
+      <Filter>Technologies Vova\Childs\Mathematics</Filter>
+    </ClInclude>
+    <ClInclude Include="Monarchy.h">
+      <Filter>Technologies Vova\Childs\Monarchy</Filter>
+    </ClInclude>
+    <ClInclude Include="Mysticism.h">
+      <Filter>Technologies Vova\Childs\Mysticism</Filter>
+    </ClInclude>
+    <ClInclude Include="Trade.h">
+      <Filter>Technologies Vova\Childs\Trade</Filter>
+    </ClInclude>
+    <ClInclude Include="Writing.h">
+      <Filter>Technologies Vova\Childs\Writing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
