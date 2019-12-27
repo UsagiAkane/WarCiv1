@@ -23,11 +23,28 @@ void Unit::checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::
 	}
 }
 
-void Unit::animationOfAttack(int value,sf::RenderWindow & w,Map & map)
+void Unit::animationOfAttack(int value, sf::RenderWindow& w, Map& map)
 {
 	if (value == 1)
 	{
-		
+
+		sf::Texture textureTMP;
+		textureTMP.loadFromFile("Icons\\swordicon.png");
+		sf::Sprite tmp(textureTMP);
+		tmp.setPosition(positionX+10, positionY);
+		tmp.setScale(0.9, 0.9);
+		sf::Texture textureTMPs;
+		textureTMPs.loadFromFile("Icons\\shieldicon.png");
+		sf::Sprite tmps(textureTMPs);
+		tmps.setScale(0.7, 0.7);
+		tmps.setPosition(positionX+30, positionY+3);
+
+	
+			w.draw(warriorSprite);
+			w.draw(tmps);
+			w.draw(tmp);
+			w.display();
+			Sleep(600);
 		/*
 		warriorSprite.setPosition(positionX, positionY);
 		w.draw(warriorSprite);*/
@@ -54,77 +71,77 @@ Unit::Unit(std::string name, int health, int armor, int damage, int speed, unsig
 	this->positionY = 0;
 }
 
-void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id, std::vector<Unit>& enemies,sf::RenderWindow & w)
+void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id, std::vector<Unit>& enemies, sf::RenderWindow& w)
 {
-	/*if (isActive != 0)
-	{*/
-		//right
-		if (((mouse_x <= this->positionX + BORDER_PIXEL_64 && mouse_x >= this->positionX + BORDER_PIXEL_32) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_32)))
+	if (isActive != 0)
+	{
+	//right
+	if (((mouse_x <= this->positionX + BORDER_PIXEL_64 && mouse_x >= this->positionX + BORDER_PIXEL_32) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_32)))
+	{
+		if ((map.getUnitInd(mouse_x, mouse_y)) == 0)
 		{
-			if ((map.getUnitInd(mouse_x, mouse_y)) == 0)
-			{
-				positionX += BORDER_PIXEL_32;
-				this->warriorSprite.setPosition(positionX, positionY);
-				this->speed--;
-				map.moveUnit(positionX - BORDER_PIXEL_32, positionY, positionX, positionY);
-			}
-			else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0) //check index of unit
-			{
-				checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies);   //Checking whether a unit can attack
-				animationOfAttack(1, w,map);
-			}
+			positionX += BORDER_PIXEL_32;
+			this->warriorSprite.setPosition(positionX, positionY);
+			this->speed--;
+			map.moveUnit(positionX - BORDER_PIXEL_32, positionY, positionX, positionY);
+		}
+		else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0) //check index of unit
+		{
+			checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies);   //Checking whether a unit can attack
+			animationOfAttack(1, w, map);
+		}
 
-		}
-		//left
-		else if (((mouse_x >= this->positionX - BORDER_PIXEL_32 && mouse_x <= this->positionX) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_32)))
+	}
+	//left
+	else if (((mouse_x >= this->positionX - BORDER_PIXEL_32 && mouse_x <= this->positionX) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_32)))
+	{
+		if ((map.getUnitInd(mouse_x, mouse_y)) == 0)
 		{
-			if ((map.getUnitInd(mouse_x, mouse_y)) == 0)
-			{
-				positionX -= BORDER_PIXEL_32;
-				this->warriorSprite.setPosition(positionX, positionY);
-				this->speed--;
-				map.moveUnit(positionX + BORDER_PIXEL_32, positionY, positionX, positionY);
-			}
-			else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
-				checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies); //Checking whether a unit can attack
+			positionX -= BORDER_PIXEL_32;
+			this->warriorSprite.setPosition(positionX, positionY);
+			this->speed--;
+			map.moveUnit(positionX + BORDER_PIXEL_32, positionY, positionX, positionY);
 		}
-		//down
-		else if ((mouse_y >= positionY - BORDER_PIXEL_32 && mouse_y <= positionY) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_32))
+		else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
+			checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies); //Checking whether a unit can attack
+	}
+	//down
+	else if ((mouse_y >= positionY - BORDER_PIXEL_32 && mouse_y <= positionY) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_32))
+	{
+		if ((map.getUnitInd(mouse_x, mouse_y)) == 0)
 		{
-			if ((map.getUnitInd(mouse_x, mouse_y)) == 0)
-			{
-				positionY -= BORDER_PIXEL_32;
-				this->warriorSprite.setPosition(positionX, positionY);
-				this->speed--;
-				map.moveUnit(positionX, positionY + BORDER_PIXEL_32, positionX, positionY);
-			}
-			else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
-				checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies); //Checking whether a unit can attack
+			positionY -= BORDER_PIXEL_32;
+			this->warriorSprite.setPosition(positionX, positionY);
+			this->speed--;
+			map.moveUnit(positionX, positionY + BORDER_PIXEL_32, positionX, positionY);
+		}
+		else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
+			checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies); //Checking whether a unit can attack
 
-		}
-		//top
-		else if ((mouse_y <= positionY + BORDER_PIXEL_64 && mouse_y >= positionY + BORDER_PIXEL_32) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_32))
+	}
+	//top
+	else if ((mouse_y <= positionY + BORDER_PIXEL_64 && mouse_y >= positionY + BORDER_PIXEL_32) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_32))
+	{
+		if ((map.getUnitInd(mouse_x, mouse_y)) == 0)
 		{
-			if ((map.getUnitInd(mouse_x, mouse_y)) == 0)
-			{
-				positionY += BORDER_PIXEL_32;
-				this->warriorSprite.setPosition(positionX, positionY);
-				this->speed--;
-				map.moveUnit(positionX, positionY - BORDER_PIXEL_32, positionX, positionY);
-			}
-			else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
-				checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies); //Checking whether a unit can attack
+			positionY += BORDER_PIXEL_32;
+			this->warriorSprite.setPosition(positionX, positionY);
+			this->speed--;
+			map.moveUnit(positionX, positionY - BORDER_PIXEL_32, positionX, positionY);
 		}
-		else {}
-		if (speed <= 0)
-			this->isActive = false;
+		else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
+			checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies); //Checking whether a unit can attack
+	}
+	else {}
+	if (speed <= 0)
+		this->isActive = false;
 
-	/*}*/
+	}
 }
 
 void Unit::attack(Unit& uEnemy, Map& map, int x, int y)
 {
-	
+
 	//damage to attacker
 	this->health -= ((uEnemy.getDamage() + uEnemy.getRank()) - (this->armor));
 	this->setArmor(this->armor - (uEnemy.getDamage() + uEnemy.getRank()));
@@ -142,7 +159,7 @@ void Unit::attack(Unit& uEnemy, Map& map, int x, int y)
 		uEnemy.death(map);
 		this->countOfKill += 1;
 	}
-		
+
 
 
 }

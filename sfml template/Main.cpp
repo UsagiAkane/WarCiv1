@@ -40,7 +40,7 @@ int main(void) {
 	Militia s;
 	m.setHealth(10);
 	m.spawn(192, 192, test);
-	s.spawn(224, 224, test);
+	s.spawn(224, 192, test);
 	m.setColorByID();
 	s.setColorByID();
 	
