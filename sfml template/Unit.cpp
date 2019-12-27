@@ -73,8 +73,8 @@ Unit::Unit(std::string name, int health, int armor, int damage, int speed, unsig
 
 void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id, std::vector<Unit>& enemies, sf::RenderWindow& w)
 {
-	if (isActive != 0)
-	{
+	/*if (isActive != 0)
+	{*/
 	//right
 	if (((mouse_x <= this->positionX + BORDER_PIXEL_64 && mouse_x >= this->positionX + BORDER_PIXEL_32) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_32)))
 	{
@@ -136,7 +136,7 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 	if (speed <= 0)
 		this->isActive = false;
 
-	}
+	//}
 }
 
 void Unit::attack(Unit& uEnemy, Map& map, int x, int y)
