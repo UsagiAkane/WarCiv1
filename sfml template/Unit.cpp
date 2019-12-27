@@ -1,6 +1,6 @@
 #include "Unit.h"
 //Checking whether a unit can attack
-void Unit::checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id, std::vector<Unit>& enemies)
+void Unit::checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id, std::vector<Unit>& enemies, sf::RenderWindow& w,int direction)
 {
 	int time = 0;//trash variable
 	for (auto i : enemies_id)//try to find enemy in enemy vector
@@ -13,6 +13,7 @@ void Unit::checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::
 				if (j.getIndex() == (map.getUnitInd(mouse_x, mouse_y) % 100))
 				{
 					attack(enemies.at(time), map, mouse_x, mouse_y);
+					animationOfAttack(direction, w, map);
 					break;
 				}
 				time++;
@@ -25,30 +26,52 @@ void Unit::checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::
 
 void Unit::animationOfAttack(int value, sf::RenderWindow& w, Map& map)
 {
+	sf::Texture textureTMP;
+	textureTMP.loadFromFile("Icons\\swordicon.png");
+	sf::Sprite tmp(textureTMP);
+	sf::Texture textureTMPs;
+	textureTMPs.loadFromFile("Icons\\shieldicon.png");
+	sf::Sprite tmps(textureTMPs);
+	//right
 	if (value == 1)
 	{
-
-		sf::Texture textureTMP;
-		textureTMP.loadFromFile("Icons\\swordicon.png");
-		sf::Sprite tmp(textureTMP);
 		tmp.setPosition(positionX+10, positionY);
 		tmp.setScale(0.9, 0.9);
-		sf::Texture textureTMPs;
-		textureTMPs.loadFromFile("Icons\\shieldicon.png");
-		sf::Sprite tmps(textureTMPs);
 		tmps.setScale(0.7, 0.7);
 		tmps.setPosition(positionX+30, positionY+3);
-
-	
-			w.draw(warriorSprite);
-			w.draw(tmps);
-			w.draw(tmp);
-			w.display();
-			Sleep(600);
-		/*
-		warriorSprite.setPosition(positionX, positionY);
-		w.draw(warriorSprite);*/
 	}
+	//left
+	else if (value == 2)
+	{
+		textureTMP.loadFromFile("Icons\\swordiconflip.png");
+		tmp.setPosition(positionX - 10, positionY);
+		tmp.setScale(0.9, 0.9);
+		tmps.setScale(0.7, 0.7);
+		tmps.setPosition(positionX - 20, positionY +3);
+	}
+	//top
+	else if (value == 3)
+	{
+		tmp.setPosition(positionX , positionY-10);
+		tmp.setScale(0.9, 0.9);
+		tmps.setScale(0.7, 0.7);
+		tmps.setPosition(positionX+6, positionY -20);
+	}
+	//down
+	else if (value == 4)
+	{
+		textureTMP.loadFromFile("Icons\\swordiconflipdown.png");
+		tmp.setPosition(positionX, positionY + 10);
+		tmp.setScale(0.9, 0.9);
+		tmps.setScale(0.7, 0.7);
+		tmps.setPosition(positionX + 9, positionY + 30);
+	}
+
+	w.draw(warriorSprite);
+	w.draw(tmps);
+	w.draw(tmp);
+	w.display();
+	Sleep(600);
 }
 
 Unit::Unit(std::string name, int health, int armor, int damage, int speed, unsigned short rank, int salary, int productionPrice, int price, int index, int PlayerID, int maxspeed)
@@ -87,8 +110,8 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 		}
 		else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0) //check index of unit
 		{
-			checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies);   //Checking whether a unit can attack
-			animationOfAttack(1, w, map);
+			checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w,1);   //Checking whether a unit can attack
+			
 		}
 
 	}
@@ -103,9 +126,9 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 			map.moveUnit(positionX + BORDER_PIXEL_32, positionY, positionX, positionY);
 		}
 		else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
-			checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies); //Checking whether a unit can attack
+			checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies,w,2); //Checking whether a unit can attack
 	}
-	//down
+	//top
 	else if ((mouse_y >= positionY - BORDER_PIXEL_32 && mouse_y <= positionY) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_32))
 	{
 		if ((map.getUnitInd(mouse_x, mouse_y)) == 0)
@@ -116,10 +139,10 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 			map.moveUnit(positionX, positionY + BORDER_PIXEL_32, positionX, positionY);
 		}
 		else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
-			checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies); //Checking whether a unit can attack
+			checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w,3); //Checking whether a unit can attack
 
 	}
-	//top
+	//down
 	else if ((mouse_y <= positionY + BORDER_PIXEL_64 && mouse_y >= positionY + BORDER_PIXEL_32) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_32))
 	{
 		if ((map.getUnitInd(mouse_x, mouse_y)) == 0)
@@ -130,7 +153,7 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 			map.moveUnit(positionX, positionY - BORDER_PIXEL_32, positionX, positionY);
 		}
 		else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
-			checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies); //Checking whether a unit can attack
+			checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w,4); //Checking whether a unit can attack
 	}
 	else {}
 	if (speed <= 0)
@@ -149,8 +172,6 @@ void Unit::attack(Unit& uEnemy, Map& map, int x, int y)
 	uEnemy.health -= ((this->getDamage() + this->getRank()) - (uEnemy.getArmor() + map.getTile(x, y).getDefense()));
 	uEnemy.setArmor(armor - (this->getDamage() + this->getRank()));
 
-
-	//debug
 	if (this->getHealth() <= 0)
 		this->death(map);
 
@@ -271,10 +292,11 @@ void Unit::spawn(int x, int y, Map& map)
 
 void Unit::death(Map& map)
 {
-	map.delUnit(positionX, positionY);
 	this->isAlive = false;
 	this->isActive = false;
-	this->max_speed = false;
+	this->max_speed = 0;
+	map.delUnit(positionX, positionY);
+
 }
 
 void Unit::setColorByID()
@@ -294,6 +316,14 @@ void Unit::setColorByID()
 	else if (this->playerID > 6)
 		warriorSprite.setColor(sf::Color(50, 50, 50));//dark
 
+}
+
+int Unit::getPositionInVector(std::vector<Unit> &units, int positionX, int positionY)
+{
+	int tmp=0;
+	std::for_each(units.begin(), units.end(), [&tmp, &positionX, &positionY](Unit& u)
+		{ if (u.getSprite().getPosition().x == positionX && u.getSprite().getPosition().y == positionY) return tmp;
+		else tmp++; });
 }
 
 void Unit::setArmor(int armor)

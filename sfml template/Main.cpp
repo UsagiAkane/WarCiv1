@@ -43,11 +43,12 @@ int main(void) {
 	s.spawn(224, 192, test);
 	m.setColorByID();
 	s.setColorByID();
-	
+
 	enemiesID.push_back(2);
 	my.push_back(m);
 	my.push_back(s);
 
+	int what_unit = 0;
 
 	try {
 		RenderWindow w(VideoMode(1100, 720), "TITLE");
@@ -60,34 +61,64 @@ int main(void) {
 
 
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-					std::for_each(my.begin(), my.end(), [&w, &test, &enemiesID, &unites](Unit& u)
-						{u.move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y, test, enemiesID, unites,w); });
-				/*	test.getTile(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y).__getInfo_DEBUG();*/
+
+					if (ev.MouseButtonReleased)
+					{
+
+						/*		std::for_each(my.begin(), my.end(), [&w, &test, &enemiesID, &unites](Unit& u)
+									{u.move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y, test, enemiesID, unites, w); });*/
+						if (my.size() >= 0)
+						{
+							std::cout << "check 1" << std::endl;
+							my.at(what_unit).move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y, test, enemiesID, unites, w);
+							std::cout << "check 2" << std::endl;
+						}
+					}
+					/*	test.getTile(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y).__getInfo_DEBUG();*/
+				}
+				if (ev.type == ev.Closed)
+				{
+					w.close();
 				}
 
-				if (ev.type == Event::Closed)
-					w.close();
+				if (ev.type == sf::Event::KeyPressed)
+				{
+					switch (ev.key.code)
+					{
+
+					case sf::Keyboard::Right:
+					{
+						what_unit++;
+						if (what_unit >= my.size())
+						{
+							what_unit = 0;
+						}
+						break;
+					}
+
+					}
+				}
+
 
 
 			}
 			w.clear(Color::Black);
 
-		
+
 			test.draw(w);
 
 			for (auto i : unites)
 			{
 				i.draw(w);
 			}
-			for (auto i: my)
+			for (auto i : my)
 			{
 				i.draw(w);
 			}
-	
-
 
 			w.display();
 		}
+
 
 
 	}

@@ -37,7 +37,7 @@ protected:
 	bool isActive;
 	bool isAlive;
 	//functions to call inside
-	void checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::vector<int> &enemies_id, std::vector<Unit> &enemies);
+	void checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::vector<int> &enemies_id, std::vector<Unit> &enemies, sf::RenderWindow& w, int direction);
 	void animationOfAttack(int value,sf::RenderWindow& w,Map& map);
 
 public:
@@ -75,6 +75,8 @@ public:
 	void spawn(int x,int y, Map& map);
 	void death(Map& map);
 	void setColorByID();
+	//find
+    int getPositionInVector(std::vector<Unit>&units,int positionX,int positionY);
 
 
 
