@@ -23,6 +23,7 @@ int main(void) {
 	std::srand(time(NULL));
 	Map test(100, 100);
 
+	////////////////////////////CREATING UNITS
 	//enemies units
 	Legion l;
 	Militia m2enemy;
@@ -60,6 +61,11 @@ int main(void) {
 	settlers.setColorByID();
 	my.push_back(settlers);
 
+	//my.erase(my.begin() + 1);
+
+
+	
+
 	try {
 		RenderWindow w(VideoMode(1100, 720), "TITLE");
 
@@ -72,24 +78,26 @@ int main(void) {
 
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 
+					////////////////////////////MOVE TARGET UNIT
 					if (ev.MouseButtonReleased)
 					{
+						if (my.size() >= 0)
+						{
+							my.at(what_unit).move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y, test, enemiesID, unites, w);
+						}
 
 						/*		std::for_each(my.begin(), my.end(), [&w, &test, &enemiesID, &unites](Unit& u)
 									{u.move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y, test, enemiesID, unites, w); });*/
-						if (my.size() >= 0)
-						{
-							std::cout << "check 1" << std::endl;
-							my.at(what_unit).move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y, test, enemiesID, unites, w);
-							std::cout << "check 2" << std::endl;
-						}
+
+					
 					}
 					/*	test.getTile(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y).__getInfo_DEBUG();*/
+
+
 				}
 				if (ev.type == ev.Closed)
-				{
 					w.close();
-				}
+		
 
 				if (ev.type == sf::Event::KeyPressed)
 				{
@@ -117,6 +125,7 @@ int main(void) {
 
 			test.draw(w);
 			cavalry.draw(w);
+
 			for (auto i : unites)
 			{
 				i.draw(w);

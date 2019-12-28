@@ -39,8 +39,13 @@ protected:
 	//functions to call inside
 	void checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::vector<int> &enemies_id, std::vector<Unit> &enemies, sf::RenderWindow& w, int direction);
 	void animationOfAttack(int value,sf::RenderWindow& w,Map& map);
+	void moveRightHidden(Map& map);
+	void moveLeftHidden(Map& map);
+	void moveDownHidden(Map& map);
+	void moveTopHidden(Map& map);
 
 public:
+	//constuctor
 	Unit(std::string name,int health,int armor,int damage,int speed,
 		unsigned short rank,int salary,int productionPrice,int price,
 		int index,int PlayerID,int maxspeed);
