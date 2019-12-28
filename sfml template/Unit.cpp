@@ -309,17 +309,6 @@ void Unit::death(Map& map)
 	map.delUnit(positionX, positionY);
 
 
-	//to del from vector
-
-	/*for (auto i = my.begin(); i < my.end(); i++)
-{
-	if ((*i).getSprite().getPosition().x == this->warriorSprite.getPosition().x && (*i).getSprite().getPosition().y == this->warriorSprite.getPosition().y)
-	{
-
-	}
-}*/
-
-
 }
 
 void Unit::setColorByID()
@@ -341,12 +330,16 @@ void Unit::setColorByID()
 
 }
 
-int Unit::getPositionInVector(std::vector<Unit> &units, int positionX, int positionY)
-{
+void Unit::delByPositionInVector(std::vector<Unit> &units)
+{  //test
 	int tmp=0;
+	int positionX = this->getSprite().getPosition().x;
+	int positionY = this->getSprite().getPosition().y;
 	std::for_each(units.begin(), units.end(), [&tmp, &positionX, &positionY](Unit& u)
 		{ if (u.getSprite().getPosition().x == positionX && u.getSprite().getPosition().y == positionY) return tmp;
 		else tmp++; });
+	units.erase(tmp + units.begin());
+
 }
 
 void Unit::setArmor(int armor)

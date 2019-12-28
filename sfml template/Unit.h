@@ -81,7 +81,7 @@ public:
 	void death(Map& map);
 	void setColorByID();
 	//find
-    int getPositionInVector(std::vector<Unit>&units,int positionX,int positionY);
+    void delByPositionInVector(std::vector<Unit>&units);
 
 
 

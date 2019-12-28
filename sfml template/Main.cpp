@@ -41,7 +41,7 @@ int main(void) {
 	std::vector<int> enemiesID;
 	Militia m;
 	Militia s;
-	m.setHealth(10);
+	m.setHealth(1);
 	m.spawn(192, 192, test);
 	s.spawn(224, 192, test);
 	m.setColorByID();
@@ -81,9 +81,21 @@ int main(void) {
 					////////////////////////////MOVE TARGET UNIT
 					if (ev.MouseButtonReleased)
 					{
-						if (my.size() >= 0)
+						if (my.size() > 0)
 						{
-							my.at(what_unit).move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y, test, enemiesID, unites, w);
+							if (my.at(what_unit).getIsAlive() == true)
+							{
+								my.at(what_unit).move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y, test, enemiesID, unites, w);
+							}
+							else
+							{
+								my.erase(what_unit + my.begin());
+								what_unit = 0;
+							}
+							
+
+
+							
 						}
 
 						/*		std::for_each(my.begin(), my.end(), [&w, &test, &enemiesID, &unites](Unit& u)
