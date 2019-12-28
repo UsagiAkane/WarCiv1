@@ -150,6 +150,7 @@
   <ItemGroup>
     <ClCompile Include="Alphabet.cpp" />
     <ClCompile Include="BronzeWorking.cpp" />
+    <ClCompile Include="Building.cpp" />
     <ClCompile Include="Cavalry.cpp" />
     <ClCompile Include="Ceremonial_Burial.cpp" />
     <ClCompile Include="Coal.cpp" />
@@ -187,6 +188,7 @@
   <ItemGroup>
     <ClInclude Include="Alphabet.h" />
     <ClInclude Include="BronzeWorking.h" />
+    <ClInclude Include="Building.h" />
     <ClInclude Include="Cavalry.h" />
     <ClInclude Include="Ceremonial_Burial.h" />
     <ClInclude Include="Coal.h" />

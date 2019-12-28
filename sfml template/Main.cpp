@@ -61,7 +61,7 @@ int main(void) {
 	settlers.setColorByID();
 	my.push_back(settlers);
 
-	//my.erase(my.begin() + 1);
+   //////TEST///////////////////
 
 
 

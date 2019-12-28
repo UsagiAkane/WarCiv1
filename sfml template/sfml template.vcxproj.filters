@@ -92,6 +92,9 @@
     <Filter Include="Units Vova\Childs\Settlers">
       <UniqueIdentifier>{5d7b5a5f-f208-441c-b660-589b4a6e3321}</UniqueIdentifier>
     </Filter>
+    <Filter Include="BuildingsVova">
+      <UniqueIdentifier>{49aa60a6-290c-437d-ae3c-64960a53b8eb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -199,6 +202,9 @@
     <ClCompile Include="Settlers.cpp">
       <Filter>Units Vova\Childs\Settlers</Filter>
     </ClCompile>
+    <ClCompile Include="Building.cpp">
+      <Filter>BuildingsVova</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resourses.h">
@@ -305,6 +311,9 @@
     </ClInclude>
     <ClInclude Include="Settlers.h">
       <Filter>Units Vova\Childs\Settlers</Filter>
+    </ClInclude>
+    <ClInclude Include="Building.h">
+      <Filter>BuildingsVova</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
