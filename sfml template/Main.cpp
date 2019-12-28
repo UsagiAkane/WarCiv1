@@ -56,7 +56,7 @@ int main(void) {
 	cavalry.spawn(0, 0, test);
 
 	Settlers settlers;
-	settlers.spawn(256, 256,test);
+	settlers.spawn(256, 256, test);
 	settlers.setPlayerID(1);
 	settlers.setColorByID();
 	my.push_back(settlers);
@@ -64,7 +64,6 @@ int main(void) {
 	//my.erase(my.begin() + 1);
 
 
-	
 
 	try {
 		RenderWindow w(VideoMode(1100, 720), "TITLE");
@@ -73,9 +72,6 @@ int main(void) {
 			Event ev;
 
 			while (w.pollEvent(ev)) {
-
-
-
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 
 					////////////////////////////MOVE TARGET UNIT
@@ -84,45 +80,28 @@ int main(void) {
 						if (my.size() > 0)
 						{
 							if (my.at(what_unit).getIsAlive() == true)
-							{
 								my.at(what_unit).move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y, test, enemiesID, unites, w);
-							}
 							else
 							{
 								my.erase(what_unit + my.begin());
 								what_unit = 0;
 							}
-							
-
-
-							
 						}
-
-						/*		std::for_each(my.begin(), my.end(), [&w, &test, &enemiesID, &unites](Unit& u)
-									{u.move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y, test, enemiesID, unites, w); });*/
-
-					
 					}
-					/*	test.getTile(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y).__getInfo_DEBUG();*/
-
-
 				}
 				if (ev.type == ev.Closed)
 					w.close();
-		
+
 
 				if (ev.type == sf::Event::KeyPressed)
 				{
 					switch (ev.key.code)
 					{
-
 					case sf::Keyboard::Right:
 					{
 						what_unit++;
 						if (what_unit >= my.size())
-						{
 							what_unit = 0;
-						}
 						break;
 					}
 
