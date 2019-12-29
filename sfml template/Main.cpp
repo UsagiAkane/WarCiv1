@@ -15,6 +15,7 @@
 #include <algorithm>
 #include "Cavalry.h"
 #include "Settlers.h"
+#include "Town.h"
 
 using namespace sf;
 
@@ -55,15 +56,17 @@ int main(void) {
 	Cavalry cavalry;
 	cavalry.spawn(0, 0, test);
 
-	Settlers settlers;
-	settlers.spawn(256, 256, test);
-	settlers.setPlayerID(1);
-	settlers.setColorByID();
-	my.push_back(settlers);
+	//Settlers settlers;
+	//settlers.spawn(256, 256, test);
+	//settlers.setPlayerID(1);
+	//settlers.setColorByID();
+	//my.push_back(settlers);
 
-   //////TEST///////////////////
+	//////TEST///////////////////
 
-
+	Town town(32, 32);
+	town.createUnit(test, 1, my);
+	
 
 	try {
 		RenderWindow w(VideoMode(1100, 720), "TITLE");
@@ -116,7 +119,7 @@ int main(void) {
 
 			test.draw(w);
 			cavalry.draw(w);
-
+			town.draw(w);
 			for (auto i : unites)
 			{
 				i.draw(w);
@@ -125,7 +128,7 @@ int main(void) {
 			{
 				i.draw(w);
 			}
-
+			
 			w.display();
 		}
 

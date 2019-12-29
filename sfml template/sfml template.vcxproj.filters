@@ -205,6 +205,7 @@
     <ClCompile Include="Building.cpp">
       <Filter>BuildingsVova</Filter>
     </ClCompile>
+    <ClCompile Include="Town.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resourses.h">
@@ -315,5 +316,6 @@
     <ClInclude Include="Building.h">
       <Filter>BuildingsVova</Filter>
     </ClInclude>
+    <ClInclude Include="Town.h" />
   </ItemGroup>
 </Project>
