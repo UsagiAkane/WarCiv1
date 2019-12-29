@@ -82,6 +82,7 @@ public:
 	void setColorByID();
 	//find
     void delByPositionInVector(std::vector<Unit>&units);
+	virtual void createTown();
 
 
 
