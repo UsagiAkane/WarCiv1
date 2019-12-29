@@ -56,10 +56,16 @@ int main(void) {
 	cavalry.spawn(0, 0, test);
 
 	Settlers settlers;
-	settlers.spawn(256, 256, test);
+	settlers.spawn(32*8, 32*8, test);
 	settlers.setPlayerID(1);
 	settlers.setColorByID();
 	my.push_back(settlers);
+
+	Settlers settlers2;
+	settlers2.spawn(32 * 7, 32 * 7, test);
+	settlers2.setPlayerID(1);
+	settlers2.setColorByID();
+	my.push_back(settlers2);
 
    //////TEST///////////////////
 
