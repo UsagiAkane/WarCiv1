@@ -9,6 +9,7 @@
 #include "Ocean.h"
 #include "Terrain.h"
 
+
 class Map {
 private:
 	std::vector<std::vector<int>> map;

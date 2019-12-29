@@ -13,21 +13,27 @@
 #include "Militia.h"
 #include "Legion.h"
 #include <algorithm>
+#include "Cavalry.h"
+#include "Settlers.h"
+#include "Town.h"
 
 using namespace sf;
 
-//КОСТЕ СДЕЛАТЬ ДЕЛИТ С КАРТЫ
 int main(void) {
 
 	std::srand(time(NULL));
 	Map test(100, 100);
 
+	////////////////////////////CREATING UNITS
 	//enemies units
 	Legion l;
 	Militia m2enemy;
 	std::vector<Unit> unites;
 	m2enemy.setPlayerID(2);
 	l.spawn(96, 96, test);
+	l.setColorByID();
+	m2enemy.setColorByID();
+
 	m2enemy.spawn(128, 128, test);
 	unites.push_back(l);
 	unites.push_back(m2enemy);
@@ -35,13 +41,32 @@ int main(void) {
 	std::vector<Unit> my;
 	std::vector<int> enemiesID;
 	Militia m;
-	m.setHealth(10);
+	Militia s;
+	m.setHealth(1);
 	m.spawn(192, 192, test);
+	s.spawn(224, 192, test);
+	m.setColorByID();
+	s.setColorByID();
+
 	enemiesID.push_back(2);
 	my.push_back(m);
+	my.push_back(s);
 
-	//std::cout<<test.getTileVec(1, 1).getMove();
+	int what_unit = 0;
+	Cavalry cavalry;
+	cavalry.spawn(0, 0, test);
 
+	//Settlers settlers;
+	//settlers.spawn(256, 256, test);
+	//settlers.setPlayerID(1);
+	//settlers.setColorByID();
+	//my.push_back(settlers);
+
+	//////TEST///////////////////
+
+	Town town(32, 32);
+	town.createUnit(test, 1, my);
+	
 
 	try {
 		RenderWindow w(VideoMode(1100, 720), "TITLE");
@@ -50,38 +75,63 @@ int main(void) {
 			Event ev;
 
 			while (w.pollEvent(ev)) {
-
-
-
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-					std::for_each(my.begin(), my.end(), [&w, &test, &enemiesID, &unites](Unit& u)
-						{u.move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y, test, enemiesID, unites); });
-					test.getTile(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y).__getInfo_DEBUG();
+
+					////////////////////////////MOVE TARGET UNIT
+					if (ev.MouseButtonReleased)
+					{
+						if (my.size() > 0)
+						{
+							if (my.at(what_unit).getIsAlive() == true)
+								my.at(what_unit).move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y, test, enemiesID, unites, w);
+							else
+							{
+								my.erase(what_unit + my.begin());
+								what_unit = 0;
+							}
+						}
+					}
+				}
+				if (ev.type == ev.Closed)
+					w.close();
+
+
+				if (ev.type == sf::Event::KeyPressed)
+				{
+					switch (ev.key.code)
+					{
+					case sf::Keyboard::Right:
+					{
+						what_unit++;
+						if (what_unit >= my.size())
+							what_unit = 0;
+						break;
+					}
+
+					}
 				}
 
-				if (ev.type == Event::Closed)
-					w.close();
 
 
 			}
 			w.clear(Color::Black);
 
-		
-			test.draw(w);
 
+			test.draw(w);
+			cavalry.draw(w);
+			town.draw(w);
 			for (auto i : unites)
 			{
 				i.draw(w);
 			}
-			for (auto i: my)
+			for (auto i : my)
 			{
 				i.draw(w);
 			}
-	
-
-
+			
 			w.display();
 		}
+
 
 
 	}
