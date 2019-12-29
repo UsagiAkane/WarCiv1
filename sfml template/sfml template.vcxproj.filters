@@ -241,6 +241,7 @@
     <ClCompile Include="Library.cpp">
       <Filter>BuildingsVova\Child\Library</Filter>
     </ClCompile>
+    <ClCompile Include="Town.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resourses.h">
@@ -366,5 +367,6 @@
     <ClInclude Include="Library.h">
       <Filter>BuildingsVova\Child\Library</Filter>
     </ClInclude>
+    <ClInclude Include="Town.h" />
   </ItemGroup>
 </Project>

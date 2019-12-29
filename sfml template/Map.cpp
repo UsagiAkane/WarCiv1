@@ -1,7 +1,6 @@
 #include "Map.h"
 
-Map::Map(int sizeX, int sizeY)
-{
+Map::Map(int sizeX, int sizeY) {
 	//1-hill  2-forest  3-grass  4-mountain
 	for (int i = 0; i < sizeX; i++) {
 		std::vector<int>maptmp;
@@ -50,8 +49,7 @@ Terrain Map::getTile(int x, int y) {
 	return getTileVec(x, y);
 }
 
-Terrain Map::getTileVec(int x, int y)
-{
+Terrain Map::getTileVec(int x, int y) {
 	if (map.at(x).at(y) / 100 == 1) {				//HILL DRAW		
 		if (map.at(x).at(y) % 100 == 1) {		//COAL DRAW
 			return Hills(1);
@@ -110,8 +108,7 @@ void Map::moveUnit(int x, int y, int newx, int newy) {
 	this->units.at(x).at(y) = 0;
 }
 
-void Map::delUnit(int x, int y)
-{
+void Map::delUnit(int x, int y) {
 	x /= 32;
 	y /= 32;
 	this->units.at(x).at(y) = 0;
@@ -130,6 +127,7 @@ void Map::draw(sf::RenderWindow& w) {
 	Horses horses;
 	Oasis oasis;
 	Oil oil;
+
 
 	//1-hill  2-forest  3-grass  4-mountain
 	for (int i = 0; i < map.size(); i++) {
@@ -186,6 +184,8 @@ void Map::draw(sf::RenderWindow& w) {
 				ocean.setPosition(i * 32, j * 32);
 				ocean.draw(w);
 			}
+
+
 		}
 	}
 }
