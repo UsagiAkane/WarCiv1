@@ -1,6 +1,6 @@
 #include "Town.h"
 
-Town::Town(int positionX, int positionY){
+Town::Town(int positionX, int positionY) {
 	this->texture.loadFromFile("Icons\\Town.png");
 	this->TownSprite.setTexture(texture);
 	this->positionX = positionX;
@@ -15,10 +15,11 @@ Town::Town(int positionX, int positionY){
 	this->food = 5;
 	this->foodIncome = 0;
 	this->population = 1;
+	this->population_limit = 10;
 	this->happines = 100;
 	this->player_id = 1;//debug
-	this->population_limit = 10;
 	this->science = 0;
+	this->TownSprite.setColor()
 }
 
 void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
@@ -28,30 +29,36 @@ void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
 	Cavalry* cavalry = new Cavalry();
 	switch (unit) {
 	case 1:
-		if (map.getUnitInd(positionX, positionY)%10 == 0)
+		if (map.getUnitInd(positionX, positionY) % 10 == 0)
 			settlers->spawn(positionX, positionY, map);
-		settlers->setPlayerID(1);
+		settlers->setPlayerID(this->player_id);
 		settlers->setColorByID();
 		actor.push_back(*settlers);
 		break;
-		//case 2:
-		//	
-		//	militia.setPlayerID(1);
-		//	militia.setColorByID();
-		//	actor.push_back(militia);
-		//	break;
-		//case 3:
-		//	
-		//	legion.setPlayerID(1);
-		//	legion.setColorByID();
-		//	actor.push_back(legion);
-		//	break;
-		//case 4:
-		//	
-		//	cavalry.setPlayerID(1);
-		//	cavalry.setColorByID();
-		//	actor.push_back(cavalry);
-		//	break;
+	case 2:
+		if (map.getUnitInd(positionX, positionY) % 10 == 0)
+			militia->spawn(positionX, positionY, map);
+		militia->setPlayerID(this->player_id);
+		militia->setColorByID();
+		actor.push_back(*militia);
+		break;
+	case 3:
+		if (map.getUnitInd(positionX, positionY) % 10 == 0)
+			legion->spawn(positionX, positionY, map);
+		else {
+			std::cout << "<error> no space under the town;\n";
+		}
+		legion->setPlayerID(this->player_id);
+		legion->setColorByID();
+		actor.push_back(*legion);
+		break;
+	case 4:
+		if (map.getUnitInd(positionX, positionY) % 10 == 0)
+			cavalry->spawn(positionX, positionY, map);
+		cavalry->setPlayerID(this->player_id);
+		cavalry->setColorByID();
+		actor.push_back(*cavalry);
+		break;
 	}
 }
 
