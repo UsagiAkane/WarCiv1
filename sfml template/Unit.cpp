@@ -199,7 +199,6 @@ void Unit::attack(Unit& uEnemy, Map& map, int x, int y)
 void Unit::skipTurn()
 {
 	this->isActive = false;
-	this->speed -= this->speed;
 }
 
 void Unit::burrow()

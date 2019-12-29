@@ -72,6 +72,8 @@ int main(void) {
 			Event ev;
 
 			while (w.pollEvent(ev)) {
+
+
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 
 					////////////////////////////MOVE TARGET UNIT
@@ -89,6 +91,7 @@ int main(void) {
 						}
 					}
 				}
+
 				if (ev.type == ev.Closed)
 					w.close();
 
