@@ -149,10 +149,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Alphabet.cpp" />
+    <ClCompile Include="Aqueduct.cpp" />
+    <ClCompile Include="Barracks.cpp" />
     <ClCompile Include="BronzeWorking.cpp" />
     <ClCompile Include="Building.cpp" />
     <ClCompile Include="Cavalry.cpp" />
     <ClCompile Include="Ceremonial_Burial.cpp" />
+    <ClCompile Include="CityWalls.cpp" />
     <ClCompile Include="Coal.cpp" />
     <ClCompile Include="Currency.cpp" />
     <ClCompile Include="Forest.cpp" />
@@ -164,9 +167,11 @@
     <ClCompile Include="Horses.cpp" />
     <ClCompile Include="IronWorking.cpp" />
     <ClCompile Include="Legion.cpp" />
+    <ClCompile Include="Library.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapMaking.cpp" />
+    <ClCompile Include="Marketplace.cpp" />
     <ClCompile Include="Masonry.cpp" />
     <ClCompile Include="Mathematics.cpp" />
     <ClCompile Include="Militia.cpp" />
@@ -188,10 +193,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Alphabet.h" />
+    <ClInclude Include="Aqueduct.h" />
+    <ClInclude Include="Barracks.h" />
     <ClInclude Include="BronzeWorking.h" />
     <ClInclude Include="Building.h" />
     <ClInclude Include="Cavalry.h" />
     <ClInclude Include="Ceremonial_Burial.h" />
+    <ClInclude Include="CityWalls.h" />
     <ClInclude Include="Coal.h" />
     <ClInclude Include="Currency.h" />
     <ClInclude Include="Forest.h" />
@@ -203,9 +211,11 @@
     <ClInclude Include="Horses.h" />
     <ClInclude Include="IronWorking.h" />
     <ClInclude Include="Legion.h" />
+    <ClInclude Include="Library.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapMaking.h" />
     <ClInclude Include="Map_I.h" />
+    <ClInclude Include="Marketplace.h" />
     <ClInclude Include="Masonry.h" />
     <ClInclude Include="Mathematics.h" />
     <ClInclude Include="Militia.h" />

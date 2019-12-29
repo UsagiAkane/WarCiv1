@@ -177,8 +177,10 @@ void Unit::attack(Unit& uEnemy, Map& map, int x, int y)
 	this->health -= ((uEnemy.getDamage() + uEnemy.getRank()) - (this->armor));
 	this->setArmor(this->armor - (uEnemy.getDamage() + uEnemy.getRank()));
 	//damage to defender unit
-	uEnemy.health -= ((this->getDamage() + this->getRank()) - (uEnemy.getArmor() + map.getTile(x, y).getDefense()));
-	uEnemy.setArmor(armor - (this->getDamage() + this->getRank()));
+
+		uEnemy.health -= ((this->getDamage() + this->getRank()) - (uEnemy.getArmor() + map.getTile(x, y).getDefense()));
+		uEnemy.setArmor(armor - (this->getDamage() + this->getRank()));
+	
 
 	if (this->getHealth() <= 0)
 	{
@@ -199,7 +201,6 @@ void Unit::attack(Unit& uEnemy, Map& map, int x, int y)
 void Unit::skipTurn()
 {
 	this->isActive = false;
-	this->speed -= this->speed;
 }
 
 void Unit::burrow()
@@ -307,8 +308,6 @@ void Unit::death(Map& map)
 	this->isActive = false;
 	this->max_speed = 0;
 	map.delUnit(positionX, positionY);
-
-
 }
 
 void Unit::setColorByID()
