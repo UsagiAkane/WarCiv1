@@ -1,6 +1,7 @@
 #include "WindowManager.h"
 
 
+
 void WindowManager::mainWindow()
 {
 	std::srand(time(NULL));
@@ -46,7 +47,8 @@ void WindowManager::mainWindow()
 
 	int what_unit = 0;
 	try {
-		RenderWindow w(VideoMode(1100, 720), "TITLE");
+		RenderWindow w(VideoMode(1100, 720), "TITLE"/*,Style::Fullscreen*/);
+		//w.setVerticalSyncEnabled(1);
 
 		while (w.isOpen()) {
 #pragma region events

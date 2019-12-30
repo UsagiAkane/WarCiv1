@@ -97,9 +97,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Файлы ресурсов</Filter>
-    </ClCompile>
     <ClCompile Include="Resourses.cpp">
       <Filter>Map kastet\Resourse</Filter>
     </ClCompile>
@@ -207,6 +204,8 @@
     </ClCompile>
     <ClCompile Include="Town.cpp" />
     <ClCompile Include="WindowManager.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Actor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resourses.h">
@@ -319,5 +318,6 @@
     </ClInclude>
     <ClInclude Include="Town.h" />
     <ClInclude Include="WindowManager.h" />
+    <ClInclude Include="Actor.h" />
   </ItemGroup>
 </Project>
