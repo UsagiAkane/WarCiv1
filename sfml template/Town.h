@@ -12,7 +12,7 @@
 
 class Town {
 private:
-	sf::Sprite TownSprite;
+	sf::Sprite townSprite;
 	sf::Texture texture;
 	std::string name;
 	int positionX, positionY;
@@ -27,17 +27,18 @@ private:
 	int foodIncome;
 	int population;
 	int happines;
-	int player_id;
+	int playerID;
 	int population_limit;
 	int science;
 public:
-	Town(int positionX = 0, int positionY = 0);
+	Town(int positionX = 0, int positionY = 0, std::string name = "noName town");
 
 	//functions that can be changed
 	//void attackTake();
 	void createUnit(Map& map, int unit, std::vector<Unit>& actor);
 	void createBuilding(int building);
 	void setPosition(int x, int y);
+	void setColorByID();
 	//getters
 	int getHealth();
 	//int getArmor();

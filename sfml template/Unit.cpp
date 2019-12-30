@@ -358,6 +358,15 @@ int Unit::getIndex()
 	return this->index;
 }
 
+int Unit::getPositionX()
+{
+	return this->positionX;
+}
+int Unit::getPositionY()
+{
+	return this->positionY;
+}
+
 Unit::~Unit()
 {
 }
