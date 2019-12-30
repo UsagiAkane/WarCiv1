@@ -206,6 +206,7 @@
       <Filter>BuildingsVova</Filter>
     </ClCompile>
     <ClCompile Include="Town.cpp" />
+    <ClCompile Include="WindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resourses.h">
@@ -317,5 +318,6 @@
       <Filter>BuildingsVova</Filter>
     </ClInclude>
     <ClInclude Include="Town.h" />
+    <ClInclude Include="WindowManager.h" />
   </ItemGroup>
 </Project>

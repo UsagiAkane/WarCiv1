@@ -183,6 +183,7 @@
     <ClCompile Include="Town.cpp" />
     <ClCompile Include="Trade.cpp" />
     <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="WindowManager.cpp" />
     <ClCompile Include="Writing.cpp" />
     <ClCompile Include="CodeOfLaws.cpp" />
   </ItemGroup>
@@ -222,6 +223,7 @@
     <ClInclude Include="Town.h" />
     <ClInclude Include="Trade.h" />
     <ClInclude Include="Unit.h" />
+    <ClInclude Include="WindowManager.h" />
     <ClInclude Include="Writing.h" />
     <ClInclude Include="CodeOfLaws.h" />
   </ItemGroup>
