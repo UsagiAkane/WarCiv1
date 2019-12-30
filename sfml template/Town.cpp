@@ -19,7 +19,7 @@ Town::Town(int positionX, int positionY) {
 	this->happines = 100;
 	this->player_id = 1;//debug
 	this->science = 0;
-	this->TownSprite.setColor()
+	//this->TownSprite.setColor();
 }
 
 void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {

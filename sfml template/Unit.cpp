@@ -299,6 +299,7 @@ void Unit::spawn(int x, int y, Map& map)
 	this->positionY = y;
 	this->warriorSprite.setPosition(x, y);
 	map.pushUnit(x, y, (this->playerID * 100) + this->index);
+	setColorByID();
 }
 
 void Unit::death(Map& map)
