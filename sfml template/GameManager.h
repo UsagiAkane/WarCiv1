@@ -11,6 +11,7 @@ public:
 	GameManager();
 
 	Map& getMap();
+	std::vector<Actor>& getActors();
 
 	void draw(sf::RenderWindow&w);
 

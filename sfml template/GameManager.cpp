@@ -34,8 +34,19 @@ GameManager::GameManager()
 	this->actors.push_back(*enemyActor);
 }
 
+Map& GameManager::getMap()
+{
+	return this->map;
+}
+
+std::vector<Actor>& GameManager::getActors()
+{
+	return this->actors;
+}
+
 void GameManager::draw(sf::RenderWindow& w)
 {
+	map.draw(w);
 	for (auto i : this->actors) {
 		i.draw(w);
 	}
