@@ -5,5 +5,6 @@ class Settlers:public Unit
 {
 public:
 	Settlers();
+
 };
 

@@ -60,6 +60,9 @@ int main(void) {
 
 	Town town(32, 32);
 	town.createUnit(test, 1, my);
+
+	std::vector<Town> towns;
+	//towns.push_back(town);
 	
 
 	try {
@@ -104,7 +107,17 @@ int main(void) {
 							what_unit = 0;
 						break;
 					}
-
+					case sf::Keyboard::W:
+					{
+						if (my.at(what_unit).getName() == "Settlers")
+						{
+							my.erase(what_unit + my.begin());
+							what_unit = 0;
+							
+						}
+					
+						break;
+					}
 					}
 				}
 

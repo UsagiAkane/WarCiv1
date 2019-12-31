@@ -1,4 +1,5 @@
 #pragma once
+
 #include <SFML/Graphics.hpp>
 #include "Resourses.h"
 #include <vector>
@@ -9,6 +10,8 @@
 #include "Legion.h"
 #include "Militia.h"
 #include "Settlers.h"
+
+
 
 class Town {
 private:
@@ -38,6 +41,7 @@ public:
 	void createUnit(Map& map, int unit, std::vector<Unit>& actor);
 	void createBuilding(int building);
 	void setPosition(int x, int y);
+	void spawn(int x, int y, Map& map);
 	//getters
 	int getHealth();
 	//int getArmor();
@@ -66,7 +70,7 @@ public:
 	void setName(std::string name);
 	//needed
 	void draw(sf::RenderWindow& w);
-	void spawn(int x, int y, Map& map);
+
 	void destroy(Map& map);
 	void retake(Map& map);
 };

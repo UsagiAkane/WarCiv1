@@ -1,6 +1,6 @@
 #include "Town.h"
 
-Town::Town(int positionX, int positionY){
+Town::Town(int positionX, int positionY) {
 	this->texture.loadFromFile("Icons\\Town.png");
 	this->TownSprite.setTexture(texture);
 	this->positionX = positionX;
@@ -21,6 +21,7 @@ Town::Town(int positionX, int positionY){
 	this->science = 0;
 }
 
+
 void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
 	Settlers* settlers = new Settlers();
 	Militia* militia = new Militia();
@@ -28,7 +29,7 @@ void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
 	Cavalry* cavalry = new Cavalry();
 	switch (unit) {
 	case 1:
-		if (map.getUnitInd(positionX, positionY)%10 == 0)
+		if (map.getUnitInd(positionX, positionY) % 10 == 0)
 			settlers->spawn(positionX, positionY, map);
 		settlers->setPlayerID(1);
 		settlers->setColorByID();
