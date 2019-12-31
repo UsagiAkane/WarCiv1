@@ -1,6 +1,8 @@
 #include "Town.h"
 
+
 Town::Town(int positionX, int positionY,std::string name) {
+
 	this->texture.loadFromFile("Icons\\Town.png");
 	this->townSprite.setTexture(texture);
 	this->positionX = positionX;
@@ -21,6 +23,7 @@ Town::Town(int positionX, int positionY,std::string name) {
 	this->science = 0;
 	//this->TownSprite.setColor();
 }
+
 
 void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
 	Settlers* settlers = new Settlers();

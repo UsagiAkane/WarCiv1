@@ -2,5 +2,6 @@
 
 int main(void) {
 	WindowManager::mainWindow();
+
 	return 1;
 }
