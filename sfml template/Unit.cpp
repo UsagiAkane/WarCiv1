@@ -341,28 +341,22 @@ void Unit::delByPositionInVector(std::vector<Unit> &units)
 	units.erase(tmp + units.begin());
 
 }
-
 //void Unit::createTown(std::vector<Town> &towns, Map& map)
 //{
 //	std::cout<<" " <<std::endl;
 //}
-
 void Unit::setArmor(int armor)
 {
 	this->armor = armor;
 }
-
 sf::Sprite Unit::getSprite()
 {
 	return this->warriorSprite;
 }
-
 int Unit::getIndex()
 {
 	return this->index;
 }
-
-
 int Unit::getPositionX()
 {
 	return this->positionX;
@@ -370,11 +364,10 @@ int Unit::getPositionX()
 int Unit::getPositionY()
 {
 	return this->positionY;
-
+}
 std::string Unit::getName()
 {
 	return this->name;
-
 }
 
 Unit::~Unit()
