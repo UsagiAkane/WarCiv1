@@ -66,6 +66,8 @@ public:
 	bool getIsActive();
 	sf::Sprite getSprite();
 	int getIndex();
+	int getPositionX();
+	int getPositionY();
 	std::string getName();
 	//setters 
 	void setDamage(int damage);

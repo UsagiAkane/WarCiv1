@@ -1,12 +1,14 @@
 #include "Town.h"
 
-Town::Town(int positionX, int positionY) {
+
+Town::Town(int positionX, int positionY,std::string name) {
+
 	this->texture.loadFromFile("Icons\\Town.png");
-	this->TownSprite.setTexture(texture);
+	this->townSprite.setTexture(texture);
 	this->positionX = positionX;
 	this->positionY = positionY;
-	this->TownSprite.setPosition(positionX, positionY);
-	this->name = "noName town";
+	this->townSprite.setPosition(positionX, positionY);
+	this->name = name;
 	this->health = 10;
 	//armor=0;
 	this->damage = 1;
@@ -15,10 +17,11 @@ Town::Town(int positionX, int positionY) {
 	this->food = 5;
 	this->foodIncome = 0;
 	this->population = 1;
-	this->happines = 100;
-	this->player_id = 1;//debug
 	this->population_limit = 10;
+	this->happines = 100;
+	this->playerID = 1;//debug
 	this->science = 0;
+	//this->TownSprite.setColor();
 }
 
 
@@ -31,28 +34,34 @@ void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
 	case 1:
 		if (map.getUnitInd(positionX, positionY) % 10 == 0)
 			settlers->spawn(positionX, positionY, map);
-		settlers->setPlayerID(1);
+		settlers->setPlayerID(this->playerID);
 		settlers->setColorByID();
 		actor.push_back(*settlers);
 		break;
-		//case 2:
-		//	
-		//	militia.setPlayerID(1);
-		//	militia.setColorByID();
-		//	actor.push_back(militia);
-		//	break;
-		//case 3:
-		//	
-		//	legion.setPlayerID(1);
-		//	legion.setColorByID();
-		//	actor.push_back(legion);
-		//	break;
-		//case 4:
-		//	
-		//	cavalry.setPlayerID(1);
-		//	cavalry.setColorByID();
-		//	actor.push_back(cavalry);
-		//	break;
+	case 2:
+		if (map.getUnitInd(positionX, positionY) % 10 == 0)
+			militia->spawn(positionX, positionY, map);
+		militia->setPlayerID(this->playerID);
+		militia->setColorByID();
+		actor.push_back(*militia);
+		break;
+	case 3:
+		if (map.getUnitInd(positionX, positionY) % 10 == 0)
+			legion->spawn(positionX, positionY, map);
+		else {
+			std::cout << "<error> no space under the town;\n";
+		}
+		legion->setPlayerID(this->playerID);
+		legion->setColorByID();
+		actor.push_back(*legion);
+		break;
+	case 4:
+		if (map.getUnitInd(positionX, positionY) % 10 == 0)
+			cavalry->spawn(positionX, positionY, map);
+		cavalry->setPlayerID(this->playerID);
+		cavalry->setColorByID();
+		actor.push_back(*cavalry);
+		break;
 	}
 }
 
@@ -60,6 +69,24 @@ void Town::setPosition(int x, int y)
 {
 	this->positionX = x;
 	this->positionY = y;
+}
+
+void Town::setColorByID()
+{
+	if (this->playerID == 1)
+		townSprite.setColor(sf::Color(180, 180, 255));//blue
+	else if (this->playerID == 2)
+		townSprite.setColor(sf::Color(255, 180, 180));//red
+	else if (this->playerID == 3)
+		townSprite.setColor(sf::Color(255, 255, 100));//yellow
+	else if (this->playerID == 4)
+		townSprite.setColor(sf::Color(180, 255, 180));//green
+	else if (this->playerID == 5)
+		townSprite.setColor(sf::Color(100, 255, 255));//purple
+	else if (this->playerID == 6)
+		townSprite.setColor(sf::Color(220, 125, 220));//pink
+	else if (this->playerID > 6)
+		townSprite.setColor(sf::Color(50, 50, 50));//dark
 }
 
 int Town::getHealth() {
@@ -90,17 +117,15 @@ int Town::getHappines() {
 	return this->happines;
 }
 int Town::getPlayer_id() {
-	return this->player_id;
+	return this->playerID;
 }
 int Town::getScience() {
 	return this->science;
 }
-
-std::string Town::getName()
-{
+std::string Town::getName() {
 	return this->name;
 }
-
+//SETTERS
 void Town::setHealth(int health) {
 	this->health = health;
 }
@@ -126,7 +151,7 @@ void Town::setHappines(int happines) {
 	this->happines = happines;
 }
 void Town::setPlayer_id(int player_id) {
-	this->player_id = player_id;
+	this->playerID = player_id;
 }
 void Town::setPopulation_limit(int population_limit) {
 	this->population_limit = population_limit;
@@ -134,13 +159,15 @@ void Town::setPopulation_limit(int population_limit) {
 void Town::setScience(int science) {
 	this->science = science;
 }
-
-void Town::setName(std::string name)
-{
+void Town::setName(std::string name) {
 	this->name = name;
 }
+//OTHER
+void Town::draw(sf::RenderWindow& w) {
+	w.draw(this->townSprite);
+}
 
-void Town::draw(sf::RenderWindow& w)
-{
-	w.draw(this->TownSprite);
+void Town::spawn(int x, int y, Map& map) {
+	map.pushUnit(x, y, this->playerID * 100 + 50);
+	setColorByID();
 }

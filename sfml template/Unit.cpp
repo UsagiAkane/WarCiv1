@@ -300,6 +300,7 @@ void Unit::spawn(int x, int y, Map& map)
 	this->positionY = y;
 	this->warriorSprite.setPosition(x, y);
 	map.pushUnit(x, y, (this->playerID * 100) + this->index);
+	setColorByID();
 }
 
 void Unit::death(Map& map)
@@ -361,9 +362,19 @@ int Unit::getIndex()
 	return this->index;
 }
 
+
+int Unit::getPositionX()
+{
+	return this->positionX;
+}
+int Unit::getPositionY()
+{
+	return this->positionY;
+
 std::string Unit::getName()
 {
 	return this->name;
+
 }
 
 Unit::~Unit()

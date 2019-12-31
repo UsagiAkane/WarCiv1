@@ -148,6 +148,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Alphabet.cpp" />
     <ClCompile Include="Aqueduct.cpp" />
     <ClCompile Include="Barracks.cpp" />
@@ -160,6 +161,7 @@
     <ClCompile Include="Currency.cpp" />
     <ClCompile Include="Forest.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Gold.cpp" />
     <ClCompile Include="Grassland.cpp" />
     <ClCompile Include="Hills.cpp" />
@@ -188,10 +190,12 @@
     <ClCompile Include="Town.cpp" />
     <ClCompile Include="Trade.cpp" />
     <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="WindowManager.cpp" />
     <ClCompile Include="Writing.cpp" />
     <ClCompile Include="CodeOfLaws.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actor.h" />
     <ClInclude Include="Alphabet.h" />
     <ClInclude Include="Aqueduct.h" />
     <ClInclude Include="Barracks.h" />
@@ -204,6 +208,7 @@
     <ClInclude Include="Currency.h" />
     <ClInclude Include="Forest.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="Gold.h" />
     <ClInclude Include="Grassland.h" />
     <ClInclude Include="Hills.h" />
@@ -232,6 +237,7 @@
     <ClInclude Include="Town.h" />
     <ClInclude Include="Trade.h" />
     <ClInclude Include="Unit.h" />
+    <ClInclude Include="WindowManager.h" />
     <ClInclude Include="Writing.h" />
     <ClInclude Include="CodeOfLaws.h" />
   </ItemGroup>
