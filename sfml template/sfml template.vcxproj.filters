@@ -5,9 +5,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="BuildingsVova">
-      <UniqueIdentifier>{49aa60a6-290c-437d-ae3c-64960a53b8eb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Map">
       <UniqueIdentifier>{f693efec-8930-4750-956f-c062dc4dc90d}</UniqueIdentifier>
     </Filter>
@@ -110,25 +107,28 @@
     <Filter Include="System\WindowManager">
       <UniqueIdentifier>{362be47f-2a8b-4641-8500-1cf3313ce36a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="BuildingsVova\Parent">
+    <Filter Include="Buildings">
+      <UniqueIdentifier>{49aa60a6-290c-437d-ae3c-64960a53b8eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Buildings\Parent">
       <UniqueIdentifier>{c0d5fb25-f9ca-43f1-8d91-46594680d6b6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="BuildingsVova\Child">
+    <Filter Include="Buildings\Child">
       <UniqueIdentifier>{43aa552f-b74b-477a-b92e-2f3cf11746d1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="BuildingsVova\Child\Aqueduct">
+    <Filter Include="Buildings\Child\Aqueduct">
       <UniqueIdentifier>{cdf3f7ac-3a71-4dac-91a5-d65754978ffc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="BuildingsVova\Child\Barracks">
+    <Filter Include="Buildings\Child\Barracks">
       <UniqueIdentifier>{05de0430-459b-41c2-84ef-547ba6862162}</UniqueIdentifier>
     </Filter>
-    <Filter Include="BuildingsVova\Child\Marketplace">
+    <Filter Include="Buildings\Child\Marketplace">
       <UniqueIdentifier>{ebdfdcf8-f093-450d-ab87-dc68bc7146b9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="BuildingsVova\Child\CityWalls">
+    <Filter Include="Buildings\Child\CityWalls">
       <UniqueIdentifier>{d1a6d879-a065-4c2f-9c3f-a975c71e1b6f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="BuildingsVova\Child\Library">
+    <Filter Include="Buildings\Child\Library">
       <UniqueIdentifier>{479fb0a5-5145-4939-964c-8fbc221ec096}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -236,22 +236,22 @@
       <Filter>Units\Childs\Settlers</Filter>
     </ClCompile>
     <ClCompile Include="Building.cpp">
-      <Filter>BuildingsVova\Parent</Filter>
+      <Filter>Buildings\Parent</Filter>
     </ClCompile>
     <ClCompile Include="Aqueduct.cpp">
-      <Filter>BuildingsVova\Child\Aqueduct</Filter>
+      <Filter>Buildings\Child\Aqueduct</Filter>
     </ClCompile>
     <ClCompile Include="Barracks.cpp">
-      <Filter>BuildingsVova\Child\Barracks</Filter>
+      <Filter>Buildings\Child\Barracks</Filter>
     </ClCompile>
     <ClCompile Include="Marketplace.cpp">
-      <Filter>BuildingsVova\Child\Marketplace</Filter>
+      <Filter>Buildings\Child\Marketplace</Filter>
     </ClCompile>
     <ClCompile Include="CityWalls.cpp">
-      <Filter>BuildingsVova\Child\CityWalls</Filter>
+      <Filter>Buildings\Child\CityWalls</Filter>
     </ClCompile>
     <ClCompile Include="Library.cpp">
-      <Filter>BuildingsVova\Child\Library</Filter>
+      <Filter>Buildings\Child\Library</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>System</Filter>
@@ -376,22 +376,22 @@
       <Filter>Units\Childs\Settlers</Filter>
     </ClInclude>
     <ClInclude Include="Building.h">
-      <Filter>BuildingsVova\Parent</Filter>
+      <Filter>Buildings\Parent</Filter>
     </ClInclude>
     <ClInclude Include="Aqueduct.h">
-      <Filter>BuildingsVova\Child\Aqueduct</Filter>
+      <Filter>Buildings\Child\Aqueduct</Filter>
     </ClInclude>
     <ClInclude Include="Barracks.h">
-      <Filter>BuildingsVova\Child\Barracks</Filter>
+      <Filter>Buildings\Child\Barracks</Filter>
     </ClInclude>
     <ClInclude Include="Marketplace.h">
-      <Filter>BuildingsVova\Child\Marketplace</Filter>
+      <Filter>Buildings\Child\Marketplace</Filter>
     </ClInclude>
     <ClInclude Include="CityWalls.h">
-      <Filter>BuildingsVova\Child\CityWalls</Filter>
+      <Filter>Buildings\Child\CityWalls</Filter>
     </ClInclude>
     <ClInclude Include="Library.h">
-      <Filter>BuildingsVova\Child\Library</Filter>
+      <Filter>Buildings\Child\Library</Filter>
     </ClInclude>
     <ClInclude Include="Town.h">
       <Filter>Town</Filter>
