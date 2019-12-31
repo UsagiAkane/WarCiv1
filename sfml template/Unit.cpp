@@ -341,6 +341,11 @@ void Unit::delByPositionInVector(std::vector<Unit> &units)
 
 }
 
+//void Unit::createTown(std::vector<Town> &towns, Map& map)
+//{
+//	std::cout<<" " <<std::endl;
+//}
+
 void Unit::setArmor(int armor)
 {
 	this->armor = armor;
@@ -354,6 +359,11 @@ sf::Sprite Unit::getSprite()
 int Unit::getIndex()
 {
 	return this->index;
+}
+
+std::string Unit::getName()
+{
+	return this->name;
 }
 
 Unit::~Unit()

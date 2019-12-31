@@ -66,6 +66,7 @@ public:
 	bool getIsActive();
 	sf::Sprite getSprite();
 	int getIndex();
+	std::string getName();
 	//setters 
 	void setDamage(int damage);
 	void setHealth(int health);
@@ -82,6 +83,7 @@ public:
 	void setColorByID();
 	//find
     void delByPositionInVector(std::vector<Unit>&units);
+	//virtual void createTown(std::vector<Town>& towns,Map & map);
 
 
 
