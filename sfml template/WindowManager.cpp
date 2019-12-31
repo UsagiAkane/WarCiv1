@@ -24,6 +24,9 @@ void WindowManager::mainWindow(){
 
 	Actor actor("Kolya",map);
 
+
+
+
 	int what_unit = 0;
 	try {
 		RenderWindow w(VideoMode(1100, 720), "TITLE"/*,Style::Fullscreen*/);

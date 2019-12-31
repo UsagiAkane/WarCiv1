@@ -88,6 +88,11 @@ void Actor::takeTax()
 	}
 }
 
+void Actor::pushbackEnemyID(int ID)
+{
+	this->enemyListID.push_back(ID);
+}
+
 int Actor::getPlayerID()
 {
 	return this->playerID;

@@ -33,6 +33,7 @@ public:
 	void takeControl(sf::Event event, Map& map, sf::RenderWindow& w,std::vector<Unit>&EnemyUnitVector);
 	void draw(sf::RenderWindow& w);
 	void takeTax();
+	void pushbackEnemyID(int id);
 	//--------GETERS
 	int getPlayerID();
 	std::vector<int> getEnemyListID();
