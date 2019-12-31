@@ -1,49 +1,28 @@
 #include "WindowManager.h"
 
-
-
-void WindowManager::mainWindow()
-{
+void WindowManager::mainWindow(){
 	std::srand(time(NULL));
 	Map map(100, 100);
 
+	Actor enemyActor("Ruslan",map);
+	enemyActor.setPlayerID(2);
 	////////////////////////////CREATING UNITS
 	std::vector<int> enemiesID;
 	enemiesID.push_back(2);
 	//enemy units
-	std::vector<Unit> EnemyUnitVector;
-	Legion legionEnemy;
-	Militia militiaEnemy;
-	militiaEnemy.setPlayerID(2);
-	militiaEnemy.spawn(128, 128, map);
-	EnemyUnitVector.push_back(militiaEnemy);
-	legionEnemy.setPlayerID(2);
-	legionEnemy.spawn(96, 96, map);
-	EnemyUnitVector.push_back(legionEnemy);
+	//std::vector<Unit> EnemyUnitVector;
+	Legion *legionEnemy=new Legion;
+	Militia *militiaEnemy=new Militia;
+	militiaEnemy->setPlayerID(2);
+	militiaEnemy->spawn(128, 128, map);
+	//EnemyUnitVector.push_back(militiaEnemy);
+	enemyActor.__PUSH_UNIT_DEBUG(militiaEnemy);
+	legionEnemy->setPlayerID(2);
+	legionEnemy->spawn(96, 96, map);
+	//EnemyUnitVector.push_back(legionEnemy);
+	enemyActor.__PUSH_UNIT_DEBUG(legionEnemy);
 
-	//my units
-	std::vector<Unit> myUnitVector;
-	Militia myMilitia;
-	Militia myMilitia2;
-	Settlers mySettlers;
-	mySettlers.spawn(32, 32, map);
-	myUnitVector.push_back(mySettlers);
-	//myMilitia.setPlayerID(1); //BY DEFAULT
-	myMilitia.spawn(192, 192, map);
-	myUnitVector.push_back(myMilitia);
-	//myMilitia2.setPlayerID(1); //BY DEFAULT
-	myMilitia2.spawn(224, 192, map);
-	myUnitVector.push_back(myMilitia2);
-
-
-	//my towns
-	std::vector<Town> myTownVector;
-	//Town town(32, 32);
-	//myTownVector.push_back(town);
-	//town.createUnit(map, 1, myUnitVector);
-
-
-
+	Actor actor("Kolya",map);
 
 	int what_unit = 0;
 	try {
@@ -58,73 +37,24 @@ void WindowManager::mainWindow()
 				//CLOSE--------------
 				if (event.type == event.Closed)
 					w.close();
-				//UNIT-MOVE----------
-				if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-					if (event.MouseButtonReleased) {
-						if (myUnitVector.size() > 0) {
-							if (myUnitVector.at(what_unit).getIsAlive() == true)
-								myUnitVector.at(what_unit).move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y, map, enemiesID, EnemyUnitVector, w);
-							else {
-								myUnitVector.erase(what_unit + myUnitVector.begin());
-								what_unit = 0;
-							}
-						}
-					}
-				}
-				if (event.type == sf::Event::KeyPressed) {
-					switch (event.key.code) {
-						//UNIT-TARGET--------
-					case sf::Keyboard::Right:
-						what_unit++;
-						if (what_unit >= myUnitVector.size())
-							what_unit = 0;
-						break;
-						//CREATE-TOWN--------
-					case sf::Keyboard::W:
-						if (myUnitVector.at(what_unit).getIsAlive() == true) {
-							if (myUnitVector.at(what_unit).getIndex() == 1) {
-								//town.createUnit(map, 1, myUnitVector);
-								if (map.getUnitInd(myUnitVector.at(what_unit).getPositionX(), myUnitVector.at(what_unit).getPositionY()) % 100 == 1) {
-									Town town(myUnitVector.at(what_unit).getPositionX(), myUnitVector.at(what_unit).getPositionY());
-									town.spawn(myUnitVector.at(what_unit).getPositionX(), myUnitVector.at(what_unit).getPositionY(), map);
-									myTownVector.push_back(town);
 
-									myUnitVector.at(what_unit).death(map);
-									myUnitVector.erase(what_unit + myUnitVector.begin());
-								}
-								else std::cout << "<error> this tile already has town\n";
-							}
-						}
-						break;
-					}
-				}
+				actor.takeControl(event,map,w,enemyActor.getUnits());
 
 			}
 #pragma endregion
 			//WINDOW-FILL-COLOR
 			w.clear(Color::Black);
+
 			//MAP-DRAW
 			map.draw(w);
-			//TOWNS-DRAW
-			for (auto i : myTownVector) {
-				i.draw(w);
-			}
-			//UNITS-DRAW
-			for (auto i : myUnitVector) {
-				i.draw(w);
-			}
-			for (auto i : EnemyUnitVector) {
-				i.draw(w);
-			}
+
+			actor.draw(w);
+			enemyActor.draw(w);
 			//DISPLAY
 			w.display();
 		}
-
-
-
 	}
 	catch (const std::exception & e) {
 		std::cout << e.what();
 	}
-
 }
