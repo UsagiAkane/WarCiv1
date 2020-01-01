@@ -8,6 +8,10 @@ GameManager::GameManager()
 	player->setPlayerID(1);
 	player->pushbackEnemyID(2);
 	player->pushbackEnemyID(3);
+	Settlers* firstS = new Settlers;
+	firstS->setPlayerID(player->getPlayerID());
+	firstS->spawn(0, 64, this->map);
+	player->__PUSH_UNIT_DEBUG(firstS);
 
 
 	//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-

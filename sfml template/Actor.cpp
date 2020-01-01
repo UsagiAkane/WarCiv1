@@ -3,11 +3,8 @@
 Actor::Actor(std::string name, Map& map) {
 	playerID = 1;
 	this->name = name;
-	Settlers* baseSettlers = new Settlers;
-	baseSettlers->setPlayerID(this->playerID);
-	baseSettlers->spawn(64, 0, map);
 	this->enemyListID.push_back(2);//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG
-	this->units.push_back(*baseSettlers);
+
 	//std::vector<std::vector<bool>> fog;
 	this->goldPerTurn = 0;
 	this->sciencePerTurn = 0;
