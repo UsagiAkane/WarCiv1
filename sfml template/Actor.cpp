@@ -15,7 +15,7 @@ Actor::Actor(std::string name, Map& map) {
 	this->unitController = 0;
 }
 
-void Actor::__PUSH_UNIT_DEBUG(Unit *unit)
+void Actor::__PUSH_UNIT_DEBUG(Unit* unit)
 {
 	this->units.push_back(*unit);
 }
@@ -44,16 +44,21 @@ void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, std::vec
 			break;
 			//CREATE-TOWN--------
 		case sf::Keyboard::W:
-			if (this->units.at(unitController).getIsAlive() == true) {
-				if (this->units.at(unitController).getIndex() == 1) {
-					if (map.getUnitInd(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY()) % 100 / 10 == 0) {
-						Town* town = new Town(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY());
-						town->spawn(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY(), map);
-						this->towns.push_back(*town);
-						this->units.at(unitController).death(map);
-						this->units.erase(unitController + this->units.begin());
+			if (this->units.size() != 0) {
+				if (this->units.at(unitController).getIsAlive() == true) {
+					if (this->units.at(unitController).getIndex() == 1) {
+						//std::cout << map.getUnitInd(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY()) << std::endl;//debug
+						if (map.getUnitInd(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY()) % 100 / 10 == 0) {
+							Town* town = new Town(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY());
+							this->units.at(unitController).death(map);
+							this->units.erase(unitController + this->units.begin());
+							town->setPlayer_id(1);
+							town->spawn(town->getPositionX(), town->getPositionY(), map);
+							this->towns.push_back(*town);
+						}
+						else std::cout << "<error> this tile already has town\n";
+						//std::cout << map.getUnitInd(this->towns.at(0).getPositionX(), this->towns.at(0).getPositionY());//debug
 					}
-					else std::cout << "<error> this tile already has town\n";
 				}
 			}
 			break;
@@ -61,8 +66,8 @@ void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, std::vec
 			this->towns.at(0).createUnit(map, 1, this->units);
 			break;
 		case sf::Keyboard::Enter:
-			std::cout << "Enter" << std::endl;
-			endOfTurn();
+			std::cout << "\nTurn ended!" << std::endl;
+			endOfTurn(map);
 			break;
 		}
 	}
@@ -83,7 +88,7 @@ void Actor::draw(sf::RenderWindow& w)
 void Actor::takeTax()
 {
 	for (auto i : this->towns) {
-		this->totalGold+=i.getGoldIncome();
+		this->totalGold += i.getGoldIncome();
 		this->totalProdaction += i.getProduction();
 		this->totalScience += i.getScience();
 	}
@@ -199,10 +204,12 @@ void Actor::setTotalProdaction(int totalProdaction)
 	this->totalProdaction = totalProdaction;
 }
 
-void Actor::endOfTurn()
+void Actor::endOfTurn(Map& map)
 {
-	for (int i = 0; i < units.size(); i++)
-	{
+	for (int i = 0; i < towns.size(); i++) {
+		towns[i].endOfTurn(map);
+	}
+	for (int i = 0; i < units.size(); i++) {
 		units.at(i).recharge();
 	}
 }
