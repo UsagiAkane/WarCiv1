@@ -52,7 +52,6 @@ void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
 			std::cout << "<error> no space under the town;\n";
 		}
 		legion->setPlayerID(this->playerID);
-		legion->setColorByID();
 		actor.push_back(*legion);
 		break;
 	case 4:

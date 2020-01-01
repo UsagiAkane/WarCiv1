@@ -13,6 +13,11 @@ GameManager::GameManager()
 	firstS->spawn(0, 64, this->map);
 	player->__PUSH_UNIT_DEBUG(firstS);
 
+	Legion* t = new Legion;
+	t->setPlayerID(player->getPlayerID());
+	t->spawn(0, 32, this->map);
+	player->__PUSH_UNIT_DEBUG(t);
+
 
 	//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 	Actor *enemyActor=new Actor("Ruslan", map);
