@@ -16,7 +16,6 @@ class Unit
 protected:
 	//general stat
 	sf::Sprite warriorSprite;
-	sf::Texture texture;
 	std::string name;
 	int health;
 	int armor;

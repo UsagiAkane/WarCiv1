@@ -341,10 +341,7 @@ void Unit::delByPositionInVector(std::vector<Unit> &units)
 	units.erase(tmp + units.begin());
 
 }
-//void Unit::createTown(std::vector<Town> &towns, Map& map)
-//{
-//	std::cout<<" " <<std::endl;
-//}
+
 void Unit::setArmor(int armor)
 {
 	this->armor = armor;

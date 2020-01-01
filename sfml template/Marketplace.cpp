@@ -2,8 +2,9 @@
 
 Marketplace::Marketplace() :Building("Marketplace",80,320,4,0,0,2,1,0 )
 {
-	texture.loadFromFile("BuildingsIcons\\Marketplace");
-	sprite.setTexture(texture);
+	sf::Texture* texture = new sf::Texture;
+	texture->loadFromFile("BuildingsIcons\\Marketplace.png");
+	sprite.setTexture(*texture);
 }
 
 bool Marketplace::isBuildable(std::vector<Technologies> techno)
