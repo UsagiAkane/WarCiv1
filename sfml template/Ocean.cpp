@@ -3,7 +3,7 @@
 Ocean::Ocean(int res){
 	texture.loadFromFile("Terrains\\Ocean.png");
 	this->sprite.setTexture(this->texture);
-	this->name = "Ocean";
+	this->name = "ocean";
 	this->move = 1;
 	this->food = 1;
 	this->prodaction = 1;

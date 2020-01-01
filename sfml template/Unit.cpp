@@ -78,35 +78,35 @@ void Unit::animationOfAttack(int value, sf::RenderWindow& w, Map& map)
 	Sleep(600);
 }
 
-void Unit::moveRightHidden(Map& map)
+void Unit::moveRightHidden(Map& map, int mouse_x, int mouse_y)
 {
 	positionX += BORDER_PIXEL_32;
 	this->warriorSprite.setPosition(positionX, positionY);
-	this->steps--;
+	this->steps -= map.getTile(mouse_x, mouse_y).getMove();
 	map.moveUnit(positionX - BORDER_PIXEL_32, positionY, positionX, positionY);
 }
 
-void Unit::moveLeftHidden(Map& map)
+void Unit::moveLeftHidden(Map& map, int mouse_x, int mouse_y)
 {
 	positionX -= BORDER_PIXEL_32;
 	this->warriorSprite.setPosition(positionX, positionY);
-	this->steps--;
+	this->steps -= map.getTile(mouse_x, mouse_y).getMove();
 	map.moveUnit(positionX + BORDER_PIXEL_32, positionY, positionX, positionY);
 }
 
-void Unit::moveDownHidden(Map& map)
+void Unit::moveDownHidden(Map& map, int mouse_x, int mouse_y)
 {
 	positionY += BORDER_PIXEL_32;
 	this->warriorSprite.setPosition(positionX, positionY);
-	this->steps--;
+	this->steps -= map.getTile(mouse_x, mouse_y).getMove();
 	map.moveUnit(positionX, positionY - BORDER_PIXEL_32, positionX, positionY);
 }
 
-void Unit::moveTopHidden(Map& map)
+void Unit::moveTopHidden(Map& map, int mouse_x, int mouse_y)
 {
 	positionY -= BORDER_PIXEL_32;
 	this->warriorSprite.setPosition(positionX, positionY);
-	this->steps--;
+	this->steps -= map.getTile(mouse_x, mouse_y).getMove();
 	map.moveUnit(positionX, positionY + BORDER_PIXEL_32, positionX, positionY);
 }
 
@@ -133,51 +133,56 @@ Unit::Unit(std::string name, int health, int armor, int damage, int speed, unsig
 
 void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id, std::vector<Unit>& enemies, sf::RenderWindow& w)
 {
-	std::cout<<this->steps<<std::endl;
-	std::cout<<this->isActive<<std::endl;
-	std::cout<<this->maxSteps<<std::endl;
 	if (isActive != false)
 	{
-	////right
-	if (((mouse_x <= this->positionX + BORDER_PIXEL_64 && mouse_x >= this->positionX + BORDER_PIXEL_32) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_32)))//check position of mouse
-	{
+		////right
+		if (((mouse_x <= this->positionX + BORDER_PIXEL_60 && mouse_x >= this->positionX + BORDER_PIXEL_32) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_32)))//check position of mouse
+		{
+			if (map.getTile(mouse_x, mouse_y).getMove() <= this->steps)
+			{
+				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty 
+					moveRightHidden(map, mouse_x, mouse_y);
+				if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0) //check index of unit
+					checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 1);   //Checking whether a unit can attack
+			}
 
-		if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0) //check index of unit
-			checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 1);   //Checking whether a unit can attack
-		if ((map.getUnitInd(mouse_x, mouse_y)) == 0)//check is tile empty 
-			moveRightHidden(map);
+		}
+		////left
+		else if (((mouse_x >= this->positionX - BORDER_PIXEL_32 && mouse_x <= this->positionX) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_32)))//check position of mouse
+		{
+			if (map.getTile(mouse_x, mouse_y).getMove() <= this->steps)
+			{
+				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
+					moveLeftHidden(map, mouse_x, mouse_y);
+				if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
+					checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 2); //Checking whether a unit can attack
+			}
 
-	}
-	////left
-	else if (((mouse_x >= this->positionX - BORDER_PIXEL_32 && mouse_x <= this->positionX) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_32)))//check position of mouse
-	{
-
-		if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
-			checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 2); //Checking whether a unit can attack
-		if ((map.getUnitInd(mouse_x, mouse_y)) == 0)//check is tile empty
-			moveLeftHidden(map);
-	}
-	////top
-	else if ((mouse_y >= positionY - BORDER_PIXEL_32 && mouse_y <= positionY) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_32))//check position of mouse
-	{
-
-		if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
-			checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 3); //Checking whether a unit can attack
-		if ((map.getUnitInd(mouse_x, mouse_y)) == 0)//check is tile empty
-			moveTopHidden(map);
-
-	}
-	////down
-	else if ((mouse_y <= positionY + BORDER_PIXEL_64 && mouse_y >= positionY + BORDER_PIXEL_32) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_32))//check position of mouse
-	{
-
-		if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
-			checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 4); //Checking whether a unit can attack
-		if ((map.getUnitInd(mouse_x, mouse_y)) == 0)//check is tile empty
-			moveDownHidden(map);
-	}
-	if (steps <= 0)
-		this->isActive = false;
+		}
+		////top
+		else if ((mouse_y >= positionY - BORDER_PIXEL_32 && mouse_y <= positionY) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_32))//check position of mouse
+		{
+			if (map.getTile(mouse_x, mouse_y).getMove() <= this->steps)
+			{
+				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
+					moveTopHidden(map, mouse_x, mouse_y);
+				if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
+					checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 3); //Checking whether a unit can attack
+			}
+		}
+		////down
+		else if ((mouse_y <= positionY + BORDER_PIXEL_60 && mouse_y >= positionY + BORDER_PIXEL_32) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_32))//check position of mouse
+	 	{
+			if (map.getTile(mouse_x, mouse_y).getMove() <= this->steps)
+			{
+				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
+					moveDownHidden(map, mouse_x, mouse_y);
+				if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
+					checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 4); //Checking whether a unit can attack
+			}
+		}
+		this->checkSteps();
+		this->checkUpUnit();
 
 	}
 }
@@ -212,9 +217,6 @@ void Unit::recharge()
 {
 	this->steps = maxSteps;
 	this->isActive = true;
-	std::cout<<"Recharge"<< std::endl;
-	std::cout<<"STEPS "<<steps<< std::endl;
-	std::cout << "MAXSTEPS " <<maxSteps<< std::endl;
 }
 
 void Unit::skipTurn()
@@ -347,6 +349,22 @@ void Unit::setColorByID()
 	else if (this->playerID > 6)
 		warriorSprite.setColor(sf::Color(50, 50, 50));//dark
 
+}
+
+void Unit::checkUpUnit()
+{
+	if (this->countOfKill >= 2)
+	{
+		this->rank += 1;
+		this->countOfKill = 0;
+	}
+	
+}
+
+void Unit::checkSteps()
+{
+	if (steps <= 0)
+		this->isActive = false;
 }
 
 void Unit::delByPositionInVector(std::vector<Unit>& units)

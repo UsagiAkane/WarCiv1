@@ -63,7 +63,7 @@ void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, std::vec
 			}
 			break;
 		case sf::Keyboard::S:
-			this->towns.at(0).createUnit(map, 1, this->units);
+			this->towns.at(0).createUnit(map, 3, this->units);
 			break;
 		case sf::Keyboard::Enter:
 			std::cout << "\nTurn ended!" << std::endl;

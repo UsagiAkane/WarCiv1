@@ -11,6 +11,9 @@
 #define BORDER_PIXEL_32 32
 #define BORDER_PIXEL_16 16
 #define BORDER_PIXEL_64 64
+#define BORDER_PIXEL_60 60
+#define BORDER_PIXEL_30 30
+
 
 class Unit
 {
@@ -39,10 +42,10 @@ protected:
 	//functions to call inside
 	void checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::vector<int> &enemies_id, std::vector<Unit> &enemies, sf::RenderWindow& w, int direction);
 	void animationOfAttack(int value,sf::RenderWindow& w,Map& map);
-	void moveRightHidden(Map& map);
-	void moveLeftHidden(Map& map);
-	void moveDownHidden(Map& map);
-	void moveTopHidden(Map& map);
+	void moveRightHidden(Map& map, int mouse_x, int mouse_y);
+	void moveLeftHidden(Map& map, int mouse_x, int mouse_y);
+	void moveDownHidden(Map& map, int mouse_x, int mouse_y);
+	void moveTopHidden(Map& map, int mouse_x, int mouse_y);
 
 public:
 	//constuctor
@@ -54,6 +57,7 @@ public:
 	virtual void move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id, std::vector<Unit>& enemies, sf::RenderWindow& w);
 	virtual void attack(Unit& u, Map& map,int x,int y);
 	virtual void recharge();
+	
 	
 	//functions ,that can be used by pressed key
 	void skipTurn();
@@ -87,6 +91,8 @@ public:
 	void spawn(int x,int y, Map& map);
 	void death(Map& map);
 	void setColorByID();
+	void checkUpUnit();
+	void checkSteps();
 	//find
     void delByPositionInVector(std::vector<Unit>&units);
 
