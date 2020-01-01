@@ -46,6 +46,11 @@ int Terrain::getDefense()
 	return this->defense;
 }
 
+bool Terrain::isWater()
+{
+	return this->name == "ocean" ? true : false;
+}
+
 void Terrain::__getInfo_DEBUG()
 {
 	std::cout << "\n-----tile-----\n";

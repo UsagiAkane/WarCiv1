@@ -16,13 +16,14 @@ protected:
 public:
 	Terrain();
 
-	virtual sf::Texture getTexture();
-	virtual	std::string getName();
-	virtual	int getMove();
-	virtual	int getFood();
-	virtual	int getProdaction();
-	virtual	int getTrade();
-	virtual	int getDefense();
+	sf::Texture getTexture();
+	std::string getName();
+	int getMove();
+	int getFood();
+	int getProdaction();
+	int getTrade();
+	int getDefense();
+	bool isWater();
 
 	void __getInfo_DEBUG();
 

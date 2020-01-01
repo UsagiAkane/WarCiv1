@@ -86,19 +86,22 @@ Terrain Map::getTileVec(int x, int y) {
 	else if (map.at(x).at(y) / 100 == 5)			//OCEAN
 		return Ocean();
 }
-
 int Map::getUnitInd(int x, int y) {
 	x /= 32;
 	y /= 32;
 	return this->units.at(x).at(y);
 }
-
+int Map::getUnitID(int x, int y) {
+	return getUnitID(x, y) % 100;
+}
+int Map::getUnitPlayerID(int x, int y) {
+	return getUnitID(x, y) / 100;
+}
 void Map::pushUnit(int x, int y, int unit) {
 	x /= 32;
 	y /= 32;
 	this->units.at(x).at(y) = unit;
 }
-
 void Map::moveUnit(int x, int y, int newx, int newy) {
 	x /= 32;
 	y /= 32;
@@ -107,13 +110,11 @@ void Map::moveUnit(int x, int y, int newx, int newy) {
 	this->units.at(newx).at(newy) = this->units.at(x).at(y);
 	this->units.at(x).at(y) = 0;
 }
-
 void Map::delUnit(int x, int y) {
 	x /= 32;
 	y /= 32;
 	this->units.at(x).at(y) = 0;
 }
-
 void Map::draw(sf::RenderWindow& w) {
 	Hills hill;
 	Forest forest;
