@@ -2,9 +2,7 @@
 #include "GameManager.h"
 
 void WindowManager::mainWindow(){
-	std::srand(time(NULL));
 	GameManager game;
-
 	try {
 		RenderWindow w(VideoMode(1100, 720), "TITLE"/*,Style::Fullscreen*/);
 
@@ -16,7 +14,6 @@ void WindowManager::mainWindow(){
 				if (event.type == event.Closed)
 					w.close();
 				game.getActors().at(0).takeControl(event,game.getMap(),w, game.getActors().at(1).getUnits());
-			
 			}
 			//WINDOW-FILL-COLOR
 			w.clear(Color::Black);

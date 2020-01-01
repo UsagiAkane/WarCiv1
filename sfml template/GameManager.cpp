@@ -12,15 +12,8 @@ GameManager::GameManager()
 	firstS->setPlayerID(player->getPlayerID());
 	firstS->spawn(0, 64, this->map);
 	player->__PUSH_UNIT_DEBUG(firstS);
-
-	Legion* t = new Legion;
-	t->setPlayerID(player->getPlayerID());
-	t->spawn(0, 32, this->map);
-	player->__PUSH_UNIT_DEBUG(t);
-
-
 	//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
-	Actor *enemyActor=new Actor("Ruslan", map);
+	Actor* enemyActor = new Actor("Ruslan", map);
 	enemyActor->setPlayerID(2);
 	////////////////////////////CREATING UNITS
 	Legion* legionEnemy = new Legion;
@@ -40,9 +33,9 @@ GameManager::GameManager()
 	third->setPlayerID(3);
 	Settlers* settlers3 = new Settlers;
 	settlers3->setPlayerID(3);
-	settlers3->spawn(32*5, 32*5, map);
+	settlers3->spawn(32 * 5, 32 * 5, map);
 	third->__PUSH_UNIT_DEBUG(settlers3);
-	
+
 
 	this->actors.push_back(*player);
 	this->actors.push_back(*enemyActor);
@@ -64,15 +57,27 @@ void GameManager::draw(sf::RenderWindow& w)
 	map.draw(w);
 	for (auto i : this->actors)
 		i.draw(w);
-	
+
 }
 
 Actor& GameManager::findActor(int ID)
 {
-	for (auto i : this->actors)
+	for (int i = 0; i < actors.size(); i++)
 	{
-		if (i.getPlayerID() == ID)
-			return i;
-
+		if (this->actors.at(i).getPlayerID() == ID)
+			return actors.at(i);
 	}
+}
+
+std::vector<Unit>& GameManager::findActorUnit(int mouse_x, int mouse_y, int unit_pos_x, int unit_pos_y)
+{
+	////right
+	if (((mouse_x <= unit_pos_x + BORDER_PIXEL_60 && mouse_x >= unit_pos_y + BORDER_PIXEL_30) && (mouse_y >= unit_pos_y && mouse_y <= unit_pos_y + BORDER_PIXEL_30)))//check position of mouse
+	{
+		if ((map.getUnitInd(mouse_x, mouse_y)) / 100 != 0) //check index of unit
+		{
+			return findActor((map.getUnitInd(mouse_x, mouse_y)) / 100).getUnits();
+		}
+	}
+
 }

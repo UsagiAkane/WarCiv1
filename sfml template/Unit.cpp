@@ -136,7 +136,7 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 	if (isActive != false)
 	{
 		////right
-		if (((mouse_x <= this->positionX + BORDER_PIXEL_60 && mouse_x >= this->positionX + BORDER_PIXEL_32) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_32)))//check position of mouse
+		if (((mouse_x <= this->positionX + BORDER_PIXEL_60 && mouse_x >= this->positionX + BORDER_PIXEL_30) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_30)))//check position of mouse
 		{
 			if (map.getTile(mouse_x, mouse_y).getMove() <= this->steps)
 			{
@@ -148,7 +148,7 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 
 		}
 		////left
-		else if (((mouse_x >= this->positionX - BORDER_PIXEL_32 && mouse_x <= this->positionX) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_32)))//check position of mouse
+		else if (((mouse_x >= this->positionX - BORDER_PIXEL_30 && mouse_x <= this->positionX) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_30)))//check position of mouse
 		{
 			if (map.getTile(mouse_x, mouse_y).getMove() <= this->steps)
 			{
@@ -157,10 +157,9 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 				if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
 					checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 2); //Checking whether a unit can attack
 			}
-
 		}
 		////top
-		else if ((mouse_y >= positionY - BORDER_PIXEL_32 && mouse_y <= positionY) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_32))//check position of mouse
+		else if ((mouse_y >= positionY - BORDER_PIXEL_30 && mouse_y <= positionY) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_30))//check position of mouse
 		{
 			if (map.getTile(mouse_x, mouse_y).getMove() <= this->steps)
 			{
@@ -171,7 +170,7 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 			}
 		}
 		////down
-		else if ((mouse_y <= positionY + BORDER_PIXEL_60 && mouse_y >= positionY + BORDER_PIXEL_32) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_32))//check position of mouse
+		else if ((mouse_y <= positionY + BORDER_PIXEL_60 && mouse_y >= positionY + BORDER_PIXEL_30) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_30))//check position of mouse
 	 	{
 			if (map.getTile(mouse_x, mouse_y).getMove() <= this->steps)
 			{
@@ -383,22 +382,27 @@ void Unit::setArmor(int armor)
 {
 	this->armor = armor;
 }
+
 sf::Sprite Unit::getSprite()
 {
 	return this->warriorSprite;
 }
+
 int Unit::getIndex()
 {
 	return this->index;
 }
+
 int Unit::getPositionX()
 {
 	return this->positionX;
 }
+
 int Unit::getPositionY()
 {
 	return this->positionY;
 }
+
 std::string Unit::getName()
 {
 	return this->name;

@@ -15,6 +15,7 @@ public:
 
 	void draw(sf::RenderWindow&w);
 	Actor& findActor(int ID);
+	std::vector<Unit>& findActorUnit(int mouse_x,int mouse_y,int unit_pos_x,int unit_pos_y);
 
 };
 
