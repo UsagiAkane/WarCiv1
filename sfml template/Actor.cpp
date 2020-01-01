@@ -15,7 +15,7 @@ Actor::Actor(std::string name, Map& map) {
 	this->totalGold = 0;
 	this->totalScience = 0;
 	this->totalProdaction = 0;
-	this->what_unit = 0;
+	this->unitController = 0;
 }
 
 void Actor::__PUSH_UNIT_DEBUG(Unit *unit)
@@ -28,11 +28,11 @@ void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, std::vec
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 		if (event.MouseButtonReleased) {
 			if (this->units.size() > 0) {
-				if (this->units.at(this->what_unit).getIsAlive() == true)
-					this->units.at(this->what_unit).move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y, map, this->enemyListID, EnemyUnitVector, w);
+				if (this->units.at(this->unitController).getIsAlive() == true)
+					this->units.at(this->unitController).move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y, map, this->enemyListID, EnemyUnitVector, w);
 				else {
-					this->units.erase(what_unit + this->units.begin());
-					this->what_unit = 0;
+					this->units.erase(unitController + this->units.begin());
+					this->unitController = 0;
 				}
 			}
 		}
@@ -41,20 +41,20 @@ void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, std::vec
 		switch (event.key.code) {
 			//UNIT-TARGET--------
 		case sf::Keyboard::Right:
-			what_unit++;
-			if (what_unit >= this->units.size())
-				what_unit = 0;
+			unitController++;
+			if (unitController >= this->units.size())
+				unitController = 0;
 			break;
 			//CREATE-TOWN--------
 		case sf::Keyboard::W:
-			if (this->units.at(what_unit).getIsAlive() == true) {
-				if (this->units.at(what_unit).getIndex() == 1) {
-					if (map.getUnitInd(this->units.at(what_unit).getPositionX(), this->units.at(what_unit).getPositionY()) % 100 / 10 == 0) {
-						Town* town = new Town(this->units.at(what_unit).getPositionX(), this->units.at(what_unit).getPositionY());
-						town->spawn(this->units.at(what_unit).getPositionX(), this->units.at(what_unit).getPositionY(), map);
+			if (this->units.at(unitController).getIsAlive() == true) {
+				if (this->units.at(unitController).getIndex() == 1) {
+					if (map.getUnitInd(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY()) % 100 / 10 == 0) {
+						Town* town = new Town(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY());
+						town->spawn(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY(), map);
 						this->towns.push_back(*town);
-						this->units.at(what_unit).death(map);
-						this->units.erase(what_unit + this->units.begin());
+						this->units.at(unitController).death(map);
+						this->units.erase(unitController + this->units.begin());
 					}
 					else std::cout << "<error> this tile already has town\n";
 				}
@@ -126,6 +126,11 @@ std::vector<Unit>& Actor::getUnits()
 std::vector<Technologies> Actor::getTech()
 {
 	return this->tech;
+}
+
+std::vector<Unit>& Actor::getUnitsVec()
+{
+	return this->units;
 }
 
 int Actor::getGoldPerTurn()

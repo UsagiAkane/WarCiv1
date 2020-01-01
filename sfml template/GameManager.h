@@ -14,6 +14,7 @@ public:
 	std::vector<Actor>& getActors();
 
 	void draw(sf::RenderWindow&w);
+	Actor& findActor(int ID);
 
 };
 

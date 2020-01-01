@@ -23,7 +23,7 @@ class Actor {
 	int totalGold;
 	int totalScience;
 	int totalProdaction;
-	int what_unit;//active Unit
+	int unitController;//active Unit
 public:
 	Actor(std::string name, Map& map);
 	//DEBUG---------
@@ -42,6 +42,7 @@ public:
 	std::vector<Town> getTowns();
 	std::vector<Unit>& getUnits();
 	std::vector<Technologies> getTech();
+	std::vector<Unit>& getUnitsVec();
 	//std::vector<std::vector<bool>> getFog;
 	int getGoldPerTurn();
 	int getSciencePerTurn();

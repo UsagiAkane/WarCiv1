@@ -7,6 +7,7 @@
 #include "Map.h"
 #include <Windows.h>
 
+
 #define BORDER_PIXEL_32 32
 #define BORDER_PIXEL_16 16
 #define BORDER_PIXEL_64 64
@@ -68,6 +69,8 @@ public:
 	int getPositionX();
 	int getPositionY();
 	std::string getName();
+	int getPlayerId();
+	int getMaxSpeed();
 	//setters 
 	void setDamage(int damage);
 	void setHealth(int health);
@@ -84,9 +87,6 @@ public:
 	void setColorByID();
 	//find
     void delByPositionInVector(std::vector<Unit>&units);
-	//virtual void createTown(std::vector<Town>& towns,Map & map);
-
-
 
 	~Unit();
 	

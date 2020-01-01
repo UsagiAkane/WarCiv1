@@ -7,6 +7,7 @@ void Unit::checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::
 	{
 		if (i == (map.getUnitInd(mouse_x, mouse_y) / 100))//compare id of all playeres and enemies id
 		{
+			
 			//show to ruslan debug
 			for (auto j : enemies)//
 			{
@@ -18,9 +19,12 @@ void Unit::checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::
 				}
 				time++;
 			}
+	
 			break;
-
 		}
+
+
+
 	}
 }
 
@@ -133,7 +137,7 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 	////right
 	if (((mouse_x <= this->positionX + BORDER_PIXEL_64 && mouse_x >= this->positionX + BORDER_PIXEL_32) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_32)))//check position of mouse
 	{
-		if ((map.getUnitInd(mouse_x, mouse_y)) == 0)//check is tile empty
+		if ((map.getUnitInd(mouse_x, mouse_y)) == 0 )//check is tile empty 
 			moveRightHidden(map);
 		else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0) //check index of unit
 			checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w,1);   //Checking whether a unit can attack
@@ -152,7 +156,7 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 	{
 		if ((map.getUnitInd(mouse_x, mouse_y)) == 0)//check is tile empty
 			moveTopHidden(map);
-		else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
+		if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
 			checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w,3); //Checking whether a unit can attack
 
 	}
@@ -183,17 +187,15 @@ void Unit::attack(Unit& uEnemy, Map& map, int x, int y)
 	
 
 	if (this->getHealth() <= 0)
-	{
 		this->death(map);
-	}
-		
 
+		
 	if (uEnemy.getHealth() <= 0)
 	{
 		uEnemy.death(map);
 		this->countOfKill += 1;
 	}
-
+		
 
 
 }
@@ -365,6 +367,16 @@ int Unit::getPositionY()
 std::string Unit::getName()
 {
 	return this->name;
+}
+
+int Unit::getPlayerId()
+{
+	return this->playerID;
+}
+
+int Unit::getMaxSpeed()
+{
+	return this->max_speed;
 }
 
 Unit::~Unit()

@@ -7,16 +7,13 @@ GameManager::GameManager()
 	Actor* player = new Actor("player", this->map);
 	player->setPlayerID(1);
 	player->pushbackEnemyID(2);
+	player->pushbackEnemyID(3);
 
 
 	//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 	Actor *enemyActor=new Actor("Ruslan", map);
 	enemyActor->setPlayerID(2);
 	////////////////////////////CREATING UNITS
-	std::vector<int> enemiesID;
-	enemiesID.push_back(2);
-	//enemy units
-	//std::vector<Unit> EnemyUnitVector;
 	Legion* legionEnemy = new Legion;
 	Militia* militiaEnemy = new Militia;
 	militiaEnemy->setPlayerID(2);
@@ -29,9 +26,18 @@ GameManager::GameManager()
 	enemyActor->__PUSH_UNIT_DEBUG(legionEnemy);
 	//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 
+
+	Actor* third = new Actor("Vova", map);
+	third->setPlayerID(3);
+	Settlers* settlers3 = new Settlers;
+	settlers3->setPlayerID(3);
+	settlers3->spawn(32*5, 32*5, map);
+	third->__PUSH_UNIT_DEBUG(settlers3);
 	
+
 	this->actors.push_back(*player);
 	this->actors.push_back(*enemyActor);
+	this->actors.push_back(*third);
 }
 
 Map& GameManager::getMap()
@@ -47,7 +53,17 @@ std::vector<Actor>& GameManager::getActors()
 void GameManager::draw(sf::RenderWindow& w)
 {
 	map.draw(w);
-	for (auto i : this->actors) {
+	for (auto i : this->actors)
 		i.draw(w);
+	
+}
+
+Actor& GameManager::findActor(int ID)
+{
+	for (auto i : this->actors)
+	{
+		if (i.getPlayerID() == ID)
+			return i;
+
 	}
 }
