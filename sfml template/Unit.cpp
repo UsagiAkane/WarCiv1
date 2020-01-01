@@ -133,9 +133,6 @@ Unit::Unit(std::string name, int health, int armor, int damage, int speed, unsig
 
 void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id, std::vector<Unit>& enemies, sf::RenderWindow& w)
 {
-	std::cout<<this->steps<<std::endl;
-	std::cout<<this->isActive<<std::endl;
-	std::cout<<this->maxSteps<<std::endl;
 	if (isActive != false)
 	{
 	////right
@@ -212,9 +209,6 @@ void Unit::recharge()
 {
 	this->steps = maxSteps;
 	this->isActive = true;
-	std::cout<<"Recharge"<< std::endl;
-	std::cout<<"STEPS "<<steps<< std::endl;
-	std::cout << "MAXSTEPS " <<maxSteps<< std::endl;
 }
 
 void Unit::skipTurn()
@@ -247,6 +241,7 @@ bool Unit::getIsActive()
 void Unit::wait()
 {
 	this->isActive = false;
+	this ->steps = 0;
 }
 
 int Unit::getDamage()
