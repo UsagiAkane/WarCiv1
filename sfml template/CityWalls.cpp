@@ -2,8 +2,9 @@
 
 CityWalls::CityWalls() : Building("City Walls",120,480,-2,0,0,0,1,5)
 {
-	texture.loadFromFile("BuildingsIcons\\CityWalls.png");
-	sprite.setTexture(texture);
+	sf::Texture* texture = new sf::Texture;
+	texture->loadFromFile("BuildingsIcons\\CityWalls.png");
+	sprite.setTexture(*texture);
 }
 
 bool CityWalls::isBuildable(std::vector<Technologies> techno)

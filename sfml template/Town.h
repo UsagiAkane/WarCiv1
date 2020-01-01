@@ -22,17 +22,16 @@ private:
 	//std::vector<Building>buildings;
 	//std::vector<Disasters>disasters;
 	int health;
-	//int armor;
 	int damage;
-	int production;
-	int goldIncome;
-	int food;
-	int foodIncome;
 	int population;
-	int happines;
-	int playerID;
 	int population_limit;
+	int production;
+	int food;
+	int trade;
+	int happines;
+	int goldIncome;
 	int science;
+	int playerID;
 public:
 	Town(int positionX = 0, int positionY = 0, std::string name = "noName town");
 
@@ -40,16 +39,16 @@ public:
 	//void attackTake();
 	void createUnit(Map& map, int unit, std::vector<Unit>& actor);
 	void createBuilding(int building);
-	void setPosition(int x, int y);
 	void setColorByID();
 	void spawn(int x, int y, Map& map);
 	//getters
+	int getPositionX();
+	int getPositionY();
 	int getHealth();
-	//int getArmor();
 	int getProduction();
 	int getGoldIncome();
 	int getFood();
-	int getFoodIncome();
+	int getTrade();
 	int getPopulation();
 	int getHappines();
 	int getPlayer_id();
@@ -57,12 +56,12 @@ public:
 	int getScience();
 	std::string getName();
 	//setters 
+	void setPosition(int x, int y);
 	void setHealth(int health);
-	//void setArmor(int armor);
 	void setProduction(int prod);
 	void setgoldIncome(int goldIncome);
 	void setFood(int food);
-	void setFoodIncome(int foodIncome);
+	void setTrade(int trade);
 	void setPopulation(int population);
 	void setHappines(int happines);
 	void setPlayer_id(int player_id);
@@ -71,6 +70,7 @@ public:
 	void setName(std::string name);
 	//needed
 	void draw(sf::RenderWindow& w);
+	void endOfTurn(Map& map);
 
 	void destroy(Map& map);
 	void retake(Map& map);

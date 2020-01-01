@@ -7,7 +7,6 @@ class Building
 {
 protected:
 	std::string name;
-	sf::Texture texture;
 	sf::Sprite sprite;
 	//prices:
 	int productionPrice;
