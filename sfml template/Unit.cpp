@@ -1,13 +1,13 @@
 #include "Unit.h"
 //Checking whether a unit can attack
-void Unit::checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id, std::vector<Unit>& enemies, sf::RenderWindow& w,int direction)
+void Unit::checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id, std::vector<Unit>& enemies, sf::RenderWindow& w, int direction)
 {
 	int time = 0;//trash variable
 	for (auto i : enemies_id)//try to find enemy in enemy vector
 	{
 		if (i == (map.getUnitInd(mouse_x, mouse_y) / 100))//compare id of all playeres and enemies id
 		{
-			
+
 			//show to ruslan debug
 			for (auto j : enemies)//
 			{
@@ -19,7 +19,7 @@ void Unit::checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::
 				}
 				time++;
 			}
-	
+
 			break;
 		}
 
@@ -39,10 +39,10 @@ void Unit::animationOfAttack(int value, sf::RenderWindow& w, Map& map)
 	//right
 	if (value == 1)
 	{
-		tmp.setPosition(positionX+10, positionY);
+		tmp.setPosition(positionX + 10, positionY);
 		tmp.setScale(0.9, 0.9);
 		tmps.setScale(0.7, 0.7);
-		tmps.setPosition(positionX+30, positionY+3);
+		tmps.setPosition(positionX + 30, positionY + 3);
 	}
 	//left
 	else if (value == 2)
@@ -51,15 +51,15 @@ void Unit::animationOfAttack(int value, sf::RenderWindow& w, Map& map)
 		tmp.setPosition(positionX - 10, positionY);
 		tmp.setScale(0.9, 0.9);
 		tmps.setScale(0.7, 0.7);
-		tmps.setPosition(positionX - 20, positionY +3);
+		tmps.setPosition(positionX - 20, positionY + 3);
 	}
 	//top
 	else if (value == 3)
 	{
-		tmp.setPosition(positionX , positionY-10);
+		tmp.setPosition(positionX, positionY - 10);
 		tmp.setScale(0.9, 0.9);
 		tmps.setScale(0.7, 0.7);
-		tmps.setPosition(positionX+6, positionY -20);
+		tmps.setPosition(positionX + 6, positionY - 20);
 	}
 	//down
 	else if (value == 4)
@@ -78,11 +78,11 @@ void Unit::animationOfAttack(int value, sf::RenderWindow& w, Map& map)
 	Sleep(600);
 }
 
-void Unit::moveRightHidden(Map & map)
+void Unit::moveRightHidden(Map& map)
 {
 	positionX += BORDER_PIXEL_32;
 	this->warriorSprite.setPosition(positionX, positionY);
-	this->speed--;
+	this->steps--;
 	map.moveUnit(positionX - BORDER_PIXEL_32, positionY, positionX, positionY);
 }
 
@@ -90,7 +90,7 @@ void Unit::moveLeftHidden(Map& map)
 {
 	positionX -= BORDER_PIXEL_32;
 	this->warriorSprite.setPosition(positionX, positionY);
-	this->speed--;
+	this->steps--;
 	map.moveUnit(positionX + BORDER_PIXEL_32, positionY, positionX, positionY);
 }
 
@@ -98,7 +98,7 @@ void Unit::moveDownHidden(Map& map)
 {
 	positionY += BORDER_PIXEL_32;
 	this->warriorSprite.setPosition(positionX, positionY);
-	this->speed--;
+	this->steps--;
 	map.moveUnit(positionX, positionY - BORDER_PIXEL_32, positionX, positionY);
 }
 
@@ -106,7 +106,7 @@ void Unit::moveTopHidden(Map& map)
 {
 	positionY -= BORDER_PIXEL_32;
 	this->warriorSprite.setPosition(positionX, positionY);
-	this->speed--;
+	this->steps--;
 	map.moveUnit(positionX, positionY + BORDER_PIXEL_32, positionX, positionY);
 }
 
@@ -116,7 +116,7 @@ Unit::Unit(std::string name, int health, int armor, int damage, int speed, unsig
 	this->health = health;
 	this->armor = armor;
 	this->damage = damage;
-	this->speed = speed;
+	this->steps = speed;
 	this->rank = 0;
 	this->salary = salary;
 	this->productionPrice = productionPrice;
@@ -128,50 +128,58 @@ Unit::Unit(std::string name, int health, int armor, int damage, int speed, unsig
 	this->isAlive = 1;
 	this->positionX = 0;
 	this->positionY = 0;
+	this->maxSteps = maxspeed;
 }
 
 void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id, std::vector<Unit>& enemies, sf::RenderWindow& w)
 {
-	/*if (isActive != 0)
-	{*/
+	std::cout<<this->steps<<std::endl;
+	std::cout<<this->isActive<<std::endl;
+	std::cout<<this->maxSteps<<std::endl;
+	if (isActive != false)
+	{
 	////right
 	if (((mouse_x <= this->positionX + BORDER_PIXEL_64 && mouse_x >= this->positionX + BORDER_PIXEL_32) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_32)))//check position of mouse
 	{
-		if ((map.getUnitInd(mouse_x, mouse_y)) == 0 )//check is tile empty 
+
+		if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0) //check index of unit
+			checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 1);   //Checking whether a unit can attack
+		if ((map.getUnitInd(mouse_x, mouse_y)) == 0)//check is tile empty 
 			moveRightHidden(map);
-		else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0) //check index of unit
-			checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w,1);   //Checking whether a unit can attack
 
 	}
 	////left
 	else if (((mouse_x >= this->positionX - BORDER_PIXEL_32 && mouse_x <= this->positionX) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_32)))//check position of mouse
 	{
+
+		if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
+			checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 2); //Checking whether a unit can attack
 		if ((map.getUnitInd(mouse_x, mouse_y)) == 0)//check is tile empty
 			moveLeftHidden(map);
-		else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
-			checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies,w,2); //Checking whether a unit can attack
 	}
 	////top
 	else if ((mouse_y >= positionY - BORDER_PIXEL_32 && mouse_y <= positionY) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_32))//check position of mouse
 	{
+
+		if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
+			checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 3); //Checking whether a unit can attack
 		if ((map.getUnitInd(mouse_x, mouse_y)) == 0)//check is tile empty
 			moveTopHidden(map);
-		if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
-			checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w,3); //Checking whether a unit can attack
 
 	}
 	////down
 	else if ((mouse_y <= positionY + BORDER_PIXEL_64 && mouse_y >= positionY + BORDER_PIXEL_32) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_32))//check position of mouse
 	{
+
+		if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
+			checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 4); //Checking whether a unit can attack
 		if ((map.getUnitInd(mouse_x, mouse_y)) == 0)//check is tile empty
 			moveDownHidden(map);
-		else if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
-			checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w,4); //Checking whether a unit can attack
 	}
-	if (speed <= 0)
+	if (steps <= 0)
 		this->isActive = false;
 
-	//}
+	}
 }
 
 void Unit::attack(Unit& uEnemy, Map& map, int x, int y)
@@ -182,22 +190,31 @@ void Unit::attack(Unit& uEnemy, Map& map, int x, int y)
 	this->setArmor(this->armor - (uEnemy.getDamage() + uEnemy.getRank()));
 	//damage to defender unit
 
-		uEnemy.health -= ((this->getDamage() + this->getRank()) - (uEnemy.getArmor() + map.getTile(x, y).getDefense()));
-		uEnemy.setArmor(armor - (this->getDamage() + this->getRank()));
-	
+	uEnemy.health -= ((this->getDamage() + this->getRank()) - (uEnemy.getArmor() + map.getTile(x, y).getDefense()));
+	uEnemy.setArmor(armor - (this->getDamage() + this->getRank()));
+
 
 	if (this->getHealth() <= 0)
 		this->death(map);
 
-		
+
 	if (uEnemy.getHealth() <= 0)
 	{
 		uEnemy.death(map);
 		this->countOfKill += 1;
 	}
-		
 
 
+
+}
+
+void Unit::recharge()
+{
+	this->steps = maxSteps;
+	this->isActive = true;
+	std::cout<<"Recharge"<< std::endl;
+	std::cout<<"STEPS "<<steps<< std::endl;
+	std::cout << "MAXSTEPS " <<maxSteps<< std::endl;
 }
 
 void Unit::skipTurn()
@@ -309,7 +326,7 @@ void Unit::death(Map& map)
 {
 	this->isAlive = false;
 	this->isActive = false;
-	this->max_speed = 0;
+	this->maxSteps = 0;
 	map.delUnit(positionX, positionY);
 }
 
@@ -332,9 +349,9 @@ void Unit::setColorByID()
 
 }
 
-void Unit::delByPositionInVector(std::vector<Unit> &units)
+void Unit::delByPositionInVector(std::vector<Unit>& units)
 {  //test
-	int tmp=0;
+	int tmp = 0;
 	int positionX = this->getSprite().getPosition().x;
 	int positionY = this->getSprite().getPosition().y;
 	std::for_each(units.begin(), units.end(), [&tmp, &positionX, &positionY](Unit& u)
@@ -376,7 +393,7 @@ int Unit::getPlayerId()
 
 int Unit::getMaxSpeed()
 {
-	return this->max_speed;
+	return this->maxSteps;
 }
 
 Unit::~Unit()

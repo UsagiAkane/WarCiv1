@@ -58,6 +58,9 @@ public:
 	void setTotalGold(int totalGold);
 	void setTotalScience(int totalScience);
 	void setTotalProdaction(int totalProdaction);
+	
+	//Methods
+	void endOfTurn();//need work
 
 
 	~Actor() {}

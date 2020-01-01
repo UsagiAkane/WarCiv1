@@ -63,6 +63,10 @@ void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, std::vec
 		case sf::Keyboard::S:
 			this->towns.at(0).createUnit(map, 1, this->units);
 			break;
+		case sf::Keyboard::Enter:
+			std::cout << "Enter" << std::endl;
+			endOfTurn();
+			break;
 		}
 	}
 }
@@ -196,4 +200,12 @@ void Actor::setTotalScience(int totalScience)
 void Actor::setTotalProdaction(int totalProdaction)
 {
 	this->totalProdaction = totalProdaction;
+}
+
+void Actor::endOfTurn()
+{
+	for (int i = 0; i < units.size(); i++)
+	{
+		units.at(i).recharge();
+	}
 }

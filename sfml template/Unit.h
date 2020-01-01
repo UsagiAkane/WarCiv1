@@ -21,8 +21,8 @@ protected:
 	int health;
 	int armor;
 	int damage;
-	int speed;
-	int max_speed;
+	int steps;
+	int maxSteps;
 	unsigned short rank;
 	unsigned int countOfKill;
 	//cost
@@ -53,6 +53,8 @@ public:
 	//functions that can be changed
 	virtual void move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id, std::vector<Unit>& enemies, sf::RenderWindow& w);
 	virtual void attack(Unit& u, Map& map,int x,int y);
+	virtual void recharge();
+	
 	//functions ,that can be used by pressed key
 	void skipTurn();
 	void burrow();

@@ -7,7 +7,6 @@ void WindowManager::mainWindow(){
 
 	try {
 		RenderWindow w(VideoMode(1100, 720), "TITLE"/*,Style::Fullscreen*/);
-		//w.setVerticalSyncEnabled(1);
 
 		while (w.isOpen()) {
 			Event event;
