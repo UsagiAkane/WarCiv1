@@ -1,8 +1,7 @@
 #include "Town.h"
 
 
-Town::Town(int positionX, int positionY,std::string name) {
-
+Town::Town(int positionX, int positionY, std::string name) {
 	this->texture.loadFromFile("Icons\\Town.png");
 	this->townSprite.setTexture(texture);
 	this->positionX = positionX;
@@ -15,7 +14,6 @@ Town::Town(int positionX, int positionY,std::string name) {
 	this->production = 0;
 	this->goldIncome = 0;
 	this->food = 5;
-	this->foodIncome = 0;
 	this->population = 1;
 	this->population_limit = 10;
 	this->happines = 100;
@@ -24,7 +22,6 @@ Town::Town(int positionX, int positionY,std::string name) {
 	//this->TownSprite.setColor();
 }
 
-
 void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
 	Settlers* settlers = new Settlers();
 	Militia* militia = new Militia();
@@ -32,46 +29,49 @@ void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
 	Cavalry* cavalry = new Cavalry();
 	switch (unit) {
 	case 1:
-		if (map.getUnitInd(positionX, positionY) % 10 == 0)
+		if (map.getUnitInd(positionX, positionY) % 10 == 0) {
+			settlers->setPlayerID(this->playerID);
 			settlers->spawn(positionX, positionY, map);
-		settlers->setPlayerID(this->playerID);
-		settlers->setColorByID();
-		actor.push_back(*settlers);
+			actor.push_back(*settlers);
+		}
+		else
+			std::cout << "<error> no space under the town;\n";
 		break;
 	case 2:
-		if (map.getUnitInd(positionX, positionY) % 10 == 0)
+		if (map.getUnitInd(positionX, positionY) % 10 == 0) {
+			militia->setPlayerID(this->playerID);
 			militia->spawn(positionX, positionY, map);
-		militia->setPlayerID(this->playerID);
-		militia->setColorByID();
-		actor.push_back(*militia);
+			actor.push_back(*militia);
+		}
+		else
+			std::cout << "<error> no space under the town;\n";
 		break;
 	case 3:
-		if (map.getUnitInd(positionX, positionY) % 10 == 0)
+		if (map.getUnitInd(positionX, positionY) % 10 == 0) {
+			legion->setPlayerID(this->playerID);
 			legion->spawn(positionX, positionY, map);
-		else {
-			std::cout << "<error> no space under the town;\n";
+			actor.push_back(*legion);
+			break;
 		}
-		legion->setPlayerID(this->playerID);
-		actor.push_back(*legion);
-		break;
+		else
+			std::cout << "<error> no space under the town;\n";
 	case 4:
-		if (map.getUnitInd(positionX, positionY) % 10 == 0)
+		if (map.getUnitInd(positionX, positionY) % 10 == 0) {
+			cavalry->setPlayerID(this->playerID);
 			cavalry->spawn(positionX, positionY, map);
-		cavalry->setPlayerID(this->playerID);
-		cavalry->setColorByID();
-		actor.push_back(*cavalry);
+			actor.push_back(*cavalry);
+		}
+		else
+			std::cout << "<error> no space under the town;\n";
 		break;
+
 	}
 }
-
-void Town::setPosition(int x, int y)
-{
+void Town::setPosition(int x, int y) {
 	this->positionX = x;
 	this->positionY = y;
 }
-
-void Town::setColorByID()
-{
+void Town::setColorByID() {
 	if (this->playerID == 1)
 		townSprite.setColor(sf::Color(180, 180, 255));//blue
 	else if (this->playerID == 2)
@@ -87,13 +87,10 @@ void Town::setColorByID()
 	else if (this->playerID > 6)
 		townSprite.setColor(sf::Color(50, 50, 50));//dark
 }
-
+//GETERS
 int Town::getHealth() {
 	return this->health;
 }
-//int Town::getArmor() {
-//	return this->armor;
-//}
 int Town::getProduction() {
 	return this->production;
 }
@@ -103,8 +100,8 @@ int Town::getGoldIncome() {
 int Town::getFood() {
 	return this->food;
 }
-int Town::getFoodIncome() {
-	return this->foodIncome;
+int Town::getTrade(){
+	return this->trade;
 }
 int Town::getPopulation() {
 	return this->population;
@@ -128,9 +125,6 @@ std::string Town::getName() {
 void Town::setHealth(int health) {
 	this->health = health;
 }
-//void Town::setArmor(int armor) {
-//	this->armor = armor;
-//}
 void Town::setProduction(int prod) {
 	this->production = production;
 }
@@ -140,8 +134,8 @@ void Town::setgoldIncome(int goldIncome) {
 void Town::setFood(int food) {
 	this->food = food;
 }
-void Town::setFoodIncome(int foodIncome) {
-	this->foodIncome = foodIncome;
+void Town::setTrade(int trade){
+	this->trade = trade;
 }
 void Town::setPopulation(int population) {
 	this->population = population;
@@ -166,7 +160,26 @@ void Town::draw(sf::RenderWindow& w) {
 	w.draw(this->townSprite);
 }
 
+void Town::endOfTurn(Map& map) {
+	//map.getTile(this->positionX, this->positionY).getName();
+	this->food += map.getTile(this->positionX, this->positionY).getFood();
+	this->production += map.getTile(this->positionX, this->positionY).getProdaction();
+	this->trade += map.getTile(this->positionX, this->positionY).getTrade();
+	//this->damage = map.getTile(this->positionX, this->positionY).getDefense();
+}
+
 void Town::spawn(int x, int y, Map& map) {
+	setPosition(x, y);
 	map.pushUnit(x, y, this->playerID * 100 + 50);
 	setColorByID();
+}
+
+int Town::getPositionX()
+{
+	return this->positionX;
+}
+
+int Town::getPositionY()
+{
+	return this->positionY;
 }

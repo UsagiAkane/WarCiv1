@@ -100,7 +100,9 @@ int Map::getUnitPlayerID(int x, int y) {
 void Map::pushUnit(int x, int y, int unit) {
 	x /= 32;
 	y /= 32;
-	this->units.at(x).at(y) = unit;
+	if (this->units.at(x).at(y) % 100 / 10 == 5)
+		this->units.at(x).at(y) += unit % 10;
+	else this->units.at(x).at(y) = unit;
 }
 void Map::moveUnit(int x, int y, int newx, int newy) {
 	x /= 32;
