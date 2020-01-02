@@ -109,13 +109,25 @@ void Map::moveUnit(int x, int y, int newx, int newy) {
 	y /= 32;
 	newx /= 32;
 	newy /= 32;
-	this->units.at(newx).at(newy) = this->units.at(x).at(y);
-	this->units.at(x).at(y) = 0;
+	if (this->units.at(x).at(y) % 100 / 10 == 5) {//FIX THIS
+		this->units.at(newx).at(newy) = this->units.at(x).at(y) - 50;
+		this->units.at(x).at(y) -= (this->units.at(x).at(y) % 10);
+	}
+	else {
+		this->units.at(newx).at(newy) = this->units.at(x).at(y);
+		this->units.at(x).at(y) = 0;
+	}
 }
 void Map::delUnit(int x, int y) {
 	x /= 32;
 	y /= 32;
 	this->units.at(x).at(y) = 0;
+}
+void Map::__getInfo_DEBUG(int x, int y)
+{
+	getTile(x, y).__getInfo_DEBUG();
+	std::cout << "unut_index = " << this->units[x/32][y / 32];
+	std::cout << "\n-map-tile-end-\n";
 }
 void Map::draw(sf::RenderWindow& w) {
 	Hills hill;

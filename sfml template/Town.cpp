@@ -1,6 +1,5 @@
 #include "Town.h"
 
-
 Town::Town(int positionX, int positionY, std::string name) {
 	this->texture.loadFromFile("Icons\\Town.png");
 	this->townSprite.setTexture(texture);
@@ -29,40 +28,49 @@ void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
 	Cavalry* cavalry = new Cavalry();
 	switch (unit) {
 	case 1:
-		if (map.getUnitInd(positionX, positionY) % 10 == 0) {
-			settlers->setPlayerID(this->playerID);
-			settlers->spawn(positionX, positionY, map);
-			actor.push_back(*settlers);
-		}
-		else
-			std::cout << "<error> no space under the town;\n";
+		//if (this->production > settlers->getProductionPrice()) {
+			if (map.getUnitInd(positionX, positionY) % 10 == 0) {
+				settlers->setPlayerID(this->playerID);
+				settlers->spawn(positionX, positionY, map);
+				actor.push_back(*settlers);
+			}
+			else
+				std::cout << "<error> no space under the town;\n";
+		//}
 		break;
 	case 2:
-		if (map.getUnitInd(positionX, positionY) % 10 == 0) {
-			militia->setPlayerID(this->playerID);
-			militia->spawn(positionX, positionY, map);
-			actor.push_back(*militia);
+		if (this->production > settlers->getProductionPrice()) {
+			if (map.getUnitInd(positionX, positionY) % 10 == 0) {
+				militia->setPlayerID(this->playerID);
+				militia->spawn(positionX, positionY, map);
+				actor.push_back(*militia);
+			}
+			else
+				std::cout << "<error> no space under the town;\n";
 		}
-		else
-			std::cout << "<error> no space under the town;\n";
 		break;
 	case 3:
-		if (map.getUnitInd(positionX, positionY) % 10 == 0) {
-			legion->setPlayerID(this->playerID);
-			legion->spawn(positionX, positionY, map);
-			actor.push_back(*legion);
-			break;
+		if (this->production > settlers->getProductionPrice()) {
+			if (map.getUnitInd(positionX, positionY) % 10 == 0) {
+				legion->setPlayerID(this->playerID);
+				legion->spawn(positionX, positionY, map);
+				actor.push_back(*legion);
+				break;
+			}
+			else
+				std::cout << "<error> no space under the town;\n";
 		}
-		else
-			std::cout << "<error> no space under the town;\n";
+		break;
 	case 4:
-		if (map.getUnitInd(positionX, positionY) % 10 == 0) {
-			cavalry->setPlayerID(this->playerID);
-			cavalry->spawn(positionX, positionY, map);
-			actor.push_back(*cavalry);
+		if (this->production > settlers->getProductionPrice()) {
+			if (map.getUnitInd(positionX, positionY) % 10 == 0) {
+				cavalry->setPlayerID(this->playerID);
+				cavalry->spawn(positionX, positionY, map);
+				actor.push_back(*cavalry);
+			}
+			else
+				std::cout << "<error> no space under the town;\n";
 		}
-		else
-			std::cout << "<error> no space under the town;\n";
 		break;
 
 	}
@@ -100,7 +108,7 @@ int Town::getGoldIncome() {
 int Town::getFood() {
 	return this->food;
 }
-int Town::getTrade(){
+int Town::getTrade() {
 	return this->trade;
 }
 int Town::getPopulation() {
@@ -121,6 +129,12 @@ int Town::getScience() {
 std::string Town::getName() {
 	return this->name;
 }
+int Town::getPositionX() {
+	return this->positionX;
+}
+int Town::getPositionY() {
+	return this->positionY;
+}
 //SETTERS
 void Town::setHealth(int health) {
 	this->health = health;
@@ -134,7 +148,7 @@ void Town::setgoldIncome(int goldIncome) {
 void Town::setFood(int food) {
 	this->food = food;
 }
-void Town::setTrade(int trade){
+void Town::setTrade(int trade) {
 	this->trade = trade;
 }
 void Town::setPopulation(int population) {
@@ -174,12 +188,3 @@ void Town::spawn(int x, int y, Map& map) {
 	setColorByID();
 }
 
-int Town::getPositionX()
-{
-	return this->positionX;
-}
-
-int Town::getPositionY()
-{
-	return this->positionY;
-}

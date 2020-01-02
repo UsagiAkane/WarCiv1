@@ -13,6 +13,7 @@ Actor::Actor(std::string name, Map& map) {
 	this->totalScience = 0;
 	this->totalProdaction = 0;
 	this->unitController = 0;
+	this->townController = 0;
 }
 
 void Actor::__PUSH_UNIT_DEBUG(Unit* unit)
@@ -28,30 +29,45 @@ void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, std::vec
 				if (this->units.at(this->unitController).getIsAlive() == true)
 					this->units.at(this->unitController).move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y, map, this->enemyListID, EnemyUnitVector, w);
 				else {
-					this->units.erase(unitController + this->units.begin());
+					this->units.erase(this->unitController + this->units.begin());
 					this->unitController = 0;
 				}
 			}
 		}
 	}
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
+		if (event.MouseButtonReleased) {
+			if (this->towns.size() > 0) {
+				for (int i = 0; i < towns.size(); i++) {
+					if (this->towns.at(i).getPositionX() == (sf::Mouse::getPosition(w).x / 32 * 32) && this->towns.at(i).getPositionY() == (sf::Mouse::getPosition(w).y / 32 * 32)) {
+						this->townController = i;
+						std::cout << "\ntownCon " << this->townController;//debug
+					}
+				}
+			}
+			map.__getInfo_DEBUG(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y);
+		}
+	}
+
 	if (event.type == sf::Event::KeyPressed) {
 		switch (event.key.code) {
 			//UNIT-TARGET--------
 		case sf::Keyboard::Right:
-			unitController++;
-			if (unitController >= this->units.size())
-				unitController = 0;
+			this->unitController++;
+			if (this->unitController >= this->units.size())
+				this->unitController = 0;
 			break;
 			//CREATE-TOWN--------
 		case sf::Keyboard::W:
 			if (this->units.size() != 0) {
-				if (this->units.at(unitController).getIsAlive() == true) {
-					if (this->units.at(unitController).getIndex() == 1) {
+				if (this->units.at(this->unitController).getIsAlive() == true) {
+					if (this->units.at(this->unitController).getIndex() == 1) {
 						//std::cout << map.getUnitInd(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY()) << std::endl;//debug
-						if (map.getUnitInd(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY()) % 100 / 10 == 0) {
-							Town* town = new Town(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY());
-							this->units.at(unitController).death(map);
-							this->units.erase(unitController + this->units.begin());
+						map.getTile(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY()).__getInfo_DEBUG();
+						if (map.getUnitInd(this->units.at(this->unitController).getPositionX(), this->units.at(this->unitController).getPositionY()) % 100 / 10 == 0) {
+							Town* town = new Town(this->units.at(this->unitController).getPositionX(), this->units.at(this->unitController).getPositionY());
+							this->units.at(this->unitController).death(map);
+							this->units.erase(this->unitController + this->units.begin());
 							town->setPlayer_id(1);
 							town->spawn(town->getPositionX(), town->getPositionY(), map);
 							this->towns.push_back(*town);
@@ -63,7 +79,10 @@ void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, std::vec
 			}
 			break;
 		case sf::Keyboard::S:
-			this->towns.at(0).createUnit(map, 3, this->units);
+			if (this->towns.size() > 0) {
+				//std::cout << "\ntownCon " << this->townController;//debug
+				this->towns.at(townController).createUnit(map, 1, this->units);
+			}
 			break;
 		case sf::Keyboard::Enter:
 			std::cout << "\nTurn ended!" << std::endl;

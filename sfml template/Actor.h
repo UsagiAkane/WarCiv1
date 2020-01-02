@@ -24,6 +24,7 @@ class Actor {
 	int totalScience;
 	int totalProdaction;
 	int unitController;//active Unit
+	int townController;//active Town
 public:
 	Actor(std::string name, Map& map);
 	//DEBUG---------

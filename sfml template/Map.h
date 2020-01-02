@@ -1,5 +1,6 @@
 #pragma once
 #include<SFML/Graphics.hpp>
+#include<iostream>
 #include<vector>
 #include<string>
 #include "Hills.h"
@@ -28,6 +29,7 @@ public:
 	void pushUnit(int x, int y, int unit);
 	void moveUnit(int x, int y, int newx, int newy);
 	void delUnit(int x, int y);
+	void __getInfo_DEBUG(int x, int y);
 
 	void draw(sf::RenderWindow& w);
 };
