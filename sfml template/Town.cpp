@@ -1,4 +1,4 @@
-#include "Town.h"
+﻿#include "Town.h"
 
 Town::Town(int positionX, int positionY, std::string name) {
 	this->texture.loadFromFile("Icons\\Town.png");
@@ -6,9 +6,12 @@ Town::Town(int positionX, int positionY, std::string name) {
 	this->positionX = positionX;
 	this->positionY = positionY;
 	this->townSprite.setPosition(positionX, positionY);
+	this->font.loadFromFile("18536.ttf");
+	this->populationText.setCharacterSize(25);
+	this->populationText.setFont(this->font);
+	this->populationText.setPosition(this->positionX + 10, positionY);
 	this->name = name;
 	this->health = 10;
-	//armor=0;
 	this->damage = 1;
 	this->production = 0;
 	this->goldIncome = 0;
@@ -18,7 +21,6 @@ Town::Town(int positionX, int positionY, std::string name) {
 	this->happines = 100;
 	this->playerID = 1;//debug
 	this->science = 0;
-	//this->TownSprite.setColor();
 }
 
 void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
@@ -28,19 +30,23 @@ void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
 	Cavalry* cavalry = new Cavalry();
 	switch (unit) {
 	case 1:
-		//if (this->production > settlers->getProductionPrice()) {
-		if (map.getUnitInd(positionX, positionY) % 10 == 0) {
-			settlers->setPlayerID(this->playerID);
-			settlers->spawn(positionX, positionY, map);
-			actor.push_back(*settlers);
+		if (this->production >= settlers->getProductionPrice()) {
+			if (map.getUnitInd(positionX, positionY) % 10 == 0) {
+				this->production -= settlers->getProductionPrice();
+				settlers->setPlayerID(this->playerID);
+				settlers->spawn(positionX, positionY, map);
+				actor.push_back(*settlers);
+			}
+			else
+				std::cout << "<error> no space under the town;\n";
 		}
 		else
-			std::cout << "<error> no space under the town;\n";
-		//}
+			std::cout << "<error> no resourses: prod(" << this->production << "/" << settlers->getProductionPrice() << ")\n";
 		break;
 	case 2:
-		if (this->production > settlers->getProductionPrice()) {
+		if (this->production >= militia->getProductionPrice()) {
 			if (map.getUnitInd(positionX, positionY) % 10 == 0) {
+				this->production -= militia->getProductionPrice();
 				militia->setPlayerID(this->playerID);
 				militia->spawn(positionX, positionY, map);
 				actor.push_back(*militia);
@@ -48,10 +54,13 @@ void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
 			else
 				std::cout << "<error> no space under the town;\n";
 		}
+		else
+			std::cout << "<error> no resourses: prod(" << this->production << "/" << militia->getProductionPrice() << ")\n";
 		break;
 	case 3:
-		if (this->production > settlers->getProductionPrice()) {
+		if (this->production >= legion->getProductionPrice()) {
 			if (map.getUnitInd(positionX, positionY) % 10 == 0) {
+				this->production -= legion->getProductionPrice();
 				legion->setPlayerID(this->playerID);
 				legion->spawn(positionX, positionY, map);
 				actor.push_back(*legion);
@@ -60,10 +69,13 @@ void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
 			else
 				std::cout << "<error> no space under the town;\n";
 		}
+		else
+			std::cout << "<error> no resourses: prod(" << this->production << "/" << legion->getProductionPrice() << ")\n";
 		break;
 	case 4:
-		if (this->production > settlers->getProductionPrice()) {
+		if (this->production >= cavalry->getProductionPrice()) {
 			if (map.getUnitInd(positionX, positionY) % 10 == 0) {
+				this->production -= cavalry->getProductionPrice();
 				cavalry->setPlayerID(this->playerID);
 				cavalry->spawn(positionX, positionY, map);
 				actor.push_back(*cavalry);
@@ -71,8 +83,9 @@ void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
 			else
 				std::cout << "<error> no space under the town;\n";
 		}
+		else
+			std::cout << "<error> no resourses: prod(" << this->production << "/" << cavalry->getProductionPrice() << ")\n";
 		break;
-
 	}
 }
 //1-Aqueduct, 2-Barracks, 3-Walls, 4-Lib, 5-Market
@@ -227,7 +240,15 @@ void Town::setName(std::string name) {
 }
 //OTHER
 void Town::draw(sf::RenderWindow& w) {
+
+
+
+	std::string prod;
+	prod = this->population + 48;
+	this->populationText.setString(prod);
+
 	w.draw(this->townSprite);
+	w.draw(this->populationText);
 }
 
 void Town::endOfTurn(Map& map) {

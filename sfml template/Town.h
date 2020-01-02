@@ -20,6 +20,8 @@
 
 class Town {
 private:
+	sf::Font font;
+	sf::Text populationText;
 	sf::Sprite townSprite;
 	sf::Texture texture;
 	std::string name;
