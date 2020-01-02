@@ -379,6 +379,24 @@ void Unit::delByPositionInVector(std::vector<Unit>& units)
 
 }
 
+int Unit::findIndexOfEnemy(int mouse_x, int mouse_y, Map & map)
+{
+	//right
+	if (((mouse_x <= this->positionX + BORDER_PIXEL_60 && mouse_x >= this->positionX + BORDER_PIXEL_30) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_30)))//check position of mouse
+		return (map.getUnitInd(mouse_x,mouse_y) / 100);
+	////left
+	else if (((mouse_x >= this->positionX - BORDER_PIXEL_30 && mouse_x <= this->positionX) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_30)))//check position of mouse
+		return (map.getUnitInd(mouse_x, mouse_y) / 100);
+	////top
+	else if ((mouse_y >= positionY - BORDER_PIXEL_30 && mouse_y <= positionY) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_30))//check position of mouse
+		return (map.getUnitInd(mouse_x, mouse_y) / 100);
+	////down
+	else if ((mouse_y <= positionY + BORDER_PIXEL_60 && mouse_y >= positionY + BORDER_PIXEL_30) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_30))//check position of mouse
+		return (map.getUnitInd(mouse_x, mouse_y) / 100);
+	//else
+	else return 1;
+}
+
 void Unit::setArmor(int armor)
 {
 	this->armor = armor;

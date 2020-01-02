@@ -81,15 +81,8 @@ Actor& GameManager::findActor(int ID)
 	}
 }
 
-std::vector<Unit>& GameManager::findActorUnit(int mouse_x, int mouse_y, int unit_pos_x, int unit_pos_y)
+std::vector<Unit>& GameManager::findActorUnit(int mouse_x, int mouse_y)
 {
-	////right
-	if (((mouse_x <= unit_pos_x + BORDER_PIXEL_60 && mouse_x >= unit_pos_y + BORDER_PIXEL_30) && (mouse_y >= unit_pos_y && mouse_y <= unit_pos_y + BORDER_PIXEL_30)))//check position of mouse
-	{
 		if ((map.getUnitInd(mouse_x, mouse_y)) / 100 != 0) //check index of unit
-		{
 			return findActor((map.getUnitInd(mouse_x, mouse_y)) / 100).getUnits();
-		}
-	}
-
 }

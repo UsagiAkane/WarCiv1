@@ -1,7 +1,7 @@
 #include "WindowManager.h"
 #include "GameManager.h"
 
-void WindowManager::mainWindow(){
+void WindowManager::mainWindow() {
 	GameManager game;
 	try {
 		RenderWindow w(VideoMode(1100, 720), "TITLE"/*,Style::Fullscreen*/);
@@ -13,7 +13,9 @@ void WindowManager::mainWindow(){
 				//CLOSE--------------
 				if (event.type == event.Closed)
 					w.close();
-				game.getActors().at(0).takeControl(event,game.getMap(),w, game.getActors().at(1).getUnits());
+				//Check is mouse in window
+				if ((Mouse::getPosition(w).x >= 0 && Mouse::getPosition(w).x < w.getSize().x)&&((Mouse::getPosition(w).y >= 0 && Mouse::getPosition(w).y < w.getSize().y)))
+					game.getActors().at(0).takeControl(event, game.getMap(), w, game.findActorUnit(Mouse::getPosition(w).x, Mouse::getPosition(w).y));
 			}
 			//WINDOW-FILL-COLOR
 			w.clear(Color::Black);

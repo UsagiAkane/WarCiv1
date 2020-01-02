@@ -96,7 +96,7 @@ public:
 	void checkSteps();
 	//find
     void delByPositionInVector(std::vector<Unit>&units);
-
+	int findIndexOfEnemy(int mouse_x, int mouse_y,Map&map);
 	~Unit();
 	
 
