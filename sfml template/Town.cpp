@@ -29,13 +29,13 @@ void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
 	switch (unit) {
 	case 1:
 		//if (this->production > settlers->getProductionPrice()) {
-			if (map.getUnitInd(positionX, positionY) % 10 == 0) {
-				settlers->setPlayerID(this->playerID);
-				settlers->spawn(positionX, positionY, map);
-				actor.push_back(*settlers);
-			}
-			else
-				std::cout << "<error> no space under the town;\n";
+		if (map.getUnitInd(positionX, positionY) % 10 == 0) {
+			settlers->setPlayerID(this->playerID);
+			settlers->spawn(positionX, positionY, map);
+			actor.push_back(*settlers);
+		}
+		else
+			std::cout << "<error> no space under the town;\n";
 		//}
 		break;
 	case 2:
@@ -75,9 +75,61 @@ void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
 
 	}
 }
-void Town::setPosition(int x, int y) {
-	this->positionX = x;
-	this->positionY = y;
+//1-Aqueduct, 2-Barracks, 3-Walls, 4-Lib, 5-Market
+void Town::createBuilding(int building) {
+	Aqueduct* aqueduct = new Aqueduct();			//1
+	Barracks* barracks = new Barracks();			//2
+	CityWalls* cityWalls = new CityWalls();			//3
+	Library* library = new Library();				//4
+	Marketplace* marketplace = new Marketplace();	//5
+
+	switch (building) {
+	case 1:
+		if (this->production >= aqueduct->getProductionPrice()) {		//PRICE
+			if (!static_cast<bool>(std::count_if(buildings.begin(), buildings.end(), [](Building& index) {return index.getName() == "Aqueduct"; }))) {		//HAVE OR NOT
+				this->production -= aqueduct->getProductionPrice();
+				this->buildings.push_back(*aqueduct);
+				std::cout << "\nAqueduct builded.";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
+			}
+		}
+		break;
+	case 2:
+		if (this->production >= barracks->getProductionPrice()) {		//PRICE
+			if (!static_cast<bool>(std::count_if(buildings.begin(), buildings.end(), [](Building& index) {return index.getName() == "Barracks"; }))) {		 //HAVE OR NOT
+				this->production -= barracks->getProductionPrice();
+				this->buildings.push_back(*barracks);
+				std::cout << "\nBarracks builded.";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
+			}
+		}
+		break;
+	case 3:
+		if (this->production >= cityWalls->getProductionPrice()) {		//PRICE
+			if (!static_cast<bool>(std::count_if(buildings.begin(), buildings.end(), [](Building& index) {return index.getName() == "City Walls"; }))) {	//HAVE OR NOT
+				this->production -= cityWalls->getProductionPrice();
+				this->buildings.push_back(*cityWalls);
+				std::cout << "\nCity Walls builded.";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
+			}
+		}
+		break;
+	case 4:
+		if (this->production >= library->getProductionPrice()) {		//PRICE
+			if (!static_cast<bool>(std::count_if(buildings.begin(), buildings.end(), [](Building& index) {return index.getName() == "Library"; }))) { 		//HAVE OR NOT
+				this->production -= library->getProductionPrice();
+				this->buildings.push_back(*library);
+				std::cout << "\nLibrary builded.";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
+			}
+		}
+		break;
+	case 5:
+		if (this->production >= marketplace->getProductionPrice()) {	//PRICE
+			if (!static_cast<bool>(std::count_if(buildings.begin(), buildings.end(), [](Building& index) {return index.getName() == "Marketplace"; }))) {	//HAVE OR NOT
+				this->production -= marketplace->getProductionPrice();
+				this->buildings.push_back(*marketplace);
+				std::cout << "\nMarketplace builded.";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
+			}
+		}
+		break;
+	}
 }
 void Town::setColorByID() {
 	if (this->playerID == 1)
@@ -136,6 +188,10 @@ int Town::getPositionY() {
 	return this->positionY;
 }
 //SETTERS
+void Town::setPosition(int x, int y) {
+	this->positionX = x;
+	this->positionY = y;
+}
 void Town::setHealth(int health) {
 	this->health = health;
 }

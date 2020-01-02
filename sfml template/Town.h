@@ -1,9 +1,9 @@
 #pragma once
-
 #include <SFML/Graphics.hpp>
 #include "Resourses.h"
 #include <vector>
 #include <string>
+#include <algorithm>
 #include "Map.h"
 #include "Unit.h"
 #include "Cavalry.h"
@@ -11,6 +11,11 @@
 #include "Militia.h"
 #include "Settlers.h"
 
+#include "Aqueduct.h"
+#include "Barracks.h"
+#include "CityWalls.h"
+#include "Library.h"
+#include "Marketplace.h"
 
 
 class Town {
@@ -18,9 +23,9 @@ private:
 	sf::Sprite townSprite;
 	sf::Texture texture;
 	std::string name;
-	int positionX, positionY;
-	//std::vector<Building>buildings;
+	std::vector<Building>buildings;
 	//std::vector<Disasters>disasters;
+	int positionX, positionY;
 	int health;
 	int damage;
 	int population;
@@ -37,7 +42,10 @@ public:
 
 	//functions that can be changed
 	//void attackTake();
+
+	//1-Settlers, 2-Militia, 3-Legion, 4-Cavalry
 	void createUnit(Map& map, int unit, std::vector<Unit>& actor);
+	//1-Aqueduct, 2-Barracks, 3-Walls, 4-Lib, 5-Market
 	void createBuilding(int building);
 	void setColorByID();
 	void spawn(int x, int y, Map& map);

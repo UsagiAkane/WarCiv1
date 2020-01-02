@@ -1,8 +1,8 @@
 #include "Building.h"
 
-Building::Building(std::string, int productionPrice, int goldCost, int goldPerTurn, int incraseLimit, int rankMulti, int moneyMulti, int scieceMulti, int increaseHP)
+Building::Building(std::string name, int productionPrice, int goldCost, int goldPerTurn, int incraseLimit, int rankMulti, int moneyMulti, int scieceMulti, int increaseHP)
 {
-	
+	this->name = name;
 	this->productionPrice = productionPrice;
 	this->goldCost = goldCost;
 	this->goldPerTurn = goldPerTurn;
@@ -11,6 +11,11 @@ Building::Building(std::string, int productionPrice, int goldCost, int goldPerTu
 	this->moneyMultiplier = moneyMulti;
 	this->scienceMultiplier = scieceMulti;
 	this->increaseHP = increaseHP;
+}
+
+std::string Building::getName()
+{
+	return this->name;
 }
 
 int Building::getProductionPrice()
