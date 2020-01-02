@@ -40,6 +40,8 @@ GameManager::GameManager()
 	this->actors.push_back(*player);
 	this->actors.push_back(*enemyActor);
 	this->actors.push_back(*third);
+
+	this->currentYear = -4000;
 }
 
 Map& GameManager::getMap()
@@ -50,6 +52,16 @@ Map& GameManager::getMap()
 std::vector<Actor>& GameManager::getActors()
 {
 	return this->actors;
+}
+
+void GameManager::setYear(int year)
+{
+	this->currentYear = year;
+}
+
+int GameManager::getYear()
+{
+	return this->currentYear;
 }
 
 void GameManager::draw(sf::RenderWindow& w)

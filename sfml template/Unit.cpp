@@ -140,10 +140,11 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 		{
 			if (map.getTile(mouse_x, mouse_y).getMove() <= this->steps)
 			{
-				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty 
-					moveRightHidden(map, mouse_x, mouse_y);
 				if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0) //check index of unit
 					checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 1);   //Checking whether a unit can attack
+				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty 
+					moveRightHidden(map, mouse_x, mouse_y);
+				
 			}
 
 		}
@@ -152,10 +153,10 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 		{
 			if (map.getTile(mouse_x, mouse_y).getMove() <= this->steps)
 			{
-				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
-					moveLeftHidden(map, mouse_x, mouse_y);
 				if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
 					checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 2); //Checking whether a unit can attack
+				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
+					moveLeftHidden(map, mouse_x, mouse_y);
 			}
 		}
 		////top
@@ -163,10 +164,10 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 		{
 			if (map.getTile(mouse_x, mouse_y).getMove() <= this->steps)
 			{
-				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
-					moveTopHidden(map, mouse_x, mouse_y);
 				if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
 					checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 3); //Checking whether a unit can attack
+				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
+					moveTopHidden(map, mouse_x, mouse_y);
 			}
 		}
 		////down
@@ -174,10 +175,10 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 	 	{
 			if (map.getTile(mouse_x, mouse_y).getMove() <= this->steps)
 			{
-				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
-					moveDownHidden(map, mouse_x, mouse_y);
 				if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
 					checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 4); //Checking whether a unit can attack
+				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
+					moveDownHidden(map, mouse_x, mouse_y);
 			}
 		}
 		this->checkSteps();
