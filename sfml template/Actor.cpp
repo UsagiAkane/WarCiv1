@@ -3,8 +3,6 @@
 Actor::Actor(std::string name, Map& map) {
 	playerID = 1;
 	this->name = name;
-	this->enemyListID.push_back(2);//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG
-
 	//std::vector<std::vector<bool>> fog;
 	this->goldPerTurn = 0;
 	this->sciencePerTurn = 0;

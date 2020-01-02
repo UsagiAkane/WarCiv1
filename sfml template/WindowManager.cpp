@@ -19,7 +19,7 @@ void WindowManager::mainWindow() {
 			}
 			//WINDOW-FILL-COLOR
 			w.clear(Color::Black);
-
+			//draw all in game
 			game.draw(w);
 			//DISPLAY
 			w.display();

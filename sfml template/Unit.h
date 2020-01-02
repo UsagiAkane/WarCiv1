@@ -94,6 +94,7 @@ public:
 	void setColorByID();
 	void checkUpUnit();
 	void checkSteps();
+	bool isEnemyInEnemyIdList(std::vector<Unit> enemies_id);
 	//find
     void delByPositionInVector(std::vector<Unit>&units);
 	int findIndexOfEnemy(int mouse_x, int mouse_y,Map&map);

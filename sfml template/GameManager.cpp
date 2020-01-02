@@ -7,10 +7,9 @@ GameManager::GameManager()
 	Actor* player = new Actor("player", this->map);
 	player->setPlayerID(1);
 	player->pushbackEnemyID(2);
-	player->pushbackEnemyID(3);
 	Settlers* firstS = new Settlers;
 	firstS->setPlayerID(player->getPlayerID());
-	firstS->spawn(0, 64, this->map);
+	firstS->spawn(128, 160, this->map);
 	player->__PUSH_UNIT_DEBUG(firstS);
 	//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 	Actor* enemyActor = new Actor("Ruslan", map);
@@ -69,7 +68,6 @@ void GameManager::draw(sf::RenderWindow& w)
 	map.draw(w);
 	for (auto i : this->actors)
 		i.draw(w);
-
 }
 
 Actor& GameManager::findActor(int ID)

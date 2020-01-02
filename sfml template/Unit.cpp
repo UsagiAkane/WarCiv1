@@ -2,30 +2,37 @@
 //Checking whether a unit can attack
 void Unit::checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id, std::vector<Unit>& enemies, sf::RenderWindow& w, int direction)
 {
-	int time = 0;//trash variable
+	int time = 0;//variable that show which unit you need to attack
+	bool tmp = true;
 	for (auto i : enemies_id)//try to find enemy in enemy vector
 	{
-		if (i == (map.getUnitInd(mouse_x, mouse_y) / 100))//compare id of all playeres and enemies id
+		if (i == (map.getUnitInd(mouse_x, mouse_y) / 100))//compare id of all players and enemies id
 		{
-
-			//show to ruslan debug
 			for (auto j : enemies)//
 			{
-				if (j.getIndex() == (map.getUnitInd(mouse_x, mouse_y) % 100))
+	/*			std::cout << "WE TRY TO FIND" << std::endl;*/
+				if (j.getIndex() == (map.getUnitInd(mouse_x, mouse_y) % 100))//find enemy in enemy vector
 				{
-					attack(enemies.at(time), map, mouse_x, mouse_y);
+					tmp = false;
+					//std::cout << "YOU HIT HIM" << std::endl;
+					//std::cout << enemies_id.size() << std::endl;
+					attack(enemies.at(time), map, mouse_x, mouse_y);//attack him
 					animationOfAttack(direction, w, map);
 					break;
 				}
 				time++;
 			}
-
 			break;
 		}
-
-
-
 	}
+	if ( map.getUnitInd(mouse_x, mouse_y) / 100 != this->playerID && map.getUnitInd(mouse_x, mouse_y) != 0 && tmp ==true)
+	{
+	/*	std::cout << "YOU TRY TO ATTACK ALLY" << std::endl;*/
+		enemies_id.push_back(map.getUnitInd(mouse_x, mouse_y) / 100);
+	/*	std::cout <<enemies_id.size()<<std::endl;
+		std::cout << "WE PUSHED IT TO ENEMY LIST" << std::endl;*/
+	}
+
 }
 
 void Unit::animationOfAttack(int value, sf::RenderWindow& w, Map& map)
@@ -143,10 +150,8 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 				if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0) //check index of unit
 					checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 1);   //Checking whether a unit can attack
 				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty 
-					moveRightHidden(map, mouse_x, mouse_y);
-				
+					moveRightHidden(map, mouse_x, mouse_y);//move to this position if empty
 			}
-
 		}
 		////left
 		else if (((mouse_x >= this->positionX - BORDER_PIXEL_30 && mouse_x <= this->positionX) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_30)))//check position of mouse
@@ -156,7 +161,7 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 				if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
 					checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 2); //Checking whether a unit can attack
 				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
-					moveLeftHidden(map, mouse_x, mouse_y);
+					moveLeftHidden(map, mouse_x, mouse_y);//move to this position if empty
 			}
 		}
 		////top
@@ -167,18 +172,18 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 				if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
 					checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 3); //Checking whether a unit can attack
 				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
-					moveTopHidden(map, mouse_x, mouse_y);
+					moveTopHidden(map, mouse_x, mouse_y);//move to this position if empty
 			}
 		}
 		////down
 		else if ((mouse_y <= positionY + BORDER_PIXEL_60 && mouse_y >= positionY + BORDER_PIXEL_30) && (mouse_x >= positionX && mouse_x <= positionX + BORDER_PIXEL_30))//check position of mouse
-	 	{
+		{
 			if (map.getTile(mouse_x, mouse_y).getMove() <= this->steps)
 			{
 				if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
 					checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 4); //Checking whether a unit can attack
 				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
-					moveDownHidden(map, mouse_x, mouse_y);
+					moveDownHidden(map, mouse_x, mouse_y);//move to this position if empty
 			}
 		}
 		this->checkSteps();
@@ -358,13 +363,18 @@ void Unit::checkUpUnit()
 		this->rank += 1;
 		this->countOfKill = 0;
 	}
-	
+
 }
 
 void Unit::checkSteps()
 {
 	if (steps <= 0)
 		this->isActive = false;
+}
+
+bool Unit::isEnemyInEnemyIdList(std::vector<Unit> enemies_id)
+{
+
 }
 
 void Unit::delByPositionInVector(std::vector<Unit>& units)
@@ -379,11 +389,11 @@ void Unit::delByPositionInVector(std::vector<Unit>& units)
 
 }
 
-int Unit::findIndexOfEnemy(int mouse_x, int mouse_y, Map & map)
+int Unit::findIndexOfEnemy(int mouse_x, int mouse_y, Map& map)
 {
 	//right
 	if (((mouse_x <= this->positionX + BORDER_PIXEL_60 && mouse_x >= this->positionX + BORDER_PIXEL_30) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_30)))//check position of mouse
-		return (map.getUnitInd(mouse_x,mouse_y) / 100);
+		return (map.getUnitInd(mouse_x, mouse_y) / 100);
 	////left
 	else if (((mouse_x >= this->positionX - BORDER_PIXEL_30 && mouse_x <= this->positionX) && (mouse_y >= positionY && mouse_y <= this->positionY + BORDER_PIXEL_30)))//check position of mouse
 		return (map.getUnitInd(mouse_x, mouse_y) / 100);
