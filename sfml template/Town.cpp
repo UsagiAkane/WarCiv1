@@ -105,6 +105,8 @@ void Town::createBuilding(int building) {
 				std::cout << "\nAqueduct builded.";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 			}
 		}
+		else
+			std::cout << "<error> no resourses: prod(" << this->production << "/" << aqueduct->getProductionPrice() << ")\n";
 		break;
 	case 2:
 		if (this->production >= barracks->getProductionPrice()) {		//PRICE
@@ -114,6 +116,8 @@ void Town::createBuilding(int building) {
 				std::cout << "\nBarracks builded.";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 			}
 		}
+		else
+			std::cout << "<error> no resourses: prod(" << this->production << "/" << barracks->getProductionPrice() << ")\n";
 		break;
 	case 3:
 		if (this->production >= cityWalls->getProductionPrice()) {		//PRICE
@@ -123,6 +127,8 @@ void Town::createBuilding(int building) {
 				std::cout << "\nCity Walls builded.";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 			}
 		}
+		else
+			std::cout << "<error> no resourses: prod(" << this->production << "/" << cityWalls->getProductionPrice() << ")\n";
 		break;
 	case 4:
 		if (this->production >= library->getProductionPrice()) {		//PRICE
@@ -132,6 +138,8 @@ void Town::createBuilding(int building) {
 				std::cout << "\nLibrary builded.";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 			}
 		}
+		else
+			std::cout << "<error> no resourses: prod(" << this->production << "/" << library->getProductionPrice() << ")\n";
 		break;
 	case 5:
 		if (this->production >= marketplace->getProductionPrice()) {	//PRICE
@@ -141,6 +149,8 @@ void Town::createBuilding(int building) {
 				std::cout << "\nMarketplace builded.";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 			}
 		}
+		else
+			std::cout << "<error> no resourses: prod(" << this->production << "/" << marketplace->getProductionPrice() << ")\n";
 		break;
 	}
 }
