@@ -60,7 +60,8 @@ public:
 	void setTotalProdaction(int totalProdaction);
 	
 	//Methods
-	void endOfTurn(Map& map);//need work
+	virtual void endOfTurn(Map& map);//need work
+
 
 
 	~Actor() {}
