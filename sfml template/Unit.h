@@ -76,6 +76,8 @@ public:
 	std::string getName();
 	int getPlayerId();
 	int getMaxSpeed();
+	int getProductionPrice();
+	int getPrice();
 	//setters 
 	void setDamage(int damage);
 	void setHealth(int health);
@@ -99,4 +101,3 @@ public:
 	
 
 };
-

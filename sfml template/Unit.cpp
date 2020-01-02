@@ -419,6 +419,16 @@ int Unit::getMaxSpeed()
 	return this->maxSteps;
 }
 
+int Unit::getProductionPrice()
+{
+	return this->productionPrice;
+}
+
+int Unit::getPrice()
+{
+	return this->price;
+}
+
 Unit::~Unit()
 {
 }
