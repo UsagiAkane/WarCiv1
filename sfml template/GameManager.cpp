@@ -2,8 +2,6 @@
 
 GameManager::GameManager()
 {
-	//this->map
-
 	Actor* player = new Actor("player", this->map);
 	player->setPlayerID(1);
 	Settlers* firstS = new Settlers;
