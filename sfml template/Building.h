@@ -22,6 +22,7 @@ public:
 	Building(std::string,int productionPrice,int goldCost,int goldPerTurn,
 		int incraseLimit,int rankMulti,int moneyMulti,int scieceMulti,int increaseHP);
 	//getters
+	std::string getName();
 	int getProductionPrice();
 	int getGoldCost();
 	int getgoldPerTurn();

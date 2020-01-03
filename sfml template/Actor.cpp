@@ -84,6 +84,12 @@ void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, std::vec
 				this->towns.at(townController).createUnit(map, 1, this->units);
 			}
 			break;
+		case sf::Keyboard::D:
+			if (this->towns.size() > 0) {
+				//std::cout << "\ntownCon " << this->townController;//debug
+				this->towns.at(townController).createBuilding(1);
+			}
+			break;
 		case sf::Keyboard::Enter:
 			std::cout << "\nTurn ended!" << std::endl;
 			endOfTurn(map);
