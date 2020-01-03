@@ -5,11 +5,11 @@ Town::Town(int positionX, int positionY, std::string name) {
 	this->townSprite.setTexture(texture);
 	this->positionX = positionX;
 	this->positionY = positionY;
-	this->townSprite.setPosition(positionX, positionY);
+	this->townSprite.setPosition(static_cast<float>(positionX), static_cast<float>(positionY));
 	this->font.loadFromFile("18536.ttf");
 	this->populationText.setCharacterSize(25);
 	this->populationText.setFont(this->font);
-	this->populationText.setPosition(this->positionX + 10, positionY);
+	this->populationText.setPosition(static_cast<float>(this->positionX + 10), static_cast<float>(positionY));
 	this->name = name;
 	this->health = 10;
 	this->damage = 1;
