@@ -45,36 +45,36 @@ void Unit::animationOfAttack(int value, sf::RenderWindow& w, Map& map)
 	//right
 	if (value == 1)
 	{
-		tmp.setPosition(positionX + 10, positionY);
-		tmp.setScale(0.9, 0.9);
-		tmps.setScale(0.7, 0.7);
-		tmps.setPosition(positionX + 30, positionY + 3);
+		tmp.setPosition(static_cast<float>(positionX + 10), static_cast<float>( positionY));
+		tmp.setScale(static_cast<float>(0.9), static_cast < float>(0.9));
+		tmps.setScale(static_cast < float>(0.7), static_cast < float>(0.7));
+		tmps.setPosition(static_cast<float>(positionX + 30), static_cast<float>(positionY + 3));
 	}
 	//left
 	else if (value == 2)
 	{
 		textureTMP.loadFromFile("Icons\\swordiconflip.png");
-		tmp.setPosition(positionX - 10, positionY);
-		tmp.setScale(0.9, 0.9);
-		tmps.setScale(0.7, 0.7);
-		tmps.setPosition(positionX - 20, positionY + 3);
+		tmp.setPosition(static_cast<float>(positionX - 10), static_cast<float>(positionY));
+		tmp.setScale(static_cast < float>(0.9), static_cast < float>( 0.9));
+		tmps.setScale(static_cast <float>(0.7), static_cast <float>(0.7));
+		tmps.setPosition(static_cast<float>(positionX - 20), static_cast<float>(positionY + 3));
 	}
 	//top
 	else if (value == 3)
 	{
-		tmp.setPosition(positionX, positionY - 10);
-		tmp.setScale(0.9, 0.9);
-		tmps.setScale(0.7, 0.7);
-		tmps.setPosition(positionX + 6, positionY - 20);
+		tmp.setPosition(static_cast<float>(positionX), static_cast<float>(positionY - 10));
+		tmp.setScale(static_cast <float>(0.9), static_cast <float>(0.9));
+		tmps.setScale(static_cast <float>(0.7), static_cast <float>(0.7));
+		tmps.setPosition(static_cast<float>(positionX + 6), static_cast<float>(positionY - 20));
 	}
 	//down
 	else if (value == 4)
 	{
 		textureTMP.loadFromFile("Icons\\swordiconflipdown.png");
-		tmp.setPosition(positionX, positionY + 10);
-		tmp.setScale(0.9, 0.9);
-		tmps.setScale(0.7, 0.7);
-		tmps.setPosition(positionX + 9, positionY + 30);
+		tmp.setPosition(static_cast<float>(positionX), static_cast<float>(positionY + 10));
+		tmp.setScale(static_cast <float>(0.9), static_cast <float>(0.9));
+		tmps.setScale(static_cast <float>(0.7), static_cast <float>(0.7));
+		tmps.setPosition(static_cast<float>(positionX + 9), static_cast<float>(positionY + 30));
 	}
 
 	w.draw(warriorSprite);
@@ -87,7 +87,7 @@ void Unit::animationOfAttack(int value, sf::RenderWindow& w, Map& map)
 void Unit::moveRightHidden(Map& map, int mouse_x, int mouse_y)
 {
 	positionX += BORDER_PIXEL_32;
-	this->warriorSprite.setPosition(positionX, positionY);
+	this->warriorSprite.setPosition(static_cast<float>(positionX), static_cast<float>(positionY));
 	this->steps -= map.getTile(mouse_x, mouse_y).getMove();
 	map.moveUnit(positionX - BORDER_PIXEL_32, positionY, positionX, positionY);
 }
@@ -95,7 +95,7 @@ void Unit::moveRightHidden(Map& map, int mouse_x, int mouse_y)
 void Unit::moveLeftHidden(Map& map, int mouse_x, int mouse_y)
 {
 	positionX -= BORDER_PIXEL_32;
-	this->warriorSprite.setPosition(positionX, positionY);
+	this->warriorSprite.setPosition(static_cast<float>(positionX), static_cast<float>(positionY));
 	this->steps -= map.getTile(mouse_x, mouse_y).getMove();
 	map.moveUnit(positionX + BORDER_PIXEL_32, positionY, positionX, positionY);
 }
@@ -103,7 +103,7 @@ void Unit::moveLeftHidden(Map& map, int mouse_x, int mouse_y)
 void Unit::moveDownHidden(Map& map, int mouse_x, int mouse_y)
 {
 	positionY += BORDER_PIXEL_32;
-	this->warriorSprite.setPosition(positionX, positionY);
+	this->warriorSprite.setPosition(static_cast<float>(positionX), static_cast<float>(positionY));
 	this->steps -= map.getTile(mouse_x, mouse_y).getMove();
 	map.moveUnit(positionX, positionY - BORDER_PIXEL_32, positionX, positionY);
 }
@@ -111,7 +111,7 @@ void Unit::moveDownHidden(Map& map, int mouse_x, int mouse_y)
 void Unit::moveTopHidden(Map& map, int mouse_x, int mouse_y)
 {
 	positionY -= BORDER_PIXEL_32;
-	this->warriorSprite.setPosition(positionX, positionY);
+	this->warriorSprite.setPosition(static_cast<float>(positionX), static_cast<float>(positionY));
 	this->steps -= map.getTile(mouse_x, mouse_y).getMove();
 	map.moveUnit(positionX, positionY + BORDER_PIXEL_32, positionX, positionY);
 }
@@ -304,7 +304,7 @@ void Unit::setPosition(int x, int y)
 {
 	this->positionX = x;
 	this->positionY = y;
-	this->warriorSprite.setPosition(x, y);
+	this->warriorSprite.setPosition(static_cast<float>(x), static_cast<float>(y));
 }
 
 void Unit::setPlayerID(int ID)
@@ -323,7 +323,7 @@ void Unit::spawn(int x, int y, Map& map)
 {
 	this->positionX = x;
 	this->positionY = y;
-	this->warriorSprite.setPosition(x, y);
+	this->warriorSprite.setPosition(static_cast<float>(x), static_cast<float>(y));
 	map.pushUnit(x, y, (this->playerID * 100) + this->index);
 	setColorByID();
 }
