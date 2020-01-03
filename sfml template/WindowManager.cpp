@@ -6,6 +6,7 @@ void WindowManager::mainWindow() {
 	try {
 		RenderWindow w(VideoMode(1000, 600), "TITLE"/*, Style::Fullscreen*/);
 		w.setFramerateLimit(60);
+
 		sf::View view(w.getView());
 
 		while (w.isOpen()) {

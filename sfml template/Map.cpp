@@ -91,8 +91,8 @@ int Map::getUnitInd(int x, int y) {
 	x /= 32;
 	y /= 32;
 	if (x > 0 && x < units.size()) {
-		if (y > 0 && (y) < units.at(x).size()) {
-			return this->units[x][y];
+		if (y > 0 && y < units.size()) {
+			return this->units.at(x).at(y);
 		}
 		else return 0;
 	}

@@ -28,6 +28,12 @@ void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
 	Militia* militia = new Militia();
 	Legion* legion = new Legion();
 	Cavalry* cavalry = new Cavalry();
+	for (auto i : this->buildings) {
+		settlers->setRank(i.getRankMultiplier());
+		militia->setRank(i.getRankMultiplier());
+		legion->setRank(i.getRankMultiplier());
+		cavalry->setRank(i.getRankMultiplier());
+	}
 	switch (unit) {
 	case 1:
 		if (this->production >= settlers->getProductionPrice()) {
@@ -102,6 +108,8 @@ void Town::createBuilding(int building) {
 			if (!static_cast<bool>(std::count_if(buildings.begin(), buildings.end(), [](Building& index) {return index.getName() == "Aqueduct"; }))) {		//HAVE OR NOT
 				this->production -= aqueduct->getProductionPrice();
 				this->buildings.push_back(*aqueduct);
+				this->population_limit += aqueduct->getIncraiseLimit();
+				this->health += aqueduct->getIncreaseHP();
 				std::cout << "\nAqueduct builded.";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 			}
 		}
@@ -113,6 +121,8 @@ void Town::createBuilding(int building) {
 			if (!static_cast<bool>(std::count_if(buildings.begin(), buildings.end(), [](Building& index) {return index.getName() == "Barracks"; }))) {		 //HAVE OR NOT
 				this->production -= barracks->getProductionPrice();
 				this->buildings.push_back(*barracks);
+				this->population_limit += barracks->getIncraiseLimit();
+				this->health += barracks->getIncreaseHP();
 				std::cout << "\nBarracks builded.";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 			}
 		}
@@ -124,6 +134,8 @@ void Town::createBuilding(int building) {
 			if (!static_cast<bool>(std::count_if(buildings.begin(), buildings.end(), [](Building& index) {return index.getName() == "City Walls"; }))) {	//HAVE OR NOT
 				this->production -= cityWalls->getProductionPrice();
 				this->buildings.push_back(*cityWalls);
+				this->population_limit += cityWalls->getIncraiseLimit();
+				this->health += cityWalls->getIncreaseHP();
 				std::cout << "\nCity Walls builded.";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 			}
 		}
@@ -135,6 +147,8 @@ void Town::createBuilding(int building) {
 			if (!static_cast<bool>(std::count_if(buildings.begin(), buildings.end(), [](Building& index) {return index.getName() == "Library"; }))) { 		//HAVE OR NOT
 				this->production -= library->getProductionPrice();
 				this->buildings.push_back(*library);
+				this->population_limit += library->getIncraiseLimit();
+				this->health += library->getIncreaseHP();
 				std::cout << "\nLibrary builded.";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 			}
 		}
@@ -146,6 +160,8 @@ void Town::createBuilding(int building) {
 			if (!static_cast<bool>(std::count_if(buildings.begin(), buildings.end(), [](Building& index) {return index.getName() == "Marketplace"; }))) {	//HAVE OR NOT
 				this->production -= marketplace->getProductionPrice();
 				this->buildings.push_back(*marketplace);
+				this->population_limit += marketplace->getIncraiseLimit();
+				this->health += marketplace->getIncreaseHP();
 				std::cout << "\nMarketplace builded.";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 			}
 		}
@@ -170,6 +186,7 @@ void Town::setColorByID() {
 	else if (this->playerID > 6)
 		townSprite.setColor(sf::Color(50, 50, 50));//dark
 }
+#pragma region GETERS
 //GETERS
 int Town::getHealth() {
 	return this->health;
@@ -210,6 +227,8 @@ int Town::getPositionX() {
 int Town::getPositionY() {
 	return this->positionY;
 }
+#pragma endregion
+#pragma region SETERS
 //SETTERS
 void Town::setPosition(int x, int y) {
 	this->positionX = x;
@@ -248,15 +267,12 @@ void Town::setScience(int science) {
 void Town::setName(std::string name) {
 	this->name = name;
 }
+#pragma endregion
 //OTHER
 void Town::draw(sf::RenderWindow& w) {
-
-
-
 	std::string prod;
 	prod = this->population + 48;
 	this->populationText.setString(prod);
-
 	w.draw(this->townSprite);
 	w.draw(this->populationText);
 }
@@ -266,6 +282,9 @@ void Town::endOfTurn(Map& map) {
 	this->food += map.getTile(this->positionX, this->positionY).getFood();
 	this->production += map.getTile(this->positionX, this->positionY).getProdaction();
 	this->trade += map.getTile(this->positionX, this->positionY).getTrade();
+	for (auto i : this->buildings) {
+		this->science += i.getScienceMultiplier();
+	}
 	//this->damage = map.getTile(this->positionX, this->positionY).getDefense();
 }
 
