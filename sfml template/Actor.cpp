@@ -20,12 +20,16 @@ void Actor::__PUSH_UNIT_DEBUG(Unit* unit)
 }
 
 void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, std::vector<Unit>& EnemyUnitVector) {
+	//to make camera dynamic
+	int mouse_x = sf::Mouse::getPosition(w).x + (w.getView().getCenter().x - w.getSize().x / 2);
+	int mouse_y = sf::Mouse::getPosition(w).y + (w.getView().getCenter().y - w.getSize().y / 2);
+
 	//UNIT-MOVE----------
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 		if (event.MouseButtonReleased) {
 			if (this->units.size() > 0) {
 				if (this->units.at(this->unitController).getIsAlive() == true)
-					this->units.at(this->unitController).move(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y, map, this->enemyListID, EnemyUnitVector, w);
+					this->units.at(this->unitController).move(mouse_x, mouse_y, map, this->enemyListID, EnemyUnitVector, w);
 				else {
 					this->units.erase(this->unitController + this->units.begin());
 					this->unitController = 0;
@@ -37,13 +41,13 @@ void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, std::vec
 		if (event.MouseButtonReleased) {
 			if (this->towns.size() > 0) {
 				for (int i = 0; i < towns.size(); i++) {
-					if (this->towns.at(i).getPositionX() == (sf::Mouse::getPosition(w).x / 32 * 32) && this->towns.at(i).getPositionY() == (sf::Mouse::getPosition(w).y / 32 * 32)) {
+					if (this->towns.at(i).getPositionX() == (mouse_x / 32 * 32) && this->towns.at(i).getPositionY() == (mouse_y / 32 * 32)) {
 						this->townController = i;
 						std::cout << "\ntownCon " << this->townController;//debug
 					}
 				}
 			}
-			map.__getInfo_DEBUG(sf::Mouse::getPosition(w).x, sf::Mouse::getPosition(w).y);
+			map.__getInfo_DEBUG(mouse_x, mouse_y);
 		}
 	}
 
