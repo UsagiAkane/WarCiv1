@@ -27,10 +27,8 @@ void Unit::checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::
 	}
 	if ( map.getUnitInd(mouse_x, mouse_y) / 100 != this->playerID && map.getUnitInd(mouse_x, mouse_y) != 0 && tmp ==true)
 	{
-	/*	std::cout << "YOU TRY TO ATTACK ALLY" << std::endl;*/
 		enemies_id.push_back(map.getUnitInd(mouse_x, mouse_y) / 100);
-	/*	std::cout <<enemies_id.size()<<std::endl;
-		std::cout << "WE PUSHED IT TO ENEMY LIST" << std::endl;*/
+		std::cout << "YOU START WAR" << std::endl;
 	}
 
 }

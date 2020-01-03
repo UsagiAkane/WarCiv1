@@ -6,11 +6,12 @@ GameManager::GameManager()
 
 	Actor* player = new Actor("player", this->map);
 	player->setPlayerID(1);
-	player->pushbackEnemyID(2);
 	Settlers* firstS = new Settlers;
 	firstS->setPlayerID(player->getPlayerID());
 	firstS->spawn(128, 160, this->map);
 	player->__PUSH_UNIT_DEBUG(firstS);
+
+
 	//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 	Actor* enemyActor = new Actor("Ruslan", map);
 	enemyActor->setPlayerID(2);
@@ -31,14 +32,19 @@ GameManager::GameManager()
 	Actor* third = new Actor("Vova", map);
 	third->setPlayerID(3);
 	Settlers* settlers3 = new Settlers;
+	Legion* legionEnemy3 = new Legion;
+	legionEnemy3->setPlayerID(3);
+	legionEnemy3->spawn(32 * 6, 32 * 6, map);
 	settlers3->setPlayerID(3);
 	settlers3->spawn(32 * 5, 32 * 5, map);
 	third->__PUSH_UNIT_DEBUG(settlers3);
+	third->__PUSH_UNIT_DEBUG(legionEnemy3);
 
 
 	this->actors.push_back(*player);
 	this->actors.push_back(*enemyActor);
 	this->actors.push_back(*third);
+	
 
 	this->currentYear = -4000;
 }
@@ -75,12 +81,12 @@ Actor& GameManager::findActor(int ID)
 	for (int i = 0; i < actors.size(); i++)
 	{
 		if (this->actors.at(i).getPlayerID() == ID)
-			return actors.at(i);
+			return this->actors.at(i);
 	}
 }
 
 std::vector<Unit>& GameManager::findActorUnit(int mouse_x, int mouse_y)
 {
-		if ((map.getUnitInd(mouse_x, mouse_y)) / 100 != 0) //check index of unit
-			return findActor((map.getUnitInd(mouse_x, mouse_y)) / 100).getUnits();
+	if ((map.getUnitInd(mouse_x, mouse_y)) / 100 != 0) //check index of unit
+		return findActor((map.getUnitInd(mouse_x, mouse_y)) / 100).getUnits();
 }
