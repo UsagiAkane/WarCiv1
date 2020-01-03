@@ -106,26 +106,31 @@ int Map::getUnitInd(int x, int y) {
 void Map::pushUnit(int x, int y, int unit) {
 	x /= 32;
 	y /= 32;
-	//if (x > 0 || x < units.size()) {
-	//	if (y > 0 || y < units.size()) {
-	if (this->units.at(x).at(y) % 100 / 10 == 5)
-		this->units.at(x).at(y) += unit % 10;
-	else this->units.at(x).at(y) = unit;
-	//	}
-	//}
+	if (x > 0 && x < units.size()) {
+		if (y > 0 && y < units.size()) {
+			if (this->units.at(x).at(y) % 100 / 10 == 5)
+				this->units.at(x).at(y) += unit % 10;
+			else this->units.at(x).at(y) = unit;
+		}
+	}
 }
 void Map::moveUnit(int x, int y, int newx, int newy) {
 	x /= 32;
 	y /= 32;
 	newx /= 32;
 	newy /= 32;
-	if (this->units.at(x).at(y) % 100 / 10 == 5) {//FIX THIS
-		this->units.at(newx).at(newy) = this->units.at(x).at(y) - 50;
-		this->units.at(x).at(y) -= (this->units.at(x).at(y) % 10);
-	}
-	else {
-		this->units.at(newx).at(newy) = this->units.at(x).at(y);
-		this->units.at(x).at(y) = 0;
+	if (newx > 0 && newx < units.size()) {
+		if (newy > 0 && newy < units.size()) {
+
+			if (this->units.at(x).at(y) % 100 / 10 == 5) {//FIX THIS
+				this->units.at(newx).at(newy) = this->units.at(x).at(y) - 50;
+				this->units.at(x).at(y) -= (this->units.at(x).at(y) % 10);
+			}
+			else {
+				this->units.at(newx).at(newy) = this->units.at(x).at(y);
+				this->units.at(x).at(y) = 0;
+			}
+		}
 	}
 }
 
@@ -136,14 +141,18 @@ void Map::delUnit(int x, int y) {
 	{
 		units.at(x).at(y) -= units.at(x).at(y) % 10;
 	}
-	else 
+	else
 		this->units.at(x).at(y) = 0;
 }
 void Map::__getInfo_DEBUG(int x, int y)
 {
-	getTile(x, y).__getInfo_DEBUG();
-	std::cout << "unut_index = " << this->units[x / 32][y / 32];
-	std::cout << "\n-map-tile-end-\n";
+	if (x/32 > 0 && x/32 < units.size()) {
+		if (y/32 > 0 && y/32 < units.size()) {
+			getTile(x, y).__getInfo_DEBUG();
+			std::cout << "unut_index = " << this->units[x / 32][y / 32];
+			std::cout << "\n-map-tile-end-\n";
+		}
+	}
 }
 void Map::draw(sf::RenderWindow& w) {
 	Hills hill;
