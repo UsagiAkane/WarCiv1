@@ -44,7 +44,7 @@ GameManager::GameManager()
 	this->actors.push_back(*player);
 	this->actors.push_back(*enemyActor);
 	this->actors.push_back(*third);
-	
+
 
 	this->currentYear = -4000;
 }
@@ -78,21 +78,30 @@ void GameManager::draw(sf::RenderWindow& w)
 
 Actor& GameManager::findActor(int ID)
 {
-	for (int i = 0; i < actors.size(); i++)
-	{
-		if (this->actors.at(i).getPlayerID() == ID)
-			return this->actors.at(i);
-		else
-			std::cout << "CAN'T FIND ACTOR" << std::endl;
+	//for (int i = 0; i < actors.size(); i++)
+	//{
+	//	if (this->actors.at(i).getPlayerID() == ID)
+	//		return this->actors.at(i);
+	//	else
+	//		std::cout << "CAN'T FIND ACTOR" << std::endl;
 
-		//NEED TO BE FIXED
+	//	//NEED TO BE FIXED
+	//}
+
+
+	if (ID < 100 && ID > 0)
+	{
+		if (this->actors.at(ID - 1).getPlayerID() == ID)
+			return this->actors.at(ID - 1);
 	}
+	else return this->actors.at(0);
 }
 
 std::vector<Unit>& GameManager::findActorUnit(int mouse_x, int mouse_y)
 {
+
 	if ((map.getUnitInd(mouse_x, mouse_y)) / 100 != 0) //check index of unit
 		return findActor((map.getUnitInd(mouse_x, mouse_y)) / 100).getUnits();
-	else
-		std::cout<<"CAN'T FIND UNIT"<<std::endl;
+	//else
+	//	std::cout << "CAN'T FIND UNIT" << std::endl;
 }

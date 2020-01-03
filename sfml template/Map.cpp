@@ -89,10 +89,11 @@ Terrain Map::getTileVec(int x, int y) {
 int Map::getUnitInd(int x, int y) {
 	x /= 32;
 	y /= 32;
-	if (x > 0 || x < units.size()) {
-		if (y > 0 || y < units.size()) {
-			return this->units.at(x).at(y);
+	if (x > 0 && x < units.size()) {
+		if (y > 0 && (y) < units.at(x).size()) {
+			return this->units[x][y];
 		}
+		else return 0;
 	}
 	else return 0;
 }
@@ -131,7 +132,12 @@ void Map::moveUnit(int x, int y, int newx, int newy) {
 void Map::delUnit(int x, int y) {
 	x /= 32;
 	y /= 32;
-	this->units.at(x).at(y) = 0;
+	if (this->units.at(x).at(y) % 100 / 10 == 5)
+	{
+		units.at(x).at(y) -= units.at(x).at(y) % 10;
+	}
+	else 
+		this->units.at(x).at(y) = 0;
 }
 void Map::__getInfo_DEBUG(int x, int y)
 {
