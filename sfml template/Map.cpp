@@ -89,8 +89,8 @@ Terrain Map::getTileVec(int x, int y) {
 int Map::getUnitInd(int x, int y) {
 	x /= 32;
 	y /= 32;
-	if (x > 0 || x < units.size()) {
-		if (y > 0 || y < units.size()) {
+	if (x > 0 && x < units.size()) {
+		if (y > 0 && y < units.size()) {
 			return this->units.at(x).at(y);
 		}
 	}

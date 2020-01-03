@@ -4,7 +4,7 @@
 void WindowManager::mainWindow() {
 	GameManager game;
 	try {
-		RenderWindow w(VideoMode(1000, 720), "TITLE"/*, Style::Fullscreen*/);
+		RenderWindow w(VideoMode(1000, 720), "TITLE", Style::Fullscreen);
 		sf::View view(w.getView());
 
 		while (w.isOpen()) {
