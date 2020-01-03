@@ -86,7 +86,6 @@ Terrain Map::getTileVec(int x, int y) {
 	else if (map.at(x).at(y) / 100 == 5)			//OCEAN
 		return Ocean();
 }
-
 int Map::getUnitInd(int x, int y) {
 	x /= 32;
 	y /= 32;
@@ -98,7 +97,12 @@ int Map::getUnitInd(int x, int y) {
 	}
 	else return 0;
 }
-
+//int Map::getUnitID(int x, int y) {
+//	return getUnitID(x, y) % 100;
+//}
+//int Map::getUnitPlayerID(int x, int y) {
+//	return getUnitID(x, y) / 100;
+//}
 void Map::pushUnit(int x, int y, int unit) {
 	x /= 32;
 	y /= 32;
@@ -110,7 +114,6 @@ void Map::pushUnit(int x, int y, int unit) {
 		}
 	}
 }
-
 void Map::moveUnit(int x, int y, int newx, int newy) {
 	x /= 32;
 	y /= 32;
