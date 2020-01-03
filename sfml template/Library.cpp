@@ -11,5 +11,5 @@ Library::Library():Building("Library",80,320,-1,0,0,0,3,0)
 bool Library::isBuildable(std::vector<Technologies> techno)
 {
 	std::for_each(techno.begin(), techno.end(), [](Technologies tech)
-		{ return tech.getName() == "Writing" && tech.getIsLearned() == true ? true : false; });
+		{ return (tech.getName() == "Writing" && tech.getIsLearned() == true ? true : false); });
 }
