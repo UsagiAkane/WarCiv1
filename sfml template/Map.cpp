@@ -89,20 +89,29 @@ Terrain Map::getTileVec(int x, int y) {
 int Map::getUnitInd(int x, int y) {
 	x /= 32;
 	y /= 32;
-	return this->units.at(x).at(y);
+	if (x > 0 || x < units.size()) {
+		if (y > 0 || y < units.size()) {
+			return this->units.at(x).at(y);
+		}
+	}
+	else return 0;
 }
-int Map::getUnitID(int x, int y) {
-	return getUnitID(x, y) % 100;
-}
-int Map::getUnitPlayerID(int x, int y) {
-	return getUnitID(x, y) / 100;
-}
+//int Map::getUnitID(int x, int y) {
+//	return getUnitID(x, y) % 100;
+//}
+//int Map::getUnitPlayerID(int x, int y) {
+//	return getUnitID(x, y) / 100;
+//}
 void Map::pushUnit(int x, int y, int unit) {
 	x /= 32;
 	y /= 32;
+	//if (x > 0 || x < units.size()) {
+	//	if (y > 0 || y < units.size()) {
 	if (this->units.at(x).at(y) % 100 / 10 == 5)
 		this->units.at(x).at(y) += unit % 10;
 	else this->units.at(x).at(y) = unit;
+	//	}
+	//}
 }
 void Map::moveUnit(int x, int y, int newx, int newy) {
 	x /= 32;
@@ -127,7 +136,7 @@ void Map::delUnit(int x, int y) {
 void Map::__getInfo_DEBUG(int x, int y)
 {
 	getTile(x, y).__getInfo_DEBUG();
-	std::cout << "unut_index = " << this->units[x/32][y / 32];
+	std::cout << "unut_index = " << this->units[x / 32][y / 32];
 	std::cout << "\n-map-tile-end-\n";
 }
 void Map::draw(sf::RenderWindow& w) {

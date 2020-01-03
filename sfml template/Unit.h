@@ -8,6 +8,7 @@
 #include <Windows.h>
 
 
+
 #define BORDER_PIXEL_16 16
 #define BORDER_PIXEL_60 60
 #define BORDER_PIXEL_30 30
