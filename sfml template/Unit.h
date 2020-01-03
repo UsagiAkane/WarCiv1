@@ -8,6 +8,7 @@
 #include <Windows.h>
 
 
+
 #define BORDER_PIXEL_16 16
 #define BORDER_PIXEL_60 60
 #define BORDER_PIXEL_30 30
@@ -94,9 +95,10 @@ public:
 	void setColorByID();
 	void checkUpUnit();
 	void checkSteps();
+	bool isEnemyInEnemyIdList(std::vector<Unit> enemies_id);
 	//find
     void delByPositionInVector(std::vector<Unit>&units);
-
+	int findIndexOfEnemy(int mouse_x, int mouse_y,Map&map);
 	~Unit();
 	
 
