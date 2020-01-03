@@ -29,6 +29,7 @@ void Unit::checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::
 	{
 		enemies_id.push_back(map.getUnitInd(mouse_x, mouse_y) / 100);
 		std::cout << "YOU START WAR" << std::endl;
+		std::cout<< map.getUnitInd(mouse_x, mouse_y) / 100 <<std::endl;
 	}
 
 }

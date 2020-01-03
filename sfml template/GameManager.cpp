@@ -82,6 +82,10 @@ Actor& GameManager::findActor(int ID)
 	{
 		if (this->actors.at(i).getPlayerID() == ID)
 			return this->actors.at(i);
+		else
+			std::cout << "CAN'T FIND ACTOR" << std::endl;
+
+		//NEED TO BE FIXED
 	}
 }
 
@@ -89,4 +93,6 @@ std::vector<Unit>& GameManager::findActorUnit(int mouse_x, int mouse_y)
 {
 	if ((map.getUnitInd(mouse_x, mouse_y)) / 100 != 0) //check index of unit
 		return findActor((map.getUnitInd(mouse_x, mouse_y)) / 100).getUnits();
+	else
+		std::cout<<"CAN'T FIND UNIT"<<std::endl;
 }
