@@ -1,17 +1,56 @@
 #include "Map.h"
 
+void baseNoise(int val, int sizex, int sizey, std::vector<std::vector<int>>& arr) {
+	std::vector<std::vector<int>>arr1;	//[x][y]
+	for (int x = 0; x < sizex; x++) {
+		std::vector<int>arr_t;
+		for (int y = 0; y < sizey; y++) {
+			arr_t.push_back(rand() % 3);
+		}
+		arr1.push_back(arr_t);
+	}
+	for (int x = 1; x < sizex - 1; x++) {
+		for (int y = 1; y < sizey - 1; y++) {
+			arr1[x][y] = (arr1[x + 1][y] + arr1[x - 1][y] + arr1[x][y + 1] + arr1[x][y - 1]) / 4 /*+ (arr1[x + 1][y + 1] + arr1[x - 1][y - 1] + arr1[x - 1][y + 1] + arr1[x + 1][y - 1]) / 4*/;
+		}
+	}
+	for (int x = 1; x < sizex - 1; x++) {
+		for (int y = 1; y < sizey - 1; y++) {
+			if (arr1[x][y] >= 1)arr[x][y] = val;
+		}
+	}
+}
+
 Map::Map(int sizeX, int sizeY) {
 	//1-hill  2-forest  3-grass  4-mountain
 	for (int i = 0; i < sizeX; i++) {
-		std::vector<int>maptmp;
+		//std::vector<int>maptmp;
 		std::vector<int>unitstmp;
 		for (int j = 0; j < sizeY; j++) {
-			maptmp.push_back(((1 + rand() % 5) * 100));
+			//maptmp.push_back(((1 + rand() % 5) * 100));
 			unitstmp.push_back(0);
 		}
-		this->map.push_back(maptmp);
+		//this->map.push_back(maptmp);
 		this->units.push_back(unitstmp);
 	}
+
+	for (int x = 0; x < sizeX; x++) {
+		std::vector<int>arr_t;
+		for (int y = 0; y < sizeY; y++) {
+			arr_t.push_back(5);
+		}
+		map.push_back(arr_t);
+	}
+	baseNoise(1, sizeX, sizeY, map);
+	baseNoise(2, sizeX, sizeY, map);
+	baseNoise(3, sizeX, sizeY, map);
+	baseNoise(4, sizeX, sizeY, map);
+	for (int x = 0; x < sizeX; x++) {
+		for (int y = 0; y < sizeY; y++) {
+			map[x][y] *= 100;
+		}
+	}
+
 	//1-Coal  2-Game  3-Gold  4-Horses  5-Oasis  6-Oil
 	for (int i = 0; i < sizeX; i++) {
 		for (int j = 0; j < sizeY; j++) {
