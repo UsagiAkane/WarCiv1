@@ -4,19 +4,20 @@
 void WindowManager::mainWindow() {
 	GameManager game;
 	try {
-		RenderWindow w(VideoMode(1000, 600), "TITLE"/*, Style::Fullscreen*/);
+		sf::RenderWindow w(sf::VideoMode(1000, 600), "TITLE"/*, Style::Fullscreen*/);
 		w.setFramerateLimit(60);
 
 		sf::View view(w.getView());
 
 		while (w.isOpen()) {
-			Event event;
+			sf::Event event;
 
 			while (w.pollEvent(event)) {
 				//CLOSE--------------
 				if (event.type == event.Closed)
 					w.close();
 				//Check is mouse in window
+
 				if ((Mouse::getPosition(w).x >= 0 && Mouse::getPosition(w).x < w.getSize().x) && ((Mouse::getPosition(w).y >= 0 && Mouse::getPosition(w).y < w.getSize().y)))
 				{
 					game.getActors().at(0).takeControl(event, game.getMap(), w);
@@ -41,8 +42,8 @@ void WindowManager::mainWindow() {
 					view.move(0, BORDER_PIXEL_32 / 6);
 
 
+			//////////////////////////////////DON'T USE THIS////////////////////////////
 
-				//////////////////////////////////DON'T USE THIS////////////////////////////
 			/*	if (event.type ==sf::Event::MouseWheelScrolled)
 				{
 					if (event.mouseWheelScroll.delta > 0)
@@ -60,7 +61,7 @@ void WindowManager::mainWindow() {
 
 			w.setView(view);
 			//WINDOW-FILL-COLOR
-			w.clear(Color::Green);
+			w.clear(sf::Color::Green);
 			//draw all in game
 			game.draw(w);
 			//DISPLAY

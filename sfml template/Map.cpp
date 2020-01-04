@@ -89,8 +89,8 @@ Terrain Map::getTileVec(int x, int y) {
 int Map::getUnitInd(int x, int y) {
 	x /= 32;
 	y /= 32;
-	if (x > 0 && x < units.size()) {
-		if (y > 0 && y < units.size()) {
+	if (x > 0 && x < static_cast<int>(units.size())) {
+		if (y > 0 && y < static_cast<int>(units.size())) {
 			return this->units.at(x).at(y);
 		}
 		else return 0;
@@ -106,8 +106,8 @@ int Map::getUnitInd(int x, int y) {
 void Map::pushUnit(int x, int y, int unit) {
 	x /= 32;
 	y /= 32;
-	if (x > 0 && x < units.size()) {
-		if (y > 0 && y < units.size()) {
+	if (x > 0 && x < static_cast<int>(units.size())) {
+		if (y > 0 && y < static_cast<int>(units.size())) {
 			if (this->units.at(x).at(y) % 100 / 10 == 5)
 				this->units.at(x).at(y) += unit % 10;
 			else this->units.at(x).at(y) = unit;
@@ -119,8 +119,8 @@ void Map::moveUnit(int x, int y, int newx, int newy) {
 	y /= 32;
 	newx /= 32;
 	newy /= 32;
-	if (newx > 0 && newx < units.size()) {
-		if (newy > 0 && newy < units.size()) {
+	if (newx > 0 && newx < static_cast<int>(units.size())) {
+		if (newy > 0 && newy < static_cast<int>(units.size())) {
 
 			if (this->units.at(x).at(y) % 100 / 10 == 5) {//FIX THIS
 				this->units.at(newx).at(newy) = this->units.at(x).at(y) - 50;
@@ -146,8 +146,8 @@ void Map::delUnit(int x, int y) {
 }
 void Map::__getInfo_DEBUG(int x, int y)
 {
-	if (x/32 > 0 && x/32 < units.size()) {
-		if (y/32 > 0 && y/32 < units.size()) {
+	if (x / 32 > 0 && x / 32 < static_cast<int>(units.size())) {
+		if (y / 32 > 0 && y / 32 < static_cast<int>(units.size())) {
 			getTile(x, y).__getInfo_DEBUG();
 			std::cout << "unut_index = " << this->units[x / 32][y / 32];
 			std::cout << "\n-map-tile-end-\n";
@@ -170,58 +170,58 @@ void Map::draw(sf::RenderWindow& w) {
 
 
 	//1-hill  2-forest  3-grass  4-mountain
-	for (int i = 0; i < map.size(); i++) {
-		for (int j = 0; j < map.at(i).size(); j++) {
+	for (int i = 0; i < static_cast<int>(map.size()); i++) {
+		for (int j = 0; j < static_cast<int>(map.at(i).size()); j++) {
 			if (map[i][j] / 100 == 1) {					//HILL DRAW
-				hill.setPosition(i * 32, j * 32);
+				hill.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
 				hill.draw(w);
 				//1-Coal  2-Game  3-Gold  4-Horses  5-Oasis  6-Oil
 				if (map[i][j] % 100 == 1) {			//COAL DRAW
-					coal.setPosition(i * 32, j * 32);
+					coal.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
 					coal.draw(w);
 				}
 				else if (map[i][j] % 100 == 6) {	//OIL DRAW
-					oil.setPosition(i * 32, j * 32);
+					oil.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
 					oil.draw(w);
 				}
 			}
 			else if (map[i][j] / 100 == 2) {			//FOREST DRAW
-				forest.setPosition(i * 32, j * 32);
+				forest.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
 				forest.draw(w);
 				//1-Coal  2-Game  3-Gold  4-Horses  5-Oasis  6-Oil
 				if (map[i][j] % 100 == 2) {			//GAME DRAW
-					game.setPosition(i * 32, j * 32);
+					game.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
 					game.draw(w);
 				}
 			}
 			else if (map[i][j] / 100 == 3) {			//GRASSLAND DRAW
-				grass.setPosition(i * 32, j * 32);
+				grass.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
 				grass.draw(w);
 				//1-Coal  2-Game  3-Gold  4-Horses  5-Oasis  6-Oil
 				if (map[i][j] % 100 == 4) {			//HORSES DRAW
-					horses.setPosition(i * 32, j * 32);
+					horses.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
 					horses.draw(w);
 				}
 				else if (map[i][j] % 100 == 1) {	//COAL DRAW
-					coal.setPosition(i * 32, j * 32);
+					coal.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
 					coal.draw(w);
 				}
 			}
 			else if (map[i][j] / 100 == 4) {			//MOUNTAIN DRAW
-				mountain.setPosition(i * 32, j * 32);
+				mountain.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
 				mountain.draw(w);
 				//1-Coal  2-Game  3-Gold  4-Horses  5-Oasis  6-Oil
 				if (map[i][j] % 100 == 3) {			//GOLD DRAW
-					gold.setPosition(i * 32, j * 32);
+					gold.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
 					gold.draw(w);
 				}
 				else if (map[i][j] % 100 == 5) {	//OASIS DRAW
-					oasis.setPosition(i * 32, j * 32);
+					oasis.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
 					oasis.draw(w);
 				}
 			}
 			else if (map[i][j] / 100 == 5) {			//OCEAN
-				ocean.setPosition(i * 32, j * 32);
+				ocean.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
 				ocean.draw(w);
 			}
 

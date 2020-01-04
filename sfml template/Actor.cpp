@@ -29,7 +29,7 @@ void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w) {
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
 		if (event.MouseButtonReleased) {
 			if (this->towns.size() > 0) {
-				for (int i = 0; i < towns.size(); i++) {
+				for (int i = 0; i < static_cast<int>(towns.size()); i++) {
 					if (this->towns.at(i).getPositionX() == (mouse_x / 32 * 32) && this->towns.at(i).getPositionY() == (mouse_y / 32 * 32)) {
 						this->townController = i;
 						std::cout << "\ntownCon " << this->townController;//debug
@@ -45,7 +45,7 @@ void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w) {
 			//UNIT-TARGET--------
 		case sf::Keyboard::Right:
 			this->unitController++;
-			if (this->unitController >= this->units.size())
+			if (this->unitController >= static_cast<int>(this->units.size()))
 				this->unitController = 0;
 			break;
 			//CREATE-TOWN--------
@@ -234,10 +234,10 @@ void Actor::setTotalProdaction(int totalProdaction)
 
 void Actor::endOfTurn(Map& map)
 {
-	for (int i = 0; i < towns.size(); i++) {
+	for (int i = 0; i < static_cast<int>(towns.size()); i++) {
 		towns[i].endOfTurn(map);
 	}
-	for (int i = 0; i < units.size(); i++) {
+	for (int i = 0; i < static_cast<int>(units.size()); i++) {
 		units.at(i).recharge();
 	}
 }
