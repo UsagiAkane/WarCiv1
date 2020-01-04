@@ -18,7 +18,7 @@ void WindowManager::mainWindow() {
 					w.close();
 				//Check is mouse in window
 
-				if ((Mouse::getPosition(w).x >= 0 && Mouse::getPosition(w).x < w.getSize().x) && ((Mouse::getPosition(w).y >= 0 && Mouse::getPosition(w).y < w.getSize().y)))
+				if ((sf::Mouse::getPosition(w).x >= 0 && sf::Mouse::getPosition(w).x < w.getSize().x) && ((sf::Mouse::getPosition(w).y >= 0 && sf::Mouse::getPosition(w).y < w.getSize().y)))
 				{
 					game.getActors().at(0).takeControl(event, game.getMap(), w);
 
@@ -32,19 +32,19 @@ void WindowManager::mainWindow() {
 
 
 
-				if (Mouse::getPosition(w).x >= w.getSize().x - BORDER_PIXEL_32)
+				if (sf::Mouse::getPosition(w).x >= w.getSize().x - BORDER_PIXEL_32)
 					view.move(BORDER_PIXEL_32 / 6, 0);
-				if (Mouse::getPosition(w).x <= BORDER_PIXEL_32)
+				if (sf::Mouse::getPosition(w).x <= BORDER_PIXEL_32)
 					view.move(-BORDER_PIXEL_32 / 6, 0);
-				if (Mouse::getPosition(w).y <= BORDER_PIXEL_32)
+				if (sf::Mouse::getPosition(w).y <= BORDER_PIXEL_32)
 					view.move(0, -BORDER_PIXEL_32 / 6);
-				if (Mouse::getPosition(w).y >= w.getSize().y - BORDER_PIXEL_32)
+				if (sf::Mouse::getPosition(w).y >= w.getSize().y - BORDER_PIXEL_32)
 					view.move(0, BORDER_PIXEL_32 / 6);
 
 
 			//////////////////////////////////DON'T USE THIS////////////////////////////
 
-			/*	if (event.type ==sf::Event::MouseWheelScrolled)
+				if (event.type ==sf::Event::MouseWheelScrolled)
 				{
 					if (event.mouseWheelScroll.delta > 0)
 					{
@@ -54,7 +54,7 @@ void WindowManager::mainWindow() {
 					{
 						view.zoom(1.01f);
 					}
-				}*/
+				}
 
 			}
 

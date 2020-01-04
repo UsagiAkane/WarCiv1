@@ -41,7 +41,7 @@ void baseNoise8(int val, int sizex, int sizey, std::vector<std::vector<int>>& ar
 	}
 }
 
-Map::Map(int sizeX, int sizeY) {
+Map::Map(int sizeX, int sizeY, int resGenChanse) {
 	//1-hill  2-forest  3-grass  4-mountain
 	for (int i = 0; i < sizeX; i++) {
 		//std::vector<int>maptmp;
@@ -61,10 +61,11 @@ Map::Map(int sizeX, int sizeY) {
 		}
 		map.push_back(arr_t);
 	}
+	//1-hill  2-forest  3-grass  4-mountain
+	baseNoise4(4, sizeX, sizeY, map);
 	baseNoise4(1, sizeX, sizeY, map);
 	baseNoise4(2, sizeX, sizeY, map);
 	baseNoise4(3, sizeX, sizeY, map);
-	baseNoise4(4, sizeX, sizeY, map);
 	baseNoise4(1, sizeX, sizeY, map);
 	baseNoise4(2, sizeX, sizeY, map);
 	baseNoise8(5, sizeX, sizeY, map);
@@ -86,27 +87,27 @@ Map::Map(int sizeX, int sizeY) {
 	//1-Coal  2-Game  3-Gold  4-Horses  5-Oasis  6-Oil
 	for (int i = 0; i < sizeX; i++) {
 		for (int j = 0; j < sizeY; j++) {
-			if (!(rand() % 10)) {
+			if (!(rand() % resGenChanse)) {
 				if (map.at(i).at(j) == 100) {			//HILL
-					if (rand() % 3)
+					if (rand() % resGenChanse == 1)
 						map.at(i).at(j) += 1;//COAL GEN
-					else if (rand() % 4)
+					else if (rand() % resGenChanse == 1)
 						map.at(i).at(j) += 6;//OIL GEN
 				}
 				else if (map.at(i).at(j) == 200) {		//FOREST
-					if (rand() % 4)
+					if (rand() % resGenChanse == 1)
 						map.at(i).at(j) += 2;//GAME GEN
 				}
 				else if (map.at(i).at(j) == 300) {		//GRASS
-					if (rand() % 4)
+					if (rand() % resGenChanse == 1)
 						map.at(i).at(j) += 1;//COAL GEN
-					else if (rand() % 3)
+					else if (rand() % resGenChanse == 1)
 						map.at(i).at(j) += 4;//HORSES GEN
 				}
 				else if (map.at(i).at(j) == 400) {		//MOUNTAIN
-					if (rand() % 4)
+					if (rand() % resGenChanse == 1)
 						map.at(i).at(j) += 3;//GOLD GEN
-					else if (rand() % 3)
+					else if (rand() % resGenChanse == 1)
 						map.at(i).at(j) += 5;//OASIS GEN
 				}
 			}
