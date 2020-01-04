@@ -18,21 +18,31 @@ void WindowManager::mainWindow() {
 					w.close();
 				//Check is mouse in window
 				if ((Mouse::getPosition(w).x >= 0 && Mouse::getPosition(w).x < w.getSize().x) && ((Mouse::getPosition(w).y >= 0 && Mouse::getPosition(w).y < w.getSize().y)))
-					game.getActors().at(0).takeControl(event, game.getMap(), w, game.findActorUnit(sf::Mouse::getPosition(w).x + (w.getView().getCenter().x - w.getSize().x / 2), sf::Mouse::getPosition(w).y + (w.getView().getCenter().y - w.getSize().y / 2)));
+				{
+					game.getActors().at(0).takeControl(event, game.getMap(), w);
 
-				
-					if (Mouse::getPosition(w).x >= w.getSize().x - BORDER_PIXEL_32)
-						view.move(BORDER_PIXEL_32 / 6, 0);
-					if (Mouse::getPosition(w).x <= BORDER_PIXEL_32)
-						view.move(-BORDER_PIXEL_32 / 6, 0);
-					if (Mouse::getPosition(w).y <= BORDER_PIXEL_32)
-						view.move(0, -BORDER_PIXEL_32 / 6);
-					if (Mouse::getPosition(w).y >= w.getSize().y - BORDER_PIXEL_32)
-						view.move(0, BORDER_PIXEL_32 / 6);
-				
-	
+					if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+					{
+						if (event.MouseButtonReleased)
+							game.getActors().at(0).takeControlUnit(event, game.getMap(), w, game.findActorUnit(sf::Mouse::getPosition(w).x + (w.getView().getCenter().x - w.getSize().x / 2), sf::Mouse::getPosition(w).y + (w.getView().getCenter().y - w.getSize().y / 2)));
+					}
 
-				////////////////////////////////////DON'T USE THIS////////////////////////////
+				}
+
+
+
+				if (Mouse::getPosition(w).x >= w.getSize().x - BORDER_PIXEL_32)
+					view.move(BORDER_PIXEL_32 / 6, 0);
+				if (Mouse::getPosition(w).x <= BORDER_PIXEL_32)
+					view.move(-BORDER_PIXEL_32 / 6, 0);
+				if (Mouse::getPosition(w).y <= BORDER_PIXEL_32)
+					view.move(0, -BORDER_PIXEL_32 / 6);
+				if (Mouse::getPosition(w).y >= w.getSize().y - BORDER_PIXEL_32)
+					view.move(0, BORDER_PIXEL_32 / 6);
+
+
+
+				//////////////////////////////////DON'T USE THIS////////////////////////////
 			/*	if (event.type ==sf::Event::MouseWheelScrolled)
 				{
 					if (event.mouseWheelScroll.delta > 0)

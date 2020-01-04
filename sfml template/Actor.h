@@ -31,10 +31,11 @@ public:
 	//do not use this function if u are not a proggramer (creator) of this app;
 	void __PUSH_UNIT_DEBUG(Unit *unit);
 	//--------------
-	void takeControl(sf::Event event, Map& map, sf::RenderWindow& w,std::vector<Unit>&EnemyUnitVector);
+	void takeControl(sf::Event event, Map& map, sf::RenderWindow& w);
 	void draw(sf::RenderWindow& w);
 	void takeTax();
 	void pushbackEnemyID(int id);
+	virtual void takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, std::vector<Unit>& EnemyUnitVector);
 	//--------GETERS
 	int getPlayerID();
 	std::vector<int> getEnemyListID();
