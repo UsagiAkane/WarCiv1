@@ -19,24 +19,13 @@ void Actor::__PUSH_UNIT_DEBUG(Unit* unit)
 	this->units.push_back(*unit);
 }
 
-void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, std::vector<Unit>& EnemyUnitVector) {
+void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w) {
 	//to make camera dynamic
 	int mouse_x = sf::Mouse::getPosition(w).x + (w.getView().getCenter().x - w.getSize().x / 2);
 	int mouse_y = sf::Mouse::getPosition(w).y + (w.getView().getCenter().y - w.getSize().y / 2);
 
 	//UNIT-MOVE----------
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-		if (event.MouseButtonReleased) {
-			if (this->units.size() > 0) {
-				if (this->units.at(this->unitController).getIsAlive() == true)
-					this->units.at(this->unitController).move(mouse_x, mouse_y, map, this->enemyListID, EnemyUnitVector, w);
-				else {
-					this->units.erase(this->unitController + this->units.begin());
-					this->unitController = 0;
-				}
-			}
-		}
-	}
+
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
 		if (event.MouseButtonReleased) {
 			if (this->towns.size() > 0) {
@@ -124,6 +113,18 @@ void Actor::takeTax()
 void Actor::pushbackEnemyID(int ID)
 {
 	this->enemyListID.push_back(ID);
+}
+
+void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, std::vector<Unit>& EnemyUnitVector)
+{
+	if (this->units.size() > 0) {
+		if (this->units.at(this->unitController).getIsAlive() == true)
+			this->units.at(this->unitController).move(sf::Mouse::getPosition(w).x + (w.getView().getCenter().x - w.getSize().x / 2), sf::Mouse::getPosition(w).y + (w.getView().getCenter().y - w.getSize().y / 2), map, this->enemyListID, EnemyUnitVector, w);
+		else {
+			this->units.erase(this->unitController + this->units.begin());
+			this->unitController = 0;
+		}
+	}
 }
 
 int Actor::getPlayerID()
