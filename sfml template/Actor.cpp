@@ -19,6 +19,11 @@ void Actor::__PUSH_UNIT_DEBUG(Unit* unit)
 	this->units.push_back(*unit);
 }
 
+void Actor::__PUSH_TOWN_DEBUG(Town* town)
+{
+	this->towns.push_back(*town);
+}
+
 void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w) {
 	//to make camera dynamic
 	int mouse_x = sf::Mouse::getPosition(w).x + (w.getView().getCenter().x - w.getSize().x / 2);

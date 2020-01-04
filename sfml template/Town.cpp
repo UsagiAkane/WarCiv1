@@ -233,6 +233,9 @@ int Town::getPositionY() {
 void Town::setPosition(int x, int y) {
 	this->positionX = x;
 	this->positionY = y;
+	this->townSprite.setPosition(this->positionX, this->positionY);
+	this->populationText.setPosition(this->positionX+10, this->positionY);
+
 }
 void Town::setHealth(int health) {
 	this->health = health;

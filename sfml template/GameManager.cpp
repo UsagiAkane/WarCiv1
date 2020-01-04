@@ -26,6 +26,12 @@ GameManager::GameManager()
 	legionEnemy->spawn(96, 96, map);
 	//EnemyUnitVector.push_back(legionEnemy);
 	enemyActor->__PUSH_UNIT_DEBUG(legionEnemy);
+	Town* townEnemy = new Town;
+	townEnemy->setPlayer_id(2);
+	townEnemy->spawn(32*5,32*6,this->map);
+	enemyActor->__PUSH_TOWN_DEBUG(townEnemy);
+
+
 	//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 
 

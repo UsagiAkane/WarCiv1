@@ -30,6 +30,7 @@ public:
 	//DEBUG---------
 	//do not use this function if u are not a proggramer (creator) of this app;
 	void __PUSH_UNIT_DEBUG(Unit *unit);
+	void __PUSH_TOWN_DEBUG(Town *town);
 	//--------------
 	void takeControl(sf::Event event, Map& map, sf::RenderWindow& w);
 	void draw(sf::RenderWindow& w);

@@ -4,7 +4,7 @@
 void WindowManager::mainWindow() {
 	GameManager game;
 	try {
-		sf::RenderWindow w(sf::VideoMode(1000, 600), "TITLE", sf::Style::Fullscreen);
+		sf::RenderWindow w(sf::VideoMode(1000, 600), "TITLE"/*, sf::Style::Fullscreen*/);
 		w.setFramerateLimit(60);
 
 		sf::View view(w.getView());
@@ -12,13 +12,24 @@ void WindowManager::mainWindow() {
 		while (w.isOpen()) {
 			sf::Event event;
 
+
+			if (sf::Mouse::getPosition(w).x >= w.getSize().x - BORDER_PIXEL_32)
+				view.move(BORDER_PIXEL_32 / 6, 0);
+			if (sf::Mouse::getPosition(w).x <= BORDER_PIXEL_32)
+				view.move(-BORDER_PIXEL_32 / 6, 0);
+			if (sf::Mouse::getPosition(w).y <= BORDER_PIXEL_32)
+				view.move(0, -BORDER_PIXEL_32 / 6);
+			if (sf::Mouse::getPosition(w).y >= w.getSize().y - BORDER_PIXEL_32)
+				view.move(0, BORDER_PIXEL_32 / 6);
+
+
 			while (w.pollEvent(event)) {
 				//CLOSE--------------
 				if (event.type == event.Closed)
 					w.close();
 				//Check is mouse in window
 
-				if ((Mouse::getPosition(w).x >= 0 && Mouse::getPosition(w).x < w.getSize().x) && ((Mouse::getPosition(w).y >= 0 && Mouse::getPosition(w).y < w.getSize().y)))
+				if ((sf::Mouse::getPosition(w).x >= 0 && sf::Mouse::getPosition(w).x < w.getSize().x) && ((sf::Mouse::getPosition(w).y >= 0 && sf::Mouse::getPosition(w).y < w.getSize().y)))
 				{
 					game.getActors().at(0).takeControl(event, game.getMap(), w);
 
@@ -30,31 +41,19 @@ void WindowManager::mainWindow() {
 
 				}
 
+				//////////////////////////////////DON'T USE THIS////////////////////////////
 
-
-				if (Mouse::getPosition(w).x >= w.getSize().x - BORDER_PIXEL_32)
-					view.move(BORDER_PIXEL_32 / 6, 0);
-				if (Mouse::getPosition(w).x <= BORDER_PIXEL_32)
-					view.move(-BORDER_PIXEL_32 / 6, 0);
-				if (Mouse::getPosition(w).y <= BORDER_PIXEL_32)
-					view.move(0, -BORDER_PIXEL_32 / 6);
-				if (Mouse::getPosition(w).y >= w.getSize().y - BORDER_PIXEL_32)
-					view.move(0, BORDER_PIXEL_32 / 6);
-
-
-			//////////////////////////////////DON'T USE THIS////////////////////////////
-
-			/*	if (event.type ==sf::Event::MouseWheelScrolled)
-				{
-					if (event.mouseWheelScroll.delta > 0)
+				/*	if (event.type ==sf::Event::MouseWheelScrolled)
 					{
-						view.zoom(0.99f);
-					}
-					else if (event.mouseWheelScroll.delta < 0)
-					{
-						view.zoom(1.01f);
-					}
-				}*/
+						if (event.mouseWheelScroll.delta > 0)
+						{
+							view.zoom(0.99f);
+						}
+						else if (event.mouseWheelScroll.delta < 0)
+						{
+							view.zoom(1.01f);
+						}
+					}*/
 
 			}
 
@@ -71,4 +70,9 @@ void WindowManager::mainWindow() {
 	catch (const std::exception & e) {
 		std::cout << e.what();
 	}
+}
+
+void WindowManager::cameraControl()
+{
+
 }
