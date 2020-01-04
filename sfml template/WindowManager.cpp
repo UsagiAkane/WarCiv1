@@ -4,7 +4,7 @@
 void WindowManager::mainWindow() {
 	GameManager game;
 	try {
-		sf::RenderWindow w(sf::VideoMode(1000, 600), "TITLE", sf::Style::Fullscreen);
+		sf::RenderWindow w(sf::VideoMode(1920, 1080), "TITLE"/*, sf::Style::Fullscreen*/);
 		w.setFramerateLimit(60);
 
 		sf::View view(w.getView());

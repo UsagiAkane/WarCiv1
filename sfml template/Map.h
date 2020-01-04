@@ -8,6 +8,7 @@
 #include "Mountain.h"
 #include "Grassland.h"
 #include "Ocean.h"
+#include "Plains.h"
 #include "Terrain.h"
 
 

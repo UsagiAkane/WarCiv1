@@ -61,14 +61,15 @@ Map::Map(int sizeX, int sizeY, int resGenChanse) {
 		}
 		map.push_back(arr_t);
 	}
-	//1-hill  2-forest  3-grass  4-mountain
+	//1-hill  2-forest  3-grass  4-mountain 5-Ocean 6-Plain
 	baseNoise4(4, sizeX, sizeY, map);
 	baseNoise4(1, sizeX, sizeY, map);
 	baseNoise4(2, sizeX, sizeY, map);
 	baseNoise4(3, sizeX, sizeY, map);
+	baseNoise8(6, sizeX, sizeY, map);
+	baseNoise8(5, sizeX, sizeY, map);
 	baseNoise4(1, sizeX, sizeY, map);
 	baseNoise4(2, sizeX, sizeY, map);
-	baseNoise8(5, sizeX, sizeY, map);
 	for (int x = 0; x < sizeX; x++) {
 		map[x][0] = 5;
 		map[x][map[x].size() - 1] = 5;
@@ -109,6 +110,10 @@ Map::Map(int sizeX, int sizeY, int resGenChanse) {
 						map.at(i).at(j) += 3;//GOLD GEN
 					else if (rand() % resGenChanse == 1)
 						map.at(i).at(j) += 5;//OASIS GEN
+				}
+				else if (map.at(i).at(j) == 600) {		//FOREST
+					if (rand() % resGenChanse == 1)
+						map.at(i).at(j) += 2;//GAME GEN
 				}
 			}
 		}
@@ -157,6 +162,12 @@ Terrain Map::getTileVec(int x, int y) {
 	}
 	else if (map.at(x).at(y) / 100 == 5)			//OCEAN
 		return Ocean();
+	else if (map.at(x).at(y) / 100 == 6) {			//PLAINS DRAW		
+		if (map.at(x).at(y) % 100 == 2) {		//HORSES DRAW
+			return Plains(1);
+		}
+		return Plains();
+	}
 }
 int Map::getUnitInd(int x, int y) {
 	x /= 32;
@@ -232,6 +243,7 @@ void Map::draw(sf::RenderWindow& w) {
 	Grassland grass;
 	Mountain mountain;
 	Ocean ocean;
+	Plains plains;
 
 	Coal coal;
 	Game game;
@@ -241,7 +253,7 @@ void Map::draw(sf::RenderWindow& w) {
 	Oil oil;
 
 
-	//1-hill  2-forest  3-grass  4-mountain
+	//1-hill  2-forest  3-grass  4-mountain 5-ocean 6-plains
 	for (int i = 0; i < static_cast<int>(map.size()); i++) {
 		for (int j = 0; j < static_cast<int>(map.at(i).size()); j++) {
 			if (map[i][j] / 100 == 1) {					//HILL DRAW
@@ -296,8 +308,15 @@ void Map::draw(sf::RenderWindow& w) {
 				ocean.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
 				ocean.draw(w);
 			}
-
-
+			else if (map[i][j] / 100 == 6) {			//PLAINS DRAW
+				plains.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
+				plains.draw(w);
+				//1-Coal  2-Game  3-Gold  4-Horses  5-Oasis  6-Oil
+				if (map[i][j] % 100 == 2) {			//HORSES DRAW
+					horses.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
+					horses.draw(w);
+				}
+			}
 		}
 	}
 }
