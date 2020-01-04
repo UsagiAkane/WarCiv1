@@ -3,11 +3,15 @@
 
 class WindowManager{
 private:
-
+	//sf::RenderWindow w;
 public:
+	WindowManager();
 	//RenderWindow w;
 	//WindowManager();
-	static void mainWindow();
-	void cameraControl();
+	void mainWindow();
+	void cameraControl(sf::View& view, sf::Window& window);
+	bool isMouseInWindow(sf::RenderWindow & w);
+	int getPosMouseByWindowX(sf::RenderWindow& w);
+	int getPosMouseByWindowY(sf::RenderWindow& w);
 };
 

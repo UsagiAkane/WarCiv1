@@ -3,6 +3,7 @@
 
 int main(void) {
 	std::srand(static_cast<unsigned int>(time(NULL)));
-	WindowManager::mainWindow();
+	WindowManager WM;
+	WM.mainWindow();
 	return SUCCESS_EXIT;
 }

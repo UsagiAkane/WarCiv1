@@ -1,48 +1,45 @@
 #include "WindowManager.h"
 #include "GameManager.h"
 
-void WindowManager::mainWindow() {
-	GameManager game;
-	try {
-		sf::RenderWindow w(sf::VideoMode(1000, 600), "TITLE"/*, sf::Style::Fullscreen*/);
-		w.setFramerateLimit(60);
+WindowManager::WindowManager()
+{
+	
+	//this->w.setTitle("WarCiv");
+	//this->w.setFramerateLimit(60);
 
+}
+
+void WindowManager::mainWindow() {
+
+	try {
+		GameManager game;
+		sf::RenderWindow w(sf::VideoMode(1000, 600), "TITLE"/*, sf::Style::Fullscreen*/);
 		sf::View view(w.getView());
 
 		while (w.isOpen()) {
 			sf::Event event;
 
-
-			if (sf::Mouse::getPosition(w).x >= w.getSize().x - BORDER_PIXEL_32)
-				view.move(BORDER_PIXEL_32 / 6, 0);
-			if (sf::Mouse::getPosition(w).x <= BORDER_PIXEL_32)
-				view.move(-BORDER_PIXEL_32 / 6, 0);
-			if (sf::Mouse::getPosition(w).y <= BORDER_PIXEL_32)
-				view.move(0, -BORDER_PIXEL_32 / 6);
-			if (sf::Mouse::getPosition(w).y >= w.getSize().y - BORDER_PIXEL_32)
-				view.move(0, BORDER_PIXEL_32 / 6);
-
-
+			//CAMERA CONTROL
+			if (isMouseInWindow(w))
+				cameraControl(view, w);
+		
 			while (w.pollEvent(event)) {
 				//CLOSE--------------
 				if (event.type == event.Closed)
 					w.close();
 				//Check is mouse in window
-
-				if ((sf::Mouse::getPosition(w).x >= 0 && sf::Mouse::getPosition(w).x < w.getSize().x) && ((sf::Mouse::getPosition(w).y >= 0 && sf::Mouse::getPosition(w).y < w.getSize().y)))
+				if (isMouseInWindow(w))
 				{
+					//all other control
 					game.getActors().at(0).takeControl(event, game.getMap(), w);
-
-					if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+					if (sf::Mouse::isButtonPressed(sf::Mouse::Left))//If you want to attack or move unit
 					{
 						if (event.MouseButtonReleased)
-							game.getActors().at(0).takeControlUnit(event, game.getMap(), w, game.findActorUnit(sf::Mouse::getPosition(w).x + (w.getView().getCenter().x - w.getSize().x / 2), sf::Mouse::getPosition(w).y + (w.getView().getCenter().y - w.getSize().y / 2)));
+							game.getActors().at(0).takeControlUnit(event, game.getMap(), w, game.findActorUnit(getPosMouseByWindowX(w), getPosMouseByWindowY(w)));
 					}
 
 				}
-
 				//////////////////////////////////DON'T USE THIS////////////////////////////
-
 				/*	if (event.type ==sf::Event::MouseWheelScrolled)
 					{
 						if (event.mouseWheelScroll.delta > 0)
@@ -72,7 +69,31 @@ void WindowManager::mainWindow() {
 	}
 }
 
-void WindowManager::cameraControl()
+void WindowManager::cameraControl(sf::View& view, sf::Window & w)
 {
-
+	if (sf::Mouse::getPosition(w).x >= w.getSize().x - BORDER_PIXEL_32)
+		view.move(BORDER_PIXEL_32 / 6, 0);
+	if (sf::Mouse::getPosition(w).x <= BORDER_PIXEL_32)
+		view.move(-BORDER_PIXEL_32 / 6, 0);
+	if (sf::Mouse::getPosition(w).y <= BORDER_PIXEL_32)
+		view.move(0, -BORDER_PIXEL_32 / 6);
+	if (sf::Mouse::getPosition(w).y >= w.getSize().y - BORDER_PIXEL_32)
+		view.move(0, BORDER_PIXEL_32 / 6);
 }
+
+bool WindowManager::isMouseInWindow(sf::RenderWindow& w)
+{
+	return (sf::Mouse::getPosition(w).x >= 0 && sf::Mouse::getPosition(w).x < w.getSize().x) && ((sf::Mouse::getPosition(w).y >= 0 && sf::Mouse::getPosition(w).y < w.getSize().y)) ? true : false;
+}
+
+int WindowManager::getPosMouseByWindowX(sf::RenderWindow& w)
+{
+	return sf::Mouse::getPosition(w).x + (w.getView().getCenter().x - w.getSize().x / 2);
+}
+
+int WindowManager::getPosMouseByWindowY(sf::RenderWindow& w)
+{
+	return  sf::Mouse::getPosition(w).y + (w.getView().getCenter().y - w.getSize().y / 2);
+}
+
+
