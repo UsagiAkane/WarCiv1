@@ -100,3 +100,4 @@ std::vector<Unit>& GameManager::findActorUnit(int mouse_x, int mouse_y)
 	else
 		std::cout << "CAN'T FIND UNIT" << std::endl;
 }
+

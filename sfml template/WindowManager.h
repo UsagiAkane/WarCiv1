@@ -3,7 +3,9 @@
 
 class WindowManager{
 private:
-	//sf::RenderWindow w;
+	sf::RenderWindow w;
+	bool isMenu = true;
+
 public:
 	WindowManager();
 	//RenderWindow w;
@@ -13,5 +15,8 @@ public:
 	bool isMouseInWindow(sf::RenderWindow & w);
 	int getPosMouseByWindowX(sf::RenderWindow& w);
 	int getPosMouseByWindowY(sf::RenderWindow& w);
+	void mainMenu(sf::RenderWindow& w);
+	sf::RenderWindow& getWindow();
+	
 };
 
