@@ -84,15 +84,6 @@ void GameManager::draw(sf::RenderWindow& w)
 
 Actor& GameManager::findActor(int ID)
 {
-	//for (int i = 0; i < actors.size(); i++)
-	//{
-	//	if (this->actors.at(i).getPlayerID() == ID)
-	//		return this->actors.at(i);
-	//	else
-	//		std::cout << "CAN'T FIND ACTOR" << std::endl;
-
-	//	//NEED TO BE FIXED
-	//}
 	if (ID < 100 && ID > 0)
 	{
 		if (this->actors.at(ID - 1).getPlayerID() == ID)

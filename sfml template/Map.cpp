@@ -210,10 +210,15 @@ void Map::delUnit(int x, int y) {
 	y /= 32;
 	if (this->units.at(x).at(y) % 100 / 10 == 5)
 	{
-		units.at(x).at(y) -= units.at(x).at(y) % 10;
+		units.at(x).at(y) -= (units.at(x).at(y) % 10);
+		std::cout << "HERE------------------------------" << std::endl;
 	}
 	else
+	{
 		this->units.at(x).at(y) = 0;
+		std::cout << "HERE2222222222222222222222------------------------------" << std::endl;
+	}
+	
 }
 void Map::__getInfo_DEBUG(int x, int y)
 {

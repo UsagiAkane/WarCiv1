@@ -1,9 +1,7 @@
 #pragma once
 #include<iostream>
 #include<vector>
-#include<string>
 #include"Town.h"
-#include"Unit.h"
 #include"Technologies.h"
 #include"Settlers.h"
 
@@ -64,6 +62,7 @@ public:
 	
 	//Methods
 	virtual void endOfTurn(Map& map);//need work
+
 
 
 

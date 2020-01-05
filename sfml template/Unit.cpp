@@ -86,34 +86,50 @@ void Unit::animationOfAttack(int value, sf::RenderWindow& w, Map& map)
 
 void Unit::moveRightHidden(Map& map, int mouse_x, int mouse_y)
 {
-	positionX += BORDER_PIXEL_32;
-	this->warriorSprite.setPosition(static_cast<float>(positionX), static_cast<float>(positionY));
-	this->steps -= map.getTile(mouse_x, mouse_y).getMove();
-	map.moveUnit(positionX - BORDER_PIXEL_32, positionY, positionX, positionY);
+
+	if (this->health > 0)
+	{
+		positionX += BORDER_PIXEL_32;
+		this->warriorSprite.setPosition(static_cast<float>(positionX), static_cast<float>(positionY));
+		this->steps -= map.getTile(mouse_x, mouse_y).getMove();
+		map.moveUnit(positionX - BORDER_PIXEL_32, positionY, positionX, positionY);
+	}
 }
 
 void Unit::moveLeftHidden(Map& map, int mouse_x, int mouse_y)
 {
-	positionX -= BORDER_PIXEL_32;
-	this->warriorSprite.setPosition(static_cast<float>(positionX), static_cast<float>(positionY));
-	this->steps -= map.getTile(mouse_x, mouse_y).getMove();
-	map.moveUnit(positionX + BORDER_PIXEL_32, positionY, positionX, positionY);
+
+	if (this->health > 0)
+	{
+		positionX -= BORDER_PIXEL_32;
+		this->warriorSprite.setPosition(static_cast<float>(positionX), static_cast<float>(positionY));
+		this->steps -= map.getTile(mouse_x, mouse_y).getMove();
+		map.moveUnit(positionX + BORDER_PIXEL_32, positionY, positionX, positionY);
+
+	}
 }
 
 void Unit::moveDownHidden(Map& map, int mouse_x, int mouse_y)
 {
-	positionY += BORDER_PIXEL_32;
-	this->warriorSprite.setPosition(static_cast<float>(positionX), static_cast<float>(positionY));
-	this->steps -= map.getTile(mouse_x, mouse_y).getMove();
-	map.moveUnit(positionX, positionY - BORDER_PIXEL_32, positionX, positionY);
+	if (this->health > 0)
+	{
+		positionY += BORDER_PIXEL_32;
+		this->warriorSprite.setPosition(static_cast<float>(positionX), static_cast<float>(positionY));
+		this->steps -= map.getTile(mouse_x, mouse_y).getMove();
+		map.moveUnit(positionX, positionY - BORDER_PIXEL_32, positionX, positionY);
+	}
+
 }
 
 void Unit::moveTopHidden(Map& map, int mouse_x, int mouse_y)
 {
+	if (this->health > 0)
+	{
 	positionY -= BORDER_PIXEL_32;
 	this->warriorSprite.setPosition(static_cast<float>(positionX), static_cast<float>(positionY));
 	this->steps -= map.getTile(mouse_x, mouse_y).getMove();
 	map.moveUnit(positionX, positionY + BORDER_PIXEL_32, positionX, positionY);
+	}
 }
 
 Unit::Unit(std::string name, int health, int armor, int damage, int speed, unsigned short rank, int salary, int productionPrice, int price, int index, int PlayerID, int maxspeed)
@@ -150,6 +166,7 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 					checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 1);   //Checking whether a unit can attack
 				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty 
 					moveRightHidden(map, mouse_x, mouse_y);//move to this position if empty
+	
 			}
 		}
 		////left
@@ -161,6 +178,7 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 					checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 2); //Checking whether a unit can attack
 				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
 					moveLeftHidden(map, mouse_x, mouse_y);//move to this position if empty
+	
 			}
 		}
 		////top
@@ -168,10 +186,12 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 		{
 			if (map.getTile(mouse_x, mouse_y).getMove() <= this->steps)
 			{
+
 				if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
 					checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 3); //Checking whether a unit can attack
 				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
 					moveTopHidden(map, mouse_x, mouse_y);//move to this position if empty
+
 			}
 		}
 		////down
@@ -183,6 +203,7 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 					checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 4); //Checking whether a unit can attack
 				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
 					moveDownHidden(map, mouse_x, mouse_y);//move to this position if empty
+
 			}
 		}
 		this->checkSteps();
@@ -204,7 +225,11 @@ void Unit::attack(Unit& uEnemy, Map& map, int x, int y)
 
 
 	if (this->getHealth() <= 0)
+	{
 		this->death(map);
+		uEnemy.setCountOfKill(+1);
+	}
+		
 
 
 	if (uEnemy.getHealth() <= 0)
