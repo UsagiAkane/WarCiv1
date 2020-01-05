@@ -4,7 +4,7 @@
 int main(void) {
 	std::srand(static_cast<unsigned int>(time(NULL)));
 	WindowManager WM;
-	WM.mainMenu(WM.getWindow());
+	//WM.mainMenu(WM.getWindow());
 	WM.mainWindow();
 	return SUCCESS_EXIT;
 }

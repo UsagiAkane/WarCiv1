@@ -16,8 +16,6 @@ void WindowManager::mainWindow() {
 
 		sf::View view(w.getView());
 
-
-
 		while (w.isOpen()) {
 			sf::Event event;
 
@@ -53,21 +51,17 @@ void WindowManager::mainWindow() {
 
 					}
 				}
-
-
-
-
 			}
-
 
 			w.setView(view);
 			//WINDOW-FILL-COLOR
-			w.clear(sf::Color::Green);
+			w.clear(sf::Color::Black);
 			//draw all in game
 			game.draw(w);
 
-			if (isMenu)
-				mainMenu(w);
+	/*		if (isMenu)
+				mainMenu(w);*/
+
 			//DISPLAY
 			w.display();
 
@@ -105,7 +99,6 @@ int WindowManager::getPosMouseByWindowY(sf::RenderWindow& w)
 	return  sf::Mouse::getPosition(w).y + (w.getView().getCenter().y - w.getSize().y / 2);
 }
 
-
 void WindowManager::mainMenu(sf::RenderWindow& w)
 {
 	sf::Texture texture;
@@ -114,6 +107,7 @@ void WindowManager::mainMenu(sf::RenderWindow& w)
 	sf::Sprite backGroundImage(texture);
 
 	backGroundImage.scale(3, 3);
+	backGroundImage.setPosition(w.getView().getCenter().x - w.getSize().x / 2, w.getView().getCenter().y - w.getSize().y / 2);
 
 	sf::Texture menuTexture1;
 	menuTexture1.loadFromFile("Icons\\menu.png");
@@ -136,7 +130,7 @@ void WindowManager::mainMenu(sf::RenderWindow& w)
 	bContinue.setScale(1.5, 1.5);
 	bLoadGame.setScale(1.5, 1.5);
 	bExit.setScale(1.5, 1.5);
-
+	//BOUNDS-----------------------------------------------
 	sf::FloatRect localBounds = tNewGame.getLocalBounds();
 	tNewGame.setOrigin(localBounds.left + localBounds.width / 2.0f, localBounds.top + localBounds.height / 2.0f);
 
@@ -172,18 +166,42 @@ void WindowManager::mainMenu(sf::RenderWindow& w)
 				isMenu = false;
 			if (ev.type == sf::Event::Closed)
 				w.close();
-	/*		if (ev.type == sf::Event::MouseWheelScrolled)
+			if (isMouseInWindow(w))
 			{
-				if (ev.mouseWheelScroll.delta > 0)
+				//all other control
+				if ((sf::IntRect(bNewGame.getGlobalBounds()).contains(sf::Mouse::getPosition(w))))
+					bNewGame.setColor(sf::Color(150, 150, 150));
+				else
+					bNewGame.setColor(sf::Color(255, 255, 255));
+				if ((sf::IntRect(bContinue.getGlobalBounds()).contains(sf::Mouse::getPosition(w))))
+					bContinue.setColor(sf::Color(150, 150, 150));
+				else
+					bContinue.setColor(sf::Color(255, 255, 255));
+				if ((sf::IntRect(bLoadGame.getGlobalBounds()).contains(sf::Mouse::getPosition(w))))
+					bLoadGame.setColor(sf::Color(150, 150, 150));
+				else
+					bLoadGame.setColor(sf::Color(255, 255, 255));
+				if ((sf::IntRect(bExit.getGlobalBounds()).contains(sf::Mouse::getPosition(w))))
+					bExit.setColor(sf::Color(150, 150, 150));
+				else
+					bExit.setColor(sf::Color(255, 255, 255));
+
+				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))//If you want to attack or move unit
 				{
-					w.getView().zoom(0.99f);
+					if (ev.MouseButtonReleased)
+					{
+						if ((sf::IntRect(bExit.getGlobalBounds()).contains(sf::Mouse::getPosition(w))))
+							w.close();
+					}
 				}
-				else if (event.mouseWheelScroll.delta < 0)
-				{
-					view.zoom(1.01f);
-				}
-			}*/
+			}
+
 		}
+
+
+	
+
+
 		w.clear(sf::Color(0, 0, 0));
 
 		w.draw(backGroundImage);
