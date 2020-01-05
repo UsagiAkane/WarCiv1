@@ -20,8 +20,11 @@ void WindowManager::mainWindow() {
 			sf::Event event;
 
 			//CAMERA CONTROL
+
 			if (isMouseInWindow(w))
 				cameraControl(view, w);
+
+
 
 			while (w.pollEvent(event)) {
 				//CLOSE--------------
@@ -59,8 +62,8 @@ void WindowManager::mainWindow() {
 			//draw all in game
 			game.draw(w);
 
-	/*		if (isMenu)
-				mainMenu(w);*/
+			if (isMenu)
+				gameMenu(w);
 
 			//DISPLAY
 			w.display();
@@ -70,6 +73,116 @@ void WindowManager::mainWindow() {
 	catch (const std::exception & e) {
 		std::cout << e.what();
 	}
+}
+
+void WindowManager::gameMenu(sf::RenderWindow& w)
+{
+	sf::Texture menuTexture1;
+	menuTexture1.loadFromFile("Icons\\menu.png");
+	sf::Sprite bNewGame(menuTexture1), bContinue(menuTexture1), bExit(menuTexture1), bLoadGame(menuTexture1);
+	sf::Font font;
+	font.loadFromFile("18536.ttf");
+	sf::Text tContinue, tSaveGame, tExit, tLoadGame;
+
+	//inicializate----------------------------------
+	tContinue.setFont(font);
+	tContinue.setString("Continue");
+	tSaveGame.setFont(font);
+	tSaveGame.setString("Save game");
+	tLoadGame.setFont(font);
+	tLoadGame.setString("Load game");
+	tExit.setFont(font);
+	tExit.setString("Exit");
+
+	bNewGame.setScale(1.5, 1.5);
+	bContinue.setScale(1.5, 1.5);
+	bLoadGame.setScale(1.5, 1.5);
+	bExit.setScale(1.5, 1.5);
+	//BOUNDS-----------------------------------------------
+	sf::FloatRect localBounds = tContinue.getLocalBounds();
+	tContinue.setOrigin(localBounds.left + localBounds.width / 2.0f, localBounds.top + localBounds.height / 2.0f);
+
+	localBounds = tContinue.getLocalBounds();
+	tSaveGame.setOrigin(localBounds.left + localBounds.width / 2.0f, localBounds.top + localBounds.height / 2.0f);
+
+	localBounds = tLoadGame.getLocalBounds();
+	tLoadGame.setOrigin(localBounds.left + localBounds.width / 2.0f, localBounds.top + localBounds.height / 2.0f);
+
+	localBounds = tExit.getLocalBounds();
+	tExit.setOrigin(localBounds.left + localBounds.width / 2.0f, localBounds.top + localBounds.height / 2.0f);
+
+
+	//BAR---------------------------------------POS
+	bNewGame.setPosition(static_cast<float>(w.getView().getCenter().x - 100 * bNewGame.getScale().x), static_cast<float>(w.getView().getCenter().y - 45 * bNewGame.getScale().y));
+	bContinue.setPosition(static_cast<float>(w.getView().getCenter().x - 100 * bContinue.getScale().x), static_cast<float>(w.getView().getCenter().y - 15 * bContinue.getScale().x));
+	bLoadGame.setPosition(static_cast<float>(w.getView().getCenter().x - 100 * bLoadGame.getScale().x), static_cast<float>(w.getView().getCenter().y + 15 * bLoadGame.getScale().x));
+	bExit.setPosition(static_cast<float>(w.getView().getCenter().x - 100 * bExit.getScale().x), static_cast<float>(w.getView().getCenter().y + 45 * bExit.getScale().x));
+
+	//TEXT-----------------------------------------POS
+	tContinue.setPosition(static_cast<float>(bNewGame.getPosition().x + 100 * bNewGame.getScale().x), static_cast<float>(bNewGame.getPosition().y + 15));
+	tSaveGame.setPosition(static_cast<float>(bContinue.getPosition().x + 100 * bContinue.getScale().x), static_cast<float>(bContinue.getPosition().y + 15));
+	tLoadGame.setPosition(static_cast<float>(bLoadGame.getPosition().x + 100 * bLoadGame.getScale().x), static_cast<float>(bLoadGame.getPosition().y + 15));
+	tExit.setPosition(static_cast<float>(bExit.getPosition().x + 100 * bExit.getScale().x), static_cast<float>(bExit.getPosition().y + 15));
+
+
+
+	while (isMenu)
+	{
+		sf::Event ev;
+		while (w.pollEvent(ev)) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+				isMenu = false;
+			if (ev.type == sf::Event::Closed)
+				w.close();
+			if (isMouseInWindow(w))
+			{
+				//all other control
+				if ((sf::IntRect(sf::FloatRect(bNewGame.getGlobalBounds().left - w.getView().getCenter().x + w.getSize().x / 2, bNewGame.getGlobalBounds().top - w.getView().getCenter().y + w.getSize().y / 2, bNewGame.getGlobalBounds().width, bNewGame.getGlobalBounds().height)).contains(sf::Mouse::getPosition(w))))
+					bNewGame.setColor(sf::Color(150, 150, 150));
+				else
+					bNewGame.setColor(sf::Color(255, 255, 255));
+				if ((sf::IntRect(sf::FloatRect(bContinue.getGlobalBounds().left - w.getView().getCenter().x + w.getSize().x / 2, bContinue.getGlobalBounds().top - w.getView().getCenter().y + w.getSize().y / 2, bContinue.getGlobalBounds().width, bContinue.getGlobalBounds().height)).contains(sf::Mouse::getPosition(w))))
+					bContinue.setColor(sf::Color(150, 150, 150));
+				else
+					bContinue.setColor(sf::Color(255, 255, 255));
+				if ((sf::IntRect(sf::FloatRect(bLoadGame.getGlobalBounds().left - w.getView().getCenter().x + w.getSize().x / 2, bLoadGame.getGlobalBounds().top - w.getView().getCenter().y + w.getSize().y / 2, bLoadGame.getGlobalBounds().width, bLoadGame.getGlobalBounds().height)).contains(sf::Mouse::getPosition(w))))
+					bLoadGame.setColor(sf::Color(150, 150, 150));
+				else
+					bLoadGame.setColor(sf::Color(255, 255, 255));
+				if ((sf::IntRect(sf::FloatRect(bExit.getGlobalBounds().left - w.getView().getCenter().x + w.getSize().x / 2, bExit.getGlobalBounds().top - w.getView().getCenter().y + w.getSize().y / 2, bExit.getGlobalBounds().width, bExit.getGlobalBounds().height)).contains(sf::Mouse::getPosition(w))))
+					bExit.setColor(sf::Color(150, 150, 150));
+				else
+					bExit.setColor(sf::Color(255, 255, 255));
+
+				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))//If you want to attack or move unit
+				{
+					if (ev.MouseButtonReleased)
+					{
+						if ((sf::IntRect(sf::FloatRect(bExit.getGlobalBounds().left - w.getView().getCenter().x + w.getSize().x / 2, bExit.getGlobalBounds().top - w.getView().getCenter().y + w.getSize().y / 2, bExit.getGlobalBounds().width, bExit.getGlobalBounds().height)).contains(sf::Mouse::getPosition(w))))
+							w.close();
+						if ((sf::IntRect(sf::FloatRect(bNewGame.getGlobalBounds().left - w.getView().getCenter().x + w.getSize().x / 2, bNewGame.getGlobalBounds().top - w.getView().getCenter().y + w.getSize().y / 2, bNewGame.getGlobalBounds().width, bNewGame.getGlobalBounds().height)).contains(sf::Mouse::getPosition(w))))
+							isMenu = false;
+
+					}
+				}
+			}
+
+		}
+
+		//bar
+		w.draw(bNewGame);
+		w.draw(bContinue);
+		w.draw(bLoadGame);
+		w.draw(bExit);
+		//text
+		w.draw(tContinue);
+		w.draw(tSaveGame);
+		w.draw(tLoadGame);
+		w.draw(tExit);
+
+		w.display();
+	}
+
 }
 
 void WindowManager::cameraControl(sf::View& view, sf::Window& w)
@@ -199,7 +312,7 @@ void WindowManager::mainMenu(sf::RenderWindow& w)
 		}
 
 
-	
+
 
 
 		w.clear(sf::Color(0, 0, 0));
