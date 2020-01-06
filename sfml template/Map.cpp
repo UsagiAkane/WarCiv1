@@ -201,12 +201,12 @@ int Map::getUnitInd(int x, int y) {
 	}
 	else return 0;
 }
-//int Map::getUnitID(int x, int y) {
-//	return getUnitID(x, y) % 100;
-//}
-//int Map::getUnitPlayerID(int x, int y) {
-//	return getUnitID(x, y) / 100;
-//}
+int Map::getUnitID(int x, int y) {
+	return getUnitInd(x, y) % 100;
+}
+int Map::getUnitPlayerID(int x, int y) {
+	return getUnitInd(x, y) / 100;
+}
 void Map::pushUnit(int x, int y, int unit) {
 	x /= 32;
 	y /= 32;
