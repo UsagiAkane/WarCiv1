@@ -14,15 +14,8 @@ Actor::Actor(std::string name, Map& map) {
 	this->townController = 0;
 }
 
-void Actor::__PUSH_UNIT_DEBUG(Unit* unit)
-{
-	this->units.push_back(*unit);
-}
-
-void Actor::__PUSH_TOWN_DEBUG(Town* town)
-{
-	this->towns.push_back(*town);
-}
+void Actor::__PUSH_UNIT_DEBUG(Unit* unit) { this->units.push_back(*unit); }
+void Actor::__PUSH_TOWN_DEBUG(Town* town) { this->towns.push_back(*town); }
 
 void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w) {
 	//to make camera dynamic
@@ -140,6 +133,7 @@ void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, std:
 	}
 }
 
+#pragma region GETTERS
 int Actor::getPlayerID()
 {
 	return this->playerID;
@@ -209,7 +203,9 @@ int Actor::getTotalProdaction()
 {
 	return this->totalProdaction;
 }
+#pragma endregion
 
+#pragma region SETTERS
 void Actor::setPlayerID(int playerID)
 {
 	this->playerID = playerID;
@@ -244,6 +240,7 @@ void Actor::setTotalProdaction(int totalProdaction)
 {
 	this->totalProdaction = totalProdaction;
 }
+#pragma endregion
 
 void Actor::endOfTurn(Map& map)
 {
