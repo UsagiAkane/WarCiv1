@@ -1,5 +1,5 @@
 #include "WindowManager.h"
-#include "GameManager.h"
+
 
 WindowManager::WindowManager()
 {
@@ -63,7 +63,7 @@ void WindowManager::mainWindow() {
 			game.draw(w);
 
 			if (isMenu)
-				gameMenu(w);
+				gameMenu(w,game);
 
 			//DISPLAY
 			w.display();
@@ -75,11 +75,11 @@ void WindowManager::mainWindow() {
 	}
 }
 
-void WindowManager::gameMenu(sf::RenderWindow& w)
+void WindowManager::gameMenu(sf::RenderWindow& w, GameManager & game)
 {
 	sf::Texture menuTexture1;
 	menuTexture1.loadFromFile("Icons\\menu.png");
-	sf::Sprite bNewGame(menuTexture1), bContinue(menuTexture1), bExit(menuTexture1), bLoadGame(menuTexture1);
+	sf::Sprite bContinue(menuTexture1), bSaveGame(menuTexture1), bExit(menuTexture1), bLoadGame(menuTexture1);
 	sf::Font font;
 	font.loadFromFile("18536.ttf");
 	sf::Text tContinue, tSaveGame, tExit, tLoadGame;
@@ -94,8 +94,8 @@ void WindowManager::gameMenu(sf::RenderWindow& w)
 	tExit.setFont(font);
 	tExit.setString("Exit");
 
-	bNewGame.setScale(1.5, 1.5);
 	bContinue.setScale(1.5, 1.5);
+	bSaveGame.setScale(1.5, 1.5);
 	bLoadGame.setScale(1.5, 1.5);
 	bExit.setScale(1.5, 1.5);
 	//BOUNDS-----------------------------------------------
@@ -113,14 +113,14 @@ void WindowManager::gameMenu(sf::RenderWindow& w)
 
 
 	//BAR---------------------------------------POS
-	bNewGame.setPosition(static_cast<float>(w.getView().getCenter().x - 100 * bNewGame.getScale().x), static_cast<float>(w.getView().getCenter().y - 45 * bNewGame.getScale().y));
-	bContinue.setPosition(static_cast<float>(w.getView().getCenter().x - 100 * bContinue.getScale().x), static_cast<float>(w.getView().getCenter().y - 15 * bContinue.getScale().x));
+	bContinue.setPosition(static_cast<float>(w.getView().getCenter().x - 100 * bContinue.getScale().x), static_cast<float>(w.getView().getCenter().y - 45 * bContinue.getScale().y));
+	bSaveGame.setPosition(static_cast<float>(w.getView().getCenter().x - 100 * bSaveGame.getScale().x), static_cast<float>(w.getView().getCenter().y - 15 * bSaveGame.getScale().x));
 	bLoadGame.setPosition(static_cast<float>(w.getView().getCenter().x - 100 * bLoadGame.getScale().x), static_cast<float>(w.getView().getCenter().y + 15 * bLoadGame.getScale().x));
 	bExit.setPosition(static_cast<float>(w.getView().getCenter().x - 100 * bExit.getScale().x), static_cast<float>(w.getView().getCenter().y + 45 * bExit.getScale().x));
 
 	//TEXT-----------------------------------------POS
-	tContinue.setPosition(static_cast<float>(bNewGame.getPosition().x + 100 * bNewGame.getScale().x), static_cast<float>(bNewGame.getPosition().y + 15));
-	tSaveGame.setPosition(static_cast<float>(bContinue.getPosition().x + 100 * bContinue.getScale().x), static_cast<float>(bContinue.getPosition().y + 15));
+	tContinue.setPosition(static_cast<float>(bContinue.getPosition().x + 100 * bContinue.getScale().x), static_cast<float>(bContinue.getPosition().y + 15));
+	tSaveGame.setPosition(static_cast<float>(bSaveGame.getPosition().x + 100 * bSaveGame.getScale().x), static_cast<float>(bSaveGame.getPosition().y + 15));
 	tLoadGame.setPosition(static_cast<float>(bLoadGame.getPosition().x + 100 * bLoadGame.getScale().x), static_cast<float>(bLoadGame.getPosition().y + 15));
 	tExit.setPosition(static_cast<float>(bExit.getPosition().x + 100 * bExit.getScale().x), static_cast<float>(bExit.getPosition().y + 15));
 
@@ -137,14 +137,14 @@ void WindowManager::gameMenu(sf::RenderWindow& w)
 			if (isMouseInWindow(w))
 			{
 				//all other control
-				if ((sf::IntRect(sf::FloatRect(bNewGame.getGlobalBounds().left - w.getView().getCenter().x + w.getSize().x / 2, bNewGame.getGlobalBounds().top - w.getView().getCenter().y + w.getSize().y / 2, bNewGame.getGlobalBounds().width, bNewGame.getGlobalBounds().height)).contains(sf::Mouse::getPosition(w))))
-					bNewGame.setColor(sf::Color(150, 150, 150));
-				else
-					bNewGame.setColor(sf::Color(255, 255, 255));
 				if ((sf::IntRect(sf::FloatRect(bContinue.getGlobalBounds().left - w.getView().getCenter().x + w.getSize().x / 2, bContinue.getGlobalBounds().top - w.getView().getCenter().y + w.getSize().y / 2, bContinue.getGlobalBounds().width, bContinue.getGlobalBounds().height)).contains(sf::Mouse::getPosition(w))))
 					bContinue.setColor(sf::Color(150, 150, 150));
 				else
 					bContinue.setColor(sf::Color(255, 255, 255));
+				if ((sf::IntRect(sf::FloatRect(bSaveGame.getGlobalBounds().left - w.getView().getCenter().x + w.getSize().x / 2, bSaveGame.getGlobalBounds().top - w.getView().getCenter().y + w.getSize().y / 2, bSaveGame.getGlobalBounds().width, bSaveGame.getGlobalBounds().height)).contains(sf::Mouse::getPosition(w))))
+					bSaveGame.setColor(sf::Color(150, 150, 150));
+				else
+					bSaveGame.setColor(sf::Color(255, 255, 255));
 				if ((sf::IntRect(sf::FloatRect(bLoadGame.getGlobalBounds().left - w.getView().getCenter().x + w.getSize().x / 2, bLoadGame.getGlobalBounds().top - w.getView().getCenter().y + w.getSize().y / 2, bLoadGame.getGlobalBounds().width, bLoadGame.getGlobalBounds().height)).contains(sf::Mouse::getPosition(w))))
 					bLoadGame.setColor(sf::Color(150, 150, 150));
 				else
@@ -160,8 +160,10 @@ void WindowManager::gameMenu(sf::RenderWindow& w)
 					{
 						if ((sf::IntRect(sf::FloatRect(bExit.getGlobalBounds().left - w.getView().getCenter().x + w.getSize().x / 2, bExit.getGlobalBounds().top - w.getView().getCenter().y + w.getSize().y / 2, bExit.getGlobalBounds().width, bExit.getGlobalBounds().height)).contains(sf::Mouse::getPosition(w))))
 							w.close();
-						if ((sf::IntRect(sf::FloatRect(bNewGame.getGlobalBounds().left - w.getView().getCenter().x + w.getSize().x / 2, bNewGame.getGlobalBounds().top - w.getView().getCenter().y + w.getSize().y / 2, bNewGame.getGlobalBounds().width, bNewGame.getGlobalBounds().height)).contains(sf::Mouse::getPosition(w))))
+						if ((sf::IntRect(sf::FloatRect(bContinue.getGlobalBounds().left - w.getView().getCenter().x + w.getSize().x / 2, bContinue.getGlobalBounds().top - w.getView().getCenter().y + w.getSize().y / 2, bContinue.getGlobalBounds().width, bContinue.getGlobalBounds().height)).contains(sf::Mouse::getPosition(w))))
 							isMenu = false;
+						if ((sf::IntRect(sf::FloatRect(bSaveGame.getGlobalBounds().left - w.getView().getCenter().x + w.getSize().x / 2, bSaveGame.getGlobalBounds().top - w.getView().getCenter().y + w.getSize().y / 2, bSaveGame.getGlobalBounds().width, bSaveGame.getGlobalBounds().height)).contains(sf::Mouse::getPosition(w))))
+							game.getMap().saveMap();
 
 					}
 				}
@@ -170,8 +172,8 @@ void WindowManager::gameMenu(sf::RenderWindow& w)
 		}
 
 		//bar
-		w.draw(bNewGame);
 		w.draw(bContinue);
+		w.draw(bSaveGame);
 		w.draw(bLoadGame);
 		w.draw(bExit);
 		//text

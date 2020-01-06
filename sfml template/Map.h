@@ -9,6 +9,7 @@
 #include "Grassland.h"
 #include "Ocean.h"
 #include "Terrain.h"
+#include <fstream>
 
 
 class Map {
@@ -19,7 +20,7 @@ public:
 	Map(int sizeX = 100, int sizeY = 100);
 
 	//void loadMap();
-	//void saveMap();
+	void saveMap();
 
 	Terrain getTile(int x, int y);
 	Terrain getTileVec(int x, int y);
@@ -29,6 +30,8 @@ public:
 	void pushUnit(int x, int y, int unit);
 	void moveUnit(int x, int y, int newx, int newy);
 	void delUnit(int x, int y);
+	std::vector<std::vector<int>>& _getVecTerrainsInt();
+	std::vector<std::vector<int>>& _getVecUnitsInt();
 	void __getInfo_DEBUG(int x, int y);
 
 	void draw(sf::RenderWindow& w);

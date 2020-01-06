@@ -114,6 +114,38 @@ Map::Map(int sizeX, int sizeY) {
 	}
 }
 
+void Map::saveMap()
+{
+	std::string path = "Save1.txt";
+	std::ofstream fout;
+	fout.open(path, std::ofstream::app);
+	if (!fout.is_open())
+		std::cout << "Error, file wasn't opened" << std::endl;
+	else
+	{
+		for (auto i : map)
+		{
+			for (auto j : i)
+			{
+				fout << j << " ";
+			}
+			fout << "\n";
+		}
+		fout << "=============================";
+		for (auto i : units)
+		{
+			for (auto j : i)
+			{
+				fout << j << " ";
+			}
+			fout << "\n";
+		}
+		std::cout <<"Successes save\n ";
+	}
+
+	fout.close();
+}
+
 Terrain Map::getTile(int x, int y) {
 	x /= 32;
 	y /= 32;
@@ -218,7 +250,15 @@ void Map::delUnit(int x, int y) {
 		this->units.at(x).at(y) = 0;
 		std::cout << "HERE2222222222222222222222------------------------------" << std::endl;
 	}
-	
+
+}
+std::vector<std::vector<int>>& Map::_getVecTerrainsInt()
+{
+	return this->map;
+}
+std::vector<std::vector<int>>& Map::_getVecUnitsInt()
+{
+	return this->units;
 }
 void Map::__getInfo_DEBUG(int x, int y)
 {
