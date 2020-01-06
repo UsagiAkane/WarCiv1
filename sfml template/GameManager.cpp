@@ -101,3 +101,12 @@ std::vector<Unit>& GameManager::findActorUnit(int mouse_x, int mouse_y)
 		std::cout << "CAN'T FIND UNIT" << std::endl;
 }
 
+void GameManager::saveGame()
+{
+	map.saveMap();
+	for (auto i : actors)
+	{
+		i.saveTotalnfo();
+	}
+}
+

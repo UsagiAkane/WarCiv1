@@ -401,6 +401,35 @@ bool Unit::isEnemyInEnemyIdList(std::vector<Unit> enemies_id)
 
 }
 
+std::string Unit::getSaveUnitInfo()
+{
+
+	std::string unitInfo;
+	unitInfo += std::to_string(this->health);
+	unitInfo += " ";
+	unitInfo += std::to_string(this->armor);
+	unitInfo += " ";
+	unitInfo += std::to_string(this->damage);
+	unitInfo += " ";
+	unitInfo += std::to_string(this->steps);
+	unitInfo += " ";
+	unitInfo += std::to_string(this->rank);
+	unitInfo += " ";
+	unitInfo += std::to_string(this->countOfKill);
+	unitInfo += " ";
+	unitInfo += std::to_string(this->index);
+	unitInfo += " ";
+	unitInfo += std::to_string(this->playerID);
+	unitInfo += " ";
+	unitInfo += std::to_string(this->positionX);
+	unitInfo += " ";
+	unitInfo += std::to_string(this->positionY);
+	unitInfo += "|";
+
+
+	return unitInfo;
+}
+
 void Unit::delByPositionInVector(std::vector<Unit>& units)
 {  //test
 	int tmp = 0;

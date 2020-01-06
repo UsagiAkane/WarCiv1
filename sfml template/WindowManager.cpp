@@ -12,7 +12,6 @@ void WindowManager::mainWindow() {
 
 	try {
 		GameManager game;
-		//sf::RenderWindow w(sf::VideoMode(1000, 600), "TITLE"/*, sf::Style::Fullscreen*/);
 
 		sf::View view(w.getView());
 
@@ -163,7 +162,11 @@ void WindowManager::gameMenu(sf::RenderWindow& w, GameManager & game)
 						if ((sf::IntRect(sf::FloatRect(bContinue.getGlobalBounds().left - w.getView().getCenter().x + w.getSize().x / 2, bContinue.getGlobalBounds().top - w.getView().getCenter().y + w.getSize().y / 2, bContinue.getGlobalBounds().width, bContinue.getGlobalBounds().height)).contains(sf::Mouse::getPosition(w))))
 							isMenu = false;
 						if ((sf::IntRect(sf::FloatRect(bSaveGame.getGlobalBounds().left - w.getView().getCenter().x + w.getSize().x / 2, bSaveGame.getGlobalBounds().top - w.getView().getCenter().y + w.getSize().y / 2, bSaveGame.getGlobalBounds().width, bSaveGame.getGlobalBounds().height)).contains(sf::Mouse::getPosition(w))))
-							game.getMap().saveMap();
+						{
+							game.saveGame();
+							
+						}
+						
 
 					}
 				}

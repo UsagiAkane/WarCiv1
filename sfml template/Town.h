@@ -1,16 +1,9 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include "Resourses.h"
-#include <vector>
-#include <string>
-#include <algorithm>
 #include "Map.h"
-#include "Unit.h"
 #include "Cavalry.h"
 #include "Legion.h"
 #include "Militia.h"
 #include "Settlers.h"
-
 #include "Aqueduct.h"
 #include "Barracks.h"
 #include "CityWalls.h"
@@ -81,6 +74,7 @@ public:
 	//needed
 	void draw(sf::RenderWindow& w);
 	void endOfTurn(Map& map);
+	std::string getSaveTownInfo();
 
 	void destroy(Map& map);
 	void retake(Map& map);

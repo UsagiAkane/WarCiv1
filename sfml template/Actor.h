@@ -62,6 +62,11 @@ public:
 	
 	//Methods
 	virtual void endOfTurn(Map& map);//need work
+	virtual void saveUnits();
+	virtual void saveTowns();
+	virtual std::string getSaveActorInfo();
+	virtual void saveActorInfo();
+	virtual void saveTotalnfo();
 
 
 

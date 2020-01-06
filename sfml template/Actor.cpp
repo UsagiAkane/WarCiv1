@@ -246,3 +246,78 @@ void Actor::endOfTurn(Map& map)
 		units.at(i).recharge();
 	}
 }
+
+void Actor::saveUnits()
+{
+	std::string path = "Saves\\Save1.txt";
+	std::ofstream fout;
+	fout.open(path, std::ofstream::app);
+	if (!fout.is_open())
+		std::cout << "Error, file wasn't opened" << std::endl;
+	else
+	{
+		for (auto i : units)
+		{
+			fout << i.getSaveUnitInfo();
+		}
+		fout << "\n###################\n";
+	}
+	fout.close();
+}
+
+void Actor::saveTowns()
+{
+	std::string path = "Saves\\Save1.txt";
+	std::ofstream fout;
+	fout.open(path, std::ofstream::app);
+	if (!fout.is_open())
+		std::cout << "Error, file wasn't opened" << std::endl;
+	else
+	{
+		for (auto i : towns)
+		{
+			fout << i.getSaveTownInfo();
+			fout << "\n*********************************************\n";
+		}
+		fout << "\n&&&&&&&&&&&&&&&&&&&&&&&&&\n";
+	}
+	fout.close();
+}
+
+std::string Actor::getSaveActorInfo()
+{
+	std::string unitInfo;
+	unitInfo += this->name;
+	unitInfo += " ";
+	unitInfo += std::to_string(this->playerID);
+	unitInfo += " ";
+	unitInfo += std::to_string(this->totalGold);
+	unitInfo += " ";
+	unitInfo += std::to_string(this->totalScience);
+	unitInfo += " ";
+	unitInfo += std::to_string(this->totalProdaction);
+	unitInfo += "\n___________________________\n";
+	return unitInfo;
+}
+
+void Actor::saveActorInfo()
+{
+	std::string path = "Saves\\Save1.txt";
+	std::ofstream fout;
+	fout.open(path, std::ofstream::app);
+	if (!fout.is_open())
+		std::cout << "Error, file wasn't opened" << std::endl;
+	else
+	{
+		fout << getSaveActorInfo();
+	}
+
+	fout.close();
+}
+
+void Actor::saveTotalnfo()
+{
+	saveActorInfo();
+	saveTowns();
+	saveUnits();
+}

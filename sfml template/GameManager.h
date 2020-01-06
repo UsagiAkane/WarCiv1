@@ -19,6 +19,7 @@ public:
 	void draw(sf::RenderWindow&w);
 	Actor& findActor(int ID); // find and return vector by ID
 	std::vector<Unit>& findActorUnit(int mouse_x,int mouse_y);//get mouse position and return vector of units of actor
+	void saveGame();
 
 };
 

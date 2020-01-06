@@ -116,7 +116,7 @@ Map::Map(int sizeX, int sizeY) {
 
 void Map::saveMap()
 {
-	std::string path = "Save1.txt";
+	std::string path = "Saves\\Save1.txt";
 	std::ofstream fout;
 	fout.open(path, std::ofstream::app);
 	if (!fout.is_open())
@@ -131,7 +131,7 @@ void Map::saveMap()
 			}
 			fout << "\n";
 		}
-		fout << "=============================";
+		fout << "=========================================================================\n";
 		for (auto i : units)
 		{
 			for (auto j : i)
@@ -140,6 +140,7 @@ void Map::saveMap()
 			}
 			fout << "\n";
 		}
+		fout << "=========================================================================\n";
 		std::cout <<"Successes save\n ";
 	}
 
