@@ -74,10 +74,28 @@ void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w) {
 				}
 			}
 			break;
-		case sf::Keyboard::S:
+		case sf::Keyboard::Num1:
 			if (this->towns.size() > 0) {
 				//std::cout << "\ntownCon " << this->townController;//debug
 				this->towns.at(townController).createUnit(map, 1, this->units);
+			}
+			break;
+		case sf::Keyboard::Num2:
+			if (this->towns.size() > 0) {
+				//std::cout << "\ntownCon " << this->townController;//debug
+				this->towns.at(townController).createUnit(map, 2, this->units);
+			}
+			break;
+		case sf::Keyboard::Num3:
+			if (this->towns.size() > 0) {
+				//std::cout << "\ntownCon " << this->townController;//debug
+				this->towns.at(townController).createUnit(map, 3, this->units);
+			}
+			break;
+		case sf::Keyboard::Num4:
+			if (this->towns.size() > 0) {
+				//std::cout << "\ntownCon " << this->townController;//debug
+				this->towns.at(townController).createUnit(map, 4, this->units);
 			}
 			break;
 		case sf::Keyboard::D:
