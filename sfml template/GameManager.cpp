@@ -216,23 +216,18 @@ int getIntFromStringByIndex(std::string com, int index)
 		{
 			return stoi(time);
 		}
+
 	}
 
 }
 
-std::vector<Unit> getUnitById(int actorInd)
+std::vector<Unit> getUnitVectorByActorInd(int actorInd)
 {
 	std::vector<Unit> tmp;
-
-	//Militia* militia = new Militia();
-	//Legion* legion = new Legion();
-	//Cavalry* cavalry = new Cavalry();
-
 	//1 0 1 1 0 0 2 2 128 128 |1 1 3 3 0 0 3 2 96 96 |
 	std::string preSlisedStr = getUnitInfoFromFile(actorInd);
 	for (int i = 0; i < getUnitsCount(actorInd); i++) {
 		std::string slisedStr = sliseStrings(preSlisedStr, i);
-
 		int tmpUnitIndex = getIntFromStringByIndex(slisedStr, 7);
 		if (tmpUnitIndex == 1) {
 			Settlers* settlers = new Settlers;
@@ -244,15 +239,50 @@ std::vector<Unit> getUnitById(int actorInd)
 			settlers->setCountOfKill(getIntFromStringByIndex(slisedStr, 6));
 			settlers->setPlayerID(getIntFromStringByIndex(slisedStr, 8));
 			settlers->setPosition(getIntFromStringByIndex(slisedStr, 9), getIntFromStringByIndex(slisedStr, 10));
-			std::cout << "\nX = " << settlers->getPositionX();
-			std::cout << "\nY = " << settlers->getPositionY() << std::endl;
 			settlers->setColorByID();
 			tmp.push_back(*settlers);
 		}
+		if (tmpUnitIndex == 2) {
+			Militia* militia = new Militia();
+			militia->setHealth(getIntFromStringByIndex(slisedStr, 1));
+			militia->setArmor(getIntFromStringByIndex(slisedStr, 2));
+			militia->setDamage(getIntFromStringByIndex(slisedStr, 3));
+			militia->setSteps(getIntFromStringByIndex(slisedStr, 4));
+			militia->setRank(getIntFromStringByIndex(slisedStr, 5));
+			militia->setCountOfKill(getIntFromStringByIndex(slisedStr, 6));
+			militia->setPlayerID(getIntFromStringByIndex(slisedStr, 8));
+			militia->setPosition(getIntFromStringByIndex(slisedStr, 9), getIntFromStringByIndex(slisedStr, 10));
+			militia->setColorByID();
+			tmp.push_back(*militia);
+		}
+		if (tmpUnitIndex == 3) {
+			Legion* legion = new Legion();		
+			legion->setHealth(getIntFromStringByIndex(slisedStr, 1));
+			legion->setArmor(getIntFromStringByIndex(slisedStr, 2));
+			legion->setDamage(getIntFromStringByIndex(slisedStr, 3));
+			legion->setSteps(getIntFromStringByIndex(slisedStr, 4));
+			legion->setRank(getIntFromStringByIndex(slisedStr, 5));
+			legion->setCountOfKill(getIntFromStringByIndex(slisedStr, 6));
+			legion->setPlayerID(getIntFromStringByIndex(slisedStr, 8));
+			legion->setPosition(getIntFromStringByIndex(slisedStr, 9), getIntFromStringByIndex(slisedStr, 10));
+			legion->setColorByID();
+			tmp.push_back(*legion);
+		}
+		if (tmpUnitIndex == 4) {
+			Cavalry* cavalry = new Cavalry();
+			cavalry->setHealth(getIntFromStringByIndex(slisedStr, 1));
+			cavalry->setArmor(getIntFromStringByIndex(slisedStr, 2));
+			cavalry->setDamage(getIntFromStringByIndex(slisedStr, 3));
+			cavalry->setSteps(getIntFromStringByIndex(slisedStr, 4));
+			cavalry->setRank(getIntFromStringByIndex(slisedStr, 5));
+			cavalry->setCountOfKill(getIntFromStringByIndex(slisedStr, 6));
+			cavalry->setPlayerID(getIntFromStringByIndex(slisedStr, 8));
+			cavalry->setPosition(getIntFromStringByIndex(slisedStr, 9), getIntFromStringByIndex(slisedStr, 10));
+			cavalry->setColorByID();
+			tmp.push_back(*cavalry);
+		}
 
 	}
-
-
 
 	return tmp;
 }
@@ -447,10 +477,10 @@ void GameManager::loadGame()
 			this->actors[i - 1].setTotalScience(getActorTS(i));
 			//this->actors.at(i - 1).setTotalGold();
 			//this->actors[i-1].__SHOW_INFO_DEBUG();
-			//this->actors[i - 1].setUnitVector(getUnitById(i));
-			std::cout << sliseStrings(getUnitInfoFromFile(i), 1) << std::endl;
-			std::cout << getIntFromStringByIndex(sliseStrings(getUnitInfoFromFile(i), 1), 10) << std::endl;
-			//std::cout << sliseStrings(getUnitInfoFromFile(i), 2) << std::endl;
+			this->actors[i - 1].setUnitVector(getUnitVectorByActorInd(i));
+			///std::cout << sliseStrings(getUnitInfoFromFile(i), 1) << std::endl;
+			///std::cout << getIntFromStringByIndex(sliseStrings(getUnitInfoFromFile(i), 1), 10) << std::endl;
+		
 
 		}
 
