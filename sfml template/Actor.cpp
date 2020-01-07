@@ -1,23 +1,29 @@
 #include "Actor.h"
 
-Actor::Actor(std::string name, Map& map) {
-	playerID = 1;
+Actor::Actor(std::string name, Map& map, int playerID) {
+	this->playerID = playerID;
 	this->name = name;
 	//std::vector<std::vector<bool>> fog;
-	this->goldPerTurn = 0;
-	this->sciencePerTurn = 0;
-	this->prodactionPerTurn = 0;
 	this->totalGold = 0;
 	this->totalScience = 0;
-	this->totalProdaction = 0;
 	this->unitController = 0;
 	this->townController = 0;
 }
 
-void Actor::__PUSH_UNIT_DEBUG(Unit* unit)
+void Actor::__SHOW_INFO_DEBUG()
 {
-	this->units.push_back(*unit);
+	std::cout << this->name << std::endl;
+	std::cout << this->playerID << std::endl;
+	std::cout << this->totalGold << std::endl;
+	std::cout << this->totalScience << std::endl;
+	//std::cout << this-> << std::endl;
+	//std::cout << this-> << std::endl;
+	//std::cout << this-> << std::endl;
+	//std::cout << this-> << std::endl;
 }
+
+void Actor::__PUSH_UNIT_DEBUG(Unit* unit) { this->units.push_back(*unit); }
+void Actor::__PUSH_TOWN_DEBUG(Town* town) { this->towns.push_back(*town); }
 
 void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w) {
 	//to make camera dynamic
@@ -69,17 +75,25 @@ void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w) {
 				}
 			}
 			break;
-		case sf::Keyboard::S:
-			if (this->towns.size() > 0) {
-				//std::cout << "\ntownCon " << this->townController;//debug
+		case sf::Keyboard::Num1:
+			if (this->towns.size() > 0)
 				this->towns.at(townController).createUnit(map, 1, this->units);
-			}
+			break;
+		case sf::Keyboard::Num2:
+			if (this->towns.size() > 0)
+				this->towns.at(townController).createUnit(map, 2, this->units);
+			break;
+		case sf::Keyboard::Num3:
+			if (this->towns.size() > 0)
+				this->towns.at(townController).createUnit(map, 3, this->units);
+			break;
+		case sf::Keyboard::Num4:
+			if (this->towns.size() > 0)
+				this->towns.at(townController).createUnit(map, 4, this->units);
 			break;
 		case sf::Keyboard::D:
-			if (this->towns.size() > 0) {
-				//std::cout << "\ntownCon " << this->townController;//debug
+			if (this->towns.size() > 0)
 				this->towns.at(townController).createBuilding(1);
-			}
 			break;
 		case sf::Keyboard::Enter:
 			std::cout << "\nTurn ended!" << std::endl;
@@ -105,7 +119,6 @@ void Actor::takeTax()
 {
 	for (auto i : this->towns) {
 		this->totalGold += i.getGoldIncome();
-		this->totalProdaction += i.getProduction();
 		this->totalScience += i.getScience();
 	}
 }
@@ -127,6 +140,7 @@ void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, std:
 	}
 }
 
+#pragma region GETTERS
 int Actor::getPlayerID()
 {
 	return this->playerID;
@@ -167,21 +181,6 @@ std::vector<Unit>& Actor::getUnitsVec()
 	return this->units;
 }
 
-int Actor::getGoldPerTurn()
-{
-	return this->goldPerTurn;
-}
-
-int Actor::getSciencePerTurn()
-{
-	return this->sciencePerTurn;
-}
-
-int Actor::getProdactionPerTurn()
-{
-	return this->prodactionPerTurn;
-}
-
 int Actor::getTotalGold()
 {
 	return this->totalGold;
@@ -192,30 +191,14 @@ int Actor::getTotalScience()
 	return this->totalScience;
 }
 
-int Actor::getTotalProdaction()
-{
-	return this->totalProdaction;
-}
+#pragma endregion
 
+#pragma region SETTERS
 void Actor::setPlayerID(int playerID)
 {
 	this->playerID = playerID;
 }
 
-void Actor::setGoldPerTurn(int goldPerTurn)
-{
-	this->goldPerTurn = goldPerTurn;
-}
-
-void Actor::setSciencePerTurn(int sciencePerTurn)
-{
-	this->sciencePerTurn = sciencePerTurn;
-}
-
-void Actor::setProdactionPerTurn(int prodactionPerTurn)
-{
-	this->prodactionPerTurn = prodactionPerTurn;
-}
 
 void Actor::setTotalGold(int totalGold)
 {
@@ -227,10 +210,12 @@ void Actor::setTotalScience(int totalScience)
 	this->totalScience = totalScience;
 }
 
-void Actor::setTotalProdaction(int totalProdaction)
+void Actor::setUnitVector(std::vector<Unit> units)
 {
-	this->totalProdaction = totalProdaction;
+	this->units = units;
 }
+
+#pragma endregion
 
 void Actor::endOfTurn(Map& map)
 {
@@ -240,4 +225,77 @@ void Actor::endOfTurn(Map& map)
 	for (int i = 0; i < static_cast<int>(units.size()); i++) {
 		units.at(i).recharge();
 	}
+}
+
+void Actor::saveUnits()
+{
+	std::string path = "Saves\\Save1.txt";
+	std::ofstream fout;
+	fout.open(path, std::ofstream::app);
+	if (!fout.is_open())
+		std::cout << "Error, file wasn't opened" << std::endl;
+	else
+	{
+		for (auto i : units)
+		{
+			fout << i.getSaveUnitInfo();
+		}
+		fout << "\n#\n";
+	}
+	fout.close();
+}
+
+void Actor::saveTowns()
+{
+	std::string path = "Saves\\Save1.txt";
+	std::ofstream fout;
+	fout.open(path, std::ofstream::app);
+	if (!fout.is_open())
+		std::cout << "Error, file wasn't opened" << std::endl;
+	else
+	{
+		for (auto i : towns)
+		{
+			fout << i.getSaveTownInfo();
+			fout << "\n*\n";
+		}
+		fout << "\n&\n";
+	}
+	fout.close();
+}
+
+std::string Actor::getSaveActorInfo()
+{
+	std::string unitInfo;
+	unitInfo += this->name;
+	unitInfo += " ";
+	unitInfo += std::to_string(this->playerID);
+	unitInfo += " ";
+	unitInfo += std::to_string(this->totalGold);
+	unitInfo += " ";
+	unitInfo += std::to_string(this->totalScience);
+	unitInfo += "\n_\n";
+	return unitInfo;
+}
+
+void Actor::saveActorInfo()
+{
+	std::string path = "Saves\\Save1.txt";
+	std::ofstream fout;
+	fout.open(path, std::ofstream::app);
+	if (!fout.is_open())
+		std::cout << "Error, file wasn't opened" << std::endl;
+	else
+	{
+		fout << getSaveActorInfo();
+	}
+
+	fout.close();
+}
+
+void Actor::saveTotalnfo()
+{
+	saveActorInfo();
+	saveTowns();
+	saveUnits();
 }

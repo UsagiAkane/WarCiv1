@@ -233,6 +233,9 @@ int Town::getPositionY() {
 void Town::setPosition(int x, int y) {
 	this->positionX = x;
 	this->positionY = y;
+	this->townSprite.setPosition(this->positionX, this->positionY);
+	this->populationText.setPosition(this->positionX + 10, this->positionY);
+
 }
 void Town::setHealth(int health) {
 	this->health = health;
@@ -286,6 +289,45 @@ void Town::endOfTurn(Map& map) {
 		this->science += i.getScienceMultiplier();
 	}
 	//this->damage = map.getTile(this->positionX, this->positionY).getDefense();
+}
+
+std::string Town::getSaveTownInfo() {
+	std::string unitInfo;
+	unitInfo += this->name;
+	unitInfo += " ";
+	unitInfo += std::to_string(this->playerID);
+	unitInfo += " ";
+	unitInfo += std::to_string(this->positionX);
+	unitInfo += " ";
+	unitInfo += std::to_string(this->positionY);
+	unitInfo += " ";
+	unitInfo += std::to_string(this->health);
+	unitInfo += " ";
+	unitInfo += std::to_string(this->damage);
+	unitInfo += " ";
+	unitInfo += std::to_string(this->population);
+	unitInfo += " ";
+	unitInfo += std::to_string(this->population_limit);
+	unitInfo += " ";
+	unitInfo += std::to_string(this->production);
+	unitInfo += " ";
+	unitInfo += std::to_string(this->food);
+	unitInfo += " ";
+	unitInfo += std::to_string(this->trade);
+	unitInfo += " ";
+	unitInfo += std::to_string(this->happines);
+	unitInfo += " ";
+	unitInfo += std::to_string(this->goldIncome);
+	unitInfo += " ";
+	unitInfo += std::to_string(this->science);
+	unitInfo += "\n~\n";
+	for (auto i : buildings) {
+		unitInfo += i.getName();
+		unitInfo += "%";
+	}
+
+
+	return unitInfo;
 }
 
 void Town::spawn(int x, int y, Map& map) {

@@ -88,6 +88,7 @@ public:
 	void setPosition(int x, int y);
 	void setPlayerID(int ID);
 	void setArmor(int armor);
+	void setSteps(int steps);
 	//needed
 	void draw(sf::RenderWindow& w);
 	void spawn(int x,int y, Map& map);
@@ -96,6 +97,7 @@ public:
 	void checkUpUnit();
 	void checkSteps();
 	bool isEnemyInEnemyIdList(std::vector<Unit> enemies_id);
+	std::string getSaveUnitInfo();
 	//find
     void delByPositionInVector(std::vector<Unit>&units);
 	int findIndexOfEnemy(int mouse_x, int mouse_y,Map&map);

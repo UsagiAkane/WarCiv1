@@ -120,6 +120,87 @@ Map::Map(int sizeX, int sizeY, int resGenChanse) {
 	}
 }
 
+void Map::saveMap()
+{
+	std::string path = "Saves\\Save1.txt";
+	std::ofstream fout;
+	fout.open(path, std::ofstream::app);
+	if (!fout.is_open())
+		std::cout << "Error, file wasn't opened" << std::endl;
+	else
+	{
+		for (auto i : map)
+		{
+			for (auto j : i)
+			{
+				fout << j << " ";
+			}
+			fout << "\n";
+		}
+		fout << "=\n";
+		for (auto i : units)
+		{
+			for (auto j : i)
+			{
+				fout << j << " ";
+			}
+			fout << "\n";
+		}
+		fout << "=\n";
+		std::cout << "Successes save\n ";
+	}
+
+	fout.close();
+}
+
+void Map::loadTerrains(std::string line)
+{
+	//  line  =  103 100 200 505
+	std::vector<int> INTbuf;
+	std::vector<std::vector<int>> newmap;
+	while (line.size() > 3) {
+		INTbuf.push_back(std::stoi(line));
+		line.erase(0, 4);
+	}
+	//std::cout << "\n\n\n\n";
+	int size = INTbuf.size() / map.size();
+
+	for (int i = 0, o = 0; i < size; i++) {
+		std::vector<int> newmap1buf;
+		for (int j = 0; j < size; j++, o++) {
+			newmap1buf.push_back(INTbuf.at(o));
+		}
+		newmap.push_back(newmap1buf);
+	}
+
+	map = newmap;
+}
+void Map::loadUnits(std::string line)
+{
+	//  line  =  0 100 0 251
+	std::vector<int> INTbuf;
+	std::vector<std::vector<int>> newmap;
+	while (line.size() > 1) {
+		INTbuf.push_back(std::stoi(line));
+		if (INTbuf.at(INTbuf.size() - 1) == 0)
+			line.erase(0, 2);
+		else
+			line.erase(0, 4);
+	}
+	int size = INTbuf.size() / units.size();
+
+	for (int i = 0, o = 0; i < size; i++) {
+		std::vector<int> newmap1buf;
+		for (int j = 0; j < size; j++, o++) {
+			newmap1buf.push_back(INTbuf.at(o));
+		}
+		newmap.push_back(newmap1buf);
+	}
+
+	units = newmap;
+}
+
+
 Terrain Map::getTile(int x, int y) {
 	x /= 32;
 	y /= 32;
@@ -180,12 +261,12 @@ int Map::getUnitInd(int x, int y) {
 	}
 	else return 0;
 }
-//int Map::getUnitID(int x, int y) {
-//	return getUnitID(x, y) % 100;
-//}
-//int Map::getUnitPlayerID(int x, int y) {
-//	return getUnitID(x, y) / 100;
-//}
+int Map::getUnitID(int x, int y) {
+	return getUnitInd(x, y) % 100;
+}
+int Map::getUnitPlayerID(int x, int y) {
+	return getUnitInd(x, y) / 100;
+}
 void Map::pushUnit(int x, int y, int unit) {
 	x /= 32;
 	y /= 32;
@@ -222,10 +303,23 @@ void Map::delUnit(int x, int y) {
 	y /= 32;
 	if (this->units.at(x).at(y) % 100 / 10 == 5)
 	{
-		units.at(x).at(y) -= units.at(x).at(y) % 10;
+		units.at(x).at(y) -= (units.at(x).at(y) % 10);
+		std::cout << "HERE------------------------------" << std::endl;
 	}
 	else
+	{
 		this->units.at(x).at(y) = 0;
+		std::cout << "HERE2222222222222222222222------------------------------" << std::endl;
+	}
+
+}
+std::vector<std::vector<int>>& Map::_getVecTerrainsInt()
+{
+	return this->map;
+}
+std::vector<std::vector<int>>& Map::_getVecUnitsInt()
+{
+	return this->units;
 }
 void Map::__getInfo_DEBUG(int x, int y)
 {

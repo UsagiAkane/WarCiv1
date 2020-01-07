@@ -1,9 +1,7 @@
 #pragma once
 #include<iostream>
 #include<vector>
-#include<string>
 #include"Town.h"
-#include"Unit.h"
 #include"Technologies.h"
 #include"Settlers.h"
 
@@ -17,19 +15,19 @@ class Actor {
 	std::vector<Unit> units;
 	std::vector<Technologies> tech;
 	//std::vector<std::vector<bool>> fog;
-	int goldPerTurn;
-	int sciencePerTurn;
-	int prodactionPerTurn;
 	int totalGold;
 	int totalScience;
-	int totalProdaction;
 	int unitController;//active Unit
 	int townController;//active Town
 public:
-	Actor(std::string name, Map& map);
+	Actor(std::string name, Map& map, int playerID = 1);
+
 	//DEBUG---------
+
 	//do not use this function if u are not a proggramer (creator) of this app;
-	void __PUSH_UNIT_DEBUG(Unit *unit);
+	void __SHOW_INFO_DEBUG();
+	void __PUSH_UNIT_DEBUG(Unit* unit);
+	void __PUSH_TOWN_DEBUG(Town* town);
 	//--------------
 	void takeControl(sf::Event event, Map& map, sf::RenderWindow& w);
 	void draw(sf::RenderWindow& w);
@@ -37,7 +35,6 @@ public:
 	void pushbackEnemyID(int id);
 	virtual void takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, std::vector<Unit>& EnemyUnitVector);
 	//--------GETERS
-	int getPlayerID();
 	std::vector<int> getEnemyListID();
 	std::vector<int> getAlliesListID();
 	std::string getName();
@@ -46,23 +43,24 @@ public:
 	std::vector<Technologies> getTech();
 	std::vector<Unit>& getUnitsVec();
 	//std::vector<std::vector<bool>> getFog;
-	int getGoldPerTurn();
-	int getSciencePerTurn();
-	int getProdactionPerTurn();
+	int getPlayerID();
 	int getTotalGold();
 	int getTotalScience();
-	int getTotalProdaction();
 	//--------SETERS
 	void setPlayerID(int playerID);
-	void setGoldPerTurn(int goldPerTurn);
-	void setSciencePerTurn(int sciencePerTurn);
-	void setProdactionPerTurn(int prodactionPerTurn);
 	void setTotalGold(int totalGold);
 	void setTotalScience(int totalScience);
-	void setTotalProdaction(int totalProdaction);
-	
+	void setUnitVector(std::vector<Unit>units);
+
+
 	//Methods
 	virtual void endOfTurn(Map& map);//need work
+	virtual void saveUnits();
+	virtual void saveTowns();
+	virtual std::string getSaveActorInfo();
+	virtual void saveActorInfo();
+	virtual void saveTotalnfo();
+
 
 
 
