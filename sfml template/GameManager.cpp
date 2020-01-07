@@ -110,6 +110,130 @@ void GameManager::saveGame()
 	}
 }
 
+std::string getUnitInfoFromFile(int actorInd)
+{
+	std::string line;
+	std::string buffer;
+	std::string path = "Saves\\Save1.txt";
+	std::ifstream fin;
+	fin.open(path);
+	short isnext = 0;
+	short actori = 0;
+	if (fin.is_open())
+	{
+		while (!fin.eof())
+		{
+			if (isnext == 2)
+			{
+				fin >> buffer;
+				if (buffer == "#")
+					actorInd--;
+
+				if (actorInd == 0 && buffer == "#")
+					break;
+
+				line += buffer;
+				line += " ";
+
+				if (buffer == "&")
+					line.clear();
+
+			}
+			else
+			{
+				fin >> buffer;
+				if (buffer == "=")
+					isnext++;
+			}
+		}
+		//std::cout << line << std::endl;//==============================DEBUG
+	}
+	else
+		std::cout << "Can't open file" << std::endl;
+	fin.close();
+	return line;
+}
+
+int getUnitsCount(int actorInd) {
+	std::string buffer = getUnitInfoFromFile(actorInd);
+	short counter = 0;
+	for (int i = 0; i < buffer.size(); i++)
+	{
+		if (buffer[i] == '|')
+			counter++;
+	}
+	return counter;
+}
+
+std::string sliseStrings(std::string str, int index) {
+	std::string tmp;
+	index--;
+	//1 0 1 3 0 0 1 3 160 160 |1 1 3 3 0 0 3 3 192 192 |
+	for (auto i : str) {
+		if (i == '|' && index == 0)break;
+		if (index != 0) {
+			if (i == '|') {
+				index--;
+				tmp.clear();
+			}
+		}
+		if (i != '|')
+			tmp += i;
+
+		//std::cout << tmp << std::endl;
+	}
+	if (index == 0) {
+		return tmp;
+	}
+
+}
+
+//find digit from heap
+int getIntFromStringByIndex(std::string com, int index)
+{
+	int tmp = 0;
+	std::string time;
+	if (index == 1) {
+		for (int i = 0; i < com.size(); i++)
+		{
+			if (!std::isdigit(com[i]))
+				break;
+			time += com[i];
+		}
+		return stoi(time);
+	}
+	for (int i = 1; i < com.size(); i++)
+	{
+		if ((std::isdigit(com[i]) || com[i] == '|') && (com[i - 1] == ' '))
+		{
+			index--;
+		}
+		if (index == 1)
+		{
+			time += com[i];
+		}
+		if (index == 0)
+		{
+			std::cout << time << std::endl;
+			return stoi(time);
+		}
+	}
+
+}
+
+std::vector<Unit> getUnitById(int actorInd)
+{
+	std::vector<Unit> tmp;
+
+	//1 0 1 1 0 0 2 2 128 128 |1 1 3 3 0 0 3 2 96 96 |
+	std::string preSlisedStr = getUnitInfoFromFile(actorInd);
+
+
+
+
+	return tmp;
+}
+
 std::string getMapTerrainDataFromFile()
 {
 	std::string line;
@@ -188,7 +312,7 @@ std::string getActorInfoFromFile(int actorInd)
 	{
 		while (!fin.eof())
 		{
-	
+
 			if (isnext == 2)
 			{
 				fin >> buffer;
@@ -199,10 +323,10 @@ std::string getActorInfoFromFile(int actorInd)
 				{
 					break;
 				}
-				
+
 				line += buffer;
 				line += " ";
-		
+
 				if (buffer == "#") {
 					line.clear();
 				}
@@ -214,8 +338,7 @@ std::string getActorInfoFromFile(int actorInd)
 					isnext++;
 			}
 		}
-		std::cout << "\n\n\n\n\n";
-		std::cout << line;
+
 	}
 	else
 		std::cout << "Can't open file" << std::endl;
@@ -229,8 +352,37 @@ std::string getActorName(int actorInd) {
 		if (!std::isalpha(namebuf.at(i)))
 			namebuf.erase(i);
 	}
-	std::cout << std::endl << namebuf;
 	return namebuf;
+}
+
+int getActorTG(int actorInd) {
+	std::string namebuf = getActorInfoFromFile(actorInd);
+	std::string intbuf;
+	for (int i = 0; i < namebuf.size(); i++) {
+		if (std::isdigit(namebuf.at(i)) || (namebuf.at(i) == ' ')) { intbuf += namebuf[i]; }
+	}
+	intbuf.erase(0, 3);
+	return stoi(intbuf);
+}
+
+int getActorTS(int actorInd) {
+	std::string namebuf = getActorInfoFromFile(actorInd);
+	std::string intbuf;
+	for (int i = 0; i < namebuf.size(); i++) {
+		if (std::isdigit(namebuf.at(i)) || (namebuf.at(i) == ' ')) { intbuf += namebuf[i]; }
+	}
+	intbuf.erase(0, 3);
+
+	for (int j = 0; j < intbuf.size(); j++) {
+		if (intbuf.at(j) == ' ') {
+			intbuf.erase(0, j);
+			break;
+		}
+	}
+
+
+
+	return stoi(intbuf);
 }
 
 int getActorsCount() {
@@ -267,8 +419,16 @@ void GameManager::loadGame()
 		//getActorInfoFromFile();
 
 		for (int i = 1; i <= getActorsCount(); i++) {
-			this->actors.push_back(Actor(getActorName(i), map,i));
+			this->actors.push_back(Actor(getActorName(i), map, i));
+			this->actors[i - 1].setTotalGold(getActorTG(i));
+			this->actors[i - 1].setTotalScience(getActorTS(i));
+			//this->actors.at(i - 1).setTotalGold();
+			//this->actors[i-1].__SHOW_INFO_DEBUG();
+
+			//std::cout << getIntFromStringByIndex(getUnitInfoFromFile(i), 1) << std::endl;
+			std::cout << sliseStrings(getUnitInfoFromFile(i), 2) << std::endl;
 		}
+
 	}
 	else
 	{

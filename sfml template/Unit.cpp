@@ -424,6 +424,7 @@ std::string Unit::getSaveUnitInfo()
 	unitInfo += std::to_string(this->positionX);
 	unitInfo += " ";
 	unitInfo += std::to_string(this->positionY);
+	unitInfo += " ";
 	unitInfo += "|";
 
 

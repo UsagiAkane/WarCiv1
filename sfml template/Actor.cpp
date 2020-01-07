@@ -10,6 +10,18 @@ Actor::Actor(std::string name, Map& map, int playerID) {
 	this->townController = 0;
 }
 
+void Actor::__SHOW_INFO_DEBUG()
+{
+	std::cout << this->name << std::endl;
+	std::cout << this->playerID << std::endl;
+	std::cout << this->totalGold << std::endl;
+	std::cout << this->totalScience << std::endl;
+	//std::cout << this-> << std::endl;
+	//std::cout << this-> << std::endl;
+	//std::cout << this-> << std::endl;
+	//std::cout << this-> << std::endl;
+}
+
 void Actor::__PUSH_UNIT_DEBUG(Unit* unit) { this->units.push_back(*unit); }
 void Actor::__PUSH_TOWN_DEBUG(Town* town) { this->towns.push_back(*town); }
 
@@ -240,9 +252,9 @@ void Actor::saveTowns()
 		for (auto i : towns)
 		{
 			fout << i.getSaveTownInfo();
-			fout << "\n*********************************************\n";
+			fout << "\n*\n";
 		}
-		fout << "\n&&&&&&&&&&&&&&&&&&&&&&&&&\n";
+		fout << "\n&\n";
 	}
 	fout.close();
 }

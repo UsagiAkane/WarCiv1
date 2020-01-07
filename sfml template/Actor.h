@@ -20,12 +20,14 @@ class Actor {
 	int unitController;//active Unit
 	int townController;//active Town
 public:
-	Actor(std::string name, Map& map,int playerID=1);
+	Actor(std::string name, Map& map, int playerID = 1);
 
 	//DEBUG---------
+
 	//do not use this function if u are not a proggramer (creator) of this app;
-	void __PUSH_UNIT_DEBUG(Unit *unit);
-	void __PUSH_TOWN_DEBUG(Town *town);
+	void __SHOW_INFO_DEBUG();
+	void __PUSH_UNIT_DEBUG(Unit* unit);
+	void __PUSH_TOWN_DEBUG(Town* town);
 	//--------------
 	void takeControl(sf::Event event, Map& map, sf::RenderWindow& w);
 	void draw(sf::RenderWindow& w);
@@ -49,7 +51,7 @@ public:
 	void setTotalGold(int totalGold);
 	void setTotalScience(int totalScience);
 
-	
+
 	//Methods
 	virtual void endOfTurn(Map& map);//need work
 	virtual void saveUnits();

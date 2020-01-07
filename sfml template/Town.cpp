@@ -320,7 +320,7 @@ std::string Town::getSaveTownInfo() {
 	unitInfo += std::to_string(this->goldIncome);
 	unitInfo += " ";
 	unitInfo += std::to_string(this->science);
-	unitInfo += "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+	unitInfo += "\n~\n";
 	for (auto i : buildings) {
 		unitInfo += i.getName();
 		unitInfo += "%";
