@@ -183,6 +183,7 @@
     <ClCompile Include="Oasis.cpp" />
     <ClCompile Include="Ocean.cpp" />
     <ClCompile Include="Oil.cpp" />
+    <ClCompile Include="Plains.cpp" />
     <ClCompile Include="Resourses.cpp" />
     <ClCompile Include="Settlers.cpp" />
     <ClCompile Include="Technologies.cpp" />
@@ -230,6 +231,7 @@
     <ClInclude Include="Oasis.h" />
     <ClInclude Include="Ocean.h" />
     <ClInclude Include="Oil.h" />
+    <ClInclude Include="Plains.h" />
     <ClInclude Include="Resourses.h" />
     <ClInclude Include="Settlers.h" />
     <ClInclude Include="Technologies.h" />
