@@ -214,7 +214,6 @@ int getIntFromStringByIndex(std::string com, int index)
 		}
 		if (index == 0)
 		{
-			std::cout << time << std::endl;
 			return stoi(time);
 		}
 	}
@@ -225,9 +224,33 @@ std::vector<Unit> getUnitById(int actorInd)
 {
 	std::vector<Unit> tmp;
 
+	//Militia* militia = new Militia();
+	//Legion* legion = new Legion();
+	//Cavalry* cavalry = new Cavalry();
+
 	//1 0 1 1 0 0 2 2 128 128 |1 1 3 3 0 0 3 2 96 96 |
 	std::string preSlisedStr = getUnitInfoFromFile(actorInd);
+	for (int i = 0; i < getUnitsCount(actorInd); i++) {
+		std::string slisedStr = sliseStrings(preSlisedStr, i);
 
+		int tmpUnitIndex = getIntFromStringByIndex(slisedStr, 7);
+		if (tmpUnitIndex == 1) {
+			Settlers* settlers = new Settlers;
+			settlers->setHealth(getIntFromStringByIndex(slisedStr, 1));
+			settlers->setArmor(getIntFromStringByIndex(slisedStr, 2));
+			settlers->setDamage(getIntFromStringByIndex(slisedStr, 3));
+			settlers->setSteps(getIntFromStringByIndex(slisedStr, 4));
+			settlers->setRank(getIntFromStringByIndex(slisedStr, 5));
+			settlers->setCountOfKill(getIntFromStringByIndex(slisedStr, 6));
+			settlers->setPlayerID(getIntFromStringByIndex(slisedStr, 8));
+			settlers->setPosition(getIntFromStringByIndex(slisedStr, 9), getIntFromStringByIndex(slisedStr, 10));
+			std::cout << "\nX = " << settlers->getPositionX();
+			std::cout << "\nY = " << settlers->getPositionY() << std::endl;
+			settlers->setColorByID();
+			tmp.push_back(*settlers);
+		}
+
+	}
 
 
 
@@ -424,9 +447,11 @@ void GameManager::loadGame()
 			this->actors[i - 1].setTotalScience(getActorTS(i));
 			//this->actors.at(i - 1).setTotalGold();
 			//this->actors[i-1].__SHOW_INFO_DEBUG();
+			//this->actors[i - 1].setUnitVector(getUnitById(i));
+			std::cout << sliseStrings(getUnitInfoFromFile(i), 1) << std::endl;
+			std::cout << getIntFromStringByIndex(sliseStrings(getUnitInfoFromFile(i), 1), 10) << std::endl;
+			//std::cout << sliseStrings(getUnitInfoFromFile(i), 2) << std::endl;
 
-			//std::cout << getIntFromStringByIndex(getUnitInfoFromFile(i), 1) << std::endl;
-			std::cout << sliseStrings(getUnitInfoFromFile(i), 2) << std::endl;
 		}
 
 	}

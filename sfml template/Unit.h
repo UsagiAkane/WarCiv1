@@ -88,6 +88,7 @@ public:
 	void setPosition(int x, int y);
 	void setPlayerID(int ID);
 	void setArmor(int armor);
+	void setSteps(int steps);
 	//needed
 	void draw(sf::RenderWindow& w);
 	void spawn(int x,int y, Map& map);

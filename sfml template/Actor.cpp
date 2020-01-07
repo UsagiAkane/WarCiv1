@@ -210,6 +210,11 @@ void Actor::setTotalScience(int totalScience)
 	this->totalScience = totalScience;
 }
 
+void Actor::setUnitVector(std::vector<Unit> units)
+{
+	this->units = units;
+}
+
 #pragma endregion
 
 void Actor::endOfTurn(Map& map)

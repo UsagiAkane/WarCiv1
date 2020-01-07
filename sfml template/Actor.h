@@ -50,6 +50,7 @@ public:
 	void setPlayerID(int playerID);
 	void setTotalGold(int totalGold);
 	void setTotalScience(int totalScience);
+	void setUnitVector(std::vector<Unit>units);
 
 
 	//Methods

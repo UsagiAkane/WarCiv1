@@ -10,7 +10,7 @@ void Unit::checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::
 		{
 			for (auto j : enemies)//
 			{
-	/*			std::cout << "WE TRY TO FIND" << std::endl;*/
+				/*			std::cout << "WE TRY TO FIND" << std::endl;*/
 				if (j.getIndex() == (map.getUnitInd(mouse_x, mouse_y) % 100))//find enemy in enemy vector
 				{
 					tmp = false;
@@ -25,11 +25,11 @@ void Unit::checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::
 			break;
 		}
 	}
-	if ( map.getUnitInd(mouse_x, mouse_y) / 100 != this->playerID && map.getUnitInd(mouse_x, mouse_y) != 0 && tmp ==true)
+	if (map.getUnitInd(mouse_x, mouse_y) / 100 != this->playerID && map.getUnitInd(mouse_x, mouse_y) != 0 && tmp == true)
 	{
 		enemies_id.push_back(map.getUnitInd(mouse_x, mouse_y) / 100);
 		std::cout << "YOU START WAR" << std::endl;
-		std::cout<< map.getUnitInd(mouse_x, mouse_y) / 100 <<std::endl;
+		std::cout << map.getUnitInd(mouse_x, mouse_y) / 100 << std::endl;
 	}
 
 }
@@ -45,9 +45,9 @@ void Unit::animationOfAttack(int value, sf::RenderWindow& w, Map& map)
 	//right
 	if (value == 1)
 	{
-		tmp.setPosition(static_cast<float>(positionX + 10), static_cast<float>( positionY));
-		tmp.setScale(static_cast<float>(0.9), static_cast < float>(0.9));
-		tmps.setScale(static_cast < float>(0.7), static_cast < float>(0.7));
+		tmp.setPosition(static_cast<float>(positionX + 10), static_cast<float>(positionY));
+		tmp.setScale(static_cast<float>(0.9), static_cast <float>(0.9));
+		tmps.setScale(static_cast <float>(0.7), static_cast <float>(0.7));
 		tmps.setPosition(static_cast<float>(positionX + 30), static_cast<float>(positionY + 3));
 	}
 	//left
@@ -55,7 +55,7 @@ void Unit::animationOfAttack(int value, sf::RenderWindow& w, Map& map)
 	{
 		textureTMP.loadFromFile("Icons\\swordiconflip.png");
 		tmp.setPosition(static_cast<float>(positionX - 10), static_cast<float>(positionY));
-		tmp.setScale(static_cast < float>(0.9), static_cast < float>( 0.9));
+		tmp.setScale(static_cast <float>(0.9), static_cast <float>(0.9));
 		tmps.setScale(static_cast <float>(0.7), static_cast <float>(0.7));
 		tmps.setPosition(static_cast<float>(positionX - 20), static_cast<float>(positionY + 3));
 	}
@@ -125,10 +125,10 @@ void Unit::moveTopHidden(Map& map, int mouse_x, int mouse_y)
 {
 	if (this->health > 0)
 	{
-	positionY -= BORDER_PIXEL_32;
-	this->warriorSprite.setPosition(static_cast<float>(positionX), static_cast<float>(positionY));
-	this->steps -= map.getTile(mouse_x, mouse_y).getMove();
-	map.moveUnit(positionX, positionY + BORDER_PIXEL_32, positionX, positionY);
+		positionY -= BORDER_PIXEL_32;
+		this->warriorSprite.setPosition(static_cast<float>(positionX), static_cast<float>(positionY));
+		this->steps -= map.getTile(mouse_x, mouse_y).getMove();
+		map.moveUnit(positionX, positionY + BORDER_PIXEL_32, positionX, positionY);
 	}
 }
 
@@ -166,7 +166,7 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 					checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 1);   //Checking whether a unit can attack
 				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty 
 					moveRightHidden(map, mouse_x, mouse_y);//move to this position if empty
-	
+
 			}
 		}
 		////left
@@ -178,7 +178,7 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 					checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 2); //Checking whether a unit can attack
 				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
 					moveLeftHidden(map, mouse_x, mouse_y);//move to this position if empty
-	
+
 			}
 		}
 		////top
@@ -229,7 +229,7 @@ void Unit::attack(Unit& uEnemy, Map& map, int x, int y)
 		this->death(map);
 		uEnemy.setCountOfKill(+1);
 	}
-		
+
 
 
 	if (uEnemy.getHealth() <= 0)
@@ -464,6 +464,11 @@ int Unit::findIndexOfEnemy(int mouse_x, int mouse_y, Map& map)
 void Unit::setArmor(int armor)
 {
 	this->armor = armor;
+}
+
+void Unit::setSteps(int steps)
+{
+	this->steps = steps;
 }
 
 sf::Sprite Unit::getSprite()
