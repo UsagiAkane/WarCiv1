@@ -223,7 +223,7 @@ void Actor::saveUnits()
 		{
 			fout << i.getSaveUnitInfo();
 		}
-		fout << "\n###################\n";
+		fout << "\n#\n";
 	}
 	fout.close();
 }

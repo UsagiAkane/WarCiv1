@@ -267,9 +267,7 @@ void GameManager::loadGame()
 		//getActorInfoFromFile();
 
 		for (int i = 1; i <= getActorsCount(); i++) {
-			this->actors.push_back(Actor(getActorName(i), map));
-			this->actors.push_back(Actor("Ruslan", map, 2));
-			this->actors.push_back(Actor("Ruslan", map, 3));
+			this->actors.push_back(Actor(getActorName(i), map,i));
 		}
 	}
 	else
