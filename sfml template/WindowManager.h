@@ -5,7 +5,7 @@
 class WindowManager{
 private:
 	sf::RenderWindow w;
-	bool isMenu = !true;//true
+	bool isMenu = false;//true
 
 public:
 	WindowManager();

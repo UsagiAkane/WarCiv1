@@ -1,7 +1,7 @@
 #include "Actor.h"
 
-Actor::Actor(std::string name, Map& map) {
-	playerID = 1;
+Actor::Actor(std::string name, Map& map, int playerID) {
+	this->playerID = playerID;
 	this->name = name;
 	//std::vector<std::vector<bool>> fog;
 	this->goldPerTurn = 0;

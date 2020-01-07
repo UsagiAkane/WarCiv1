@@ -312,6 +312,11 @@ void WindowManager::mainMenu(sf::RenderWindow& w)
 							isMenu = false;
 						if ((sf::IntRect(bExit.getGlobalBounds()).contains(sf::Mouse::getPosition(w))))
 							w.close();
+						if ((sf::IntRect(bLoadGame.getGlobalBounds()).contains(sf::Mouse::getPosition(w))))
+						{
+							isMenu = false;
+						}
+						
 						
 					}
 				}

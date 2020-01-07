@@ -110,43 +110,134 @@ void GameManager::saveGame()
 	}
 }
 
-void GameManager::loadGame()
+std::string getMapTerrainDataFromFile()
 {
-	//std::vector<std::string> line;
 	std::string line;
 	std::string buffer;
 	std::string path = "Saves\\Save1.txt";
 	std::ifstream fin;
 	fin.open(path);
-
 	if (fin.is_open())
 	{
 		while (!fin.eof())
 		{
 			fin >> buffer;
 			if (buffer == "=") {
-				std::cout << buffer << "\n";
 				break;
 			}
 			line += buffer;
 			line += " ";
-			/*line.push_back(buffer);*/
 		}
-		std::cout << "\n\n\n\n\n";
-		for (auto i: line)
-		{
-			std::cout << i;
-		}
-
+		//std::cout << "\n\n\n\n\n";
+		//for (auto i : line)
+		//{
+		//	std::cout << i;
+		//}
 	}
 	else
 		std::cout << "Can't open file" << std::endl;
 	fin.close();
+	return line;
+}
+
+std::string getMapUnitDataFromFile()
+{
+	std::string line;
+	std::string buffer;
+	std::string path = "Saves\\Save1.txt";
+	std::ifstream fin;
+	fin.open(path);
+	bool isnext=false;
+	if (fin.is_open())
+	{
+		while (!fin.eof())
+		{	
+			if (isnext)
+			{
+				fin >> buffer;
+				if (buffer == "=") {
+					break;
+				}
+				line += buffer;
+				line += " ";
+			}
+			else
+			{
+				fin >> buffer;
+				if (buffer == "=")
+					isnext = true;
+			}
+		}
+	}
+	else
+		std::cout << "Can't open file" << std::endl;
+	fin.close();
+	return line;
+}
+
+std::string getActorFromFile()
+{
+
+	std::string line;
+	std::string buffer;
+	std::string path = "Saves\\Save1.txt";
+	std::ifstream fin;
+	fin.open(path);
+	short isnext = 0;
+	if (fin.is_open())
+	{
+		while (!fin.eof())
+		{
+			if (isnext== 2)
+			{
+				fin >> buffer;
+				if (buffer == "_")
+					break;
+				line += buffer;
+				line += " ";
+		
+			}
+			else
+			{
+				fin >> buffer;
+				if (buffer == "=")
+					isnext++;
+			}
+		}
+		std::cout << "\n\n\n\n\n";
+		for (auto i : line)
+		{
+			std::cout << i;
+		}
+	}
+	else
+		std::cout << "Can't open file" << std::endl;
+	fin.close();
+	return line;
+}
+
+void GameManager::loadGame()
+{
+	map.loadUnits(getMapUnitDataFromFile());
+	map.loadTerrains(getMapTerrainDataFromFile());
+	if (this->actors.size()>0)
+	{
+		this->deleteAllActors();
+		this->actors.push_back(Actor("player", map));
+		this->actors.push_back(Actor("Ruslan", map,2));
+		this->actors.push_back(Actor("Ruslan", map,3));
+	}
+	else
+	{
+		getActorFromFile();
+	}
+	
 
 
-	map.loadTerrains(line);
+}
 
-
-	//return line;
+void GameManager::deleteAllActors()
+{
+	this->actors.clear();
 }
 

@@ -24,7 +24,8 @@ class Actor {
 	int unitController;//active Unit
 	int townController;//active Town
 public:
-	Actor(std::string name, Map& map);
+	Actor(std::string name, Map& map,int playerID=1);
+
 	//DEBUG---------
 	//do not use this function if u are not a proggramer (creator) of this app;
 	void __PUSH_UNIT_DEBUG(Unit *unit);

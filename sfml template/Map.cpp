@@ -156,13 +156,12 @@ void Map::loadTerrains(std::string line)
 		INTbuf.push_back(std::stoi(line));
 		line.erase(0, 4);
 	}
-	std::cout << "\n\n\n\n";
+	//std::cout << "\n\n\n\n";
 	int size = INTbuf.size() / map.size();
 
-	
-	for (int i = 0,o=0; i < size; i++) {
+	for (int i = 0, o = 0; i < size; i++) {
 		std::vector<int> newmap1buf;
-		for (int j = 0; j < size; j++,o++) {
+		for (int j = 0; j < size; j++, o++) {
 			newmap1buf.push_back(INTbuf.at(o));
 		}
 		newmap.push_back(newmap1buf);
@@ -170,6 +169,31 @@ void Map::loadTerrains(std::string line)
 
 	map = newmap;
 }
+void Map::loadUnits(std::string line)
+{
+	//  line  =  0 100 0 251
+	std::vector<int> INTbuf;
+	std::vector<std::vector<int>> newmap;
+	while (line.size() > 1) {
+		INTbuf.push_back(std::stoi(line));
+		if (INTbuf.at(INTbuf.size() - 1) == 0)
+			line.erase(0, 2);
+		else
+			line.erase(0, 4);
+	}
+	int size = INTbuf.size() / units.size();
+
+	for (int i = 0, o = 0; i < size; i++) {
+		std::vector<int> newmap1buf;
+		for (int j = 0; j < size; j++, o++) {
+			newmap1buf.push_back(INTbuf.at(o));
+		}
+		newmap.push_back(newmap1buf);
+	}
+
+	units = newmap;
+}
+
 
 Terrain Map::getTile(int x, int y) {
 	x /= 32;
