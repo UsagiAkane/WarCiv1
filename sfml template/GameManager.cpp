@@ -28,7 +28,7 @@ GameManager::GameManager()
 	enemyActor->__PUSH_UNIT_DEBUG(legionEnemy);
 	Town* townEnemy = new Town;
 	townEnemy->setPlayer_id(2);
-	townEnemy->spawn(32*5,32*6,this->map);
+	townEnemy->spawn(32 * 5, 32 * 6, this->map);
 	enemyActor->__PUSH_TOWN_DEBUG(townEnemy);
 
 
@@ -95,7 +95,7 @@ Actor& GameManager::findActor(int ID)
 std::vector<Unit>& GameManager::findActorUnit(int mouse_x, int mouse_y)
 {
 
-	if ((map.getUnitInd(mouse_x, mouse_y)) / 100 != 0 && (map.getUnitInd(mouse_x, mouse_y))/ 100 != this->actors.at(0).getPlayerID()) //check index of unit
+	if ((map.getUnitInd(mouse_x, mouse_y)) / 100 != 0 && (map.getUnitInd(mouse_x, mouse_y)) / 100 != this->actors.at(0).getPlayerID()) //check index of unit
 		return findActor((map.getUnitInd(mouse_x, mouse_y)) / 100).getUnits();
 	else
 		std::cout << "CAN'T FIND UNIT" << std::endl;
@@ -108,5 +108,45 @@ void GameManager::saveGame()
 	{
 		i.saveTotalnfo();
 	}
+}
+
+void GameManager::loadGame()
+{
+	//std::vector<std::string> line;
+	std::string line;
+	std::string buffer;
+	std::string path = "Saves\\Save1.txt";
+	std::ifstream fin;
+	fin.open(path);
+
+	if (fin.is_open())
+	{
+		while (!fin.eof())
+		{
+			fin >> buffer;
+			if (buffer == "=") {
+				std::cout << buffer << "\n";
+				break;
+			}
+			line += buffer;
+			line += " ";
+			/*line.push_back(buffer);*/
+		}
+		std::cout << "\n\n\n\n\n";
+		for (auto i: line)
+		{
+			std::cout << i;
+		}
+
+	}
+	else
+		std::cout << "Can't open file" << std::endl;
+	fin.close();
+
+
+	map.loadTerrains(line);
+
+
+	//return line;
 }
 

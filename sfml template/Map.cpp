@@ -131,7 +131,7 @@ void Map::saveMap()
 			}
 			fout << "\n";
 		}
-		fout << "=========================================================================\n";
+		fout << "=\n";
 		for (auto i : units)
 		{
 			for (auto j : i)
@@ -140,11 +140,35 @@ void Map::saveMap()
 			}
 			fout << "\n";
 		}
-		fout << "=========================================================================\n";
-		std::cout <<"Successes save\n ";
+		fout << "=\n";
+		std::cout << "Successes save\n ";
 	}
 
 	fout.close();
+}
+
+void Map::loadTerrains(std::string line)
+{
+	//  line  =  103 100 200 505
+	std::vector<int> INTbuf;
+	std::vector<std::vector<int>> newmap;
+	while (line.size() > 3) {
+		INTbuf.push_back(std::stoi(line));
+		line.erase(0, 4);
+	}
+	std::cout << "\n\n\n\n";
+	int size = INTbuf.size() / map.size();
+
+	
+	for (int i = 0,o=0; i < size; i++) {
+		std::vector<int> newmap1buf;
+		for (int j = 0; j < size; j++,o++) {
+			newmap1buf.push_back(INTbuf.at(o));
+		}
+		newmap.push_back(newmap1buf);
+	}
+
+	map = newmap;
 }
 
 Terrain Map::getTile(int x, int y) {

@@ -162,10 +162,10 @@ void WindowManager::gameMenu(sf::RenderWindow& w, GameManager & game)
 						if ((sf::IntRect(sf::FloatRect(bContinue.getGlobalBounds().left - w.getView().getCenter().x + w.getSize().x / 2, bContinue.getGlobalBounds().top - w.getView().getCenter().y + w.getSize().y / 2, bContinue.getGlobalBounds().width, bContinue.getGlobalBounds().height)).contains(sf::Mouse::getPosition(w))))
 							isMenu = false;
 						if ((sf::IntRect(sf::FloatRect(bSaveGame.getGlobalBounds().left - w.getView().getCenter().x + w.getSize().x / 2, bSaveGame.getGlobalBounds().top - w.getView().getCenter().y + w.getSize().y / 2, bSaveGame.getGlobalBounds().width, bSaveGame.getGlobalBounds().height)).contains(sf::Mouse::getPosition(w))))
-						{
 							game.saveGame();
-							
-						}
+						if ((sf::IntRect(sf::FloatRect(bLoadGame.getGlobalBounds().left - w.getView().getCenter().x + w.getSize().x / 2, bLoadGame.getGlobalBounds().top - w.getView().getCenter().y + w.getSize().y / 2, bLoadGame.getGlobalBounds().width, bLoadGame.getGlobalBounds().height)).contains(sf::Mouse::getPosition(w))))
+							game.loadGame();
+				
 						
 
 					}
@@ -312,12 +312,13 @@ void WindowManager::mainMenu(sf::RenderWindow& w)
 							isMenu = false;
 						if ((sf::IntRect(bExit.getGlobalBounds()).contains(sf::Mouse::getPosition(w))))
 							w.close();
+						
 					}
 				}
 			}
 
 		}
-
+		
 
 
 

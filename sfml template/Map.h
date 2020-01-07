@@ -22,6 +22,8 @@ public:
 	//void loadMap();
 	void saveMap();
 
+	void loadTerrains(std::string line);
+
 	Terrain getTile(int x, int y);
 	Terrain getTileVec(int x, int y);
 	int getUnitInd(int x, int y);
