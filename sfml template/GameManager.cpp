@@ -30,8 +30,6 @@ GameManager::GameManager()
 	townEnemy->setPlayer_id(2);
 	townEnemy->spawn(32 * 5, 32 * 6, this->map);
 	enemyActor->__PUSH_TOWN_DEBUG(townEnemy);
-
-
 	//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 
 
@@ -223,12 +221,16 @@ int getIntFromStringByIndex(std::string com, int index)
 
 std::vector<Unit> getUnitVectorByActorInd(int actorInd)
 {
+	//std::cout << "\n\nplayerID: " << actorInd;//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 	std::vector<Unit> tmp;
 	//1 0 1 1 0 0 2 2 128 128 |1 1 3 3 0 0 3 2 96 96 |
 	std::string preSlisedStr = getUnitInfoFromFile(actorInd);
+	//std::cout << "\npreSlisedStr: " << preSlisedStr;//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 	for (int i = 0; i < getUnitsCount(actorInd); i++) {
-		std::string slisedStr = sliseStrings(preSlisedStr, i);
+		std::string slisedStr = sliseStrings(preSlisedStr, i+1);
+		//std::cout << "\nslisedStr: " << slisedStr;//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 		int tmpUnitIndex = getIntFromStringByIndex(slisedStr, 7);
+		//std::cout << "\nuID: " << tmpUnitIndex;//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 		if (tmpUnitIndex == 1) {
 			Settlers* settlers = new Settlers;
 			settlers->setHealth(getIntFromStringByIndex(slisedStr, 1));
@@ -241,6 +243,7 @@ std::vector<Unit> getUnitVectorByActorInd(int actorInd)
 			settlers->setPosition(getIntFromStringByIndex(slisedStr, 9), getIntFromStringByIndex(slisedStr, 10));
 			settlers->setColorByID();
 			tmp.push_back(*settlers);
+			//std::cout << "\nPushed s";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 		}
 		if (tmpUnitIndex == 2) {
 			Militia* militia = new Militia();
@@ -254,6 +257,7 @@ std::vector<Unit> getUnitVectorByActorInd(int actorInd)
 			militia->setPosition(getIntFromStringByIndex(slisedStr, 9), getIntFromStringByIndex(slisedStr, 10));
 			militia->setColorByID();
 			tmp.push_back(*militia);
+			//std::cout << "\nPushed m";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 		}
 		if (tmpUnitIndex == 3) {
 			Legion* legion = new Legion();		
@@ -267,6 +271,7 @@ std::vector<Unit> getUnitVectorByActorInd(int actorInd)
 			legion->setPosition(getIntFromStringByIndex(slisedStr, 9), getIntFromStringByIndex(slisedStr, 10));
 			legion->setColorByID();
 			tmp.push_back(*legion);
+			//std::cout << "\nPushed l";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 		}
 		if (tmpUnitIndex == 4) {
 			Cavalry* cavalry = new Cavalry();
@@ -280,10 +285,11 @@ std::vector<Unit> getUnitVectorByActorInd(int actorInd)
 			cavalry->setPosition(getIntFromStringByIndex(slisedStr, 9), getIntFromStringByIndex(slisedStr, 10));
 			cavalry->setColorByID();
 			tmp.push_back(*cavalry);
+			//std::cout << "\nPushed c";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 		}
 
 	}
-
+		
 	return tmp;
 }
 
@@ -497,4 +503,3 @@ void GameManager::deleteAllActors()
 {
 	this->actors.clear();
 }
-

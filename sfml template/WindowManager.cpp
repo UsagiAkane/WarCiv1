@@ -31,7 +31,6 @@ void WindowManager::newGameWindow() {
 					w.close();
 
 				if (event.type == sf::Event::KeyPressed)
-
 				{
 					if (event.key.code == sf::Keyboard::Escape)
 					{
@@ -42,7 +41,6 @@ void WindowManager::newGameWindow() {
 
 
 				if (!isMenu)
-
 				{
 					//Check is mouse in window
 					if (isMouseInWindow(w))
