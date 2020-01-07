@@ -5,13 +5,13 @@
 class WindowManager{
 private:
 	sf::RenderWindow w;
-	bool isMenu = false;//true
+	bool isMenu = true;//true
 
 public:
 	WindowManager();
 	//RenderWindow w;
 	//WindowManager();
-	void mainWindow();
+	void newGameWindow();
 	void cameraControl(sf::View& view, sf::Window& window);
 	bool isMouseInWindow(sf::RenderWindow & w);
 	int getPosMouseByWindowX(sf::RenderWindow& w);

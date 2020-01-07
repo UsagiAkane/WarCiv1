@@ -8,7 +8,7 @@ WindowManager::WindowManager()
 
 }
 
-void WindowManager::mainWindow() {
+void WindowManager::newGameWindow() {
 
 	try {
 		GameManager game;
@@ -308,6 +308,8 @@ void WindowManager::mainMenu(sf::RenderWindow& w)
 				{
 					if (ev.MouseButtonReleased)
 					{
+						if ((sf::IntRect(bNewGame.getGlobalBounds()).contains(sf::Mouse::getPosition(w))))
+							isMenu = false;
 						if ((sf::IntRect(bExit.getGlobalBounds()).contains(sf::Mouse::getPosition(w))))
 							w.close();
 					}
