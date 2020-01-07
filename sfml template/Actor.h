@@ -15,12 +15,8 @@ class Actor {
 	std::vector<Unit> units;
 	std::vector<Technologies> tech;
 	//std::vector<std::vector<bool>> fog;
-	int goldPerTurn;
-	int sciencePerTurn;
-	int prodactionPerTurn;
 	int totalGold;
 	int totalScience;
-	int totalProdaction;
 	int unitController;//active Unit
 	int townController;//active Town
 public:
@@ -37,7 +33,6 @@ public:
 	void pushbackEnemyID(int id);
 	virtual void takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, std::vector<Unit>& EnemyUnitVector);
 	//--------GETERS
-	int getPlayerID();
 	std::vector<int> getEnemyListID();
 	std::vector<int> getAlliesListID();
 	std::string getName();
@@ -46,20 +41,14 @@ public:
 	std::vector<Technologies> getTech();
 	std::vector<Unit>& getUnitsVec();
 	//std::vector<std::vector<bool>> getFog;
-	int getGoldPerTurn();
-	int getSciencePerTurn();
-	int getProdactionPerTurn();
+	int getPlayerID();
 	int getTotalGold();
 	int getTotalScience();
-	int getTotalProdaction();
 	//--------SETERS
 	void setPlayerID(int playerID);
-	void setGoldPerTurn(int goldPerTurn);
-	void setSciencePerTurn(int sciencePerTurn);
-	void setProdactionPerTurn(int prodactionPerTurn);
 	void setTotalGold(int totalGold);
 	void setTotalScience(int totalScience);
-	void setTotalProdaction(int totalProdaction);
+
 	
 	//Methods
 	virtual void endOfTurn(Map& map);//need work

@@ -147,11 +147,11 @@ std::string getMapUnitDataFromFile()
 	std::string path = "Saves\\Save1.txt";
 	std::ifstream fin;
 	fin.open(path);
-	bool isnext=false;
+	bool isnext = false;
 	if (fin.is_open())
 	{
 		while (!fin.eof())
-		{	
+		{
 			if (isnext)
 			{
 				fin >> buffer;
@@ -175,27 +175,37 @@ std::string getMapUnitDataFromFile()
 	return line;
 }
 
-std::string getActorFromFile()
+std::string getActorInfoFromFile(int actorInd)
 {
-
 	std::string line;
 	std::string buffer;
 	std::string path = "Saves\\Save1.txt";
 	std::ifstream fin;
 	fin.open(path);
 	short isnext = 0;
+	short actori = 0;
 	if (fin.is_open())
 	{
 		while (!fin.eof())
 		{
-			if (isnext== 2)
+	
+			if (isnext == 2)
 			{
 				fin >> buffer;
-				if (buffer == "_")
+				if (buffer == "_") {
+					actorInd--;
+				}
+				if (actorInd == 0 && buffer == "_")
+				{
 					break;
+				}
+				
 				line += buffer;
 				line += " ";
 		
+				if (buffer == "#") {
+					line.clear();
+				}
 			}
 			else
 			{
@@ -205,10 +215,7 @@ std::string getActorFromFile()
 			}
 		}
 		std::cout << "\n\n\n\n\n";
-		for (auto i : line)
-		{
-			std::cout << i;
-		}
+		std::cout << line;
 	}
 	else
 		std::cout << "Can't open file" << std::endl;
@@ -216,22 +223,59 @@ std::string getActorFromFile()
 	return line;
 }
 
+std::string getActorName(int actorInd) {
+	std::string namebuf = getActorInfoFromFile(actorInd);
+	for (int i = 0; i < namebuf.size(); i++) {
+		if (!std::isalpha(namebuf.at(i)))
+			namebuf.erase(i);
+	}
+	std::cout << std::endl << namebuf;
+	return namebuf;
+}
+
+int getActorsCount() {
+
+	std::string buffer;
+	std::string path = "Saves\\Save1.txt";
+	std::ifstream fin;
+	fin.open(path);
+	short isnext = 0;
+	if (fin.is_open())
+	{
+		while (!fin.eof())
+		{
+			fin >> buffer;
+			if (buffer == "_")
+				isnext++;
+		}
+	}
+	else
+		std::cout << "Can't open file" << std::endl;
+	fin.close();
+
+	return isnext;
+
+}
+
 void GameManager::loadGame()
 {
 	map.loadUnits(getMapUnitDataFromFile());
 	map.loadTerrains(getMapTerrainDataFromFile());
-	if (this->actors.size()>0)
+	if (this->actors.size() > 0)
 	{
 		this->deleteAllActors();
-		this->actors.push_back(Actor("player", map));
-		this->actors.push_back(Actor("Ruslan", map,2));
-		this->actors.push_back(Actor("Ruslan", map,3));
+		//getActorInfoFromFile();
+
+		for (int i = 1; i <= getActorsCount(); i++) {
+			this->actors.push_back(Actor(getActorName(i), map));
+			this->actors.push_back(Actor("Ruslan", map, 2));
+			this->actors.push_back(Actor("Ruslan", map, 3));
+		}
 	}
 	else
 	{
-		getActorFromFile();
 	}
-	
+
 
 
 }
