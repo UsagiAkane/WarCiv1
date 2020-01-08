@@ -8,6 +8,7 @@
 #include "Mountain.h"
 #include "Grassland.h"
 #include "Ocean.h"
+#include "Plains.h"
 #include "Terrain.h"
 #include <fstream>
 
@@ -17,7 +18,7 @@ private:
 	std::vector<std::vector<int>> map;
 	std::vector<std::vector<int>> units;
 public:
-	Map(int sizeX = 100, int sizeY = 100);
+	Map(int sizeX = 100, int sizeY = 100, int resGenChanse = 8);
 
 	//void loadMap();
 	void saveMap();

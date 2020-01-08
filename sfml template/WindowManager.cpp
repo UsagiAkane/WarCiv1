@@ -29,7 +29,9 @@ void WindowManager::newGameWindow() {
 				//CLOSE--------------
 				if (event.type == event.Closed)
 					w.close();
+
 				if (event.type == sf::Event::KeyPressed)
+
 				{
 					if (event.key.code == sf::Keyboard::Escape)
 					{
@@ -38,7 +40,9 @@ void WindowManager::newGameWindow() {
 					}
 				}
 
+
 				if (!isMenu)
+
 				{
 					//Check is mouse in window
 					if (isMouseInWindow(w))
@@ -50,7 +54,6 @@ void WindowManager::newGameWindow() {
 							if (event.MouseButtonReleased)
 								game.getActors().at(0).takeControlUnit(event, game.getMap(), w, game.findActorUnit(getPosMouseByWindowX(w), getPosMouseByWindowY(w)));
 						}
-
 					}
 				}
 			}
