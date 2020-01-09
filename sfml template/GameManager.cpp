@@ -686,11 +686,9 @@ void GameManager::loadGame()
 
 			this->actors[i - 1].setUnitVector(getUnitVectorByActorInd(i));
 
-			if (getTownsCount(i) != 0)
-			{
+
 				this->actors[i-1].setUnitTown(getTownVectorByActorInd(i));
 
-			}
 
 
 
