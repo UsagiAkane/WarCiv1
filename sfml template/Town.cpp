@@ -270,6 +270,10 @@ void Town::setScience(int science) {
 void Town::setName(std::string name) {
 	this->name = name;
 }
+void Town::setDamage(int damage)
+{
+	this->damage = damage;
+}
 #pragma endregion
 //OTHER
 void Town::draw(sf::RenderWindow& w) {

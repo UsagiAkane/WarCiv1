@@ -12,6 +12,8 @@ GameManager::GameManager()
 	player->__PUSH_UNIT_DEBUG(firstS);
 
 
+
+
 	//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 	Actor* enemyActor = new Actor("Ruslan", map);
 	enemyActor->setPlayerID(2);
@@ -108,6 +110,10 @@ void GameManager::saveGame()
 	}
 }
 
+
+
+#pragma region UNitsMap_LOAD
+//find digit from heap
 std::string getUnitInfoFromFile(int actorInd)
 {
 	std::string line;
@@ -186,7 +192,6 @@ std::string sliseStrings(std::string str, int index) {
 
 }
 
-//find digit from heap
 int getIntFromStringByIndex(std::string com, int index)
 {
 	int tmp = 0;
@@ -227,7 +232,7 @@ std::vector<Unit> getUnitVectorByActorInd(int actorInd)
 	std::string preSlisedStr = getUnitInfoFromFile(actorInd);
 	//std::cout << "\npreSlisedStr: " << preSlisedStr;//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 	for (int i = 0; i < getUnitsCount(actorInd); i++) {
-		std::string slisedStr = sliseStrings(preSlisedStr, i+1);
+		std::string slisedStr = sliseStrings(preSlisedStr, i + 1);
 		//std::cout << "\nslisedStr: " << slisedStr;//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 		int tmpUnitIndex = getIntFromStringByIndex(slisedStr, 7);
 		//std::cout << "\nuID: " << tmpUnitIndex;//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
@@ -260,7 +265,7 @@ std::vector<Unit> getUnitVectorByActorInd(int actorInd)
 			//std::cout << "\nPushed m";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 		}
 		if (tmpUnitIndex == 3) {
-			Legion* legion = new Legion();		
+			Legion* legion = new Legion();
 			legion->setHealth(getIntFromStringByIndex(slisedStr, 1));
 			legion->setArmor(getIntFromStringByIndex(slisedStr, 2));
 			legion->setDamage(getIntFromStringByIndex(slisedStr, 3));
@@ -289,7 +294,7 @@ std::vector<Unit> getUnitVectorByActorInd(int actorInd)
 		}
 
 	}
-		
+
 	return tmp;
 }
 
@@ -357,7 +362,9 @@ std::string getMapUnitDataFromFile()
 	fin.close();
 	return line;
 }
+#pragma endregion
 
+#pragma region actor_LOAD
 std::string getActorInfoFromFile(int actorInd)
 {
 	std::string line;
@@ -467,7 +474,202 @@ int getActorsCount() {
 	return isnext;
 
 }
+#pragma endregion
 
+#pragma region TOWNS_LOAD
+//return count of user's towns
+int getTownsCount(int actorInd)
+{
+	std::string buffer;
+	std::string path = "Saves\\Save1.txt";
+	std::ifstream fin;
+	fin.open(path);
+	short isnext = 0;
+
+	if (fin.is_open())
+	{
+		while (!fin.eof())
+		{
+			fin >> buffer;
+
+
+			if (actorInd == 0)
+			{
+				if (buffer == "~")
+					isnext++;
+			}
+			if (buffer == "_" && actorInd == 0)
+			{
+				return isnext;
+			}
+
+			if (buffer == "_")
+				actorInd--;
+
+		}
+	}
+	else
+		std::cout << "Can't open file" << std::endl;
+	fin.close();
+
+	return isnext;
+
+}
+//work perfectly
+std::string getTownInfoFromFile(int actorInd)
+{
+
+	std::string line;
+	std::string buffer;
+	std::string path = "Saves\\Save1.txt";
+	std::ifstream fin;
+	fin.open(path);
+	short isnext = 0;
+	short _check = getTownsCount(actorInd);
+	bool does_write = 1;
+	int count_of_rep = getTownsCount(actorInd);
+
+	if (fin.is_open())
+	{
+		while (!fin.eof())
+		{
+			fin >> buffer;
+
+			if (_check == 0)
+			{
+				if (actorInd == 0 && buffer == "~")
+				{
+					return line;
+				}
+				if (actorInd == 0)
+				{
+					line += buffer;
+					line += " ";
+				}
+				if (buffer == "_")
+				{
+					actorInd--;
+
+				}
+			}
+			else
+			{
+
+
+
+				if (actorInd == 0 && buffer == "~" && count_of_rep > 0)
+				{
+					line += " |";
+					does_write = 0;
+					count_of_rep--;
+				}
+				if (actorInd == 0 && does_write)
+				{
+					line += buffer;
+					line += " ";
+				}
+				if (actorInd == 0 && count_of_rep > 0)
+				{
+					if (buffer == "*")
+					{
+						does_write = true;
+					}
+				}
+				if (count_of_rep == 0)
+				{
+					return line;
+				}
+				if (buffer == "_")
+				{
+					actorInd--;
+
+				}
+
+			}
+
+		}
+		//std::cout << line << std::endl;//==============================DEBUG
+	}
+	else
+		std::cout << "Can't open file" << std::endl;
+	fin.close();
+	return line;
+
+}
+//WORK
+std::string getStringFromSringByIndexTowns(std::string com)
+{
+	int tmp = 0;
+	std::string time;
+	for (int i = 0; i < com.size(); i++)
+	{
+		if (!std::isdigit(com[i]) && !std::ispunct(com[i]))
+		{
+			time += com[i];
+		}
+		if (isdigit(com[i]))
+		{
+			break;
+		}
+	}
+	return time;
+
+}
+//WORK
+int getIntFromStringByIndexTowns(std::string com, int index)
+{
+	int tmp = 0;
+	std::string time;
+
+
+	for (int i = 0; i < com.size(); i++)
+	{
+		if ((std::isdigit(com[i]) || com[i] == '|') && (com[i - 1] == ' '))
+		{
+			index--;
+		}
+		if (index == 1)
+		{
+			time += com[i];
+		}
+
+		
+		
+	}
+	return stoi(time);
+}
+#pragma endregion
+
+
+
+std::vector<Town> getTownVectorByActorInd(int actorInd)
+{
+	std::vector<Town> tmp;
+	//1 0 1 1 0 0 2 2 128 128 |1 1 3 3 0 0 3 2 96 96 |
+	std::string preSlisedStr = getTownInfoFromFile(actorInd);
+
+	for (int i = 0; i < getTownsCount(actorInd); i++) {
+		std::string slisedStr = sliseStrings(preSlisedStr, i + 1);
+		Town* town = new Town;
+		town->setPlayer_id(getIntFromStringByIndexTowns(slisedStr, 2));
+		town->setPosition(getIntFromStringByIndexTowns(slisedStr, 3),getIntFromStringByIndexTowns(slisedStr, 4));
+		town->setHealth(getIntFromStringByIndexTowns(slisedStr, 5));
+		town->setDamage(getIntFromStringByIndexTowns(slisedStr, 6));
+		town->setPopulation(getIntFromStringByIndexTowns(slisedStr,7));
+		town->setPopulation_limit(getIntFromStringByIndexTowns(slisedStr, 8));
+		town->setProduction(getIntFromStringByIndexTowns(slisedStr, 9));
+		town->setTrade(getIntFromStringByIndexTowns(slisedStr, 10));
+		town->setHappines(getIntFromStringByIndexTowns(slisedStr, 11));
+		town->setgoldIncome(getIntFromStringByIndexTowns(slisedStr, 12));
+		town->setScience(getIntFromStringByIndexTowns(slisedStr, 13));
+		town->setColorByID();
+
+		tmp.push_back(*town);
+	}
+
+	return tmp;
+}
+//-------------------LOAD GAME
 void GameManager::loadGame()
 {
 	map.loadUnits(getMapUnitDataFromFile());
@@ -481,12 +683,16 @@ void GameManager::loadGame()
 			this->actors.push_back(Actor(getActorName(i), map, i));
 			this->actors[i - 1].setTotalGold(getActorTG(i));
 			this->actors[i - 1].setTotalScience(getActorTS(i));
-			//this->actors.at(i - 1).setTotalGold();
-			//this->actors[i-1].__SHOW_INFO_DEBUG();
+
 			this->actors[i - 1].setUnitVector(getUnitVectorByActorInd(i));
-			///std::cout << sliseStrings(getUnitInfoFromFile(i), 1) << std::endl;
-			///std::cout << getIntFromStringByIndex(sliseStrings(getUnitInfoFromFile(i), 1), 10) << std::endl;
-		
+
+			if (getTownsCount(i) != 0)
+			{
+				this->actors[i-1].setUnitTown(getTownVectorByActorInd(i));
+
+			}
+
+
 
 		}
 
@@ -503,3 +709,4 @@ void GameManager::deleteAllActors()
 {
 	this->actors.clear();
 }
+

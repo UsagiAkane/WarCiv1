@@ -33,7 +33,7 @@ private:
 	int science;
 	int playerID;
 public:
-	Town(int positionX = 0, int positionY = 0, std::string name = "noName town");
+	Town(int positionX = 0, int positionY = 0, std::string name = "NoNameTown");
 
 	//functions that can be changed
 	//void attackTake();
@@ -71,6 +71,7 @@ public:
 	void setPopulation_limit(int population_limit);
 	void setScience(int science);
 	void setName(std::string name);
+	void setDamage(int damage);
 	//needed
 	void draw(sf::RenderWindow& w);
 	void endOfTurn(Map& map);

@@ -215,6 +215,11 @@ void Actor::setUnitVector(std::vector<Unit> units)
 	this->units = units;
 }
 
+void Actor::setUnitTown(std::vector<Town> towns)
+{
+	this->towns = towns;
+}
+
 #pragma endregion
 
 void Actor::endOfTurn(Map& map)

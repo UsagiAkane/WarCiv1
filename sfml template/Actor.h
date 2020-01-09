@@ -51,6 +51,7 @@ public:
 	void setTotalGold(int totalGold);
 	void setTotalScience(int totalScience);
 	void setUnitVector(std::vector<Unit>units);
+	void setUnitTown(std::vector<Town>towns);
 
 
 	//Methods
