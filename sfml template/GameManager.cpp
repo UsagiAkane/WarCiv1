@@ -2,17 +2,12 @@
 
 GameManager::GameManager()
 {
-	//this->map
-
 	Actor* player = new Actor("player", this->map);
 	player->setPlayerID(1);
 	Settlers* firstS = new Settlers;
 	firstS->setPlayerID(player->getPlayerID());
 	firstS->spawn(128, 160, this->map);
 	player->__PUSH_UNIT_DEBUG(firstS);
-
-
-
 
 	//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 	Actor* enemyActor = new Actor("Ruslan", map);
@@ -34,7 +29,6 @@ GameManager::GameManager()
 	enemyActor->__PUSH_TOWN_DEBUG(townEnemy);
 	//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 
-
 	Actor* third = new Actor("Vova", map);
 	third->setPlayerID(3);
 	Settlers* settlers3 = new Settlers;
@@ -46,11 +40,9 @@ GameManager::GameManager()
 	third->__PUSH_UNIT_DEBUG(settlers3);
 	third->__PUSH_UNIT_DEBUG(legionEnemy3);
 
-
 	this->actors.push_back(*player);
 	this->actors.push_back(*enemyActor);
 	this->actors.push_back(*third);
-
 
 	this->currentYear = -4000;
 }
@@ -70,7 +62,7 @@ void GameManager::setYear(int year)
 	this->currentYear = year;
 }
 
-int GameManager::getYear()
+int& GameManager::getYear()
 {
 	return this->currentYear;
 }
@@ -80,6 +72,10 @@ void GameManager::draw(sf::RenderWindow& w)
 	map.draw(w);
 	for (auto i : this->actors)
 		i.draw(w);
+	//if(IsMenu)
+	ui.resize(w);
+	ui.setParams(this->actors[0].getTotalGold(), this->actors[0].getTotalScience(), (this->currentYear + 4000) / 5, this->currentYear);
+	this->ui.draw(w);
 }
 
 Actor& GameManager::findActor(int ID)
@@ -109,8 +105,6 @@ void GameManager::saveGame()
 		i.saveTotalnfo();
 	}
 }
-
-
 
 #pragma region UNitsMap_LOAD
 //find digit from heap
@@ -633,14 +627,12 @@ int getIntFromStringByIndexTowns(std::string com, int index)
 			time += com[i];
 		}
 
-		
-		
+
+
 	}
 	return stoi(time);
 }
 #pragma endregion
-
-
 
 std::vector<Town> getTownVectorByActorInd(int actorInd)
 {
@@ -652,10 +644,10 @@ std::vector<Town> getTownVectorByActorInd(int actorInd)
 		std::string slisedStr = sliseStrings(preSlisedStr, i + 1);
 		Town* town = new Town;
 		town->setPlayer_id(getIntFromStringByIndexTowns(slisedStr, 2));
-		town->setPosition(getIntFromStringByIndexTowns(slisedStr, 3),getIntFromStringByIndexTowns(slisedStr, 4));
+		town->setPosition(getIntFromStringByIndexTowns(slisedStr, 3), getIntFromStringByIndexTowns(slisedStr, 4));
 		town->setHealth(getIntFromStringByIndexTowns(slisedStr, 5));
 		town->setDamage(getIntFromStringByIndexTowns(slisedStr, 6));
-		town->setPopulation(getIntFromStringByIndexTowns(slisedStr,7));
+		town->setPopulation(getIntFromStringByIndexTowns(slisedStr, 7));
 		town->setPopulation_limit(getIntFromStringByIndexTowns(slisedStr, 8));
 		town->setProduction(getIntFromStringByIndexTowns(slisedStr, 9));
 		town->setTrade(getIntFromStringByIndexTowns(slisedStr, 10));
@@ -687,7 +679,7 @@ void GameManager::loadGame()
 			this->actors[i - 1].setUnitVector(getUnitVectorByActorInd(i));
 
 
-				this->actors[i-1].setUnitTown(getTownVectorByActorInd(i));
+			this->actors[i - 1].setUnitTown(getTownVectorByActorInd(i));
 
 
 

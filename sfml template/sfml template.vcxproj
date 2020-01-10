@@ -190,6 +190,7 @@
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Town.cpp" />
     <ClCompile Include="Trade.cpp" />
+    <ClCompile Include="Ui.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="WindowManager.cpp" />
     <ClCompile Include="Writing.cpp" />
@@ -238,6 +239,7 @@
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Town.h" />
     <ClInclude Include="Trade.h" />
+    <ClInclude Include="Ui.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="WindowManager.h" />
     <ClInclude Include="Writing.h" />

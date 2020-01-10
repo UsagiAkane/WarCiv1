@@ -29,7 +29,7 @@ public:
 	void __PUSH_UNIT_DEBUG(Unit* unit);
 	void __PUSH_TOWN_DEBUG(Town* town);
 	//--------------
-	void takeControl(sf::Event event, Map& map, sf::RenderWindow& w);
+	void takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& year);
 	void draw(sf::RenderWindow& w);
 	void takeTax();
 	void pushbackEnemyID(int id);

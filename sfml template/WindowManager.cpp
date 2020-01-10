@@ -1,7 +1,7 @@
 #include "WindowManager.h"
 
 
-WindowManager::WindowManager(){
+WindowManager::WindowManager() {
 	this->w.create(sf::VideoMode(1000, 600), "WC"/*, sf::Style::Fullscreen*/);
 	this->w.setFramerateLimit(60);
 }
@@ -20,6 +20,7 @@ void WindowManager::newGameWindow() {
 				cameraControl(view, w);
 
 
+		
 
 			while (w.pollEvent(event)) {
 				//CLOSE--------------
@@ -44,7 +45,7 @@ void WindowManager::newGameWindow() {
 					if (isMouseInWindow(w))
 					{
 						//all other control
-						game.getActors().at(0).takeControl(event, game.getMap(), w);
+						game.getActors().at(0).takeControl(event, game.getMap(), w, game.getYear());
 						if (sf::Mouse::isButtonPressed(sf::Mouse::Left))//If you want to attack or move unit
 						{
 							if (event.MouseButtonReleased)
@@ -73,7 +74,7 @@ void WindowManager::newGameWindow() {
 	}
 }
 
-void WindowManager::gameMenu(sf::RenderWindow& w, GameManager& game){
+void WindowManager::gameMenu(sf::RenderWindow& w, GameManager& game) {
 	sf::Texture menuTexture1;
 	menuTexture1.loadFromFile("Icons\\menu.png");
 	sf::Sprite bContinue(menuTexture1), bSaveGame(menuTexture1), bExit(menuTexture1), bLoadGame(menuTexture1);

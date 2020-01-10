@@ -269,6 +269,7 @@
       <Filter>System\WindowManager</Filter>
     </ClCompile>
     <ClCompile Include="Plains.cpp" />
+    <ClCompile Include="Ui.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resourses.h">
@@ -407,5 +408,6 @@
       <Filter>System\WindowManager</Filter>
     </ClInclude>
     <ClInclude Include="Plains.h" />
+    <ClInclude Include="Ui.h" />
   </ItemGroup>
 </Project>
