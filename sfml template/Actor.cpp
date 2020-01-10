@@ -16,10 +16,7 @@ void Actor::__SHOW_INFO_DEBUG()
 	std::cout << this->playerID << std::endl;
 	std::cout << this->totalGold << std::endl;
 	std::cout << this->totalScience << std::endl;
-	//std::cout << this-> << std::endl;
-	//std::cout << this-> << std::endl;
-	//std::cout << this-> << std::endl;
-	//std::cout << this-> << std::endl;
+
 }
 
 void Actor::__PUSH_UNIT_DEBUG(Unit* unit) { this->units.push_back(*unit); }
