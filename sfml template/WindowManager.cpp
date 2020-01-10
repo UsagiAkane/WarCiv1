@@ -1,18 +1,14 @@
 #include "WindowManager.h"
 
 
-WindowManager::WindowManager()
-{
+WindowManager::WindowManager(){
 	this->w.create(sf::VideoMode(1000, 600), "WC"/*, sf::Style::Fullscreen*/);
 	this->w.setFramerateLimit(60);
-
 }
 
 void WindowManager::newGameWindow() {
-
 	try {
 		GameManager game;
-
 		sf::View view(w.getView());
 
 		while (w.isOpen()) {
@@ -38,7 +34,9 @@ void WindowManager::newGameWindow() {
 						else isMenu = 1;
 					}
 				}
-
+				if (event.type == sf::Event::Resized) {
+					view.setSize(sf::Vector2f(event.size.width, event.size.height));
+				}
 
 				if (!isMenu)
 				{
@@ -63,7 +61,7 @@ void WindowManager::newGameWindow() {
 			game.draw(w);
 
 			if (isMenu)
-				gameMenu(w,game);
+				gameMenu(w, game);
 
 			//DISPLAY
 			w.display();
@@ -75,8 +73,7 @@ void WindowManager::newGameWindow() {
 	}
 }
 
-void WindowManager::gameMenu(sf::RenderWindow& w, GameManager & game)
-{
+void WindowManager::gameMenu(sf::RenderWindow& w, GameManager& game){
 	sf::Texture menuTexture1;
 	menuTexture1.loadFromFile("Icons\\menu.png");
 	sf::Sprite bContinue(menuTexture1), bSaveGame(menuTexture1), bExit(menuTexture1), bLoadGame(menuTexture1);
@@ -124,8 +121,6 @@ void WindowManager::gameMenu(sf::RenderWindow& w, GameManager & game)
 	tLoadGame.setPosition(static_cast<float>(bLoadGame.getPosition().x + 100 * bLoadGame.getScale().x), static_cast<float>(bLoadGame.getPosition().y + 15));
 	tExit.setPosition(static_cast<float>(bExit.getPosition().x + 100 * bExit.getScale().x), static_cast<float>(bExit.getPosition().y + 15));
 
-
-
 	while (isMenu)
 	{
 		sf::Event ev;
@@ -166,8 +161,8 @@ void WindowManager::gameMenu(sf::RenderWindow& w, GameManager & game)
 							game.saveGame();
 						if ((sf::IntRect(sf::FloatRect(bLoadGame.getGlobalBounds().left - w.getView().getCenter().x + w.getSize().x / 2, bLoadGame.getGlobalBounds().top - w.getView().getCenter().y + w.getSize().y / 2, bLoadGame.getGlobalBounds().width, bLoadGame.getGlobalBounds().height)).contains(sf::Mouse::getPosition(w))))
 							game.loadGame();
-				
-						
+
+
 
 					}
 				}
@@ -317,14 +312,14 @@ void WindowManager::mainMenu(sf::RenderWindow& w)
 						{
 							isMenu = false;
 						}
-						
-						
+
+
 					}
 				}
 			}
 
 		}
-		
+
 
 
 
