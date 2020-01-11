@@ -386,9 +386,6 @@
     <ClInclude Include="Barracks.h">
       <Filter>Buildings\Child\Barracks</Filter>
     </ClInclude>
-    <ClInclude Include="Marketplace.h">
-      <Filter>Buildings\Child\Marketplace</Filter>
-    </ClInclude>
     <ClInclude Include="CityWalls.h">
       <Filter>Buildings\Child\CityWalls</Filter>
     </ClInclude>
@@ -409,5 +406,8 @@
     </ClInclude>
     <ClInclude Include="Plains.h" />
     <ClInclude Include="Ui.h" />
+    <ClInclude Include="Marketplace.h">
+      <Filter>Buildings\Child\Marketplace</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
