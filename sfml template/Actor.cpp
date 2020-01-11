@@ -25,7 +25,7 @@ void Actor::__SHOW_INFO_DEBUG()
 void Actor::__PUSH_UNIT_DEBUG(Unit* unit) { this->units.push_back(*unit); }
 void Actor::__PUSH_TOWN_DEBUG(Town* town) { this->towns.push_back(*town); }
 
-void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w,int& year) {
+void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& year) {
 	//to make camera dynamic
 	int mouse_x = sf::Mouse::getPosition(w).x + (w.getView().getCenter().x - w.getSize().x / 2);
 	int mouse_y = sf::Mouse::getPosition(w).y + (w.getView().getCenter().y - w.getSize().y / 2);
@@ -131,11 +131,38 @@ void Actor::pushbackEnemyID(int ID)
 
 void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, std::vector<Unit>& EnemyUnitVector)
 {
+
+	//this->units.at(this->unitController).move(sf::Mouse::getPosition(w).x + (w.getView().getCenter().x - w.getSize().x / 2), sf::Mouse::getPosition(w).y + (w.getView().getCenter().y - w.getSize().y / 2), map, this->enemyListID, EnemyUnitVector, w);
+	//CHECK IS VECTOR EMTPY
 	if (this->units.size() > 0) {
+
+		//===================================================================VARIABLES
+        //Dynamic pos for mouse
+		int mouse_x = sf::Mouse::getPosition(w).x + (w.getView().getCenter().x - w.getSize().x / 2);
+		int mouse_y = sf::Mouse::getPosition(w).y + (w.getView().getCenter().y - w.getSize().y / 2);
+		//Pos for unit
+		int UnPosX = this->units.at(this->unitController).getPositionX();
+		int UnPosY = this->units.at(this->unitController).getPositionY();
+		//===================================================================
+
+		//CHECK IS UNIT ALIVE
 		if (this->units.at(this->unitController).getIsAlive() == true)
-			this->units.at(this->unitController).move(sf::Mouse::getPosition(w).x + (w.getView().getCenter().x - w.getSize().x / 2), sf::Mouse::getPosition(w).y + (w.getView().getCenter().y - w.getSize().y / 2), map, this->enemyListID, EnemyUnitVector, w);
+		{
+			if (map.getTile(mouse_x, mouse_y).getMove() <= this->units.at(this->unitController).getSteps())
+			{
+				if (((mouse_x <= UnPosX + BORDER_PIXEL_60 && mouse_x >= UnPosX + BORDER_PIXEL_30) && (mouse_y >= UnPosY && mouse_y <= UnPosY + BORDER_PIXEL_30)))//check position of mouse
+				{
+					checkIsEnemy(mouse_x, mouse_y, map, EnemyUnitVector, w, 1);
+
+				}
+			}
+
+		}
+		//if not alive remove it
 		else {
+			//erase from unit vector
 			this->units.erase(this->unitController + this->units.begin());
+			//set unit controll to 0
 			this->unitController = 0;
 		}
 	}
@@ -304,4 +331,38 @@ void Actor::saveTotalnfo()
 	saveActorInfo();
 	saveTowns();
 	saveUnits();
+}
+
+void Actor::checkIsEnemy(int mouse_x, int mouse_y, Map& map, std::vector<Unit>& enemies, sf::RenderWindow& w, int direction)
+{
+	int time = 0;//variable that show which unit you need to attack
+	bool tmp = true;
+	for (auto i : this->enemyListID)//try to find enemy in enemy vector
+	{
+		if (i == (map.getUnitInd(mouse_x, mouse_y) / 100))//compare id of all players and enemies id
+		{
+			for (auto j : enemies)//
+			{
+
+				if (j.getIndex() == (map.getUnitInd(mouse_x, mouse_y) % 100))//find enemy in enemy vector
+				{
+					tmp = false;
+					this->units.at(unitController).attack(enemies.at(time), map, mouse_x, mouse_y);//attack him
+					this->units.at(unitController).animationOfAttack(direction, w, map);
+					break;
+				}
+				time++;
+			}
+			break;
+		}
+
+	}
+	if (map.getUnitInd(mouse_x, mouse_y) / 100 != this->playerID && map.getUnitInd(mouse_x, mouse_y) != 0 && tmp == true)
+	{
+		enemyListID.push_back(map.getUnitInd(mouse_x, mouse_y) / 100);
+		std::cout << "YOU START WAR" << std::endl;
+		std::cout << map.getUnitInd(mouse_x, mouse_y) / 100 << std::endl;
+	}
+
+
 }

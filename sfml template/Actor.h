@@ -61,6 +61,7 @@ public:
 	virtual std::string getSaveActorInfo();
 	virtual void saveActorInfo();
 	virtual void saveTotalnfo();
+	virtual void checkIsEnemy(int mouse_x, int mouse_y, Map& map, std::vector<Unit>& enemies, sf::RenderWindow& w, int direction);
 
 
 

@@ -131,6 +131,9 @@
     <Filter Include="Buildings\Child\Library">
       <UniqueIdentifier>{479fb0a5-5145-4939-964c-8fbc221ec096}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{f6392d5d-7037-46a7-b1fb-42cc3b5ee801}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Resourses.cpp">
@@ -269,7 +272,9 @@
       <Filter>System\WindowManager</Filter>
     </ClCompile>
     <ClCompile Include="Plains.cpp" />
-    <ClCompile Include="Ui.cpp" />
+    <ClCompile Include="Ui.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resourses.h">
@@ -408,6 +413,8 @@
       <Filter>System\WindowManager</Filter>
     </ClInclude>
     <ClInclude Include="Plains.h" />
-    <ClInclude Include="Ui.h" />
+    <ClInclude Include="Ui.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
