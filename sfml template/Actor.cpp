@@ -131,11 +131,9 @@ void Actor::pushbackEnemyID(int ID)
 
 void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, std::vector<Unit>& EnemyUnitVector)
 {
-
-	//this->units.at(this->unitController).move(sf::Mouse::getPosition(w).x + (w.getView().getCenter().x - w.getSize().x / 2), sf::Mouse::getPosition(w).y + (w.getView().getCenter().y - w.getSize().y / 2), map, this->enemyListID, EnemyUnitVector, w);
 	//CHECK IS VECTOR EMTPY
-	if (this->units.size() > 0) {
-
+	if (this->units.size() > 0)
+	{
 		//===================================================================VARIABLES
         //Dynamic pos for mouse
 		int mouse_x = sf::Mouse::getPosition(w).x + (w.getView().getCenter().x - w.getSize().x / 2);
@@ -148,15 +146,55 @@ void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, std:
 		//CHECK IS UNIT ALIVE
 		if (this->units.at(this->unitController).getIsAlive() == true)
 		{
-			if (map.getTile(mouse_x, mouse_y).getMove() <= this->units.at(this->unitController).getSteps())
+			//top
+			//check position of mouse
+			if (((mouse_x <= UnPosX + BORDER_PIXEL_60 && mouse_x >= UnPosX + BORDER_PIXEL_30) && (mouse_y >= UnPosY && mouse_y <= UnPosY + BORDER_PIXEL_30)))
 			{
-				if (((mouse_x <= UnPosX + BORDER_PIXEL_60 && mouse_x >= UnPosX + BORDER_PIXEL_30) && (mouse_y >= UnPosY && mouse_y <= UnPosY + BORDER_PIXEL_30)))//check position of mouse
+				//Check does can unit go on tile
+				if (map.getTile(mouse_x, mouse_y).getMove() <= this->units.at(this->unitController).getSteps())
 				{
-					checkIsEnemy(mouse_x, mouse_y, map, EnemyUnitVector, w, 1);
-
+					if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit to attack
+					checkIsEnemy(mouse_x, mouse_y, map, EnemyUnitVector, w, 1);//try to attack if it's enemy
+					if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
+						this->units.at(this->unitController).moveRightHidden(map, mouse_x, mouse_y);//move to this position if empty;
 				}
 			}
+			//left
+			//check position of mouse
+			else if ((((mouse_x >= UnPosX - BORDER_PIXEL_30 && mouse_x <= UnPosX) && (mouse_y >= UnPosY && mouse_y <= UnPosY + BORDER_PIXEL_30))))
+			{
+				//Check does can unit go on tile
+				if (map.getTile(mouse_x, mouse_y).getMove() <= this->units.at(this->unitController).getSteps())
+				{
+					if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit to attack
+						checkIsEnemy(mouse_x, mouse_y, map, EnemyUnitVector, w, 2);//try to attack if it's enemy
+					if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
+						this->units.at(this->unitController).moveLeftHidden(map, mouse_x, mouse_y);//move to this position if empty;
+				}
+			}
+			else if ((mouse_y >= UnPosY - BORDER_PIXEL_30 && mouse_y <= UnPosY) && (mouse_x >= UnPosX && mouse_x <= UnPosX + BORDER_PIXEL_30))//check position of mouse
+			{
+				//Check does can unit go on tile
+				if (map.getTile(mouse_x, mouse_y).getMove() <= this->units.at(this->unitController).getSteps())
+				{
+					if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit to attack
+						checkIsEnemy(mouse_x, mouse_y, map, EnemyUnitVector, w, 3);//try to attack if it's enemy
+					if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
+						this->units.at(this->unitController).moveTopHidden(map, mouse_x, mouse_y);//move to this position if empty;
+				}
 
+			}
+			else if ((mouse_y <= UnPosY + BORDER_PIXEL_60 && mouse_y >= UnPosY + BORDER_PIXEL_30) && (mouse_x >= UnPosX && mouse_x <= UnPosX + BORDER_PIXEL_30))//check position of mouse
+			{
+				if (map.getTile(mouse_x, mouse_y).getMove() <= this->units.at(this->unitController).getSteps())
+				{
+					if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit to attack
+						checkIsEnemy(mouse_x, mouse_y, map, EnemyUnitVector, w, 4);//try to attack if it's enemy
+					if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
+						this->units.at(this->unitController).moveDownHidden(map, mouse_x, mouse_y);//move to this position if empty;
+				}
+			}
+			this->units.at(this->unitController).checkUpUnit();
 		}
 		//if not alive remove it
 		else {

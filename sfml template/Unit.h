@@ -42,10 +42,6 @@ protected:
 	//functions to call inside
 	void checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::vector<int> &enemies_id, std::vector<Unit> &enemies, sf::RenderWindow& w, int direction);
 
-	void moveRightHidden(Map& map, int mouse_x, int mouse_y);
-	void moveLeftHidden(Map& map, int mouse_x, int mouse_y);
-	void moveDownHidden(Map& map, int mouse_x, int mouse_y);
-	void moveTopHidden(Map& map, int mouse_x, int mouse_y);
 
 public:
 	//constuctor
@@ -100,6 +96,11 @@ public:
 	bool isEnemyInEnemyIdList(std::vector<Unit> enemies_id);
 	std::string getSaveUnitInfo();
 	void animationOfAttack(int value, sf::RenderWindow& w, Map& map);
+	void moveRightHidden(Map& map, int mouse_x, int mouse_y);
+	void moveLeftHidden(Map& map, int mouse_x, int mouse_y);
+	void moveDownHidden(Map& map, int mouse_x, int mouse_y);
+	void moveTopHidden(Map& map, int mouse_x, int mouse_y);
+
 	//find
     void delByPositionInVector(std::vector<Unit>&units);
 	int findIndexOfEnemy(int mouse_x, int mouse_y,Map&map);
