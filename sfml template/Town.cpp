@@ -23,6 +23,8 @@ Town::Town(int positionX, int positionY, std::string name) {
 	this->science = 0;
 }
 
+
+
 void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
 	Settlers* settlers = new Settlers();
 	Militia* militia = new Militia();

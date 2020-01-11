@@ -458,7 +458,15 @@ void Actor::unitAttackTown(int mouse_x, int mouse_y, Map& map, std::vector<Town>
 			
 					if (townsEnemy.at(time).getHealth() <= 0)
 					{
+						townsEnemy[time].setPlayer_id(1);
+						townsEnemy[time].setColorByID();
+						townsEnemy[time].setHealth(10);
+						towns.push_back(townsEnemy[time]);
 						townsEnemy.erase(townsEnemy.begin() + time);
+				/*		for (int i = 0; i < this->towns.size(); i++)
+						{
+							std::cout<<i<<"." <<"Town pos: "<<towns[i].getPositionX() << std::endl;
+						}*/
 					}
 	
 					//
