@@ -326,6 +326,17 @@ void Map::__getInfo_DEBUG(int x, int y)
 		}
 	}
 }
+void Map::reTakeTown(int x, int y, int newPlayerID)
+{
+
+	x /= 32;
+	y /= 32;
+
+	int tmp = units.at(x).at(y) % 100;
+	tmp += (newPlayerID * 100);
+	units.at(x).at(y) = tmp;
+
+}
 void Map::draw(sf::RenderWindow& w) {
 	Hills hill;
 	Forest forest;
