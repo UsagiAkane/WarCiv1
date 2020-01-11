@@ -421,37 +421,49 @@ void Actor::checkIsEnemy(int mouse_x, int mouse_y, Map& map, std::vector<Unit>& 
 
 void Actor::unitAttackTown(int mouse_x, int mouse_y, Map& map, std::vector<Town>& townsEnemy,sf::RenderWindow & w, int direction)
 {
-	std::cout <<"Here we come for check" << std::endl;
 	int time = 0;//variable that show which unit you need to attack
 	bool tmp = true;
 	for (auto i : this->enemyListID)//try to find enemy in enemy vector
 	{
 		if (i == (map.getUnitInd(mouse_x, mouse_y) / 100))//compare id of all players and enemies id
 		{
-			for (auto j : townsEnemy)//
+			for (auto j : townsEnemy)
 			{
 				//doesn't work correct
 				if (map.getUnitInd(j.getPositionX(),j.getPositionY())== map.getUnitInd(mouse_x,mouse_y))//find enemy in enemy vector
 				{
+					//animation
 					this->units.at(this->unitController).animationOfAttack(1,w,map);
-			/*		this->units.at(unitController).animationOfAttack(1,w,map);*/
-					townsEnemy.at(time).setHealth(townsEnemy.at(time).getHealth()-(this->units.at(this->unitController).getDamage()));
-					std::cout << "Here we come for check  22222222222222" << std::endl;
-					std::cout <<"Unit controller: "<<unitController << std::endl;
-					this->units.at(this->unitController).setHealth(this->units.at(this->unitController).getHealth() - (townsEnemy.at(time).getDamage()));
-					std::cout << "-------------------------------------------------------------" << std::endl;
+					//damage to town
+					if (this->units.at(this->unitController).getDamage() - map.getTile(mouse_x,mouse_y).getDefense() > 0)
+					{
+						//if damage more than defense it will attack on full damage- defense
+						townsEnemy.at(time).setHealth(townsEnemy.at(time).getHealth() - (this->units.at(this->unitController).getDamage() - map.getTile(mouse_x, mouse_y).getDefense()));
+					}
+					else
+					{
+						//if damage is less than armor you will damage only 1 
+					    std::cout <<"------------------------------------------------"<<std::endl;
+					    std::cout <<"Position of town was so good, you damaged only 1"<<std::endl;
+					    std::cout <<"------------------------------------------------"<<std::endl;
+						townsEnemy.at(time).setHealth(townsEnemy.at(time).getHealth() - 1);
+					}
+					
+					if (this->units.at(this->unitController).getArmor() <= 0)
+					{
+						this->units.at(this->unitController).setHealth(this->units.at(this->unitController).getHealth() - (townsEnemy.at(time).getDamage())- this->units.at(this->unitController).getArmor());
+					}
+					else
+					this->units.at(this->unitController).setArmor(this->units.at(this->unitController).getArmor()- townsEnemy.at(time).getDamage());
 			
 					if (townsEnemy.at(time).getHealth() <= 0)
 					{
-						std::cout <<"Town: "<< townsEnemy.at(time).getName() << "was destroyed by player"<< this->playerID << std::endl;
 						townsEnemy.erase(townsEnemy.begin() + time);
 					}
 	
 					if (this->units.at(this->unitController).getHealth() <= 0)
 					{
-					
 						this->units.at(this->unitController).death(map);
-						
 					}
 		
 					
