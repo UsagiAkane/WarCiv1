@@ -57,6 +57,7 @@ public:
 	int getPlayer_id();
 	int getPopulation_limit();
 	int getScience();
+	int getDamage();
 	std::string getName();
 	//setters 
 	void setPosition(int x, int y);

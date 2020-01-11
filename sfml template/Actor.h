@@ -40,6 +40,7 @@ public:
 	std::vector<int> getAlliesListID();
 	std::string getName();
 	std::vector<Town> getTowns();
+	std::vector<Town>& getTownsLink();
 	std::vector<Unit>& getUnits();
 	std::vector<Technologies> getTech();
 	std::vector<Unit>& getUnitsVec();
@@ -63,6 +64,7 @@ public:
 	virtual void saveActorInfo();
 	virtual void saveTotalnfo();
 	virtual void checkIsEnemy(int mouse_x, int mouse_y, Map& map, std::vector<Unit>& enemies, sf::RenderWindow& w, int direction);
+	virtual void unitAttackTown(int mouse_x, int mouse_y,Map& map, std::vector<Town> & townsEnemy, sf::RenderWindow& w, int direction);
 
 
 

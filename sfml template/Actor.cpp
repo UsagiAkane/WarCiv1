@@ -19,10 +19,6 @@ void Actor::__SHOW_INFO_DEBUG()
 	std::cout << this->playerID << std::endl;
 	std::cout << this->totalGold << std::endl;
 	std::cout << this->totalScience << std::endl;
-	//std::cout << this-> << std::endl;
-	//std::cout << this-> << std::endl;
-	//std::cout << this-> << std::endl;
-	//std::cout << this-> << std::endl;
 }
 
 void Actor::__PUSH_UNIT_DEBUG(Unit* unit) { this->units.push_back(*unit); }
@@ -155,7 +151,7 @@ void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, Acto
 		//===================================================================
 
 		//CHECK IS UNIT ALIVE
-		if (this->units.at(this->unitController).getIsAlive() == true)
+		if (this->units.at(this->unitController).getHealth() > 0)
 		{
 			//top
 			//check position of mouse
@@ -164,8 +160,10 @@ void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, Acto
 				//Check does can unit go on tile
 				if (map.getTile(mouse_x, mouse_y).getMove() <= this->units.at(this->unitController).getSteps())
 				{
-					if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit to attack
-						checkIsEnemy(mouse_x, mouse_y, map, actorEnemy.getUnitsVec() , w, 1);//try to attack if it's enemy
+					if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0 && (map.getUnitInd(mouse_x, mouse_y)) / 10 % 10 != 5)//check index of unit to attack
+						checkIsEnemy(mouse_x, mouse_y, map, actorEnemy.getUnitsVec(), w, 1);//try to attack if it's enemy
+					else if ((map.getUnitInd(mouse_x, mouse_y)) / 10 % 10 == 5 && !(map.getTile(mouse_x, mouse_y).isWater()))
+						unitAttackTown(mouse_x, mouse_y, map, actorEnemy.getTownsLink(),w,1);
 					if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
 						this->units.at(this->unitController).moveRightHidden(map, mouse_x, mouse_y);//move to this position if empty;
 				}
@@ -239,6 +237,11 @@ std::string Actor::getName()
 }
 
 std::vector<Town> Actor::getTowns()
+{
+	return this->towns;
+}
+
+std::vector<Town>& Actor::getTownsLink()
 {
 	return this->towns;
 }
@@ -414,4 +417,57 @@ void Actor::checkIsEnemy(int mouse_x, int mouse_y, Map& map, std::vector<Unit>& 
 	}
 
 
+}
+
+void Actor::unitAttackTown(int mouse_x, int mouse_y, Map& map, std::vector<Town>& townsEnemy,sf::RenderWindow & w, int direction)
+{
+	std::cout <<"Here we come for check" << std::endl;
+	int time = 0;//variable that show which unit you need to attack
+	bool tmp = true;
+	for (auto i : this->enemyListID)//try to find enemy in enemy vector
+	{
+		if (i == (map.getUnitInd(mouse_x, mouse_y) / 100))//compare id of all players and enemies id
+		{
+			for (auto j : townsEnemy)//
+			{
+				//doesn't work correct
+				if (map.getUnitInd(j.getPositionX(),j.getPositionY())== map.getUnitInd(mouse_x,mouse_y))//find enemy in enemy vector
+				{
+					this->units.at(this->unitController).animationOfAttack(1,w,map);
+			/*		this->units.at(unitController).animationOfAttack(1,w,map);*/
+					townsEnemy.at(time).setHealth(townsEnemy.at(time).getHealth()-(this->units.at(this->unitController).getDamage()));
+					std::cout << "Here we come for check  22222222222222" << std::endl;
+					std::cout <<"Unit controller: "<<unitController << std::endl;
+					this->units.at(this->unitController).setHealth(this->units.at(this->unitController).getHealth() - (townsEnemy.at(time).getDamage()));
+					std::cout << "-------------------------------------------------------------" << std::endl;
+			
+					if (townsEnemy.at(time).getHealth() <= 0)
+					{
+						std::cout <<"Town: "<< townsEnemy.at(time).getName() << "was destroyed by player"<< this->playerID << std::endl;
+						townsEnemy.erase(townsEnemy.begin() + time);
+					}
+	
+					if (this->units.at(this->unitController).getHealth() <= 0)
+					{
+					
+						this->units.at(this->unitController).death(map);
+						
+					}
+		
+					
+					tmp = false;
+					break;
+				}
+				time++;
+			}
+			break;
+		}
+
+	}
+	if (map.getUnitInd(mouse_x, mouse_y) / 100 != this->playerID && map.getUnitInd(mouse_x, mouse_y) != 0 && tmp == true)
+	{
+		enemyListID.push_back(map.getUnitInd(mouse_x, mouse_y) / 100);
+		std::cout << "YOU START WAR (TOWN)" << std::endl;
+		std::cout << map.getUnitInd(mouse_x, mouse_y) / 100 << std::endl;
+	}
 }

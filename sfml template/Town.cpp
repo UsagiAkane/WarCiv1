@@ -218,6 +218,10 @@ int Town::getPlayer_id() {
 int Town::getScience() {
 	return this->science;
 }
+int Town::getDamage()
+{
+	return this->damage;
+}
 std::string Town::getName() {
 	return this->name;
 }
