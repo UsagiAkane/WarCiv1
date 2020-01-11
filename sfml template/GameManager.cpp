@@ -27,6 +27,10 @@ GameManager::GameManager()
 	townEnemy->setPlayer_id(2);
 	townEnemy->spawn(32 * 5, 32 * 6, this->map);
 	enemyActor->__PUSH_TOWN_DEBUG(townEnemy);
+	Town* townEnemy2 = new Town;
+	townEnemy2->setPlayer_id(2);
+	townEnemy2->spawn(32 * 7, 32 * 7, this->map);
+	enemyActor->__PUSH_TOWN_DEBUG(townEnemy2);
 	//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 
 	Actor* third = new Actor("Vova", map);
@@ -93,8 +97,8 @@ Actor& GameManager::findActor(int mouse_x, int mouse_y)
 
 	if ((map.getUnitInd(mouse_x, mouse_y)) / 100 != 0 && (map.getUnitInd(mouse_x, mouse_y)) / 100 != this->actors.at(0).getPlayerID()) //check index of unit
 		return findActorHidden((map.getUnitInd(mouse_x, mouse_y)) / 100);
-	else
-		std::cout << "CAN'T FIND UNIT" << std::endl;
+	//else
+	/*	std::cout << "CAN'T FIND UNIT" << std::endl;*/
 }
 
 void GameManager::saveGame()

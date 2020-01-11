@@ -461,6 +461,7 @@ void Actor::unitAttackTown(int mouse_x, int mouse_y, Map& map, std::vector<Town>
 						townsEnemy.erase(townsEnemy.begin() + time);
 					}
 	
+					//
 					if (this->units.at(this->unitController).getHealth() <= 0)
 					{
 						this->units.at(this->unitController).death(map);
