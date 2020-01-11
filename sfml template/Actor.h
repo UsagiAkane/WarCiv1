@@ -8,6 +8,7 @@
 class Actor {
 	////WorldStat wStat;
 	int playerID;
+	sf::Sprite target;
 	std::vector<int> enemyListID;
 	std::vector<int> alliesListID;
 	std::string name;

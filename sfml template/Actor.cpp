@@ -8,6 +8,9 @@ Actor::Actor(std::string name, Map& map, int playerID) {
 	this->totalScience = 0;
 	this->unitController = 0;
 	this->townController = 0;
+	sf::Texture* tmp = new sf::Texture;
+	tmp->loadFromFile("Icons\\target.png");
+	this->target.setTexture(*tmp);
 }
 
 void Actor::__SHOW_INFO_DEBUG()
@@ -51,8 +54,10 @@ void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& yea
 			//UNIT-TARGET--------
 		case sf::Keyboard::Right:
 			this->unitController++;
+	
 			if (this->unitController >= static_cast<int>(this->units.size()))
 				this->unitController = 0;
+	
 			break;
 			//CREATE-TOWN--------
 		case sf::Keyboard::W:
@@ -113,6 +118,12 @@ void Actor::draw(sf::RenderWindow& w)
 	//UNITS-DRAW
 	for (auto i : this->units) {
 		i.draw(w);
+	}
+	
+	if (units.size() > 0 && this->playerID == 1)
+	{
+		target.setPosition(units.at(unitController).getSprite().getPosition());
+		w.draw(target);
 	}
 }
 
