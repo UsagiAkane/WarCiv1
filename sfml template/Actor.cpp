@@ -129,7 +129,7 @@ void Actor::pushbackEnemyID(int ID)
 	this->enemyListID.push_back(ID);
 }
 
-void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, std::vector<Unit>& EnemyUnitVector)
+void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, Actor& actorEnemy)
 {
 	//CHECK IS VECTOR EMTPY
 	if (this->units.size() > 0)
@@ -154,20 +154,20 @@ void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, std:
 				if (map.getTile(mouse_x, mouse_y).getMove() <= this->units.at(this->unitController).getSteps())
 				{
 					if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit to attack
-					checkIsEnemy(mouse_x, mouse_y, map, EnemyUnitVector, w, 1);//try to attack if it's enemy
+						checkIsEnemy(mouse_x, mouse_y, map, actorEnemy.getUnitsVec() , w, 1);//try to attack if it's enemy
 					if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
 						this->units.at(this->unitController).moveRightHidden(map, mouse_x, mouse_y);//move to this position if empty;
 				}
 			}
 			//left
 			//check position of mouse
-			else if ((((mouse_x >= UnPosX - BORDER_PIXEL_30 && mouse_x <= UnPosX) && (mouse_y >= UnPosY && mouse_y <= UnPosY + BORDER_PIXEL_30))))
+			else if (((mouse_x >= UnPosX - BORDER_PIXEL_30 && mouse_x <=UnPosX) && (mouse_y >= UnPosY && mouse_y <=UnPosY + BORDER_PIXEL_30)))
 			{
 				//Check does can unit go on tile
 				if (map.getTile(mouse_x, mouse_y).getMove() <= this->units.at(this->unitController).getSteps())
 				{
 					if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit to attack
-						checkIsEnemy(mouse_x, mouse_y, map, EnemyUnitVector, w, 2);//try to attack if it's enemy
+						checkIsEnemy(mouse_x, mouse_y, map, actorEnemy.getUnitsVec(), w, 2);//try to attack if it's enemy
 					if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
 						this->units.at(this->unitController).moveLeftHidden(map, mouse_x, mouse_y);//move to this position if empty;
 				}
@@ -178,7 +178,7 @@ void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, std:
 				if (map.getTile(mouse_x, mouse_y).getMove() <= this->units.at(this->unitController).getSteps())
 				{
 					if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit to attack
-						checkIsEnemy(mouse_x, mouse_y, map, EnemyUnitVector, w, 3);//try to attack if it's enemy
+						checkIsEnemy(mouse_x, mouse_y, map, actorEnemy.getUnitsVec(), w, 3);//try to attack if it's enemy
 					if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
 						this->units.at(this->unitController).moveTopHidden(map, mouse_x, mouse_y);//move to this position if empty;
 				}
@@ -189,7 +189,7 @@ void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, std:
 				if (map.getTile(mouse_x, mouse_y).getMove() <= this->units.at(this->unitController).getSteps())
 				{
 					if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit to attack
-						checkIsEnemy(mouse_x, mouse_y, map, EnemyUnitVector, w, 4);//try to attack if it's enemy
+						checkIsEnemy(mouse_x, mouse_y, map, actorEnemy.getUnitsVec(), w, 4);//try to attack if it's enemy
 					if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
 						this->units.at(this->unitController).moveDownHidden(map, mouse_x, mouse_y);//move to this position if empty;
 				}

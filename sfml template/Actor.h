@@ -33,7 +33,7 @@ public:
 	void draw(sf::RenderWindow& w);
 	void takeTax();
 	void pushbackEnemyID(int id);
-	virtual void takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, std::vector<Unit>& EnemyUnitVector);
+	virtual void takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, Actor & actorEnemy);
 	//--------GETERS
 	std::vector<int> getEnemyListID();
 	std::vector<int> getAlliesListID();

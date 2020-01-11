@@ -78,7 +78,7 @@ void GameManager::draw(sf::RenderWindow& w)
 	this->ui.draw(w);
 }
 
-Actor& GameManager::findActor(int ID)
+Actor& GameManager::findActorHidden(int ID)
 {
 	if (ID < 100 && ID > 0)
 	{
@@ -88,11 +88,11 @@ Actor& GameManager::findActor(int ID)
 	else return this->actors.at(0);
 }
 
-std::vector<Unit>& GameManager::findActorUnit(int mouse_x, int mouse_y)
+Actor& GameManager::findActor(int mouse_x, int mouse_y)
 {
 
 	if ((map.getUnitInd(mouse_x, mouse_y)) / 100 != 0 && (map.getUnitInd(mouse_x, mouse_y)) / 100 != this->actors.at(0).getPlayerID()) //check index of unit
-		return findActor((map.getUnitInd(mouse_x, mouse_y)) / 100).getUnits();
+		return findActorHidden((map.getUnitInd(mouse_x, mouse_y)) / 100);
 	else
 		std::cout << "CAN'T FIND UNIT" << std::endl;
 }
