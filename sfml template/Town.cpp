@@ -26,81 +26,78 @@ Town::Town(int positionX, int positionY, std::string name) {
 
 
 void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
-	if (population > 1) {
-		Settlers* settlers = new Settlers();
-		Militia* militia = new Militia();
-		Legion* legion = new Legion();
-		Cavalry* cavalry = new Cavalry();
-		for (auto i : this->buildings) {
-			settlers->setRank(i.getRankMultiplier());
-			militia->setRank(i.getRankMultiplier());
-			legion->setRank(i.getRankMultiplier());
-			cavalry->setRank(i.getRankMultiplier());
-		}
-		switch (unit) {
-		case 1:
-			if (this->production >= settlers->getProductionPrice()) {
-				if (map.getUnitInd(positionX, positionY) % 10 == 0) {
+	Settlers* settlers = new Settlers();
+	Militia* militia = new Militia();
+	Legion* legion = new Legion();
+	Cavalry* cavalry = new Cavalry();
+	for (auto i : this->buildings) {
+		settlers->setRank(i.getRankMultiplier());
+		militia->setRank(i.getRankMultiplier());
+		legion->setRank(i.getRankMultiplier());
+		cavalry->setRank(i.getRankMultiplier());
+	}
+	switch (unit) {
+	case 1:
+		if (this->production >= settlers->getProductionPrice()) {
+			if (map.getUnitInd(positionX, positionY) % 10 == 0) {
+				if (population > 1) {
 					this->production -= settlers->getProductionPrice();
 					settlers->setPlayerID(this->playerID);
 					settlers->spawn(positionX, positionY, map);
 					actor.push_back(*settlers);
 					this->population--;
 				}
-				else
-					std::cout << "<error> no space under the town;\n";
+				else std::cout << "<error> no humans in town(need >1)\n";
 			}
 			else
-				std::cout << "<error> no resourses: prod(" << this->production << "/" << settlers->getProductionPrice() << ")\n";
-			break;
-		case 2:
-			if (this->production >= militia->getProductionPrice()) {
-				if (map.getUnitInd(positionX, positionY) % 10 == 0) {
-					this->production -= militia->getProductionPrice();
-					militia->setPlayerID(this->playerID);
-					militia->spawn(positionX, positionY, map);
-					actor.push_back(*militia);
-					this->population--;
-				}
-				else
-					std::cout << "<error> no space under the town;\n";
-			}
-			else
-				std::cout << "<error> no resourses: prod(" << this->production << "/" << militia->getProductionPrice() << ")\n";
-			break;
-		case 3:
-			if (this->production >= legion->getProductionPrice()) {
-				if (map.getUnitInd(positionX, positionY) % 10 == 0) {
-					this->production -= legion->getProductionPrice();
-					legion->setPlayerID(this->playerID);
-					legion->spawn(positionX, positionY, map);
-					actor.push_back(*legion);
-					this->population--;
-				}
-				else
-					std::cout << "<error> no space under the town;\n";
-			}
-			else
-				std::cout << "<error> no resourses: prod(" << this->production << "/" << legion->getProductionPrice() << ")\n";
-			break;
-		case 4:
-			if (this->production >= cavalry->getProductionPrice()) {
-				if (map.getUnitInd(positionX, positionY) % 10 == 0) {
-					this->production -= cavalry->getProductionPrice();
-					cavalry->setPlayerID(this->playerID);
-					cavalry->spawn(positionX, positionY, map);
-					actor.push_back(*cavalry);
-					this->population--;
-				}
-				else
-					std::cout << "<error> no space under the town;\n";
-			}
-			else
-				std::cout << "<error> no resourses: prod(" << this->production << "/" << cavalry->getProductionPrice() << ")\n";
-			break;
+				std::cout << "<error> no space under the town;\n";
 		}
+		else
+			std::cout << "<error> no resourses: prod(" << this->production << "/" << settlers->getProductionPrice() << ")\n";
+		break;
+	case 2:
+		if (this->production >= militia->getProductionPrice()) {
+			if (map.getUnitInd(positionX, positionY) % 10 == 0) {
+				this->production -= militia->getProductionPrice();
+				militia->setPlayerID(this->playerID);
+				militia->spawn(positionX, positionY, map);
+				actor.push_back(*militia);
+			}
+			else
+				std::cout << "<error> no space under the town;\n";
+		}
+		else
+			std::cout << "<error> no resourses: prod(" << this->production << "/" << militia->getProductionPrice() << ")\n";
+		break;
+	case 3:
+		if (this->production >= legion->getProductionPrice()) {
+			if (map.getUnitInd(positionX, positionY) % 10 == 0) {
+				this->production -= legion->getProductionPrice();
+				legion->setPlayerID(this->playerID);
+				legion->spawn(positionX, positionY, map);
+				actor.push_back(*legion);
+			}
+			else
+				std::cout << "<error> no space under the town;\n";
+		}
+		else
+			std::cout << "<error> no resourses: prod(" << this->production << "/" << legion->getProductionPrice() << ")\n";
+		break;
+	case 4:
+		if (this->production >= cavalry->getProductionPrice()) {
+			if (map.getUnitInd(positionX, positionY) % 10 == 0) {
+				this->production -= cavalry->getProductionPrice();
+				cavalry->setPlayerID(this->playerID);
+				cavalry->spawn(positionX, positionY, map);
+				actor.push_back(*cavalry);
+			}
+			else
+				std::cout << "<error> no space under the town;\n";
+		}
+		else
+			std::cout << "<error> no resourses: prod(" << this->production << "/" << cavalry->getProductionPrice() << ")\n";
+		break;
 	}
-	else std::cout << "<error> no humans in town(need >1)\n";
 }
 //1-Aqueduct, 2-Barracks, 3-Walls, 4-Lib, 5-Market
 void Town::createBuilding(int building) {

@@ -30,6 +30,7 @@ public:
 	Terrain getTileVec(int x, int y);
 	int getUnitInd(int x, int y);
 	int getUnitID(int x, int y);
+	bool isTown(int x, int y);
 	int getUnitPlayerID(int x, int y);
 	void pushUnit(int x, int y, int unit);
 	void moveUnit(int x, int y, int newx, int newy);

@@ -438,9 +438,8 @@ void Actor::unitAttackTown(int mouse_x, int mouse_y, Map& map, std::vector<Town>
 			isEnemy = true;
 			for (auto j : townsEnemy)
 			{
-
 				//doesn't work correct
-				if (map.getUnitInd(j.getPositionX(), j.getPositionY()) == map.getUnitInd(mouse_x, mouse_y))//find enemy in enemy vector
+				if (j.getPositionX() == mouse_x / 32 * 32 && j.getPositionY() == mouse_y / 32 * 32)//find enemy in enemy vector
 				{
 					//animation
 					this->units.at(this->unitController).animationOfAttack(direction, w, map);

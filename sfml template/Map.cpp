@@ -253,8 +253,8 @@ Terrain Map::getTileVec(int x, int y) {
 int Map::getUnitInd(int x, int y) {
 	x /= 32;
 	y /= 32;
-	if (x > 0 && x < static_cast<int>(units.size())) {
-		if (y > 0 && y < static_cast<int>(units.size())) {
+	if (x >= 0 && x < static_cast<int>(units.size())) {
+		if (y >= 0 && y < static_cast<int>(units.size())) {
 			return this->units.at(x).at(y);
 		}
 		else return 0;
@@ -263,6 +263,9 @@ int Map::getUnitInd(int x, int y) {
 }
 int Map::getUnitID(int x, int y) {
 	return getUnitInd(x, y) % 100;
+}
+bool Map::isTown(int x, int y) {
+	return getUnitInd(x, y) / 100 % 10;
 }
 int Map::getUnitPlayerID(int x, int y) {
 	return getUnitInd(x, y) / 100;
@@ -301,11 +304,11 @@ void Map::moveUnit(int x, int y, int newx, int newy) {
 void Map::delUnit(int x, int y) {
 	x /= 32;
 	y /= 32;
-	if (this->units.at(x).at(y) % 100 / 10 == 5)	
-		units.at(x).at(y) -= (units.at(x).at(y) % 10);	
-	else	
+	if (this->units.at(x).at(y) % 100 / 10 == 5)
+		units.at(x).at(y) -= (units.at(x).at(y) % 10);
+	else
 		this->units.at(x).at(y) = 0;
-	
+
 
 }
 std::vector<std::vector<int>>& Map::_getVecTerrainsInt()
@@ -318,8 +321,8 @@ std::vector<std::vector<int>>& Map::_getVecUnitsInt()
 }
 void Map::__getInfo_DEBUG(int x, int y)
 {
-	if (x / 32 > 0 && x / 32 < static_cast<int>(units.size())) {
-		if (y / 32 > 0 && y / 32 < static_cast<int>(units.size())) {
+	if (x / 32 >= 0 && x / 32 < static_cast<int>(units.size())) {
+		if (y / 32 >= 0 && y / 32 < static_cast<int>(units.size())) {
 			getTile(x, y).__getInfo_DEBUG();
 			std::cout << "unut_index = " << this->units[x / 32][y / 32];
 			std::cout << "\n-map-tile-end-\n";
