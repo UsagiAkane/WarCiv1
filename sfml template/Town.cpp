@@ -43,6 +43,7 @@ void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
 					settlers->setPlayerID(this->playerID);
 					settlers->spawn(positionX, positionY, map);
 					actor.push_back(*settlers);
+					this->population--;
 				}
 				else
 					std::cout << "<error> no space under the town;\n";
@@ -57,6 +58,7 @@ void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
 					militia->setPlayerID(this->playerID);
 					militia->spawn(positionX, positionY, map);
 					actor.push_back(*militia);
+					this->population--;
 				}
 				else
 					std::cout << "<error> no space under the town;\n";
@@ -71,7 +73,7 @@ void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
 					legion->setPlayerID(this->playerID);
 					legion->spawn(positionX, positionY, map);
 					actor.push_back(*legion);
-					break;
+					this->population--;
 				}
 				else
 					std::cout << "<error> no space under the town;\n";
@@ -86,6 +88,7 @@ void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
 					cavalry->setPlayerID(this->playerID);
 					cavalry->spawn(positionX, positionY, map);
 					actor.push_back(*cavalry);
+					this->population--;
 				}
 				else
 					std::cout << "<error> no space under the town;\n";
