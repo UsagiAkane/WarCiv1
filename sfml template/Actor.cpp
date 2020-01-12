@@ -19,6 +19,7 @@ void Actor::__SHOW_INFO_DEBUG()
 	std::cout << this->playerID << std::endl;
 	std::cout << this->totalGold << std::endl;
 	std::cout << this->totalScience << std::endl;
+
 }
 
 void Actor::__PUSH_UNIT_DEBUG(Unit* unit) { this->units.push_back(*unit); }
@@ -311,7 +312,7 @@ void Actor::setUnitTown(std::vector<Town> towns)
 void Actor::endOfTurn(Map& map)
 {
 	for (int i = 0; i < static_cast<int>(towns.size()); i++) {
-		towns[i].endOfTurn(map);
+		towns[i].endOfTurn(map, this->totalGold, this->totalScience);
 	}
 	for (int i = 0; i < static_cast<int>(units.size()); i++) {
 		units.at(i).recharge();
