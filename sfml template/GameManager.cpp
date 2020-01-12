@@ -27,6 +27,10 @@ GameManager::GameManager()
 	townEnemy->setPlayer_id(2);
 	townEnemy->spawn(32 * 5, 32 * 6, this->map);
 	enemyActor->__PUSH_TOWN_DEBUG(townEnemy);
+	Town* townEnemy2 = new Town;
+	townEnemy2->setPlayer_id(2);
+	townEnemy2->spawn(32 * 7, 32 * 7, this->map);
+	enemyActor->__PUSH_TOWN_DEBUG(townEnemy2);
 	//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 
 	Actor* third = new Actor("Vova", map);
@@ -78,7 +82,7 @@ void GameManager::draw(sf::RenderWindow& w)
 	this->ui.draw(w);
 }
 
-Actor& GameManager::findActor(int ID)
+Actor& GameManager::findActorHidden(int ID)
 {
 	if (ID < 100 && ID > 0)
 	{
@@ -88,13 +92,13 @@ Actor& GameManager::findActor(int ID)
 	else return this->actors.at(0);
 }
 
-std::vector<Unit>& GameManager::findActorUnit(int mouse_x, int mouse_y)
+Actor& GameManager::findActor(int mouse_x, int mouse_y)
 {
 
 	if ((map.getUnitInd(mouse_x, mouse_y)) / 100 != 0 && (map.getUnitInd(mouse_x, mouse_y)) / 100 != this->actors.at(0).getPlayerID()) //check index of unit
-		return findActor((map.getUnitInd(mouse_x, mouse_y)) / 100).getUnits();
-	else
-		std::cout << "CAN'T FIND UNIT" << std::endl;
+		return findActorHidden((map.getUnitInd(mouse_x, mouse_y)) / 100);
+	//else
+	/*	std::cout << "CAN'T FIND UNIT" << std::endl;*/
 }
 
 void GameManager::saveGame()

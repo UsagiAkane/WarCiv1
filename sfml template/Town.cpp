@@ -23,6 +23,8 @@ Town::Town(int positionX, int positionY, std::string name) {
 	this->science = 0;
 }
 
+
+
 void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
 	if (population > 1) {
 		Settlers* settlers = new Settlers();
@@ -223,6 +225,10 @@ int Town::getPlayer_id() {
 }
 int Town::getScience() {
 	return this->science;
+}
+int Town::getDamage()
+{
+	return this->damage;
 }
 std::string Town::getName() {
 	return this->name;

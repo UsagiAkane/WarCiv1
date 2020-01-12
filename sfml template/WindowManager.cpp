@@ -2,7 +2,7 @@
 
 
 WindowManager::WindowManager() {
-	this->w.create(sf::VideoMode(1000, 600), "WC"/*, sf::Style::Fullscreen*/);
+	this->w.create(sf::VideoMode(1000, 600), "WC" /*sf::Style::Fullscreen*/);
 	this->w.setFramerateLimit(60);
 }
 
@@ -49,7 +49,7 @@ void WindowManager::newGameWindow() {
 						if (sf::Mouse::isButtonPressed(sf::Mouse::Left))//If you want to attack or move unit
 						{
 							if (event.MouseButtonReleased)
-								game.getActors().at(0).takeControlUnit(event, game.getMap(), w, game.findActorUnit(getPosMouseByWindowX(w), getPosMouseByWindowY(w)));
+								game.getActors().at(0).takeControlUnit(event, game.getMap(), w, game.findActor(getPosMouseByWindowX(w), getPosMouseByWindowY(w)));
 						}
 					}
 				}

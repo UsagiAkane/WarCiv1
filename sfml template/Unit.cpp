@@ -516,6 +516,11 @@ int Unit::getPrice()
 	return this->price;
 }
 
+int Unit::getSteps()
+{
+	return this->steps;
+}
+
 Unit::~Unit()
 {
 }

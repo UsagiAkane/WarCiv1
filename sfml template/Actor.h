@@ -8,6 +8,7 @@
 class Actor {
 	////WorldStat wStat;
 	int playerID;
+	sf::Sprite target;
 	std::vector<int> enemyListID;
 	std::vector<int> alliesListID;
 	std::string name;
@@ -33,12 +34,13 @@ public:
 	void draw(sf::RenderWindow& w);
 	void takeTax();
 	void pushbackEnemyID(int id);
-	virtual void takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, std::vector<Unit>& EnemyUnitVector);
+	virtual void takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, Actor & actorEnemy);
 	//--------GETERS
 	std::vector<int> getEnemyListID();
 	std::vector<int> getAlliesListID();
 	std::string getName();
 	std::vector<Town> getTowns();
+	std::vector<Town>& getTownsLink();
 	std::vector<Unit>& getUnits();
 	std::vector<Technologies> getTech();
 	std::vector<Unit>& getUnitsVec();
@@ -61,6 +63,8 @@ public:
 	virtual std::string getSaveActorInfo();
 	virtual void saveActorInfo();
 	virtual void saveTotalnfo();
+	virtual void checkIsEnemy(int mouse_x, int mouse_y, Map& map, std::vector<Unit>& enemies, sf::RenderWindow& w, int direction);
+	virtual void unitAttackTown(int mouse_x, int mouse_y,Map& map, std::vector<Town> & townsEnemy, sf::RenderWindow& w, int direction);
 
 
 

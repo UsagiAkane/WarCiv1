@@ -37,6 +37,8 @@ public:
 	std::vector<std::vector<int>>& _getVecTerrainsInt();
 	std::vector<std::vector<int>>& _getVecUnitsInt();
 	void __getInfo_DEBUG(int x, int y);
+	void changePlayerID(int x, int y);
+	void reTakeTown(int x,int y,int newPlayerID);
 
 	void draw(sf::RenderWindow& w);
 };

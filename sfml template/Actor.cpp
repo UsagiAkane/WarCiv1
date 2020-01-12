@@ -8,6 +8,9 @@ Actor::Actor(std::string name, Map& map, int playerID) {
 	this->totalScience = 0;
 	this->unitController = 0;
 	this->townController = 0;
+	sf::Texture* tmp = new sf::Texture;
+	tmp->loadFromFile("Icons\\target.png");
+	this->target.setTexture(*tmp);
 }
 
 void Actor::__SHOW_INFO_DEBUG()
@@ -48,8 +51,10 @@ void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& yea
 			//UNIT-TARGET--------
 		case sf::Keyboard::Right:
 			this->unitController++;
+
 			if (this->unitController >= static_cast<int>(this->units.size()))
 				this->unitController = 0;
+
 			break;
 			//CREATE-TOWN--------
 		case sf::Keyboard::W:
@@ -111,6 +116,12 @@ void Actor::draw(sf::RenderWindow& w)
 	for (auto i : this->units) {
 		i.draw(w);
 	}
+
+	if (units.size() > 0 && this->playerID == 1)
+	{
+		target.setPosition(units.at(unitController).getSprite().getPosition());
+		w.draw(target);
+	}
 }
 
 void Actor::takeTax()
@@ -126,13 +137,86 @@ void Actor::pushbackEnemyID(int ID)
 	this->enemyListID.push_back(ID);
 }
 
-void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, std::vector<Unit>& EnemyUnitVector)
+void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, Actor& actorEnemy)
 {
-	if (this->units.size() > 0) {
-		if (this->units.at(this->unitController).getIsAlive() == true)
-			this->units.at(this->unitController).move(sf::Mouse::getPosition(w).x + (w.getView().getCenter().x - w.getSize().x / 2), sf::Mouse::getPosition(w).y + (w.getView().getCenter().y - w.getSize().y / 2), map, this->enemyListID, EnemyUnitVector, w);
+	//CHECK IS VECTOR EMTPY
+	if (this->units.size() > 0)
+	{
+		//===================================================================VARIABLES
+		//Dynamic pos for mouse
+		int mouse_x = sf::Mouse::getPosition(w).x + (w.getView().getCenter().x - w.getSize().x / 2);
+		int mouse_y = sf::Mouse::getPosition(w).y + (w.getView().getCenter().y - w.getSize().y / 2);
+		//Pos for unit
+		int UnPosX = this->units.at(this->unitController).getPositionX();
+		int UnPosY = this->units.at(this->unitController).getPositionY();
+		//===================================================================
+
+		//CHECK IS UNIT ALIVE
+		if (this->units.at(this->unitController).getHealth() > 0)
+		{
+			//top
+			//check position of mouse
+			if (((mouse_x <= UnPosX + BORDER_PIXEL_60 && mouse_x >= UnPosX + BORDER_PIXEL_30) && (mouse_y >= UnPosY && mouse_y <= UnPosY + BORDER_PIXEL_30)))
+			{
+				//Check does can unit go on tile
+				if (map.getTile(mouse_x, mouse_y).getMove() <= this->units.at(this->unitController).getSteps())
+				{
+					if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0 && (map.getUnitInd(mouse_x, mouse_y)) / 10 % 10 != 5)//check index of unit to attack
+						checkIsEnemy(mouse_x, mouse_y, map, actorEnemy.getUnitsVec(), w, 1);//try to attack if it's enemy
+					else if ((map.getUnitInd(mouse_x, mouse_y)) / 10 % 10 == 5 && !(map.getTile(mouse_x, mouse_y).isWater()))
+						unitAttackTown(mouse_x, mouse_y, map, actorEnemy.getTownsLink(), w, 1);
+					if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
+						this->units.at(this->unitController).moveRightHidden(map, mouse_x, mouse_y);//move to this position if empty;
+				}
+			}
+			//left
+			//check position of mouse
+			else if (((mouse_x >= UnPosX - BORDER_PIXEL_30 && mouse_x <= UnPosX) && (mouse_y >= UnPosY && mouse_y <= UnPosY + BORDER_PIXEL_30)))
+			{
+				//Check does can unit go on tile
+				if (map.getTile(mouse_x, mouse_y).getMove() <= this->units.at(this->unitController).getSteps())
+				{
+					if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0 && (map.getUnitInd(mouse_x, mouse_y)) / 10 % 10 != 5)//check index of unit to attack
+						checkIsEnemy(mouse_x, mouse_y, map, actorEnemy.getUnitsVec(), w, 2);//try to attack if it's enemy
+					else if ((map.getUnitInd(mouse_x, mouse_y)) / 10 % 10 == 5 && !(map.getTile(mouse_x, mouse_y).isWater()))
+						unitAttackTown(mouse_x, mouse_y, map, actorEnemy.getTownsLink(), w, 2);
+					if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
+						this->units.at(this->unitController).moveLeftHidden(map, mouse_x, mouse_y);//move to this position if empty;
+				}
+			}
+			else if ((mouse_y >= UnPosY - BORDER_PIXEL_30 && mouse_y <= UnPosY) && (mouse_x >= UnPosX && mouse_x <= UnPosX + BORDER_PIXEL_30))//check position of mouse
+			{
+				//Check does can unit go on tile
+				if (map.getTile(mouse_x, mouse_y).getMove() <= this->units.at(this->unitController).getSteps())
+				{
+					if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0 && (map.getUnitInd(mouse_x, mouse_y)) / 10 % 10 != 5)//check index of unit to attack
+						checkIsEnemy(mouse_x, mouse_y, map, actorEnemy.getUnitsVec(), w, 3);//try to attack if it's enemy
+					else if ((map.getUnitInd(mouse_x, mouse_y)) / 10 % 10 == 5 && !(map.getTile(mouse_x, mouse_y).isWater()))
+						unitAttackTown(mouse_x, mouse_y, map, actorEnemy.getTownsLink(), w, 3);
+					if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
+						this->units.at(this->unitController).moveTopHidden(map, mouse_x, mouse_y);//move to this position if empty;
+				}
+
+			}
+			else if ((mouse_y <= UnPosY + BORDER_PIXEL_60 && mouse_y >= UnPosY + BORDER_PIXEL_30) && (mouse_x >= UnPosX && mouse_x <= UnPosX + BORDER_PIXEL_30))//check position of mouse
+			{
+				if (map.getTile(mouse_x, mouse_y).getMove() <= this->units.at(this->unitController).getSteps())
+				{
+					if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0 && (map.getUnitInd(mouse_x, mouse_y)) / 10 % 10 != 5)//check index of unit to attack
+						checkIsEnemy(mouse_x, mouse_y, map, actorEnemy.getUnitsVec(), w, 4);//try to attack if it's enemy
+					else if ((map.getUnitInd(mouse_x, mouse_y)) / 10 % 10 == 5 && !(map.getTile(mouse_x, mouse_y).isWater()))
+						unitAttackTown(mouse_x, mouse_y, map, actorEnemy.getTownsLink(), w, 4);
+					if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
+						this->units.at(this->unitController).moveDownHidden(map, mouse_x, mouse_y);//move to this position if empty;
+				}
+			}
+			this->units.at(this->unitController).checkUpUnit();
+		}
+		//if not alive remove it
 		else {
+			//erase from unit vector
 			this->units.erase(this->unitController + this->units.begin());
+			//set unit controll to 0
 			this->unitController = 0;
 		}
 	}
@@ -160,6 +244,11 @@ std::string Actor::getName()
 }
 
 std::vector<Town> Actor::getTowns()
+{
+	return this->towns;
+}
+
+std::vector<Town>& Actor::getTownsLink()
 {
 	return this->towns;
 }
@@ -301,4 +390,118 @@ void Actor::saveTotalnfo()
 	saveActorInfo();
 	saveTowns();
 	saveUnits();
+}
+
+void Actor::checkIsEnemy(int mouse_x, int mouse_y, Map& map, std::vector<Unit>& enemies, sf::RenderWindow& w, int direction)
+{
+	int time = 0;//variable that show which unit you need to attack
+	bool tmp = true;
+	for (auto i : this->enemyListID)//try to find enemy in enemy vector
+	{
+		if (i == (map.getUnitInd(mouse_x, mouse_y) / 100))//compare id of all players and enemies id
+		{
+			for (auto j : enemies)//
+			{
+
+				if (j.getIndex() == (map.getUnitInd(mouse_x, mouse_y) % 100))//find enemy in enemy vector
+				{
+					tmp = false;
+					this->units.at(unitController).attack(enemies.at(time), map, mouse_x, mouse_y);//attack him
+					this->units.at(unitController).animationOfAttack(direction, w, map);
+					break;
+				}
+				time++;
+			}
+			break;
+		}
+
+	}
+	if (map.getUnitInd(mouse_x, mouse_y) / 100 != this->playerID && map.getUnitInd(mouse_x, mouse_y) != 0 && tmp == true)
+	{
+		enemyListID.push_back(map.getUnitInd(mouse_x, mouse_y) / 100);
+		std::cout << "YOU START WAR" << std::endl;
+		std::cout << map.getUnitInd(mouse_x, mouse_y) / 100 << std::endl;
+	}
+
+
+}
+
+void Actor::unitAttackTown(int mouse_x, int mouse_y, Map& map, std::vector<Town>& townsEnemy, sf::RenderWindow& w, int direction)
+{
+	int time = 0;//variable that show which unit you need to attack
+	bool tmp = true;
+	bool isEnemy = false;
+	for (auto i : this->enemyListID)//try to find enemy in enemy vector
+	{
+		if (i == (map.getUnitInd(mouse_x, mouse_y) / 100))//compare id of all players and enemies id
+		{
+			isEnemy = true;
+			for (auto j : townsEnemy)
+			{
+
+				//doesn't work correct
+				if (map.getUnitInd(j.getPositionX(), j.getPositionY()) == map.getUnitInd(mouse_x, mouse_y))//find enemy in enemy vector
+				{
+					//animation
+					this->units.at(this->unitController).animationOfAttack(direction, w, map);
+					//damage to town
+					if (this->units.at(this->unitController).getDamage() - map.getTile(mouse_x, mouse_y).getDefense() > 0)
+					{
+						//if damage more than defense it will attack on full damage- defense
+						townsEnemy.at(time).setHealth(townsEnemy.at(time).getHealth() - (this->units.at(this->unitController).getDamage() - map.getTile(mouse_x, mouse_y).getDefense()));
+					}
+					else
+					{
+						//if damage is less than armor you will damage only 1 
+						std::cout << "------------------------------------------------" << std::endl;
+						std::cout << "Position of town was so good, you damaged only 1" << std::endl;
+						std::cout << "------------------------------------------------" << std::endl;
+						townsEnemy.at(time).setHealth(townsEnemy.at(time).getHealth() - 1);
+					}
+
+					if (this->units.at(this->unitController).getArmor() <= 0)
+					{
+						this->units.at(this->unitController).setHealth(this->units.at(this->unitController).getHealth() - (townsEnemy.at(time).getDamage()) - this->units.at(this->unitController).getArmor());
+					}
+					else
+						this->units.at(this->unitController).setArmor(this->units.at(this->unitController).getArmor() - townsEnemy.at(time).getDamage());
+
+					if (townsEnemy.at(time).getHealth() <= 0)
+					{
+						//change town type
+						townsEnemy[time].setPlayer_id(1);
+						townsEnemy[time].setColorByID();
+						townsEnemy[time].setHealth(10);
+						//give unit to player
+						this->towns.push_back(townsEnemy[time]);
+						//take from enemy
+						townsEnemy.erase(townsEnemy.begin() + time);
+						// to change on map
+						map.reTakeTown(mouse_x, mouse_y, this->playerID);
+					}
+
+					if (this->units.at(this->unitController).getHealth() <= 0)
+					{
+						this->units.at(this->unitController).death(map);
+					}
+
+
+					tmp = false;
+					break;
+				}
+				time++;
+			}
+			break;
+		}
+
+	}
+	if (map.getUnitInd(mouse_x, mouse_y) / 100 != this->playerID && map.getUnitInd(mouse_x, mouse_y) != 0 && tmp == true)
+	{
+		if (isEnemy == false)
+			enemyListID.push_back(map.getUnitInd(mouse_x, mouse_y) / 100);
+
+
+		std::cout << "YOU START WAR (TOWN)" << std::endl;
+		std::cout << "With player: " << map.getUnitInd(mouse_x, mouse_y) / 100 << std::endl;
+	}
 }
