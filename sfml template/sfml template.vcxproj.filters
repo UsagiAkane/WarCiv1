@@ -269,6 +269,7 @@
       <Filter>System\WindowManager</Filter>
     </ClCompile>
     <ClCompile Include="Plains.cpp" />
+    <ClCompile Include="Ui.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resourses.h">
@@ -385,9 +386,6 @@
     <ClInclude Include="Barracks.h">
       <Filter>Buildings\Child\Barracks</Filter>
     </ClInclude>
-    <ClInclude Include="Marketplace.h">
-      <Filter>Buildings\Child\Marketplace</Filter>
-    </ClInclude>
     <ClInclude Include="CityWalls.h">
       <Filter>Buildings\Child\CityWalls</Filter>
     </ClInclude>
@@ -407,5 +405,9 @@
       <Filter>System\WindowManager</Filter>
     </ClInclude>
     <ClInclude Include="Plains.h" />
+    <ClInclude Include="Ui.h" />
+    <ClInclude Include="Marketplace.h">
+      <Filter>Buildings\Child\Marketplace</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

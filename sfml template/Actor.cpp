@@ -16,16 +16,13 @@ void Actor::__SHOW_INFO_DEBUG()
 	std::cout << this->playerID << std::endl;
 	std::cout << this->totalGold << std::endl;
 	std::cout << this->totalScience << std::endl;
-	//std::cout << this-> << std::endl;
-	//std::cout << this-> << std::endl;
-	//std::cout << this-> << std::endl;
-	//std::cout << this-> << std::endl;
+
 }
 
 void Actor::__PUSH_UNIT_DEBUG(Unit* unit) { this->units.push_back(*unit); }
 void Actor::__PUSH_TOWN_DEBUG(Town* town) { this->towns.push_back(*town); }
 
-void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w) {
+void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& year) {
 	//to make camera dynamic
 	int mouse_x = sf::Mouse::getPosition(w).x + (w.getView().getCenter().x - w.getSize().x / 2);
 	int mouse_y = sf::Mouse::getPosition(w).y + (w.getView().getCenter().y - w.getSize().y / 2);
@@ -96,6 +93,7 @@ void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w) {
 				this->towns.at(townController).createBuilding(1);
 			break;
 		case sf::Keyboard::Enter:
+			year += 5;
 			std::cout << "\nTurn ended!" << std::endl;
 			endOfTurn(map);
 			break;
@@ -215,12 +213,17 @@ void Actor::setUnitVector(std::vector<Unit> units)
 	this->units = units;
 }
 
+void Actor::setUnitTown(std::vector<Town> towns)
+{
+	this->towns = towns;
+}
+
 #pragma endregion
 
 void Actor::endOfTurn(Map& map)
 {
 	for (int i = 0; i < static_cast<int>(towns.size()); i++) {
-		towns[i].endOfTurn(map);
+		towns[i].endOfTurn(map, this->totalGold, this->totalScience);
 	}
 	for (int i = 0; i < static_cast<int>(units.size()); i++) {
 		units.at(i).recharge();
