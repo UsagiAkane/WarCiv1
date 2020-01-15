@@ -58,23 +58,33 @@ bool Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& yea
 			break;
 			//CREATE-TOWN--------
 		case sf::Keyboard::W:
-			if (this->units.size() != 0) { //yesn`t hasn`t units 
-				if (this->units.at(this->unitController).getHealth() > 0) {
-					if (this->units.at(this->unitController).getIndex() == 1) { //settlers?
-						//std::cout << map.getUnitInd(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY()) << std::endl;//debug
-						//map.getTile(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY()).__getInfo_DEBUG();//debug
-						if (map.getUnitInd(this->units.at(this->unitController).getPositionX(), this->units.at(this->unitController).getPositionY()) % 100 / 10 == 0) {//no town?
-							Town* town = new Town(this->units.at(this->unitController).getPositionX(), this->units.at(this->unitController).getPositionY());
-							this->units.at(this->unitController).death(map);
-							this->units.erase(this->unitController + this->units.begin());
-							town->setPlayer_id(1);
-							town->spawn(town->getPositionX(), town->getPositionY(), map);
-							this->towns.push_back(*town);
+			bool have_s = 0;
+			for (int i = 0; i < this->units.size(); i++) {
+				if (this->units[i].getIndex() == 1) {
+					unitController = i;
+					have_s = 1;
+				}
+				else have_s = 0;
+			}
+			if (have_s) {
+				if (this->units.size() != 0) { //yesn`t hasn`t units 
+					if (this->units.at(this->unitController).getHealth() > 0) {
+						if (this->units.at(this->unitController).getIndex() == 1) { //settlers?
+							//std::cout << map.getUnitInd(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY()) << std::endl;//debug
+							//map.getTile(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY()).__getInfo_DEBUG();//debug
+							if (map.getUnitInd(this->units.at(this->unitController).getPositionX(), this->units.at(this->unitController).getPositionY()) % 100 / 10 == 0) {//no town?
+								Town* town = new Town(this->units.at(this->unitController).getPositionX(), this->units.at(this->unitController).getPositionY());
+								this->units.at(this->unitController).death(map);
+								this->units.erase(this->unitController + this->units.begin());
+								town->setPlayer_id(1);
+								town->spawn(town->getPositionX(), town->getPositionY(), map);
+								this->towns.push_back(*town);
 
-							unitController = 0;
+								unitController = 0;
+							}
+							else std::cout << "<error> this tile already has town\n";
+							//std::cout << map.getUnitInd(this->towns.at(0).getPositionX(), this->towns.at(0).getPositionY());//debug
 						}
-						else std::cout << "<error> this tile already has town\n";
-						//std::cout << map.getUnitInd(this->towns.at(0).getPositionX(), this->towns.at(0).getPositionY());//debug
 					}
 				}
 			}
@@ -231,13 +241,6 @@ void Actor::endOfTurnBot(Map& map, std::vector<Unit>& eUnits)
 	int x = 0;
 	int y = 0;
 
-
-
-
-
-
-
-
 	for (int i = 0; i < this->units.size(); i++)
 	{
 		x = this->units.at(i).getSprite().getPosition().x;
@@ -393,25 +396,21 @@ void Actor::endOfTurnBot(Map& map, std::vector<Unit>& eUnits)
 		}
 	}
 
-
 	bool have_s = 0;
-	std::cout << "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=   " << units.size() << std::endl;
 	for (int i = 0; i < units.size(); i++) {
 		if (this->units[i].getIndex() == 1) {
 			unitController = i;
 			have_s = 1;
-			std::cout << "-=-=-=-=-=PReSTART-=-=-=-=-=   " << unitController << std::endl;
 		}
 		else have_s = 0;
 	}
-	std::cout << "-=-=-=-=-=START-=-=-=-=-=   " << unitController << std::endl;
 	if (have_s) {
 	if (!(rand() % 10)) {
 		if (this->units.size() > 0) {
 			if (this->units.at(this->unitController).getHealth() > 0) {
 				if (this->units.at(this->unitController).getIndex() == 1) {
 					//std::cout << map.getUnitInd(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY()) << std::endl;//debug
-					map.getTile(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY()).__getInfo_DEBUG();
+					//map.getTile(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY()).__getInfo_DEBUG();//debug
 					if (map.getUnitInd(this->units.at(this->unitController).getPositionX(), this->units.at(this->unitController).getPositionY()) % 100 / 10 == 0) {
 						Town* town = new Town(this->units.at(this->unitController).getPositionX(), this->units.at(this->unitController).getPositionY());
 						this->units.at(this->unitController).death(map);
