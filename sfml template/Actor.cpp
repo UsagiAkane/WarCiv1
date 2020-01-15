@@ -47,6 +47,7 @@ bool Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& yea
 	}
 
 	if (event.type == sf::Event::KeyPressed) {
+	
 		switch (event.key.code) {
 			//UNIT-TARGET--------
 		case sf::Keyboard::Right:
@@ -58,15 +59,6 @@ bool Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& yea
 			break;
 			//CREATE-TOWN--------
 		case sf::Keyboard::W:
-			bool have_s = 0;
-			for (int i = 0; i < this->units.size(); i++) {
-				if (this->units[i].getIndex() == 1) {
-					unitController = i;
-					have_s = 1;
-				}
-				else have_s = 0;
-			}
-			if (have_s) {
 				if (this->units.size() != 0) { //yesn`t hasn`t units 
 					if (this->units.at(this->unitController).getHealth() > 0) {
 						if (this->units.at(this->unitController).getIndex() == 1) { //settlers?
@@ -87,7 +79,7 @@ bool Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& yea
 						}
 					}
 				}
-			}
+			
 			break;
 		case sf::Keyboard::Num1:
 			if (this->towns.size() > 0)
