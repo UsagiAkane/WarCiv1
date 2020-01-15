@@ -2,7 +2,7 @@
 
 GameManager::GameManager()
 {
-	Actor* player = new Actor("player", this->map);
+	Actor* player = new Actor("player");
 	player->setPlayerID(1);
 	Settlers* firstS = new Settlers;
 	firstS->setPlayerID(player->getPlayerID());
@@ -10,7 +10,7 @@ GameManager::GameManager()
 	player->__PUSH_UNIT_DEBUG(firstS);
 
 	//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
-	Actor* enemyActor = new Actor("Ruslan", map);
+	AI* enemyActor = new AI(2);
 	enemyActor->setPlayerID(2);
 	////////////////////////////CREATING UNITS
 	Legion* legionEnemy = new Legion;
@@ -33,7 +33,7 @@ GameManager::GameManager()
 	enemyActor->__PUSH_TOWN_DEBUG(townEnemy2);
 	//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 
-	Actor* third = new Actor("Vova", map);
+	AI* third = new AI(2);
 	third->setPlayerID(3);
 	Settlers* settlers3 = new Settlers;
 	Legion* legionEnemy3 = new Legion;
@@ -676,7 +676,7 @@ void GameManager::loadGame()
 		//getActorInfoFromFile();
 
 		for (int i = 1; i <= getActorsCount(); i++) {
-			this->actors.push_back(Actor(getActorName(i), map, i));
+			this->actors.push_back(Actor(getActorName(i), i));
 			this->actors[i - 1].setTotalGold(getActorTG(i));
 			this->actors[i - 1].setTotalScience(getActorTS(i));
 

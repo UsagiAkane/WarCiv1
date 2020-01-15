@@ -1,5 +1,5 @@
 #pragma once
-#include"Actor.h"
+#include"AI.h"
 #include"Map.h"
 #include"Ui.h"
 

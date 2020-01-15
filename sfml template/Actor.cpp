@@ -1,6 +1,6 @@
 #include "Actor.h"
 
-Actor::Actor(std::string name, Map& map, int playerID) {
+Actor::Actor(std::string name, int playerID) {
 	this->playerID = playerID;
 	this->name = name;
 	//std::vector<std::vector<bool>> fog;
@@ -25,7 +25,7 @@ void Actor::__SHOW_INFO_DEBUG()
 void Actor::__PUSH_UNIT_DEBUG(Unit* unit) { this->units.push_back(*unit); }
 void Actor::__PUSH_TOWN_DEBUG(Town* town) { this->towns.push_back(*town); }
 
-void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& year) {
+bool Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& year) {
 	//to make camera dynamic
 	int mouse_x = sf::Mouse::getPosition(w).x + (w.getView().getCenter().x - w.getSize().x / 2);
 	int mouse_y = sf::Mouse::getPosition(w).y + (w.getView().getCenter().y - w.getSize().y / 2);
@@ -101,9 +101,11 @@ void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& yea
 			year += 5;
 			std::cout << "\nTurn ended!" << std::endl;
 			endOfTurn(map);
+			return 1;
 			break;
 		}
 	}
+	return 0;
 }
 
 void Actor::draw(sf::RenderWindow& w)
@@ -220,6 +222,48 @@ void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, Acto
 			this->unitController = 0;
 		}
 	}
+}
+
+void Actor::endOfTurnBot(Map& map)
+{
+
+
+	for (int i = 0; i < this->units.size(); i++)
+	{
+		//Is alive
+		if (this->units.at(i).getHealth() > 0)
+		{
+			//Is water
+			if (!(map.getTile(this->units.at(i).getPositionX(), this->units.at(i).getPositionY() + 32).isWater()))
+				this->units.at(i).moveDownHidden(map);
+			else {
+				if (1) {}
+
+			}
+
+
+
+		}
+		else
+		{
+			this->units.erase(units.begin() + i);
+
+		}
+
+	}
+
+
+	for (int i = 0; i < static_cast<int>(towns.size()); i++) {
+		towns[i].endOfTurn(map, this->totalGold, this->totalScience);
+	}
+	for (int i = 0; i < static_cast<int>(units.size()); i++) {
+		units.at(i).recharge();
+	}
+
+
+
+
+
 }
 
 #pragma region GETTERS
