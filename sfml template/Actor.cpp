@@ -245,12 +245,20 @@ void Actor::endOfTurnBot(Map& map)
 				{
 					for (int j = units[i].getSteps(); j >= 0;)
 					{
-						//Is water
+						//Is water is tile empty
 						if ((map.getUnitInd(x + 32, y)) == 0 && !(map.getTile(x + 32, y).isWater()))
 						{
+						
+
+							 if (!(map.getTile(x + 32, y).getMove() < this->units.at(i).getSteps()))
+								break;
 							this->units.at(i).moveRightHidden(map);
 							x += 32;
 							j = units[i].getSteps();
+						}
+						//is enemy
+						else if (map.getUnitID(x + 32, y) != 0 && map.getUnitID(x + 32, y) < 10) {
+
 						}
 						else
 							break;
@@ -262,12 +270,23 @@ void Actor::endOfTurnBot(Map& map)
 			{
 				if (map.getTile(x - 32, y).getMove() < this->units.at(i).getSteps())
 				{
-					//Is water
-					if ((map.getUnitInd(x - 32, y)) == 0 && !(map.getTile(x - 32, y).isWater()))
+
+					for (int j = units[i].getSteps(); j >= 0;)
 					{
-						this->units.at(i).moveLeftHidden(map);
-						x -= 32;
+						//Is water
+						if ((map.getUnitInd(x - 32, y)) == 0 && !(map.getTile(x - 32, y).isWater()))
+						{
+							if (!(map.getTile(x - 32, y).getMove() < this->units.at(i).getSteps()))
+								break;
+							this->units.at(i).moveLeftHidden(map);
+							x -= 32;
+							j = units[i].getSteps();
+						}
+						else
+							break;
 					}
+
+
 
 				}
 			}
@@ -276,12 +295,24 @@ void Actor::endOfTurnBot(Map& map)
 			{
 				if (map.getTile(x, y - 32).getMove() < this->units.at(i).getSteps())
 				{
-					//Is water
-					if ((map.getUnitInd(x, y - 32)) == 0 && !(map.getTile(x, y - 32).isWater()))
+
+					for (int j = units[i].getSteps(); j >= 0;)
 					{
-						this->units.at(i).moveTopHidden(map);
-						y -= 32;
+						//Is water
+						if ((map.getUnitInd(x, y - 32)) == 0 && !(map.getTile(x, y - 32).isWater()))
+						{
+							if (!(map.getTile(x, y - 32).getMove() < this->units.at(i).getSteps()))
+								break;
+							this->units.at(i).moveTopHidden(map);
+							y -= 32;
+							j = units[i].getSteps();
+						}
+						else
+							break;
 					}
+
+
+
 
 				}
 			}
@@ -291,12 +322,22 @@ void Actor::endOfTurnBot(Map& map)
 
 				if (map.getTile(x, y + 32).getMove() < this->units.at(i).getSteps())
 				{
-					//Is water
-					if ((map.getUnitInd(x, y + 32)) == 0 && !(map.getTile(x, y + 32).isWater()))
+
+					for (int j = units[i].getSteps(); j >= 0;)
 					{
-						this->units.at(i).moveDownHidden(map);
-						y += 32;
+						//Is water
+						if ((map.getUnitInd(x, y + 32)) == 0 && !(map.getTile(x, y + 32).isWater()))
+						{
+							if (!(map.getTile(x, y + 32).getMove() < this->units.at(i).getSteps()))
+								break;
+							this->units.at(i).moveDownHidden(map);
+							y += 32;
+							j = units[i].getSteps();
+						}
+						else
+							break;
 					}
+
 
 				}
 			}

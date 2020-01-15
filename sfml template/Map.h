@@ -18,7 +18,7 @@ private:
 	std::vector<std::vector<int>> map;
 	std::vector<std::vector<int>> units;
 public:
-	Map(int sizeX = 100, int sizeY = 100, int resGenChanse = 8);
+	Map(int sizeX = 50, int sizeY = 50, int resGenChanse = 8);
 
 	//void loadMap();
 	void saveMap();
