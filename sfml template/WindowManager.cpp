@@ -48,7 +48,7 @@ void WindowManager::newGameWindow() {
 						if (game.getActors().at(0).takeControl(event, game.getMap(), w, game.getYear()))
 						{
 							for (int i = 1; i < game.getActors().size(); i++) {
-								game.getActors().at(i).endOfTurnBot(game.getMap());
+								game.getActors().at(i).endOfTurnBot(game.getMap(), game.getActors().at(0).getUnits());
 							
 							}
 						}

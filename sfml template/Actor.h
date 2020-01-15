@@ -68,7 +68,7 @@ public:
 	virtual void checkIsEnemy(int mouse_x, int mouse_y, Map& map, std::vector<Unit>& enemies, sf::RenderWindow& w, int direction);
 	virtual void unitAttackTown(int mouse_x, int mouse_y,Map& map, std::vector<Town> & townsEnemy, sf::RenderWindow& w, int direction);
 	virtual void takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, Actor& actorEnemy);
-	virtual void endOfTurnBot(Map & map);
+	virtual void endOfTurnBot(Map & map, std::vector<Unit>& eUnits);
 
 
 

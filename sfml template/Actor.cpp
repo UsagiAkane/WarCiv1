@@ -224,7 +224,7 @@ void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, Acto
 	}
 }
 
-void Actor::endOfTurnBot(Map& map)
+void Actor::endOfTurnBot(Map& map, std::vector<Unit>& eUnits)
 {
 	int x = 0;
 	int y = 0;
@@ -248,17 +248,25 @@ void Actor::endOfTurnBot(Map& map)
 						//Is water is tile empty
 						if ((map.getUnitInd(x + 32, y)) == 0 && !(map.getTile(x + 32, y).isWater()))
 						{
-						
-
-							 if (!(map.getTile(x + 32, y).getMove() < this->units.at(i).getSteps()))
+							if (!(map.getTile(x + 32, y).getMove() < this->units.at(i).getSteps()))
 								break;
 							this->units.at(i).moveRightHidden(map);
 							x += 32;
 							j = units[i].getSteps();
 						}
 						//is enemy
-						else if (map.getUnitID(x + 32, y) != 0 && map.getUnitID(x + 32, y) < 10) {
-
+						else if (map.getUnitInd(x + 32, y) % 10 != 0 && map.getUnitPlayerID(x + 32, y) == 1)
+						{
+							for (auto& k : eUnits)
+							{
+								std::cout << "Me debilu1" << std::endl;
+								if (k.getPositionX() == x + 32, k.getPositionY() == y)
+								{
+									this->units[i].attack(k, map, x + 32, y);
+									break;
+								}
+							}
+							break;
 						}
 						else
 							break;
@@ -270,7 +278,6 @@ void Actor::endOfTurnBot(Map& map)
 			{
 				if (map.getTile(x - 32, y).getMove() < this->units.at(i).getSteps())
 				{
-
 					for (int j = units[i].getSteps(); j >= 0;)
 					{
 						//Is water
@@ -282,12 +289,24 @@ void Actor::endOfTurnBot(Map& map)
 							x -= 32;
 							j = units[i].getSteps();
 						}
+						//is enemy
+						else if (map.getUnitInd(x - 32, y) % 10 != 0 && map.getUnitPlayerID(x - 32, y) == 1)
+						{
+							for (auto& k : eUnits)
+							{
+								std::cout << "Me debilu2" << std::endl;
+								if (k.getPositionX() == x - 32, k.getPositionY() == y)
+								{
+									this->units[i].attack(k, map, x - 32, y);
+									break;
+								}
+							}
+							break;
+						}
+
 						else
 							break;
 					}
-
-
-
 				}
 			}
 			//top
@@ -295,7 +314,6 @@ void Actor::endOfTurnBot(Map& map)
 			{
 				if (map.getTile(x, y - 32).getMove() < this->units.at(i).getSteps())
 				{
-
 					for (int j = units[i].getSteps(); j >= 0;)
 					{
 						//Is water
@@ -307,22 +325,31 @@ void Actor::endOfTurnBot(Map& map)
 							y -= 32;
 							j = units[i].getSteps();
 						}
+						//is enemy
+						else if (map.getUnitInd(x, y - 32) % 10 != 0 && map.getUnitPlayerID(x, y - 32) == 1)
+						{
+							for (auto& k : eUnits)
+							{
+								std::cout << "Me debilu3" << std::endl;
+								if (k.getPositionX() == x, k.getPositionY() == y - 32)
+								{
+									this->units[i].attack(k, map, x, y - 32);
+									break;
+								}
+							}
+							break;
+						}
+
 						else
 							break;
 					}
-
-
-
-
 				}
 			}
 			//down
 			if (tmp == 4)
 			{
-
 				if (map.getTile(x, y + 32).getMove() < this->units.at(i).getSteps())
 				{
-
 					for (int j = units[i].getSteps(); j >= 0;)
 					{
 						//Is water
@@ -334,11 +361,24 @@ void Actor::endOfTurnBot(Map& map)
 							y += 32;
 							j = units[i].getSteps();
 						}
+						//is enemy
+						else if (map.getUnitInd(x, y + 32) % 10 != 0 && map.getUnitPlayerID(x, y + 32) == 1)
+						{
+							for (auto& k : eUnits)
+							{
+								std::cout << "Me debilu1" << std::endl;
+								if (k.getPositionX() == x, k.getPositionY() == y + 32)
+								{
+									this->units[i].attack(k, map, x, y + 32);
+									break;
+								}
+							}
+							break;
+						}
+
 						else
 							break;
 					}
-
-
 				}
 			}
 		}
