@@ -6,6 +6,7 @@
 #include"Settlers.h"
 
 class Actor {
+protected: 
 	////WorldStat wStat;
 	int playerID;
 	sf::Sprite target;
@@ -21,7 +22,7 @@ class Actor {
 	int unitController;//active Unit
 	int townController;//active Town
 public:
-	Actor(std::string name, Map& map, int playerID = 1);
+	Actor(std::string name,int playerID = 1);
 
 	//DEBUG---------
 
@@ -30,11 +31,11 @@ public:
 	void __PUSH_UNIT_DEBUG(Unit* unit);
 	void __PUSH_TOWN_DEBUG(Town* town);
 	//--------------
-	void takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& year);
+	bool takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& year);
 	void draw(sf::RenderWindow& w);
 	void takeTax();
 	void pushbackEnemyID(int id);
-	virtual void takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, Actor & actorEnemy);
+
 	//--------GETERS
 	std::vector<int> getEnemyListID();
 	std::vector<int> getAlliesListID();
@@ -54,6 +55,7 @@ public:
 	void setTotalScience(int totalScience);
 	void setUnitVector(std::vector<Unit>units);
 	void setUnitTown(std::vector<Town>towns);
+	
 
 
 	//Methods
@@ -65,6 +67,8 @@ public:
 	virtual void saveTotalnfo();
 	virtual void checkIsEnemy(int mouse_x, int mouse_y, Map& map, std::vector<Unit>& enemies, sf::RenderWindow& w, int direction);
 	virtual void unitAttackTown(int mouse_x, int mouse_y,Map& map, std::vector<Town> & townsEnemy, sf::RenderWindow& w, int direction);
+	virtual void takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, Actor& actorEnemy);
+	virtual void endOfTurnBot(Map & map, std::vector<Unit>& eUnits);
 
 
 

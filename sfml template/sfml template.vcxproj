@@ -149,6 +149,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="AI.cpp" />
     <ClCompile Include="Alphabet.cpp" />
     <ClCompile Include="Aqueduct.cpp" />
     <ClCompile Include="Barracks.cpp" />
@@ -198,6 +199,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="AI.h" />
     <ClInclude Include="Alphabet.h" />
     <ClInclude Include="Aqueduct.h" />
     <ClInclude Include="Barracks.h" />

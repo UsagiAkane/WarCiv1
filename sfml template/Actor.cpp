@@ -1,6 +1,6 @@
 #include "Actor.h"
 
-Actor::Actor(std::string name, Map& map, int playerID) {
+Actor::Actor(std::string name, int playerID) {
 	this->playerID = playerID;
 	this->name = name;
 	//std::vector<std::vector<bool>> fog;
@@ -25,7 +25,7 @@ void Actor::__SHOW_INFO_DEBUG()
 void Actor::__PUSH_UNIT_DEBUG(Unit* unit) { this->units.push_back(*unit); }
 void Actor::__PUSH_TOWN_DEBUG(Town* town) { this->towns.push_back(*town); }
 
-void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& year) {
+bool Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& year) {
 	//to make camera dynamic
 	int mouse_x = sf::Mouse::getPosition(w).x + (w.getView().getCenter().x - w.getSize().x / 2);
 	int mouse_y = sf::Mouse::getPosition(w).y + (w.getView().getCenter().y - w.getSize().y / 2);
@@ -47,6 +47,7 @@ void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& yea
 	}
 
 	if (event.type == sf::Event::KeyPressed) {
+	
 		switch (event.key.code) {
 			//UNIT-TARGET--------
 		case sf::Keyboard::Right:
@@ -58,24 +59,27 @@ void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& yea
 			break;
 			//CREATE-TOWN--------
 		case sf::Keyboard::W:
-			if (this->units.size() != 0) {
-				if (this->units.at(this->unitController).getIsAlive() == true) {
-					if (this->units.at(this->unitController).getIndex() == 1) {
-						//std::cout << map.getUnitInd(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY()) << std::endl;//debug
-						map.getTile(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY()).__getInfo_DEBUG();
-						if (map.getUnitInd(this->units.at(this->unitController).getPositionX(), this->units.at(this->unitController).getPositionY()) % 100 / 10 == 0) {
-							Town* town = new Town(this->units.at(this->unitController).getPositionX(), this->units.at(this->unitController).getPositionY());
-							this->units.at(this->unitController).death(map);
-							this->units.erase(this->unitController + this->units.begin());
-							town->setPlayer_id(1);
-							town->spawn(town->getPositionX(), town->getPositionY(), map);
-							this->towns.push_back(*town);
+				if (this->units.size() != 0) { //yesn`t hasn`t units 
+					if (this->units.at(this->unitController).getHealth() > 0) {
+						if (this->units.at(this->unitController).getIndex() == 1) { //settlers?
+							//std::cout << map.getUnitInd(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY()) << std::endl;//debug
+							//map.getTile(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY()).__getInfo_DEBUG();//debug
+							if (map.getUnitInd(this->units.at(this->unitController).getPositionX(), this->units.at(this->unitController).getPositionY()) % 100 / 10 == 0) {//no town?
+								Town* town = new Town(this->units.at(this->unitController).getPositionX(), this->units.at(this->unitController).getPositionY());
+								this->units.at(this->unitController).death(map);
+								this->units.erase(this->unitController + this->units.begin());
+								town->setPlayer_id(1);
+								town->spawn(town->getPositionX(), town->getPositionY(), map);
+								this->towns.push_back(*town);
+
+								unitController = 0;
+							}
+							else std::cout << "<error> this tile already has town\n";
+							//std::cout << map.getUnitInd(this->towns.at(0).getPositionX(), this->towns.at(0).getPositionY());//debug
 						}
-						else std::cout << "<error> this tile already has town\n";
-						//std::cout << map.getUnitInd(this->towns.at(0).getPositionX(), this->towns.at(0).getPositionY());//debug
 					}
 				}
-			}
+			
 			break;
 		case sf::Keyboard::Num1:
 			if (this->towns.size() > 0)
@@ -101,9 +105,11 @@ void Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& yea
 			year += 5;
 			std::cout << "\nTurn ended!" << std::endl;
 			endOfTurn(map);
+			return 1;
 			break;
 		}
 	}
+	return 0;
 }
 
 void Actor::draw(sf::RenderWindow& w)
@@ -219,6 +225,228 @@ void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, Acto
 			//set unit controll to 0
 			this->unitController = 0;
 		}
+	}
+}
+
+void Actor::endOfTurnBot(Map& map, std::vector<Unit>& eUnits)
+{
+	int x = 0;
+	int y = 0;
+
+	for (int i = 0; i < this->units.size(); i++)
+	{
+		x = this->units.at(i).getSprite().getPosition().x;
+		y = this->units.at(i).getSprite().getPosition().y;
+
+		int tmp = rand() % 4 + 1;
+		//Is alive
+		if (this->units.at(i).getHealth() > 0)
+		{
+			//right
+			if (tmp == 1)
+			{
+				if (map.getTile(x + 32, y).getMove() < this->units.at(i).getSteps())
+				{
+					for (int j = units[i].getSteps(); j >= 0;)
+					{
+						//Is water is tile empty
+						if ((map.getUnitInd(x + 32, y)) == 0 && !(map.getTile(x + 32, y).isWater()))
+						{
+							if (!(map.getTile(x + 32, y).getMove() < this->units.at(i).getSteps()))
+								break;
+							this->units.at(i).moveRightHidden(map);
+							x += 32;
+							j = units[i].getSteps();
+						}
+						//is enemy
+						else if (map.getUnitInd(x + 32, y) % 10 != 0 && map.getUnitPlayerID(x + 32, y) == 1)
+						{
+							for (auto& k : eUnits)
+							{
+								if (k.getPositionX() == x + 32, k.getPositionY() == y)
+								{
+									this->units[i].attack(k, map, x + 32, y);
+									break;
+								}
+							}
+							break;
+						}
+						else
+							break;
+					}
+				}
+			}
+			//left
+			if (tmp == 2)
+			{
+				if (map.getTile(x - 32, y).getMove() < this->units.at(i).getSteps())
+				{
+					for (int j = units[i].getSteps(); j >= 0;)
+					{
+						//Is water
+						if ((map.getUnitInd(x - 32, y)) == 0 && !(map.getTile(x - 32, y).isWater()))
+						{
+							if (!(map.getTile(x - 32, y).getMove() < this->units.at(i).getSteps()))
+								break;
+							this->units.at(i).moveLeftHidden(map);
+							x -= 32;
+							j = units[i].getSteps();
+						}
+						//is enemy
+						else if (map.getUnitInd(x - 32, y) % 10 != 0 && map.getUnitPlayerID(x - 32, y) == 1)
+						{
+							for (auto& k : eUnits)
+							{
+								if (k.getPositionX() == x - 32, k.getPositionY() == y)
+								{
+									this->units[i].attack(k, map, x - 32, y);
+									break;
+								}
+							}
+							break;
+						}
+
+						else
+							break;
+					}
+				}
+			}
+			//top
+			if (tmp == 3)
+			{
+				if (map.getTile(x, y - 32).getMove() < this->units.at(i).getSteps())
+				{
+					for (int j = units[i].getSteps(); j >= 0;)
+					{
+						//Is water
+						if ((map.getUnitInd(x, y - 32)) == 0 && !(map.getTile(x, y - 32).isWater()))
+						{
+							if (!(map.getTile(x, y - 32).getMove() < this->units.at(i).getSteps()))
+								break;
+							this->units.at(i).moveTopHidden(map);
+							y -= 32;
+							j = units[i].getSteps();
+						}
+						//is enemy
+						else if (map.getUnitInd(x, y - 32) % 10 != 0 && map.getUnitPlayerID(x, y - 32) == 1)
+						{
+							for (auto& k : eUnits)
+							{
+								if (k.getPositionX() == x, k.getPositionY() == y - 32)
+								{
+									this->units[i].attack(k, map, x, y - 32);
+									break;
+								}
+							}
+							break;
+						}
+
+						else
+							break;
+					}
+				}
+			}
+			//down
+			if (tmp == 4)
+			{
+				if (map.getTile(x, y + 32).getMove() < this->units.at(i).getSteps())
+				{
+					for (int j = units[i].getSteps(); j >= 0;)
+					{
+						//Is water
+						if ((map.getUnitInd(x, y + 32)) == 0 && !(map.getTile(x, y + 32).isWater()))
+						{
+							if (!(map.getTile(x, y + 32).getMove() < this->units.at(i).getSteps()))
+								break;
+							this->units.at(i).moveDownHidden(map);
+							y += 32;
+							j = units[i].getSteps();
+						}
+						//is enemy
+						else if (map.getUnitInd(x, y + 32) % 10 != 0 && map.getUnitPlayerID(x, y + 32) == 1)
+						{
+							for (auto& k : eUnits)
+							{
+								if (k.getPositionX() == x, k.getPositionY() == y + 32)
+								{
+									this->units[i].attack(k, map, x, y + 32);
+									break;
+								}
+							}
+							break;
+						}
+
+						else
+							break;
+					}
+				}
+			}
+		}
+		else
+		{
+			this->units.erase(units.begin() + i);
+		}
+	}
+
+	bool have_s = 0;
+	for (int i = 0; i < units.size(); i++) {
+		if (this->units[i].getIndex() == 1) {
+			unitController = i;
+			have_s = 1;
+		}
+		else have_s = 0;
+	}
+	if (have_s) {
+	if (!(rand() % 10)) {
+		if (this->units.size() > 0) {
+			if (this->units.at(this->unitController).getHealth() > 0) {
+				if (this->units.at(this->unitController).getIndex() == 1) {
+					//std::cout << map.getUnitInd(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY()) << std::endl;//debug
+					//map.getTile(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY()).__getInfo_DEBUG();//debug
+					if (map.getUnitInd(this->units.at(this->unitController).getPositionX(), this->units.at(this->unitController).getPositionY()) % 100 / 10 == 0) {
+						Town* town = new Town(this->units.at(this->unitController).getPositionX(), this->units.at(this->unitController).getPositionY());
+						this->units.at(this->unitController).death(map);
+						this->units.erase(this->unitController + this->units.begin());
+						town->setPlayer_id(this->playerID);
+						town->spawn(town->getPositionX(), town->getPositionY(), map);
+						this->towns.push_back(*town);
+						this->unitController = 0;
+					}
+					else std::cout << "<error> this tile already has town\n";
+					//std::cout << map.getUnitInd(this->towns.at(0).getPositionX(), this->towns.at(0).getPositionY());//debug
+				}
+			}
+		}
+	}
+	}
+
+
+
+	//Train units
+	for (int i = 0; i < static_cast<int>(towns.size()); i++) {
+		if (towns[i].getPopulation() > 2 && towns[i].getProduction() > 40) {
+			towns[i].createUnit(map, 1, this->units);
+		}
+		if (towns[i].getProduction() > 40) {
+			int unitChoise = rand() % 3 + 2;
+			towns[i].createUnit(map, unitChoise, this->units);
+		}
+	}
+
+
+
+
+
+
+
+
+
+	//End of turns
+	for (int i = 0; i < static_cast<int>(towns.size()); i++) {
+		towns[i].endOfTurn(map, this->totalGold, this->totalScience);
+	}
+	for (int i = 0; i < static_cast<int>(units.size()); i++) {
+		units.at(i).recharge();
 	}
 }
 
@@ -403,7 +631,7 @@ void Actor::checkIsEnemy(int mouse_x, int mouse_y, Map& map, std::vector<Unit>& 
 			for (auto j : enemies)//
 			{
 
-				if (j.getIndex() == (map.getUnitInd(mouse_x, mouse_y) % 100))//find enemy in enemy vector
+				if (j.getIndex() == (map.getUnitInd(mouse_x, mouse_y) % 100) && (j.getPositionX() == mouse_x / 32 * 32 && j.getPositionY() == mouse_y / 32 * 32))//find enemy in enemy vector
 				{
 					tmp = false;
 					this->units.at(unitController).attack(enemies.at(time), map, mouse_x, mouse_y);//attack him

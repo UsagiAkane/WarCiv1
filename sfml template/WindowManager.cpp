@@ -20,7 +20,7 @@ void WindowManager::newGameWindow() {
 				cameraControl(view, w);
 
 
-		
+
 
 			while (w.pollEvent(event)) {
 				//CLOSE--------------
@@ -45,7 +45,13 @@ void WindowManager::newGameWindow() {
 					if (isMouseInWindow(w))
 					{
 						//all other control
-						game.getActors().at(0).takeControl(event, game.getMap(), w, game.getYear());
+						if (game.getActors().at(0).takeControl(event, game.getMap(), w, game.getYear()))
+						{
+							for (int i = 1; i < game.getActors().size(); i++) {
+								game.getActors().at(i).endOfTurnBot(game.getMap(), game.getActors().at(0).getUnits());
+							
+							}
+						}
 						if (sf::Mouse::isButtonPressed(sf::Mouse::Left))//If you want to attack or move unit
 						{
 							if (event.MouseButtonReleased)

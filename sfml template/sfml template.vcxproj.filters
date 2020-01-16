@@ -134,6 +134,9 @@
     <Filter Include="UI">
       <UniqueIdentifier>{f6392d5d-7037-46a7-b1fb-42cc3b5ee801}</UniqueIdentifier>
     </Filter>
+    <Filter Include="System\Actor\AI">
+      <UniqueIdentifier>{d1bfa892-d7a1-4641-96ae-5c983ba0cccc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Resourses.cpp">
@@ -271,9 +274,14 @@
     <ClCompile Include="WindowManager.cpp">
       <Filter>System\WindowManager</Filter>
     </ClCompile>
-    <ClCompile Include="Plains.cpp" />
     <ClCompile Include="Ui.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="AI.cpp">
+      <Filter>System\Actor\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Plains.cpp">
+      <Filter>Map\Terrains\All</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -409,10 +417,17 @@
     <ClInclude Include="WindowManager.h">
       <Filter>System\WindowManager</Filter>
     </ClInclude>
-    <ClInclude Include="Plains.h" />
-    <ClInclude Include="Ui.h" />
     <ClInclude Include="Marketplace.h">
       <Filter>Buildings\Child\Marketplace</Filter>
+    </ClInclude>
+    <ClInclude Include="AI.h">
+      <Filter>System\Actor\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Plains.h">
+      <Filter>Map\Terrains\All</Filter>
+    </ClInclude>
+    <ClInclude Include="Ui.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

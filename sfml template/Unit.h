@@ -96,10 +96,10 @@ public:
 	bool isEnemyInEnemyIdList(std::vector<Unit> enemies_id);
 	std::string getSaveUnitInfo();
 	void animationOfAttack(int value, sf::RenderWindow& w, Map& map);
-	void moveRightHidden(Map& map, int mouse_x, int mouse_y);
-	void moveLeftHidden(Map& map, int mouse_x, int mouse_y);
-	void moveDownHidden(Map& map, int mouse_x, int mouse_y);
-	void moveTopHidden(Map& map, int mouse_x, int mouse_y);
+	void moveRightHidden(Map& map, int mouse_x=0, int mouse_y = 0);
+	void moveLeftHidden(Map& map, int mouse_x = 0, int mouse_y = 0);
+	void moveDownHidden(Map& map, int mouse_x = 0, int mouse_y = 0);
+	void moveTopHidden(Map& map, int mouse_x = 0, int mouse_y = 0);
 
 	//find
     void delByPositionInVector(std::vector<Unit>&units);

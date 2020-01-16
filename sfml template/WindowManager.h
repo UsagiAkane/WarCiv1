@@ -22,4 +22,3 @@ public:
 	sf::RenderWindow& getWindow();
 	
 };
-
