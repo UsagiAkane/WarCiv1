@@ -35,7 +35,7 @@ public:
 	void __PUSH_TOWN_DEBUG(Town* town);
 	//--------------
 	bool takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& year);
-	void draw(sf::RenderWindow& w);
+	void draw(sf::RenderWindow& w, Map& map);
 	void takeTax();
 	void pushbackEnemyID(int id);
 

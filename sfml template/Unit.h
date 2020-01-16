@@ -88,7 +88,7 @@ public:
 	void setArmor(int armor);
 	void setSteps(int steps);
 	//needed
-	void draw(sf::RenderWindow& w);
+	void draw(sf::RenderWindow& w, Map& map);
 	void spawn(int x,int y, Map& map);
 	void death(Map& map);
 	void setColorByID();

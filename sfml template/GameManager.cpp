@@ -75,7 +75,7 @@ void GameManager::draw(sf::RenderWindow& w)
 {
 	map.draw(w);
 	for (auto i : this->actors)
-		i.draw(w);
+		i.draw(w,this->map);
 	//if(IsMenu)
 	ui.resize(w);
 	ui.setParams(this->actors[0].getTotalGold(), this->actors[0].getTotalScience(), (this->currentYear + 4000) / 5, this->currentYear);

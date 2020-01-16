@@ -92,7 +92,7 @@ void Unit::moveRightHidden(Map& map, int mouse_x, int mouse_y)
 		positionX += BORDER_PIXEL_32;
 		this->warriorSprite.setPosition(static_cast<float>(positionX), static_cast<float>(positionY));
 		this->steps -= map.getTile(mouse_x, mouse_y).getMove();
-		map.moveUnit(positionX - BORDER_PIXEL_32, positionY, positionX, positionY);
+		map.moveUnit(positionX - BORDER_PIXEL_32, positionY, positionX, positionY,this->playerID);
 	}
 }
 
@@ -104,7 +104,7 @@ void Unit::moveLeftHidden(Map& map, int mouse_x, int mouse_y)
 		positionX -= BORDER_PIXEL_32;
 		this->warriorSprite.setPosition(static_cast<float>(positionX), static_cast<float>(positionY));
 		this->steps -= map.getTile(mouse_x, mouse_y).getMove();
-		map.moveUnit(positionX + BORDER_PIXEL_32, positionY, positionX, positionY);
+		map.moveUnit(positionX + BORDER_PIXEL_32, positionY, positionX, positionY, this->playerID);
 
 	}
 }
@@ -116,7 +116,7 @@ void Unit::moveDownHidden(Map& map, int mouse_x, int mouse_y)
 		positionY += BORDER_PIXEL_32;
 		this->warriorSprite.setPosition(static_cast<float>(positionX), static_cast<float>(positionY));
 		this->steps -= map.getTile(mouse_x, mouse_y).getMove();
-		map.moveUnit(positionX, positionY - BORDER_PIXEL_32, positionX, positionY);
+		map.moveUnit(positionX, positionY - BORDER_PIXEL_32, positionX, positionY, this->playerID);
 	}
 
 }
@@ -128,7 +128,7 @@ void Unit::moveTopHidden(Map& map, int mouse_x, int mouse_y)
 		positionY -= BORDER_PIXEL_32;
 		this->warriorSprite.setPosition(static_cast<float>(positionX), static_cast<float>(positionY));
 		this->steps -= map.getTile(mouse_x, mouse_y).getMove();
-		map.moveUnit(positionX, positionY + BORDER_PIXEL_32, positionX, positionY);
+		map.moveUnit(positionX, positionY + BORDER_PIXEL_32, positionX, positionY, this->playerID);
 	}
 }
 
@@ -337,11 +337,11 @@ void Unit::setPlayerID(int ID)
 	this->playerID = ID;
 }
 
-void Unit::draw(sf::RenderWindow& w)
+void Unit::draw(sf::RenderWindow& w, Map& map)
 {
-	if (this->isAlive)
-		w.draw(this->warriorSprite);
-
+	if (!map.isFog(positionX, positionY))
+		if (this->isAlive)
+			w.draw(this->warriorSprite);
 }
 
 void Unit::spawn(int x, int y, Map& map)

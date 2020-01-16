@@ -285,12 +285,14 @@ void Town::setDamage(int damage)
 }
 #pragma endregion
 //OTHER
-void Town::draw(sf::RenderWindow& w) {
-	std::string prod;
-	prod = std::to_string(this->population);
-	this->populationText.setString(prod);
-	w.draw(this->townSprite);
-	w.draw(this->populationText);
+void Town::draw(sf::RenderWindow& w, Map& map) {
+	if (!map.isFog(positionX, positionY)) {
+		std::string prod;
+		prod = std::to_string(this->population);
+		this->populationText.setString(prod);
+		w.draw(this->townSprite);
+		w.draw(this->populationText);
+	}
 }
 
 void Town::endOfTurn(Map& map, int& gold, int& science) {

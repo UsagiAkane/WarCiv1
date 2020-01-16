@@ -112,15 +112,15 @@ bool Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& yea
 	return 0;
 }
 
-void Actor::draw(sf::RenderWindow& w)
+void Actor::draw(sf::RenderWindow& w, Map& map)
 {
 	//TOWNS-DRAW
 	for (auto i : this->towns) {
-		i.draw(w);
+		i.draw(w, map);
 	}
 	//UNITS-DRAW
 	for (auto i : this->units) {
-		i.draw(w);
+		i.draw(w, map);
 	}
 
 	if (units.size() > 0 && this->playerID == 1)
@@ -358,7 +358,7 @@ void Actor::endOfTurnBot(Map& map, Actor& eActor)
 							break;
 						}
 						//is town
-						else if (map.getUnitInd(x, y- BORDER_PIXEL_32) / 10 % 10 == 5 && map.getUnitPlayerID(x , y- BORDER_PIXEL_32) == 1)
+						else if (map.getUnitInd(x, y - BORDER_PIXEL_32) / 10 % 10 == 5 && map.getUnitPlayerID(x, y - BORDER_PIXEL_32) == 1)
 						{
 							botAttackTown(map, eActor, x, y, i, 3);
 							break;
@@ -426,7 +426,7 @@ void Actor::endOfTurnBot(Map& map, Actor& eActor)
 		else have_s = 0;
 	}
 	if (have_s) {
-		if (!(rand() % 10) ) {
+		if (!(rand() % 10)) {
 			if (this->units.size() > 0) {
 				if (this->units.at(this->unitController).getHealth() > 0) {
 					if (this->units.at(this->unitController).getIndex() == 1) {
@@ -489,7 +489,7 @@ void Actor::botAttackTown(Map& map, Actor& eActor, int x, int y, int i, int dire
 			{
 				//if damage more than defense it will attack on full damage- defense
 				//eActor.getTownsLink().at(time).setHealth(eActor.getTownsLink().at(time).getHealth() - (this->units.at(i).getDamage() - map.getTile(x, y).getDefense()));
-				eActor.getTownsLink().at(time).setHealth(eActor.getTownsLink().at(time).getHealth() - ((this->units.at(i).getDamage()+ BOT_DAMAGE_MOD)));
+				eActor.getTownsLink().at(time).setHealth(eActor.getTownsLink().at(time).getHealth() - ((this->units.at(i).getDamage() + BOT_DAMAGE_MOD)));
 			}
 			else
 			{

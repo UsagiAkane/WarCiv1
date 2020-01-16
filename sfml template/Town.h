@@ -74,7 +74,7 @@ public:
 	void setName(std::string name);
 	void setDamage(int damage);
 	//needed
-	void draw(sf::RenderWindow& w);
+	void draw(sf::RenderWindow& w, Map& map);
 	void endOfTurn(Map& map, int& gold, int& science);
 	std::string getSaveTownInfo();
 
