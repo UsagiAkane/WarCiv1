@@ -429,5 +429,8 @@
     <ClInclude Include="Ui.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="path.h">
+      <Filter>Файлы ресурсов</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

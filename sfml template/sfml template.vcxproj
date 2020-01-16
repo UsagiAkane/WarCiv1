@@ -215,6 +215,7 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Gold.h" />
     <ClInclude Include="Grassland.h" />
+    <ClInclude Include="path.h" />
     <ClInclude Include="Hills.h" />
     <ClInclude Include="Horseback_Riding.h" />
     <ClInclude Include="Horses.h" />

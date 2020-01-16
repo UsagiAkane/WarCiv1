@@ -4,6 +4,9 @@
 #include"Town.h"
 #include"Technologies.h"
 #include"Settlers.h"
+#include "path.h"
+
+#define BOT_DAMAGE_MOD 4
 
 class Actor {
 protected: 
@@ -45,7 +48,6 @@ public:
 	std::vector<Unit>& getUnits();
 	std::vector<Technologies> getTech();
 	std::vector<Unit>& getUnitsVec();
-	//std::vector<std::vector<bool>> getFog;
 	int getPlayerID();
 	int getTotalGold();
 	int getTotalScience();
@@ -68,7 +70,8 @@ public:
 	virtual void checkIsEnemy(int mouse_x, int mouse_y, Map& map, std::vector<Unit>& enemies, sf::RenderWindow& w, int direction);
 	virtual void unitAttackTown(int mouse_x, int mouse_y,Map& map, std::vector<Town> & townsEnemy, sf::RenderWindow& w, int direction);
 	virtual void takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, Actor& actorEnemy);
-	virtual void endOfTurnBot(Map & map, std::vector<Unit>& eUnits);
+	virtual void endOfTurnBot(Map & map,Actor & eActor);
+	virtual void botAttackTown(Map& map, Actor& eActor,int x,int y, int i, int direction);
 
 
 

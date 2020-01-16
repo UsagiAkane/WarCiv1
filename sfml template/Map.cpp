@@ -122,7 +122,7 @@ Map::Map(int sizeX, int sizeY, int resGenChanse) {
 
 void Map::saveMap()
 {
-	std::string path = "Saves\\Save1.txt";
+	std::string path = PATH_TO_SAVE_1;
 	std::ofstream fout;
 	fout.open(path, std::ofstream::app);
 	if (!fout.is_open())
@@ -304,9 +304,7 @@ void Map::moveUnit(int x, int y, int newx, int newy) {
 void Map::delUnit(int x, int y) {
 	x /= 32;
 	y /= 32;
-	std::cout << "fffffffffffffffffffffffffffffffffffffffffffff" << std::endl;
 	if (this->units.at(x).at(y) % 100 / 10 == 5) {
-		std::cout << "HEREHEREHEREHEREHEREHEREHEREHEREHEREHERE" << std::endl;
 		units.at(x).at(y) -= (units.at(x).at(y) % 10);
 	}
 	else
