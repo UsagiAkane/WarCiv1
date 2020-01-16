@@ -230,11 +230,13 @@ void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, Acto
 
 void Actor::endOfTurnBot(Map& map, Actor& eActor)
 {
+	//to save coordination
 	int x = 0;
 	int y = 0;
 
 	for (int i = 0; i < this->units.size(); i++)
 	{
+		//to save coordination
 		x = this->units.at(i).getSprite().getPosition().x;
 		y = this->units.at(i).getSprite().getPosition().y;
 
@@ -245,33 +247,35 @@ void Actor::endOfTurnBot(Map& map, Actor& eActor)
 			//right
 			if (tmp == 1)
 			{
-				if (map.getTile(x + 32, y).getMove() < this->units.at(i).getSteps())
+				//check does can move
+				if (map.getTile(x + BORDER_PIXEL_32, y).getMove() < this->units.at(i).getSteps())
 				{
 					for (int j = units[i].getSteps(); j >= 0;)
 					{
 						//Is water is tile empty
-						if ((map.getUnitInd(x + 32, y)) == 0 && !(map.getTile(x + 32, y).isWater()))
+						if ((map.getUnitInd(x + BORDER_PIXEL_32, y)) == 0 && !(map.getTile(x + BORDER_PIXEL_32, y).isWater()))
 						{
-							if (!(map.getTile(x + 32, y).getMove() < this->units.at(i).getSteps()))
+							if (!(map.getTile(x + BORDER_PIXEL_32, y).getMove() < this->units.at(i).getSteps()))
 								break;
 							this->units.at(i).moveRightHidden(map);
 							x += 32;
 							j = units[i].getSteps();
 						}
 						//is enemy
-						else if (map.getUnitInd(x + 32, y) % 10 != 0 && map.getUnitPlayerID(x + 32, y) == 1)
+						else if (map.getUnitInd(x + BORDER_PIXEL_32, y) % 10 != 0 && map.getUnitPlayerID(x + BORDER_PIXEL_32, y) == 1)
 						{
 							for (auto& k : eActor.getUnits())
 							{
-								if (k.getPositionX() == x + 32, k.getPositionY() == y)
+								if (k.getPositionX() == x + BORDER_PIXEL_32, k.getPositionY() == y)
 								{
-									this->units[i].attack(k, map, x + 32, y);
+									this->units[i].attack(k, map, x + BORDER_PIXEL_32, y);
 									break;
 								}
 							}
 							break;
 						}
-						else if (map.getUnitInd(x + 32, y) / 10 % 10 == 5 && map.getUnitPlayerID(x + 32, y) == 1)
+						//is town
+						else if (map.getUnitInd(x + BORDER_PIXEL_32, y) / 10 % 10 == 5 && map.getUnitPlayerID(x + BORDER_PIXEL_32, y) == 1)
 						{
 							botAttackTown(map, eActor, x, y, i, 1);
 							break;
@@ -284,25 +288,26 @@ void Actor::endOfTurnBot(Map& map, Actor& eActor)
 			//left
 			if (tmp == 2)
 			{
-				if (map.getTile(x - 32, y).getMove() < this->units.at(i).getSteps())
+				//check does can move
+				if (map.getTile(x - BORDER_PIXEL_32, y).getMove() < this->units.at(i).getSteps())
 				{
 					for (int j = units[i].getSteps(); j >= 0;)
 					{
 						//Is water
-						if ((map.getUnitInd(x - 32, y)) == 0 && !(map.getTile(x - 32, y).isWater()))
+						if ((map.getUnitInd(x - BORDER_PIXEL_32, y)) == 0 && !(map.getTile(x - BORDER_PIXEL_32, y).isWater()))
 						{
-							if (!(map.getTile(x - 32, y).getMove() < this->units.at(i).getSteps()))
+							if (!(map.getTile(x - BORDER_PIXEL_32, y).getMove() < this->units.at(i).getSteps()))
 								break;
 							this->units.at(i).moveLeftHidden(map);
-							x -= 32;
+							x -= BORDER_PIXEL_32;
 							j = units[i].getSteps();
 						}
 						//is enemy
-						else if (map.getUnitInd(x - 32, y) % 10 != 0 && map.getUnitPlayerID(x - 32, y) == 1)
+						else if (map.getUnitInd(x - BORDER_PIXEL_32, y) % 10 != 0 && map.getUnitPlayerID(x - BORDER_PIXEL_32, y) == 1)
 						{
 							for (auto& k : eActor.getUnits())
 							{
-								if (k.getPositionX() == x - 32, k.getPositionY() == y)
+								if (k.getPositionX() == x - BORDER_PIXEL_32, k.getPositionY() == y)
 								{
 									this->units[i].attack(k, map, x - 32, y);
 									break;
@@ -310,7 +315,8 @@ void Actor::endOfTurnBot(Map& map, Actor& eActor)
 							}
 							break;
 						}
-						else if (map.getUnitInd(x - 32, y) / 10 % 10 == 5 && map.getUnitPlayerID(x - 32, y) == 1)
+						//is town
+						else if (map.getUnitInd(x - BORDER_PIXEL_32, y) / 10 % 10 == 5 && map.getUnitPlayerID(x - BORDER_PIXEL_32, y) == 1)
 						{
 							botAttackTown(map, eActor, x, y, i, 2);
 							break;
@@ -324,33 +330,35 @@ void Actor::endOfTurnBot(Map& map, Actor& eActor)
 			//top
 			if (tmp == 3)
 			{
-				if (map.getTile(x, y - 32).getMove() < this->units.at(i).getSteps())
+				//check does can move
+				if (map.getTile(x, y - BORDER_PIXEL_32).getMove() < this->units.at(i).getSteps())
 				{
 					for (int j = units[i].getSteps(); j >= 0;)
 					{
 						//Is water
-						if ((map.getUnitInd(x, y - 32)) == 0 && !(map.getTile(x, y - 32).isWater()))
+						if ((map.getUnitInd(x, y - BORDER_PIXEL_32)) == 0 && !(map.getTile(x, y - BORDER_PIXEL_32).isWater()))
 						{
-							if (!(map.getTile(x, y - 32).getMove() < this->units.at(i).getSteps()))
+							if (!(map.getTile(x, y - BORDER_PIXEL_32).getMove() < this->units.at(i).getSteps()))
 								break;
 							this->units.at(i).moveTopHidden(map);
 							y -= 32;
 							j = units[i].getSteps();
 						}
 						//is enemy
-						else if (map.getUnitInd(x, y - 32) % 10 != 0 && map.getUnitPlayerID(x, y - 32) == 1)
+						else if (map.getUnitInd(x, y - BORDER_PIXEL_32) % 10 != 0 && map.getUnitPlayerID(x, y - BORDER_PIXEL_32) == 1)
 						{
 							for (auto& k : eActor.getUnits())
 							{
 								if (k.getPositionX() == x, k.getPositionY() == y - 32)
 								{
-									this->units[i].attack(k, map, x, y - 32);
+									this->units[i].attack(k, map, x, y - BORDER_PIXEL_32);
 									break;
 								}
 							}
 							break;
 						}
-						else if (map.getUnitInd(x, y-32) / 10 % 10 == 5 && map.getUnitPlayerID(x , y-32) == 1)
+						//is town
+						else if (map.getUnitInd(x, y- BORDER_PIXEL_32) / 10 % 10 == 5 && map.getUnitPlayerID(x , y- BORDER_PIXEL_32) == 1)
 						{
 							botAttackTown(map, eActor, x, y, i, 3);
 							break;
@@ -364,33 +372,35 @@ void Actor::endOfTurnBot(Map& map, Actor& eActor)
 			////down
 			if (tmp == 4)
 			{
-				if (map.getTile(x, y + 32).getMove() < this->units.at(i).getSteps())
+				//check does can move
+				if (map.getTile(x, y + BORDER_PIXEL_32).getMove() < this->units.at(i).getSteps())
 				{
 					for (int j = units[i].getSteps(); j >= 0;)
 					{
 						//Is water
-						if ((map.getUnitInd(x, y + 32)) == 0 && !(map.getTile(x, y + 32).isWater()))
+						if ((map.getUnitInd(x, y + BORDER_PIXEL_32)) == 0 && !(map.getTile(x, y + BORDER_PIXEL_32).isWater()))
 						{
-							if (!(map.getTile(x, y + 32).getMove() < this->units.at(i).getSteps()))
+							if (!(map.getTile(x, y + BORDER_PIXEL_32).getMove() < this->units.at(i).getSteps()))
 								break;
 							this->units.at(i).moveDownHidden(map);
-							y += 32;
+							y += BORDER_PIXEL_32;
 							j = units[i].getSteps();
 						}
 						//is enemy
-						else if (map.getUnitInd(x, y + 32) % 10 != 0 && map.getUnitPlayerID(x, y + 32) == 1)
+						else if (map.getUnitInd(x, y + BORDER_PIXEL_32) % 10 != 0 && map.getUnitPlayerID(x, y + BORDER_PIXEL_32) == 1)
 						{
 							for (auto& k : eActor.getUnits())
 							{
-								if (k.getPositionX() == x, k.getPositionY() == y + 32)
+								if (k.getPositionX() == x, k.getPositionY() == y + BORDER_PIXEL_32)
 								{
-									this->units[i].attack(k, map, x, y + 32);
+									this->units[i].attack(k, map, x, y + BORDER_PIXEL_32);
 									break;
 								}
 							}
 							break;
 						}
-						else if (map.getUnitInd(x, y + 32) / 10 % 10 == 5 && map.getUnitPlayerID(x, y + 32) == 1)
+						//is town
+						else if (map.getUnitInd(x, y + BORDER_PIXEL_32) / 10 % 10 == 5 && map.getUnitPlayerID(x, y + BORDER_PIXEL_32) == 1)
 						{
 							botAttackTown(map, eActor, x, y, i, 4);
 							break;
@@ -416,7 +426,7 @@ void Actor::endOfTurnBot(Map& map, Actor& eActor)
 		else have_s = 0;
 	}
 	if (have_s) {
-		if (!(rand() % 10)) {
+		if (!(rand() % 10) ) {
 			if (this->units.size() > 0) {
 				if (this->units.at(this->unitController).getHealth() > 0) {
 					if (this->units.at(this->unitController).getIndex() == 1) {
@@ -431,7 +441,7 @@ void Actor::endOfTurnBot(Map& map, Actor& eActor)
 							this->towns.push_back(*town);
 							this->unitController = 0;
 						}
-						else std::cout << "<error> this tile already has town\n";
+						else std::cout << "BOT CAN'T CREATE TOWN";
 						//std::cout << map.getUnitInd(this->towns.at(0).getPositionX(), this->towns.at(0).getPositionY());//debug
 					}
 				}
@@ -461,34 +471,35 @@ void Actor::endOfTurnBot(Map& map, Actor& eActor)
 void Actor::botAttackTown(Map& map, Actor& eActor, int x, int y, int i, int direction)
 {
 	if (direction == 1)
-		x += 32;
+		x += BORDER_PIXEL_32;
 	else if (direction == 2)
-		x -= 32;
+		x -= BORDER_PIXEL_32;
 	else if (direction == 3)
-		y -= 32;
+		y -= BORDER_PIXEL_32;
 	else if (direction == 4)
-		y += 32;
+		y += BORDER_PIXEL_32;
 
 	int time = 0;
 	for (auto j : eActor.getTownsLink())
 	{
-		if (j.getPositionX() == (x) / 32 * 32 && j.getPositionY() == (y) / 32 * 32)//find enemy in enemy vector
+		if (j.getPositionX() == (x) / BORDER_PIXEL_32 * BORDER_PIXEL_32 && j.getPositionY() == (y) / BORDER_PIXEL_32 * BORDER_PIXEL_32)//find enemy in enemy vector
 		{
 			//damage to town
 			if (this->units.at(i).getDamage() - map.getTile(x, y).getDefense() > 0)
 			{
 				//if damage more than defense it will attack on full damage- defense
-				eActor.getTownsLink().at(time).setHealth(eActor.getTownsLink().at(time).getHealth() - (this->units.at(i).getDamage() - map.getTile(x, y).getDefense()));
+				//eActor.getTownsLink().at(time).setHealth(eActor.getTownsLink().at(time).getHealth() - (this->units.at(i).getDamage() - map.getTile(x, y).getDefense()));
+				eActor.getTownsLink().at(time).setHealth(eActor.getTownsLink().at(time).getHealth() - ((this->units.at(i).getDamage()+ BOT_DAMAGE_MOD)));
 			}
 			else
 			{
 				//if damage is less than armor you will damage only 1 
-				eActor.getTownsLink().at(time).setHealth(eActor.getTownsLink().at(time).getHealth() - 1);
+				/*eActor.getTownsLink().at(time).setHealth(eActor.getTownsLink().at(time).getHealth() - 1);*/
+				eActor.getTownsLink().at(time).setHealth(eActor.getTownsLink().at(time).getHealth() - (this->units.at(i).getDamage() + BOT_DAMAGE_MOD));
 			}
 
 			if (this->units.at(this->unitController).getArmor() <= 0)
 				this->units.at(i).setHealth(this->units.at(i).getHealth() - (eActor.getTownsLink().at(time).getDamage()) - this->units.at(i).getArmor());
-
 			else
 				this->units.at(i).setArmor(this->units.at(i).getArmor() - eActor.getTownsLink().at(time).getDamage());
 

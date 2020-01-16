@@ -5,6 +5,8 @@
 #include"Technologies.h"
 #include"Settlers.h"
 
+#define BOT_DAMAGE_MOD 4
+
 class Actor {
 protected: 
 	////WorldStat wStat;

@@ -304,9 +304,7 @@ void Map::moveUnit(int x, int y, int newx, int newy) {
 void Map::delUnit(int x, int y) {
 	x /= 32;
 	y /= 32;
-	std::cout << "fffffffffffffffffffffffffffffffffffffffffffff" << std::endl;
 	if (this->units.at(x).at(y) % 100 / 10 == 5) {
-		std::cout << "HEREHEREHEREHEREHEREHEREHEREHEREHEREHERE" << std::endl;
 		units.at(x).at(y) -= (units.at(x).at(y) % 10);
 	}
 	else
