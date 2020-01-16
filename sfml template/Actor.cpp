@@ -273,52 +273,8 @@ void Actor::endOfTurnBot(Map& map, Actor& eActor)
 						}
 						else if (map.getUnitInd(x + 32, y) / 10 % 10 == 5 && map.getUnitPlayerID(x + 32, y) == 1)
 						{
-							int time = 0;
-							for (auto j : eActor.getTownsLink())
-							{
-								if (j.getPositionX() == (x + 32) / 32 * 32 && j.getPositionY() == (y) / 32 * 32)//find enemy in enemy vector
-								{
-									//damage to town
-									if (this->units.at(i).getDamage() - map.getTile(x, y).getDefense() > 0)
-									{
-										//if damage more than defense it will attack on full damage- defense
-										eActor.getTownsLink().at(time).setHealth(eActor.getTownsLink().at(time).getHealth() - (this->units.at(i).getDamage() - map.getTile(x + 32, y).getDefense()));
-									}
-									else
-									{
-										//if damage is less than armor you will damage only 1 
-										eActor.getTownsLink().at(time).setHealth(eActor.getTownsLink().at(time).getHealth() - 1);
-									}
-
-									if (this->units.at(this->unitController).getArmor() <= 0)
-										this->units.at(i).setHealth(this->units.at(i).getHealth() - (eActor.getTownsLink().at(time).getDamage()) - this->units.at(i).getArmor());
-							
-									else
-										this->units.at(i).setArmor(this->units.at(i).getArmor() - eActor.getTownsLink().at(time).getDamage());
-
-									if (eActor.getTownsLink().at(time).getHealth() <= 0)
-									{
-										//change town type
-										eActor.getTownsLink()[time].setPlayer_id(this->playerID);
-										eActor.getTownsLink()[time].setColorByID();
-										eActor.getTownsLink()[time].setHealth(10);
-										//give unit to player
-										this->towns.push_back(eActor.getTownsLink()[time]);
-										//take from enemy
-										eActor.getTownsLink().erase(eActor.getTownsLink().begin() + time);
-										// to change on map
-										map.reTakeTown(x + 32, y, this->playerID);
-									}
-
-									if (this->units.at(i).getHealth() <= 0)
-										this->units.at(i).death(map);
-						
-									break;
-								}
-								time++;
-							}
-								break;
-							
+							botAttackTown(map, eActor, x, y, i, 1);
+							break;
 						}
 						else
 							break;
@@ -326,110 +282,124 @@ void Actor::endOfTurnBot(Map& map, Actor& eActor)
 				}
 			}
 			//left
-			//if (tmp == 2)
-			//{
-			//	if (map.getTile(x - 32, y).getMove() < this->units.at(i).getSteps())
-			//	{
-			//		for (int j = units[i].getSteps(); j >= 0;)
-			//		{
-			//			//Is water
-			//			if ((map.getUnitInd(x - 32, y)) == 0 && !(map.getTile(x - 32, y).isWater()))
-			//			{
-			//				if (!(map.getTile(x - 32, y).getMove() < this->units.at(i).getSteps()))
-			//					break;
-			//				this->units.at(i).moveLeftHidden(map);
-			//				x -= 32;
-			//				j = units[i].getSteps();
-			//			}
-			//			//is enemy
-			//			else if (map.getUnitInd(x - 32, y) % 10 != 0 && map.getUnitPlayerID(x - 32, y) == 1)
-			//			{
-			//				for (auto& k : eActor.getUnits())
-			//				{
-			//					if (k.getPositionX() == x - 32, k.getPositionY() == y)
-			//					{
-			//						this->units[i].attack(k, map, x - 32, y);
-			//						break;
-			//					}
-			//				}
-			//				break;
-			//			}
+			if (tmp == 2)
+			{
+				if (map.getTile(x - 32, y).getMove() < this->units.at(i).getSteps())
+				{
+					for (int j = units[i].getSteps(); j >= 0;)
+					{
+						//Is water
+						if ((map.getUnitInd(x - 32, y)) == 0 && !(map.getTile(x - 32, y).isWater()))
+						{
+							if (!(map.getTile(x - 32, y).getMove() < this->units.at(i).getSteps()))
+								break;
+							this->units.at(i).moveLeftHidden(map);
+							x -= 32;
+							j = units[i].getSteps();
+						}
+						//is enemy
+						else if (map.getUnitInd(x - 32, y) % 10 != 0 && map.getUnitPlayerID(x - 32, y) == 1)
+						{
+							for (auto& k : eActor.getUnits())
+							{
+								if (k.getPositionX() == x - 32, k.getPositionY() == y)
+								{
+									this->units[i].attack(k, map, x - 32, y);
+									break;
+								}
+							}
+							break;
+						}
+						else if (map.getUnitInd(x - 32, y) / 10 % 10 == 5 && map.getUnitPlayerID(x - 32, y) == 1)
+						{
+							botAttackTown(map, eActor, x, y, i, 2);
+							break;
+						}
 
-			//			else
-			//				break;
-			//		}
-			//	}
-			//}
-			////top
-			//if (tmp == 3)
-			//{
-			//	if (map.getTile(x, y - 32).getMove() < this->units.at(i).getSteps())
-			//	{
-			//		for (int j = units[i].getSteps(); j >= 0;)
-			//		{
-			//			//Is water
-			//			if ((map.getUnitInd(x, y - 32)) == 0 && !(map.getTile(x, y - 32).isWater()))
-			//			{
-			//				if (!(map.getTile(x, y - 32).getMove() < this->units.at(i).getSteps()))
-			//					break;
-			//				this->units.at(i).moveTopHidden(map);
-			//				y -= 32;
-			//				j = units[i].getSteps();
-			//			}
-			//			//is enemy
-			//			else if (map.getUnitInd(x, y - 32) % 10 != 0 && map.getUnitPlayerID(x, y - 32) == 1)
-			//			{
-			//				for (auto& k : eActor.getUnits())
-			//				{
-			//					if (k.getPositionX() == x, k.getPositionY() == y - 32)
-			//					{
-			//						this->units[i].attack(k, map, x, y - 32);
-			//						break;
-			//					}
-			//				}
-			//				break;
-			//			}
+						else
+							break;
+					}
+				}
+			}
+			//top
+			if (tmp == 3)
+			{
+				if (map.getTile(x, y - 32).getMove() < this->units.at(i).getSteps())
+				{
+					for (int j = units[i].getSteps(); j >= 0;)
+					{
+						//Is water
+						if ((map.getUnitInd(x, y - 32)) == 0 && !(map.getTile(x, y - 32).isWater()))
+						{
+							if (!(map.getTile(x, y - 32).getMove() < this->units.at(i).getSteps()))
+								break;
+							this->units.at(i).moveTopHidden(map);
+							y -= 32;
+							j = units[i].getSteps();
+						}
+						//is enemy
+						else if (map.getUnitInd(x, y - 32) % 10 != 0 && map.getUnitPlayerID(x, y - 32) == 1)
+						{
+							for (auto& k : eActor.getUnits())
+							{
+								if (k.getPositionX() == x, k.getPositionY() == y - 32)
+								{
+									this->units[i].attack(k, map, x, y - 32);
+									break;
+								}
+							}
+							break;
+						}
+						else if (map.getUnitInd(x, y-32) / 10 % 10 == 5 && map.getUnitPlayerID(x , y-32) == 1)
+						{
+							botAttackTown(map, eActor, x, y, i, 3);
+							break;
+						}
 
-			//			else
-			//				break;
-			//		}
-			//	}
-			//}
+						else
+							break;
+					}
+				}
+			}
 			////down
-			//if (tmp == 4)
-			//{
-			//	if (map.getTile(x, y + 32).getMove() < this->units.at(i).getSteps())
-			//	{
-			//		for (int j = units[i].getSteps(); j >= 0;)
-			//		{
-			//			//Is water
-			//			if ((map.getUnitInd(x, y + 32)) == 0 && !(map.getTile(x, y + 32).isWater()))
-			//			{
-			//				if (!(map.getTile(x, y + 32).getMove() < this->units.at(i).getSteps()))
-			//					break;
-			//				this->units.at(i).moveDownHidden(map);
-			//				y += 32;
-			//				j = units[i].getSteps();
-			//			}
-			//			//is enemy
-			//			else if (map.getUnitInd(x, y + 32) % 10 != 0 && map.getUnitPlayerID(x, y + 32) == 1)
-			//			{
-			//				for (auto& k : eActor.getUnits())
-			//				{
-			//					if (k.getPositionX() == x, k.getPositionY() == y + 32)
-			//					{
-			//						this->units[i].attack(k, map, x, y + 32);
-			//						break;
-			//					}
-			//				}
-			//				break;
-			//			}
-
-			//			else
-			//				break;
-			//		}
-			//	}
-			//}
+			if (tmp == 4)
+			{
+				if (map.getTile(x, y + 32).getMove() < this->units.at(i).getSteps())
+				{
+					for (int j = units[i].getSteps(); j >= 0;)
+					{
+						//Is water
+						if ((map.getUnitInd(x, y + 32)) == 0 && !(map.getTile(x, y + 32).isWater()))
+						{
+							if (!(map.getTile(x, y + 32).getMove() < this->units.at(i).getSteps()))
+								break;
+							this->units.at(i).moveDownHidden(map);
+							y += 32;
+							j = units[i].getSteps();
+						}
+						//is enemy
+						else if (map.getUnitInd(x, y + 32) % 10 != 0 && map.getUnitPlayerID(x, y + 32) == 1)
+						{
+							for (auto& k : eActor.getUnits())
+							{
+								if (k.getPositionX() == x, k.getPositionY() == y + 32)
+								{
+									this->units[i].attack(k, map, x, y + 32);
+									break;
+								}
+							}
+							break;
+						}
+						else if (map.getUnitInd(x, y + 32) / 10 % 10 == 5 && map.getUnitPlayerID(x, y + 32) == 1)
+						{
+							botAttackTown(map, eActor, x, y, i, 4);
+							break;
+						}
+						else
+							break;
+					}
+				}
+			}
 		}
 		else
 		{
@@ -469,8 +439,6 @@ void Actor::endOfTurnBot(Map& map, Actor& eActor)
 		}
 	}
 
-
-
 	//Train units
 	for (int i = 0; i < static_cast<int>(towns.size()); i++) {
 		if (towns[i].getPopulation() > 2 && towns[i].getProduction() > 40) {
@@ -481,15 +449,6 @@ void Actor::endOfTurnBot(Map& map, Actor& eActor)
 			towns[i].createUnit(map, unitChoise, this->units);
 		}
 	}
-
-
-
-
-
-
-
-
-
 	//End of turns
 	for (int i = 0; i < static_cast<int>(towns.size()); i++) {
 		towns[i].endOfTurn(map, this->totalGold, this->totalScience);
@@ -497,6 +456,65 @@ void Actor::endOfTurnBot(Map& map, Actor& eActor)
 	for (int i = 0; i < static_cast<int>(units.size()); i++) {
 		units.at(i).recharge();
 	}
+}
+
+void Actor::botAttackTown(Map& map, Actor& eActor, int x, int y, int i, int direction)
+{
+	if (direction == 1)
+		x += 32;
+	else if (direction == 2)
+		x -= 32;
+	else if (direction == 3)
+		y -= 32;
+	else if (direction == 4)
+		y += 32;
+
+	int time = 0;
+	for (auto j : eActor.getTownsLink())
+	{
+		if (j.getPositionX() == (x) / 32 * 32 && j.getPositionY() == (y) / 32 * 32)//find enemy in enemy vector
+		{
+			//damage to town
+			if (this->units.at(i).getDamage() - map.getTile(x, y).getDefense() > 0)
+			{
+				//if damage more than defense it will attack on full damage- defense
+				eActor.getTownsLink().at(time).setHealth(eActor.getTownsLink().at(time).getHealth() - (this->units.at(i).getDamage() - map.getTile(x, y).getDefense()));
+			}
+			else
+			{
+				//if damage is less than armor you will damage only 1 
+				eActor.getTownsLink().at(time).setHealth(eActor.getTownsLink().at(time).getHealth() - 1);
+			}
+
+			if (this->units.at(this->unitController).getArmor() <= 0)
+				this->units.at(i).setHealth(this->units.at(i).getHealth() - (eActor.getTownsLink().at(time).getDamage()) - this->units.at(i).getArmor());
+
+			else
+				this->units.at(i).setArmor(this->units.at(i).getArmor() - eActor.getTownsLink().at(time).getDamage());
+
+			if (eActor.getTownsLink().at(time).getHealth() <= 0)
+			{
+				//change town type
+				eActor.getTownsLink()[time].setPlayer_id(this->playerID);
+				eActor.getTownsLink()[time].setColorByID();
+				eActor.getTownsLink()[time].setHealth(10);
+				//give unit to player
+				this->towns.push_back(eActor.getTownsLink()[time]);
+				//take from enemy
+				eActor.getTownsLink().erase(eActor.getTownsLink().begin() + time);
+				// to change on map
+				map.reTakeTown(x, y, this->playerID);
+			}
+
+			if (this->units.at(i).getHealth() <= 0)
+				this->units.at(i).death(map);
+
+			break;
+		}
+		time++;
+	}
+
+
 }
 
 #pragma region GETTERS
