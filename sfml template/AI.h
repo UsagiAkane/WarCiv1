@@ -7,8 +7,6 @@ private:
 public:
 	AI(int playerID);
 
-	void endOfTurnBot(Map& map);
-	
 
 
 
