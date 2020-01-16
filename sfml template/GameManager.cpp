@@ -6,7 +6,7 @@ GameManager::GameManager()
 	player->setPlayerID(1);
 	Settlers* firstS = new Settlers;
 	firstS->setPlayerID(player->getPlayerID());
-	firstS->spawn(128, 160, this->map);
+	firstS->spawn(/*(1 + rand() % map._getVecTerrainsInt().size() - 2) * 32*/32 * 15, /*(1 + rand() % map._getVecTerrainsInt().at(0).size() - 2) * 32*/32 * 15, this->map);
 	player->__PUSH_UNIT_DEBUG(firstS);
 
 	//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
@@ -16,16 +16,16 @@ GameManager::GameManager()
 	Legion* legionEnemy = new Legion;
 	Militia* militiaEnemy = new Militia;
 	militiaEnemy->setPlayerID(2);
-	militiaEnemy->spawn(128, 128, map);
+	militiaEnemy->spawn(32 * 10, 32 * 9, map);
 	//EnemyUnitVector.push_back(militiaEnemy);
 	enemyActor->__PUSH_UNIT_DEBUG(militiaEnemy);
 	legionEnemy->setPlayerID(2);
-	legionEnemy->spawn(96, 96, map);
+	legionEnemy->spawn(32 * 9, 32 * 10, map);
 	//EnemyUnitVector.push_back(legionEnemy);
 	enemyActor->__PUSH_UNIT_DEBUG(legionEnemy);
 	Town* townEnemy = new Town;
 	townEnemy->setPlayer_id(2);
-	townEnemy->spawn(32 * 5, 32 * 6, this->map);
+	townEnemy->spawn(32 * 10, 32 *10, this->map);
 	enemyActor->__PUSH_TOWN_DEBUG(townEnemy);
 	Town* townEnemy2 = new Town;
 	townEnemy2->setPlayer_id(2);
@@ -38,9 +38,9 @@ GameManager::GameManager()
 	Settlers* settlers3 = new Settlers;
 	Legion* legionEnemy3 = new Legion;
 	legionEnemy3->setPlayerID(3);
-	legionEnemy3->spawn(32 * 6, 32 * 6, map);
+	legionEnemy3->spawn(32 * 20, 32 * 20, map);
 	settlers3->setPlayerID(3);
-	settlers3->spawn(32 * 5, 32 * 5, map);
+	settlers3->spawn(32 * 19, 32 * 19, map);
 	third->__PUSH_UNIT_DEBUG(settlers3);
 	third->__PUSH_UNIT_DEBUG(legionEnemy3);
 
@@ -75,7 +75,7 @@ void GameManager::draw(sf::RenderWindow& w)
 {
 	map.draw(w);
 	for (auto i : this->actors)
-		i.draw(w,this->map);
+		i.draw(w, this->map);
 	//if(IsMenu)
 	ui.resize(w);
 	ui.setParams(this->actors[0].getTotalGold(), this->actors[0].getTotalScience(), (this->currentYear + 4000) / 5, this->currentYear);

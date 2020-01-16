@@ -92,7 +92,7 @@ void Unit::moveRightHidden(Map& map, int mouse_x, int mouse_y)
 		positionX += BORDER_PIXEL_32;
 		this->warriorSprite.setPosition(static_cast<float>(positionX), static_cast<float>(positionY));
 		this->steps -= map.getTile(mouse_x, mouse_y).getMove();
-		map.moveUnit(positionX - BORDER_PIXEL_32, positionY, positionX, positionY,this->playerID);
+		map.moveUnit(positionX - BORDER_PIXEL_32, positionY, positionX, positionY, this->playerID);
 	}
 }
 
@@ -351,6 +351,8 @@ void Unit::spawn(int x, int y, Map& map)
 	this->warriorSprite.setPosition(static_cast<float>(x), static_cast<float>(y));
 	map.pushUnit(x, y, (this->playerID * 100) + this->index);
 	setColorByID();
+	if (this->playerID == 1)
+		map.radarFog(x / 32, y / 32);
 }
 
 void Unit::death(Map& map)
