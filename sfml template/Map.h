@@ -11,6 +11,7 @@
 #include "Plains.h"
 #include "Terrain.h"
 #include <fstream>
+#include "path.h"
 
 
 class Map {

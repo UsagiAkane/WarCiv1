@@ -627,7 +627,7 @@ void Actor::endOfTurn(Map& map)
 
 void Actor::saveUnits()
 {
-	std::string path = "Saves\\Save1.txt";
+	std::string path = PATH_TO_SAVE_1;
 	std::ofstream fout;
 	fout.open(path, std::ofstream::app);
 	if (!fout.is_open())
@@ -645,7 +645,7 @@ void Actor::saveUnits()
 
 void Actor::saveTowns()
 {
-	std::string path = "Saves\\Save1.txt";
+	std::string path = PATH_TO_SAVE_1;
 	std::ofstream fout;
 	fout.open(path, std::ofstream::app);
 	if (!fout.is_open())
@@ -678,7 +678,7 @@ std::string Actor::getSaveActorInfo()
 
 void Actor::saveActorInfo()
 {
-	std::string path = "Saves\\Save1.txt";
+	std::string path = PATH_TO_SAVE_1;
 	std::ofstream fout;
 	fout.open(path, std::ofstream::app);
 	if (!fout.is_open())

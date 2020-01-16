@@ -116,7 +116,7 @@ std::string getUnitInfoFromFile(int actorInd)
 {
 	std::string line;
 	std::string buffer;
-	std::string path = "Saves\\Save1.txt";
+	std::string path = PATH_TO_SAVE_1;
 	std::ifstream fin;
 	fin.open(path);
 	short isnext = 0;
@@ -172,7 +172,8 @@ std::string sliseStrings(std::string str, int index) {
 	index--;
 	//1 0 1 3 0 0 1 3 160 160 |1 1 3 3 0 0 3 3 192 192 |
 	for (auto i : str) {
-		if (i == '|' && index == 0)break;
+		if (i == '|' && index == 0)
+			break;
 		if (index != 0) {
 			if (i == '|') {
 				index--;
@@ -300,7 +301,7 @@ std::string getMapTerrainDataFromFile()
 {
 	std::string line;
 	std::string buffer;
-	std::string path = "Saves\\Save1.txt";
+	std::string path = PATH_TO_SAVE_1;
 	std::ifstream fin;
 	fin.open(path);
 	if (fin.is_open())
@@ -330,7 +331,7 @@ std::string getMapUnitDataFromFile()
 {
 	std::string line;
 	std::string buffer;
-	std::string path = "Saves\\Save1.txt";
+	std::string path = PATH_TO_SAVE_1;
 	std::ifstream fin;
 	fin.open(path);
 	bool isnext = false;
@@ -367,7 +368,7 @@ std::string getActorInfoFromFile(int actorInd)
 {
 	std::string line;
 	std::string buffer;
-	std::string path = "Saves\\Save1.txt";
+	std::string path = PATH_TO_SAVE_1;
 	std::ifstream fin;
 	fin.open(path);
 	short isnext = 0;
@@ -452,7 +453,7 @@ int getActorTS(int actorInd) {
 int getActorsCount() {
 
 	std::string buffer;
-	std::string path = "Saves\\Save1.txt";
+	std::string path = PATH_TO_SAVE_1;
 	std::ifstream fin;
 	fin.open(path);
 	short isnext = 0;
@@ -479,7 +480,7 @@ int getActorsCount() {
 int getTownsCount(int actorInd)
 {
 	std::string buffer;
-	std::string path = "Saves\\Save1.txt";
+	std::string path = PATH_TO_SAVE_1;
 	std::ifstream fin;
 	fin.open(path);
 	short isnext = 0;
@@ -519,7 +520,7 @@ std::string getTownInfoFromFile(int actorInd)
 
 	std::string line;
 	std::string buffer;
-	std::string path = "Saves\\Save1.txt";
+	std::string path = PATH_TO_SAVE_1;
 	std::ifstream fin;
 	fin.open(path);
 	short isnext = 0;

@@ -122,7 +122,7 @@ Map::Map(int sizeX, int sizeY, int resGenChanse) {
 
 void Map::saveMap()
 {
-	std::string path = "Saves\\Save1.txt";
+	std::string path = PATH_TO_SAVE_1;
 	std::ofstream fout;
 	fout.open(path, std::ofstream::app);
 	if (!fout.is_open())

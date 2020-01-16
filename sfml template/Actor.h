@@ -4,6 +4,7 @@
 #include"Town.h"
 #include"Technologies.h"
 #include"Settlers.h"
+#include "path.h"
 
 #define BOT_DAMAGE_MOD 4
 
