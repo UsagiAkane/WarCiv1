@@ -137,6 +137,9 @@
     <Filter Include="System\Actor\AI">
       <UniqueIdentifier>{d1bfa892-d7a1-4641-96ae-5c983ba0cccc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Units\Childs\Chariot">
+      <UniqueIdentifier>{77a53d09-ce06-4394-afa0-bb1c247953a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Resourses.cpp">
@@ -282,6 +285,9 @@
     </ClCompile>
     <ClCompile Include="Plains.cpp">
       <Filter>Map\Terrains\All</Filter>
+    </ClCompile>
+    <ClCompile Include="Chariot.cpp">
+      <Filter>Units\Childs\Chariot</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -431,6 +437,9 @@
     </ClInclude>
     <ClInclude Include="path.h">
       <Filter>Файлы ресурсов</Filter>
+    </ClInclude>
+    <ClInclude Include="Chariot.h">
+      <Filter>Units\Childs\Chariot</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

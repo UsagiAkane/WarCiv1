@@ -9,6 +9,7 @@
 #include "CityWalls.h"
 #include "Library.h"
 #include "Marketplace.h"
+#include "Chariot.h"
 
 
 class Town {

@@ -97,6 +97,10 @@ bool Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& yea
 			if (this->towns.size() > 0)
 				this->towns.at(townController).createUnit(map, 4, this->units);
 			break;
+		case sf::Keyboard::Num5:
+			if (this->towns.size() > 0)
+				this->towns.at(townController).createUnit(map, 5, this->units);
+			break;
 		case sf::Keyboard::D:
 			if (this->towns.size() > 0)
 				this->towns.at(townController).createBuilding(1);

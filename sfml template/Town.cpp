@@ -30,6 +30,7 @@ void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
 	Militia* militia = new Militia();
 	Legion* legion = new Legion();
 	Cavalry* cavalry = new Cavalry();
+	Chariot* chariot = new Chariot();
 	for (auto i : this->buildings) {
 		settlers->setRank(i.getRankMultiplier());
 		militia->setRank(i.getRankMultiplier());
@@ -96,6 +97,20 @@ void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
 		}
 		else
 			std::cout << "<error> no resourses: prod(" << this->production << "/" << cavalry->getProductionPrice() << ")\n";
+		break;
+	case 5:
+		if (this->production >= chariot->getProductionPrice()) {
+			if (map.getUnitInd(positionX, positionY) % 10 == 0) {
+				this->production -= chariot->getProductionPrice();
+				chariot->setPlayerID(this->playerID);
+				chariot->spawn(positionX, positionY, map);
+				actor.push_back(*chariot);
+			}
+			else
+				std::cout << "<error> no space under the town;\n";
+		}
+		else
+			std::cout << "<error> no resourses: prod(" << this->production << "/" << chariot->getProductionPrice() << ")\n";
 		break;
 	}
 }
