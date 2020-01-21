@@ -216,6 +216,10 @@ void Unit::attack(Unit& uEnemy, Map& map, int x, int y)
 {
 
 	//damage to attacker
+	if (this->health <=0)
+	{
+
+	}
 	this->health -= ((uEnemy.getDamage() + uEnemy.getRank()) - (this->armor));
 	this->setArmor(this->armor - (uEnemy.getDamage() + uEnemy.getRank()));
 	//damage to defender unit
@@ -246,6 +250,20 @@ void Unit::recharge()
 {
 	this->steps = maxSteps;
 	this->isActive = true;
+}
+
+void Unit::GET_SHOW_INFO_DEBUG()
+{
+	std::cout << "============================================" << this->health << std::endl;
+	std::cout<< "Health: "<< this->health<< std::endl;
+	std::cout<<"Armor: " <<this->armor << std::endl;
+	std::cout<<"Damage:" << this->damage<< std::endl;
+	std::cout <<"Count of kill: " <<this->countOfKill << std::endl;
+	std::cout <<"Index: " << this->index<< std::endl;
+	std::cout <<"Rank: "<<this->rank<< std::endl;
+	std::cout <<"Alive: " <<this->isAlive<< std::endl;
+	std::cout <<"X: " <<this->positionX<< std::endl;
+	std::cout <<"Y: " <<this->positionY<< std::endl;
 }
 
 void Unit::skipTurn()

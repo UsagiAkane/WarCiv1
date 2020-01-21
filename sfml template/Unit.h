@@ -55,7 +55,9 @@ public:
 	virtual void attack(Unit& u, Map& map,int x,int y);
 	virtual void recharge();
 	
-	
+	//DEBUG
+	void GET_SHOW_INFO_DEBUG();
+
 	//functions ,that can be used by pressed key
 	void skipTurn();
 	void burrow();

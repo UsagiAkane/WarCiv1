@@ -164,6 +164,7 @@ void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, Acto
 		//CHECK IS UNIT ALIVE
 		if (this->units.at(this->unitController).getHealth() > 0)
 		{
+			/*this->units.at(this->unitController).GET_SHOW_INFO_DEBUG();*/
 			//top
 			//check position of mouse
 			if (((mouse_x <= UnPosX + BORDER_PIXEL_60 && mouse_x >= UnPosX + BORDER_PIXEL_30) && (mouse_y >= UnPosY && mouse_y <= UnPosY + BORDER_PIXEL_30)))
