@@ -102,11 +102,11 @@ Actor& GameManager::findActor(int mouse_x, int mouse_y)
 
 void GameManager::saveGame()
 {
+	std::cout<<"Does deleted: " << std::remove(PATH_TO_SAVE_1) << std::endl;
+
 	map.saveMap();
 	for (auto i : actors)
-	{
 		i.saveTotalnfo();
-	}
 }
 
 #pragma region UNitsMap_LOAD
