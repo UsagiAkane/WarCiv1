@@ -2,7 +2,7 @@
 
 Plains::Plains(int res)
 {
-	texture.loadFromFile("Terrains\\Plains.png");
+	texture.loadFromFile(PATH_TO_TERRAINS_PLAINS);
 	this->sprite.setTexture(this->texture);
 	this->name = "plains";
 	this->move = 1;

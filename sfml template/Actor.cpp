@@ -9,7 +9,7 @@ Actor::Actor(std::string name, int playerID) {
 	this->unitController = 0;
 	this->townController = 0;
 	sf::Texture* tmp = new sf::Texture;
-	tmp->loadFromFile("Icons\\target.png");
+	tmp->loadFromFile(PATH_TO_ICON_TARGET);
 	this->target.setTexture(*tmp);
 }
 

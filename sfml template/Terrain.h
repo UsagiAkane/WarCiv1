@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "Resourses.h"
 #include <string>
+#include "path.h"
 
 class Terrain {
 protected:

@@ -1,7 +1,7 @@
 ﻿#include "Town.h"
 
 Town::Town(int positionX, int positionY, std::string name) {
-	this->texture.loadFromFile("Icons\\Town.png");
+	this->texture.loadFromFile(PATH_TO_ICON_TOWN);
 	this->townSprite.setTexture(texture);
 	this->positionX = positionX;
 	this->positionY = positionY;

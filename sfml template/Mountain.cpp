@@ -3,7 +3,7 @@
 //1=gold, 2=oasis
 Mountain::Mountain(int res)
 {
-	texture.loadFromFile("Terrains\\Mountains.png");
+	texture.loadFromFile(PATH_TO_TERRAINS_MOUNTAIN);
 	this->sprite.setTexture(this->texture);
 	this->name = "mountain";
 	this->move = 3;

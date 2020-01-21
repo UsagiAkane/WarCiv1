@@ -2,7 +2,7 @@
 
 Game::Game()
 {
-	this->texture.loadFromFile("Resources\\Game.png");
+	this->texture.loadFromFile(PATH_TO_RESOURCES_GAME);
 	this->sprite.setTexture(texture);
 	this->food = 2;
 }

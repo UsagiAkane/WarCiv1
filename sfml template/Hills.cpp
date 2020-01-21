@@ -3,7 +3,7 @@
 //1=coal, 2=oil
 Hills::Hills(int res)
 {
-	texture.loadFromFile("Terrains\\Hills.png");
+	texture.loadFromFile(PATH_TO_TERRAINS_HILLS);
 	this->sprite.setTexture(this->texture);
 	this->name = "hills";
 	this->move = 2;

@@ -2,7 +2,7 @@
 
 Gold::Gold()
 {
-	this->texture.loadFromFile("Resources\\Gold.png");
+	this->texture.loadFromFile(PATH_TO_RESOURCES_GOLD);
 	this->sprite.setTexture(texture);
 	this->trade = 2;
 }
