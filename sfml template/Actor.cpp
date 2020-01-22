@@ -38,9 +38,6 @@ bool Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& yea
 				for (int i = 0; i < static_cast<int>(towns.size()); i++) {
 					if (this->towns.at(i).getPositionX() == (mouse_x / 32 * 32) && this->towns.at(i).getPositionY() == (mouse_y / 32 * 32)) {
 						this->townController = i;
-						//std::cout << "\ntownCon " << this->townController;//debug
-						
-			
 					}
 				}
 			}
@@ -110,22 +107,47 @@ bool Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& yea
 		case sf::Keyboard::Num1:
 			if (this->towns.size() > 0)
 				this->towns.at(townController).createUnit(map, 1, this->units);
+			else
+			{
+				std::string tmp = YOU_HAVE_NO_CITY;
+				ui.changeLog(tmp);
+			}
 			break;
 		case sf::Keyboard::Num2:
 			if (this->towns.size() > 0)
 				this->towns.at(townController).createUnit(map, 2, this->units);
+			else
+			{
+				std::string tmp = YOU_HAVE_NO_CITY;
+				ui.changeLog(tmp);
+			}
 			break;
 		case sf::Keyboard::Num3:
 			if (this->towns.size() > 0)
 				this->towns.at(townController).createUnit(map, 3, this->units);
+			else
+			{
+				std::string tmp = YOU_HAVE_NO_CITY;
+				ui.changeLog(tmp);
+			}
 			break;
 		case sf::Keyboard::Num4:
 			if (this->towns.size() > 0)
 				this->towns.at(townController).createUnit(map, 4, this->units);
+			else
+			{
+				std::string tmp = YOU_HAVE_NO_CITY;
+				ui.changeLog(tmp);
+			}
 			break;
 		case sf::Keyboard::Num5:
 			if (this->towns.size() > 0)
 				this->towns.at(townController).createUnit(map, 5, this->units);
+			else
+			{
+				std::string tmp = YOU_HAVE_NO_CITY;
+				ui.changeLog(tmp);
+			}
 			break;
 		case sf::Keyboard::D:
 			if (this->towns.size() > 0)
