@@ -719,3 +719,8 @@ void GameManager::deleteAllActors()
 	this->actors.clear();
 }
 
+Ui& GameManager::getUi()
+{
+	return this->ui;
+}
+

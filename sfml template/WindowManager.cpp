@@ -32,6 +32,14 @@ void WindowManager::newGameWindow(bool doesLoad) {
 					}
 				}
 
+				if (event.type == sf::Event::KeyPressed)
+				{
+					if (event.key.code == sf::Keyboard::F1)
+					{
+						game.getUi().isLog = !(game.getUi().isLog);
+					}
+				}
+
 				//CLOSE--------------
 				if (event.type == event.Closed)
 					w.close();

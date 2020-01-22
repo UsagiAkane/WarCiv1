@@ -24,6 +24,7 @@ public:
 	void saveGame();
 	void loadGame();
 	void deleteAllActors();
+	Ui& getUi();
 
 };
 
