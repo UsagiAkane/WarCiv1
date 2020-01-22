@@ -5,12 +5,13 @@
 #include"Technologies.h"
 #include"Settlers.h"
 #include "path.h"
+#include"Ui.h"
 
 #define BOT_DAMAGE_MOD 4
 
 class Actor {
 protected: 
-	////WorldStat wStat;
+	Ui ui;
 	int playerID;
 	sf::Sprite target;
 	std::vector<int> enemyListID;
@@ -19,7 +20,6 @@ protected:
 	std::vector<Town> towns;
 	std::vector<Unit> units;
 	std::vector<Technologies> tech;
-	//std::vector<std::vector<bool>> fog;
 	int totalGold;
 	int totalScience;
 	int unitController;//active Unit
@@ -48,6 +48,7 @@ public:
 	std::vector<Unit>& getUnits();
 	std::vector<Technologies> getTech();
 	std::vector<Unit>& getUnitsVec();
+	Ui& getUI();
 	int getPlayerID();
 	int getTotalGold();
 	int getTotalScience();
@@ -61,7 +62,7 @@ public:
 
 
 	//Methods
-	virtual void endOfTurn(Map& map);//need work
+	virtual void endOfTurn(Map& map);//Give control to bot;
 	virtual void saveUnits();
 	virtual void saveTowns();
 	virtual std::string getSaveActorInfo();

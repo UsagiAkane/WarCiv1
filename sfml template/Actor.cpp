@@ -1,9 +1,9 @@
 #include "Actor.h"
+#include "Logs.h"
 
 Actor::Actor(std::string name, int playerID) {
 	this->playerID = playerID;
 	this->name = name;
-	//std::vector<std::vector<bool>> fog;
 	this->totalGold = 0;
 	this->totalScience = 0;
 	this->unitController = 0;
@@ -38,11 +38,35 @@ bool Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& yea
 				for (int i = 0; i < static_cast<int>(towns.size()); i++) {
 					if (this->towns.at(i).getPositionX() == (mouse_x / 32 * 32) && this->towns.at(i).getPositionY() == (mouse_y / 32 * 32)) {
 						this->townController = i;
-						std::cout << "\ntownCon " << this->townController;//debug
+						//std::cout << "\ntownCon " << this->townController;//debug
+						
+			
 					}
 				}
 			}
-			map.__getInfo_DEBUG(mouse_x, mouse_y);
+			std::string tmp = "Name: ";
+		    tmp +=map.getTile(mouse_x, mouse_y).getName();
+			ui.changeLog(tmp,true);
+
+			tmp = "Production: ";
+			tmp += std::to_string(map.getTile(mouse_x, mouse_y).getProdaction());
+			ui.changeLog(tmp);
+
+			tmp = "Food: ";
+			tmp += std::to_string(map.getTile(mouse_x, mouse_y).getFood());
+			ui.changeLog(tmp);
+
+			tmp = "Move: ";
+			tmp += std::to_string(map.getTile(mouse_x, mouse_y).getMove());
+			ui.changeLog(tmp);
+
+			tmp = "Defense: ";
+			tmp += std::to_string(map.getTile(mouse_x, mouse_y).getDefense());
+			ui.changeLog(tmp);
+
+			tmp = "";
+			for (int i = 4; i < LOGS_COUNT; i++)
+				ui.changeLog(tmp);
 		}
 	}
 
@@ -62,8 +86,6 @@ bool Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& yea
 			if (this->units.size() != 0) { //yesn`t hasn`t units 
 				if (this->units.at(this->unitController).getHealth() > 0) {
 					if (this->units.at(this->unitController).getIndex() == 1) { //settlers?
-						//std::cout << map.getUnitInd(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY()) << std::endl;//debug
-						//map.getTile(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY()).__getInfo_DEBUG();//debug
 						if (map.getUnitInd(this->units.at(this->unitController).getPositionX(), this->units.at(this->unitController).getPositionY()) % 100 / 10 == 0) {//no town?
 							Town* town = new Town(this->units.at(this->unitController).getPositionX(), this->units.at(this->unitController).getPositionY());
 							this->units.at(this->unitController).death(map);
@@ -74,8 +96,12 @@ bool Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& yea
 
 							unitController = 0;
 						}
-						else std::cout << "<error> this tile already has town\n";
-						//std::cout << map.getUnitInd(this->towns.at(0).getPositionX(), this->towns.at(0).getPositionY());//debug
+						else
+						{
+							std::string tmp = CANT_BUILD_TOWN_LOG;
+							ui.changeLog(tmp);
+						}
+				
 					}
 				}
 			}
@@ -107,10 +133,12 @@ bool Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& yea
 			break;
 		case sf::Keyboard::Enter:
 			year += 5;
-			std::cout << "\nTurn ended!" << std::endl;
+
+			std::string tmp = TURN_ENDED_LOG;
+			ui.changeLog(tmp);
+
 			endOfTurn(map);
 			return 1;
-			break;
 		}
 	}
 	return 0;
@@ -164,7 +192,6 @@ void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, Acto
 		//CHECK IS UNIT ALIVE
 		if (this->units.at(this->unitController).getHealth() > 0)
 		{
-			/*this->units.at(this->unitController).GET_SHOW_INFO_DEBUG();*/
 			//top
 			//check position of mouse
 			if (((mouse_x <= UnPosX + BORDER_PIXEL_60 && mouse_x >= UnPosX + BORDER_PIXEL_30) && (mouse_y >= UnPosY && mouse_y <= UnPosY + BORDER_PIXEL_30)))
@@ -178,7 +205,18 @@ void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, Acto
 						unitAttackTown(mouse_x, mouse_y, map, actorEnemy.getTownsLink(), w, 1);
 					if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
 						this->units.at(this->unitController).moveRightHidden(map, mouse_x, mouse_y);//move to this position if empty;
+					else
+					{
+						std::string tmp = YOU_CANT_GO_LOG;
+						ui.changeLog(tmp);
+					}
 				}
+				else
+				{
+					std::string tmp = YOU_HAVE_NO_ENOUGH_MOVE_LOG;
+					ui.changeLog(tmp);
+				}
+
 			}
 			//left
 			//check position of mouse
@@ -193,6 +231,16 @@ void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, Acto
 						unitAttackTown(mouse_x, mouse_y, map, actorEnemy.getTownsLink(), w, 2);
 					if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
 						this->units.at(this->unitController).moveLeftHidden(map, mouse_x, mouse_y);//move to this position if empty;
+					else
+					{
+						std::string tmp = YOU_CANT_GO_LOG;
+						ui.changeLog(tmp);
+					}
+				}
+				else
+				{
+					std::string tmp = YOU_HAVE_NO_ENOUGH_MOVE_LOG;
+					ui.changeLog(tmp);
 				}
 			}
 			else if ((mouse_y >= UnPosY - BORDER_PIXEL_30 && mouse_y <= UnPosY) && (mouse_x >= UnPosX && mouse_x <= UnPosX + BORDER_PIXEL_30))//check position of mouse
@@ -206,6 +254,16 @@ void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, Acto
 						unitAttackTown(mouse_x, mouse_y, map, actorEnemy.getTownsLink(), w, 3);
 					if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
 						this->units.at(this->unitController).moveTopHidden(map, mouse_x, mouse_y);//move to this position if empty;
+					else
+					{
+						std::string tmp = YOU_CANT_GO_LOG;
+						ui.changeLog(tmp);
+					}
+				}
+				else
+				{
+					std::string tmp = YOU_HAVE_NO_ENOUGH_MOVE_LOG;
+					ui.changeLog(tmp);
 				}
 
 			}
@@ -219,6 +277,16 @@ void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, Acto
 						unitAttackTown(mouse_x, mouse_y, map, actorEnemy.getTownsLink(), w, 4);
 					if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
 						this->units.at(this->unitController).moveDownHidden(map, mouse_x, mouse_y);//move to this position if empty;
+					else
+					{
+						std::string tmp = YOU_CANT_GO_LOG;
+						ui.changeLog(tmp);
+					}
+				}
+				else
+				{
+					std::string tmp = YOU_HAVE_NO_ENOUGH_MOVE_LOG;
+					ui.changeLog(tmp);
 				}
 			}
 			this->units.at(this->unitController).checkUpUnit();
@@ -354,7 +422,7 @@ void Actor::endOfTurnBot(Map& map, Actor& eActor)
 						{
 							for (auto& k : eActor.getUnits())
 							{
-								if (k.getPositionX() == x, k.getPositionY() == y - 32)
+								if (k.getPositionX() == x, k.getPositionY() == y - BORDER_PIXEL_32)
 								{
 									this->units[i].attack(k, map, x, y - BORDER_PIXEL_32);
 									break;
@@ -446,7 +514,7 @@ void Actor::endOfTurnBot(Map& map, Actor& eActor)
 							this->towns.push_back(*town);
 							this->unitController = 0;
 						}
-						else std::cout << "BOT CAN'T CREATE TOWN";
+						/*else std::cout << "BOT CAN'T CREATE TOWN";*/
 						//std::cout << map.getUnitInd(this->towns.at(0).getPositionX(), this->towns.at(0).getPositionY());//debug
 					}
 				}
@@ -577,6 +645,11 @@ std::vector<Technologies> Actor::getTech()
 std::vector<Unit>& Actor::getUnitsVec()
 {
 	return this->units;
+}
+
+Ui& Actor::getUI()
+{
+	return this->ui;
 }
 
 int Actor::getTotalGold()
@@ -730,8 +803,12 @@ void Actor::checkIsEnemy(int mouse_x, int mouse_y, Map& map, std::vector<Unit>& 
 	if (map.getUnitInd(mouse_x, mouse_y) / 100 != this->playerID && map.getUnitInd(mouse_x, mouse_y) != 0 && tmp == true)
 	{
 		enemyListID.push_back(map.getUnitInd(mouse_x, mouse_y) / 100);
-		std::cout << "YOU START WAR" << std::endl;
-		std::cout << map.getUnitInd(mouse_x, mouse_y) / 100 << std::endl;
+		//std::cout << "YOU START WAR" << std::endl;
+		//std::cout << map.getUnitInd(mouse_x, mouse_y) / 100 << std::endl;
+
+		std::string tmp = YOU_START_WAR_LOG;
+		tmp += std::to_string(map.getUnitInd(mouse_x, mouse_y) / 100);
+		ui.changeLog(tmp);
 	}
 
 

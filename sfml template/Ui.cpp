@@ -1,13 +1,29 @@
 #include "Ui.h"
 
+void Ui::changeLog(std::string& str, bool clean)
+{
+	if (clean)
+		this->lastChangedLog = 0;
+	if (this->lastChangedLog < LOGS_COUNT)
+	{
+		this->gLog.at(lastChangedLog).setString(str);
+		lastChangedLog++;
+	}
+		
+	else
+		this->lastChangedLog = 0;
+}
+
 Ui::Ui()
 {
-	//this->DownLeftRect.setFillColor(sf::Color(50,50,50));
-	//this->DownMiddleRect.setFillColor(sf::Color(50, 50, 50));
-	//this->DownRightRect.setFillColor(sf::Color(50, 50, 50));
+	this->lastChangedLog=0;
+
+	//set TEXTURE
 	sf::Texture* tex = new sf::Texture;
 	tex->loadFromFile("Icons\\VerticalScroll.png");
 	vScrollSprite.setTexture(*tex);
+
+	//fonts
 	this->font.loadFromFile("18536.ttf");
 	this->tgold.setFont(this->font);
 	this->tsience.setFont(this->font);
@@ -15,22 +31,19 @@ Ui::Ui()
 	this->tyear.setFont(this->font);
 
 	
-
 	this->tgold.setFillColor(sf::Color(0, 0, 0));
 	this->tsience.setFillColor(sf::Color(0, 0, 0));
 	this->tturn.setFillColor(sf::Color(0, 0, 0));
 	this->tyear.setFillColor(sf::Color(0, 0, 0));
 
-
+	//set logs
 	sf::Text log;
 	for (int i = 0; i < LOGS_COUNT; i++)
 	{
 		this->gLog.push_back(log);
 		this->gLog[i].setFont(this->font);
 		this->gLog[i].setFillColor(sf::Color(255, 255, 255));
-		this->gLog[i].setString("teret");
-		//this->gLog[i].setScale(0.7, 0.7);
-	
+		this->gLog[i].setString("");
 	}
 
 }
@@ -81,6 +94,16 @@ void Ui::setParams(int gold, int sience, int turn, int year)
 	tmp = "Year: ";
 	tmp += std::to_string(year);
 	this->tyear.setString(tmp);
+}
+
+void Ui::clearLogs()
+{
+	std::string tmp= " ";
+
+	for (int i = 0; i <= LOGS_COUNT; i++)
+		changeLog(tmp);
+
+	this->lastChangedLog = 0;
 }
 
 void Ui::draw(sf::RenderWindow& w)

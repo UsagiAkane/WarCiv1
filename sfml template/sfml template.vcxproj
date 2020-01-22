@@ -212,6 +212,7 @@
     <ClInclude Include="CityWalls.h" />
     <ClInclude Include="Coal.h" />
     <ClInclude Include="Currency.h" />
+    <ClInclude Include="Logs.h" />
     <ClInclude Include="Forest.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameManager.h" />

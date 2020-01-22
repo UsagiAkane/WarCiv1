@@ -441,5 +441,8 @@
     <ClInclude Include="Chariot.h">
       <Filter>Units\Childs\Chariot</Filter>
     </ClInclude>
+    <ClInclude Include="Logs.h">
+      <Filter>Файлы ресурсов</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

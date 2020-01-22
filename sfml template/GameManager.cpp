@@ -76,10 +76,9 @@ void GameManager::draw(sf::RenderWindow& w)
 	map.draw(w);
 	for (auto i : this->actors)
 		i.draw(w, this->map);
-	//if(IsMenu)
-	ui.resize(w);
-	ui.setParams(this->actors[0].getTotalGold(), this->actors[0].getTotalScience(), (this->currentYear + 4000) / 5, this->currentYear);
-	this->ui.draw(w);
+	this->actors.at(0).getUI().resize(w);
+	this->actors.at(0).getUI().setParams(this->actors[0].getTotalGold(), this->actors[0].getTotalScience(), (this->currentYear + 4000) / 5, this->currentYear);
+	this->actors.at(0).getUI().draw(w);
 }
 
 Actor& GameManager::findActorHidden(int ID)
@@ -719,8 +718,4 @@ void GameManager::deleteAllActors()
 	this->actors.clear();
 }
 
-Ui& GameManager::getUi()
-{
-	return this->ui;
-}
 

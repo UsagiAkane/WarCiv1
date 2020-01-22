@@ -1,12 +1,12 @@
 #pragma once
 #include"AI.h"
 #include"Map.h"
-#include"Ui.h"
+
 
 class GameManager
 {
 private:
-	Ui ui;
+	
 	std::vector<Actor> actors;
 	Map map;
 	int currentYear;
@@ -24,7 +24,7 @@ public:
 	void saveGame();
 	void loadGame();
 	void deleteAllActors();
-	Ui& getUi();
+
 
 };
 

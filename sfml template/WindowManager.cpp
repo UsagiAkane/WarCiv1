@@ -2,7 +2,7 @@
 
 
 WindowManager::WindowManager() {
-	this->w.create(sf::VideoMode(1000, 600), "WC" /*sf::Style::Fullscreen*/);
+	this->w.create(sf::VideoMode(1000, 600), "WC" /*,sf::Style::Fullscreen*/);
 	this->w.setFramerateLimit(60);
 }
 
@@ -11,9 +11,7 @@ void WindowManager::newGameWindow(bool doesLoad) {
 		GameManager game;
 
 		if (doesLoad)
-		{
 			game.loadGame();
-		}
 		
 		sf::View view(w.getView());
 
@@ -24,28 +22,27 @@ void WindowManager::newGameWindow(bool doesLoad) {
 
 			while (w.pollEvent(event)) {
 
-				if (event.type == sf::Event::KeyPressed)
-				{
-					if (event.key.code == sf::Keyboard::Escape)
-					{
-						isMenu = !isMenu;
-					}
-				}
 
+				//go to menu
 				if (event.type == sf::Event::KeyPressed)
-				{
+					if (event.key.code == sf::Keyboard::Escape)
+						isMenu = !isMenu;
+
+				//to watch current logs
+				if (event.type == sf::Event::KeyPressed)
 					if (event.key.code == sf::Keyboard::F1)
-					{
-						game.getUi().isLog = !(game.getUi().isLog);
-					}
-				}
+					game.getActors().at(0).getUI().isLog = !(game.getActors().at(0).getUI().isLog);
+				//to clear  logs
+				if (event.type == sf::Event::KeyPressed)
+					if (event.key.code == sf::Keyboard::F2)
+						game.getActors().at(0).getUI().clearLogs();
 
 				//CLOSE--------------
 				if (event.type == event.Closed)
 					w.close();
-				if (event.type == sf::Event::Resized) {
+				//if window resized, all sprites and textes resized too
+				if (event.type == sf::Event::Resized)
 					view.setSize(sf::Vector2f(event.size.width, event.size.height));
-				}
 
 				if (!isMenu)
 				{
@@ -55,12 +52,11 @@ void WindowManager::newGameWindow(bool doesLoad) {
 						//all other control
 						if (game.getActors().at(0).takeControl(event, game.getMap(), w, game.getYear()))
 						{
-							for (int i = 1; i < game.getActors().size(); i++) {
+							for (int i = 1; i < game.getActors().size(); i++)
 								game.getActors().at(i).endOfTurnBot(game.getMap(), game.getActors().at(0));
-							
-							}
 						}
-						if (sf::Mouse::isButtonPressed(sf::Mouse::Left))//If you want to attack or move unit
+						//If you want to attack or move unit
+						if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 						{
 							if (event.MouseButtonReleased)
 								game.getActors().at(0).takeControlUnit(event, game.getMap(), w, game.findActor(getPosMouseByWindowX(w), getPosMouseByWindowY(w)));
@@ -69,7 +65,6 @@ void WindowManager::newGameWindow(bool doesLoad) {
 				}
 			}
 			//CAMERA CONTROL
-
 			if (isMouseInWindow(w))
 				cameraControl(view, w);
 
