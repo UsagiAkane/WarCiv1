@@ -26,7 +26,7 @@ public:
 	void setParams(int gold, int sience, int turn, int year);
 
 	//for user
-	void setStringLogs(std::string text);
+	void setStringLogs(std::string text, bool doesClear = false);
 
 
 

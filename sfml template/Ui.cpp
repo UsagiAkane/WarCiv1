@@ -80,12 +80,30 @@ void Ui::setParams(int gold, int sience, int turn, int year)
 	this->tyear.setString(tmp);
 }
 
-void Ui::setStringLogs(std::string text)
+void Ui::setStringLogs(std::string text,bool doesClear)
 {
-	if (currentLog <= LOGS_COUNT)
-		this->gLog.at(currentLog).setString(text);
+	if (!doesClear)
+	{
+		if (currentLog < LOGS_COUNT)
+		{
+			this->gLog.at(currentLog).setString(text);
+			currentLog++;
+
+		}
+		else
+			this->currentLog = 0;
+	}
 	else
-		this->currentLog = 0;
+	{
+		for (int i = 0; i < LOGS_COUNT; i++)
+		{
+			this->gLog[i].setString(" ");
+
+		}
+		this->gLog[0].setString(text);
+		currentLog = 0;
+	}
+	
 }
 
 void Ui::draw(sf::RenderWindow& w)

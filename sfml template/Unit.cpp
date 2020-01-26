@@ -28,7 +28,6 @@ void Unit::checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::
 	if (map.getUnitInd(mouse_x, mouse_y) / 100 != this->playerID && map.getUnitInd(mouse_x, mouse_y) != 0 && tmp == true)
 	{
 		enemies_id.push_back(map.getUnitInd(mouse_x, mouse_y) / 100);
-		std::cout << "YOU START WAR" << std::endl;
 		std::cout << map.getUnitInd(mouse_x, mouse_y) / 100 << std::endl;
 	}
 
@@ -36,6 +35,7 @@ void Unit::checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::
 
 void Unit::animationOfAttack(int value, sf::RenderWindow& w, Map& map)
 {
+	
 	sf::Texture textureTMP;
 	textureTMP.loadFromFile("Icons\\swordicon.png");
 	sf::Sprite tmp(textureTMP);

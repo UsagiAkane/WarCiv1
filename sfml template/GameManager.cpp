@@ -705,6 +705,7 @@ void GameManager::loadGame()
 		else
 		{
 		}
+		this->ui.setStringLogs("Successfully load",true);
 	}
 	else
 		this->ui.setStringLogs("\nCant find this file : " PATH_TO_SAVE_1  " (game has started in NEW GAME order)");
