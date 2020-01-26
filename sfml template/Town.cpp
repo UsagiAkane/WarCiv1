@@ -21,7 +21,7 @@ Town::Town(int positionX, int positionY, std::string name) {
 	this->happines = 100;
 	this->playerID = 1;//debug
 	this->science = 0;
-	this->isMenu = 1;//debug
+	this->isMenu = 0;//debug
 }
 
 void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
