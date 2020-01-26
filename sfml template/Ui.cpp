@@ -2,9 +2,6 @@
 
 Ui::Ui()
 {
-	//this->DownLeftRect.setFillColor(sf::Color(50,50,50));
-	//this->DownMiddleRect.setFillColor(sf::Color(50, 50, 50));
-	//this->DownRightRect.setFillColor(sf::Color(50, 50, 50));
 	sf::Texture* tex = new sf::Texture;
 	tex->loadFromFile("Icons\\VerticalScroll.png");
 	vScrollSprite.setTexture(*tex);
@@ -28,7 +25,7 @@ Ui::Ui()
 		this->gLog.push_back(log);
 		this->gLog[i].setFont(this->font);
 		this->gLog[i].setFillColor(sf::Color(255, 255, 255));
-		this->gLog[i].setString("teret");
+		this->gLog[i].setString("");
 		//this->gLog[i].setScale(0.7, 0.7);
 	
 	}
@@ -83,6 +80,14 @@ void Ui::setParams(int gold, int sience, int turn, int year)
 	this->tyear.setString(tmp);
 }
 
+void Ui::setStringLogs(std::string text)
+{
+	if (currentLog <= LOGS_COUNT)
+		this->gLog.at(currentLog).setString(text);
+	else
+		this->currentLog = 0;
+}
+
 void Ui::draw(sf::RenderWindow& w)
 {
 	w.draw(this->vScrollSprite);
@@ -90,9 +95,6 @@ void Ui::draw(sf::RenderWindow& w)
 	w.draw(this->tsience);
 	w.draw(this->tturn);
 	w.draw(this->tyear);
-	//	w.draw(this->DownLeftRect);
-	//	w.draw(this->DownMiddleRect);
-	//	w.draw(this->DownRightRect);
 
 	for (int i = 0; i < LOGS_COUNT; i++)
 	{

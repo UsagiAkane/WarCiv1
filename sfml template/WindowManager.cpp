@@ -2,7 +2,7 @@
 
 
 WindowManager::WindowManager() {
-	this->w.create(sf::VideoMode(1000, 600), "WC" /*sf::Style::Fullscreen*/);
+	this->w.create(sf::VideoMode(1000, 600), "WC" /*,sf::Style::Fullscreen*/);
 	this->w.setFramerateLimit(60);
 }
 

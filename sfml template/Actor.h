@@ -10,7 +10,6 @@
 
 class Actor {
 protected: 
-	////WorldStat wStat;
 	int playerID;
 	sf::Sprite target;
 	std::vector<int> enemyListID;
