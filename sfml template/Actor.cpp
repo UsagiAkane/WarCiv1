@@ -38,7 +38,10 @@ bool Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& yea
 				for (int i = 0; i < static_cast<int>(towns.size()); i++) {
 					if (this->towns.at(i).getPositionX() == (mouse_x / 32 * 32) && this->towns.at(i).getPositionY() == (mouse_y / 32 * 32)) {
 						this->townController = i;
-						std::cout << "\ntownCon " << this->townController;//debug
+						//std::cout << "\ntownCon " << this->townController;//debug
+						if (this->towns.at(townController).isMenu == true)this->towns.at(townController).isMenu = false;
+						else this->towns.at(townController).isMenu = true;						
+						//std::cout << "\nisMenu " << this->towns.at(townController).isMenu;//debug
 					}
 				}
 			}
@@ -58,7 +61,7 @@ bool Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& yea
 
 			break;
 			//CREATE-TOWN--------
-		case sf::Keyboard::W:
+		case sf::Keyboard::T:
 			if (this->units.size() != 0) { //yesn`t hasn`t units 
 				if (this->units.at(this->unitController).getHealth() > 0) {
 					if (this->units.at(this->unitController).getIndex() == 1) { //settlers?
@@ -101,9 +104,25 @@ bool Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& yea
 			if (this->towns.size() > 0)
 				this->towns.at(townController).createUnit(map, 5, this->units);
 			break;
-		case sf::Keyboard::D:
+		case sf::Keyboard::A:
 			if (this->towns.size() > 0)
 				this->towns.at(townController).createBuilding(1);
+			break;
+		case sf::Keyboard::B:
+			if (this->towns.size() > 0)
+				this->towns.at(townController).createBuilding(2);
+			break;
+		case sf::Keyboard::W:
+			if (this->towns.size() > 0)
+				this->towns.at(townController).createBuilding(3);
+			break;
+		case sf::Keyboard::L:
+			if (this->towns.size() > 0)
+				this->towns.at(townController).createBuilding(4);
+			break;
+		case sf::Keyboard::M:
+			if (this->towns.size() > 0)
+				this->towns.at(townController).createBuilding(5);
 			break;
 		case sf::Keyboard::Enter:
 			year += 5;

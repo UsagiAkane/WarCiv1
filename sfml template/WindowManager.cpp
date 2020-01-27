@@ -18,10 +18,8 @@ void WindowManager::newGameWindow(bool doesLoad) {
 		sf::View view(w.getView());
 
 		while (w.isOpen()) {
-			sf::Event event;
-
-
-
+			sf::Event event;			
+      
 			while (w.pollEvent(event)) {
 
 				if (event.type == sf::Event::KeyPressed)
@@ -297,7 +295,6 @@ void WindowManager::mainMenu(sf::RenderWindow& w)
 	tExit.setPosition(static_cast<float>(bExit.getPosition().x + 100 * bExit.getScale().x), static_cast<float>(bExit.getPosition().y + 15));
 
 
-
 	while (isMenu)
 	{
 		sf::Event ev;
@@ -346,19 +343,10 @@ void WindowManager::mainMenu(sf::RenderWindow& w)
 							isMenu = false;
 							newGameWindow(true);
 						}
-
-
-
 					}
 				}
 			}
-
 		}
-
-
-
-
-
 		w.clear(sf::Color(0, 0, 0));
 
 		w.draw(backGroundImage);
@@ -375,9 +363,6 @@ void WindowManager::mainMenu(sf::RenderWindow& w)
 
 		w.display();
 	}
-
-
-
 }
 
 sf::RenderWindow& WindowManager::getWindow()

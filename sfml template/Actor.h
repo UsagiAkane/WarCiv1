@@ -26,15 +26,6 @@ protected:
 public:
 	Actor(std::string name,int playerID = 1);
 
-	//DEBUG---------
-
-	//do not use this function if u are not a proggramer (creator) of this app;
-	void __SHOW_INFO_DEBUG();
-	void __PUSH_UNIT_DEBUG(Unit* unit);
-	void __PUSH_TOWN_DEBUG(Town* town);
-
-
-	//--------------METHODS
 	bool takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& year);
 	void draw(sf::RenderWindow& w, Map& map);
 	void takeTax();
@@ -55,15 +46,13 @@ public:
 	int getPlayerID();
 	int getTotalGold();
 	int getTotalScience();
+
 	//--------SETERS
 	void setPlayerID(int playerID);
 	void setTotalGold(int totalGold);
 	void setTotalScience(int totalScience);
 	void setUnitVector(std::vector<Unit>units);
 	void setUnitTown(std::vector<Town>towns);
-	
-	
-
 
 	//Methods
 	virtual void endOfTurn(Map& map);//need work
@@ -78,8 +67,13 @@ public:
 	virtual void endOfTurnBot(Map & map,Actor & eActor);
 	virtual void botAttackTown(Map& map, Actor& eActor,int x,int y, int i, int direction);
 
-
-
+	//DEBUG---------
+	//do not use this function if u are not a proggramer (creator) of this app;
+	void __SHOW_INFO_DEBUG();
+	//do not use this function if u are not a proggramer (creator) of this app;
+	void __PUSH_UNIT_DEBUG(Unit* unit);
+	//do not use this function if u are not a proggramer (creator) of this app;
+	void __PUSH_TOWN_DEBUG(Town* town);
 
 	~Actor() {}
 };

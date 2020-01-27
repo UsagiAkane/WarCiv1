@@ -11,7 +11,6 @@
 #include "Marketplace.h"
 #include "Chariot.h"
 
-
 class Town {
 private:
 	sf::Font font;
@@ -33,19 +32,24 @@ private:
 	int goldIncome;
 	int science;
 	int playerID;
+	void statInfo(sf::RenderWindow& w);
 public:
+	bool isMenu;
+	//=====================================================
 	Town(int positionX = 0, int positionY = 0, std::string name = "NoNameTown");
 
-	//functions that can be changed
-	//void attackTake();
 
-	//1-Settlers, 2-Militia, 3-Legion, 4-Cavalry
+	//functions that can be changed
+
+	///1-Settlers, 2-Militia, 3-Legion, 4-Cavalry, 5-Chariot
 	void createUnit(Map& map, int unit, std::vector<Unit>& actor);
-	//1-Aqueduct, 2-Barracks, 3-Walls, 4-Lib, 5-Market
+	///1-Aqueduct, 2-Barracks, 3-Walls, 4-Lib, 5-Market
 	void createBuilding(int building);
 	void setColorByID();
 	void spawn(int x, int y, Map& map);
+
 	//getters
+
 	int getPositionX();
 	int getPositionY();
 	int getHealth();
@@ -60,7 +64,9 @@ public:
 	int getScience();
 	int getDamage();
 	std::string getName();
+
 	//setters 
+
 	void setPosition(int x, int y);
 	void setHealth(int health);
 	void setProduction(int prod);
@@ -74,7 +80,9 @@ public:
 	void setScience(int science);
 	void setName(std::string name);
 	void setDamage(int damage);
+
 	//needed
+
 	void draw(sf::RenderWindow& w, Map& map);
 	void endOfTurn(Map& map, int& gold, int& science);
 	std::string getSaveTownInfo();

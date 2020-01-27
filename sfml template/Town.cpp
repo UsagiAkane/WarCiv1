@@ -21,9 +21,8 @@ Town::Town(int positionX, int positionY, std::string name) {
 	this->happines = 100;
 	this->playerID = 1;//debug
 	this->science = 0;
+	this->isMenu = 0;//debug
 }
-
-
 
 void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
 	Settlers* settlers = new Settlers();
@@ -36,6 +35,7 @@ void Town::createUnit(Map& map, int unit, std::vector<Unit>& actor) {
 		militia->setRank(i.getRankMultiplier());
 		legion->setRank(i.getRankMultiplier());
 		cavalry->setRank(i.getRankMultiplier());
+		chariot->setRank(i.getRankMultiplier());
 	}
 	switch (unit) {
 	case 1:
@@ -259,7 +259,6 @@ void Town::setPosition(int x, int y) {
 	this->positionY = y;
 	this->townSprite.setPosition(this->positionX, this->positionY);
 	this->populationText.setPosition(this->positionX + 10, this->positionY);
-
 }
 void Town::setHealth(int health) {
 	this->health = health;
@@ -300,6 +299,74 @@ void Town::setDamage(int damage)
 }
 #pragma endregion
 //OTHER
+bool isMouseInWindow(sf::RenderWindow& w) { return (sf::Mouse::getPosition(w).x >= 0 && sf::Mouse::getPosition(w).x < w.getSize().x) && ((sf::Mouse::getPosition(w).y >= 0 && sf::Mouse::getPosition(w).y < w.getSize().y)) ? true : false; }
+void Town::statInfo(sf::RenderWindow& w) {
+	sf::Texture menuTexture;
+	menuTexture.loadFromFile("Icons\\VerticalScroll.png");
+	sf::Sprite menuSprite(menuTexture);
+	menuSprite.setPosition(this->townSprite.getPosition().x + 32, this->townSprite.getPosition().y);
+	menuSprite.setScale(sf::Vector2f(4, 4));
+
+	sf::Font font;
+	font.loadFromFile("18536.ttf");
+	sf::Text tProdaction, tHealth, tFood, tPopulationLimit, tPopulation, tHappines;
+	//inicializate----------------------------------
+	tProdaction.setFont(font);
+	std::string productionstr = "Production = ";
+	productionstr += std::to_string(this->production);
+	tProdaction.setString(productionstr);
+	tProdaction.setFillColor(sf::Color::Black);
+	tProdaction.setCharacterSize(14);
+	tProdaction.setPosition(this->townSprite.getPosition().x + 32 + 40, this->townSprite.getPosition().y + 32);
+
+	tHealth.setFont(font);
+	std::string healthstr = "Health = ";
+	healthstr += std::to_string(this->health);
+	tHealth.setString(healthstr);
+	tHealth.setFillColor(sf::Color::Black);
+	tHealth.setCharacterSize(14);
+	tHealth.setPosition(this->townSprite.getPosition().x + 32 + 40, this->townSprite.getPosition().y + 32 + 23 * 1);
+
+	tFood.setFont(font);
+	std::string Foodstr = "Food = ";
+	Foodstr += std::to_string(this->food);
+	tFood.setString(Foodstr);
+	tFood.setFillColor(sf::Color::Black);
+	tFood.setCharacterSize(14);
+	tFood.setPosition(this->townSprite.getPosition().x + 32 + 40, this->townSprite.getPosition().y + 32 + 23 * 2);
+
+	tPopulation.setFont(font);
+	std::string poppstr = "Population = ";
+	poppstr += std::to_string(this->population);
+	tPopulation.setString(poppstr);
+	tPopulation.setFillColor(sf::Color::Black);
+	tPopulation.setCharacterSize(14);
+	tPopulation.setPosition(this->townSprite.getPosition().x + 32 + 40, this->townSprite.getPosition().y + 32 + 23 * 3);
+
+	tPopulationLimit.setFont(font);
+	std::string popstr = "Population\nLimit = ";
+	popstr += std::to_string(this->population);
+	tPopulationLimit.setString(popstr);
+	tPopulationLimit.setFillColor(sf::Color::Black);
+	tPopulationLimit.setCharacterSize(14);
+	tPopulationLimit.setPosition(this->townSprite.getPosition().x + 32 + 40, this->townSprite.getPosition().y + 32 + 23 * 4);
+
+	tHappines.setFont(font);
+	std::string hepstr = "Happines = ";
+	hepstr += std::to_string(this->happines);
+	tHappines.setString(hepstr);
+	tHappines.setFillColor(sf::Color::Black);
+	tHappines.setCharacterSize(14);
+	tHappines.setPosition(this->townSprite.getPosition().x + 32 + 40, this->townSprite.getPosition().y + 32 + 23 * 6);
+
+	w.draw(menuSprite);
+	w.draw(tProdaction);
+	w.draw(tHealth);
+	w.draw(tFood);
+	w.draw(tPopulation);
+	w.draw(tPopulationLimit);
+	w.draw(tHappines);
+}
 void Town::draw(sf::RenderWindow& w, Map& map) {
 	if (!map.isFog(positionX, positionY)) {
 		std::string prod;
@@ -307,9 +374,10 @@ void Town::draw(sf::RenderWindow& w, Map& map) {
 		this->populationText.setString(prod);
 		w.draw(this->townSprite);
 		w.draw(this->populationText);
+		if (this->isMenu)
+			statInfo(w);
 	}
 }
-
 void Town::endOfTurn(Map& map, int& gold, int& science) {
 	//map.getTile(this->positionX, this->positionY).getName();
 	int buildingTotalGoldIncome = 0;
@@ -343,7 +411,6 @@ void Town::endOfTurn(Map& map, int& gold, int& science) {
 			populationText.setPosition(populationText.getPosition().x + 7, populationText.getPosition().y);
 	}
 }
-
 std::string Town::getSaveTownInfo() {
 	std::string unitInfo;
 	unitInfo += this->name;
@@ -379,13 +446,10 @@ std::string Town::getSaveTownInfo() {
 		unitInfo += "%";
 	}
 
-
 	return unitInfo;
 }
-
 void Town::spawn(int x, int y, Map& map) {
 	setPosition(x, y);
 	map.pushUnit(x, y, this->playerID * 100 + 50);
 	setColorByID();
 }
-
