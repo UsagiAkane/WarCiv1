@@ -40,12 +40,14 @@ bool Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& yea
 						this->townController = i;
 						//std::cout << "\ntownCon " << this->townController;//debug
 						if (this->towns.at(townController).isMenu == true)this->towns.at(townController).isMenu = false;
-						else this->towns.at(townController).isMenu = true;						
+						else this->towns.at(townController).isMenu = true;
 						//std::cout << "\nisMenu " << this->towns.at(townController).isMenu;//debug
 					}
 				}
 			}
-			map.__getInfo_DEBUG(mouse_x, mouse_y);
+			map.__getInfo_DEBUG(mouse_x, mouse_y);//DEBUG
+
+			
 		}
 	}
 

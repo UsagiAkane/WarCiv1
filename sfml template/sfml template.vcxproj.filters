@@ -330,9 +330,6 @@
     <ClInclude Include="Map.h">
       <Filter>Map</Filter>
     </ClInclude>
-    <ClInclude Include="Map_I.h">
-      <Filter>Map</Filter>
-    </ClInclude>
     <ClInclude Include="Unit.h">
       <Filter>Units\Parent Unit</Filter>
     </ClInclude>

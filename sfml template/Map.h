@@ -41,6 +41,7 @@ public:
 	void reTakeTown(int x, int y, int newPlayerID);
 	void radarFog(int newx, int newy);
 	void __getInfo_DEBUG(int x, int y);
+	void getInfo(int x, int y, sf::RenderWindow& w);
 
 	void draw(sf::RenderWindow& w);
 };

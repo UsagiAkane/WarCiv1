@@ -226,7 +226,6 @@
     <ClInclude Include="Library.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapMaking.h" />
-    <ClInclude Include="Map_I.h" />
     <ClInclude Include="Marketplace.h" />
     <ClInclude Include="Masonry.h" />
     <ClInclude Include="Mathematics.h" />
