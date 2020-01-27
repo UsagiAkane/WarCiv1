@@ -1,6 +1,6 @@
 #pragma once
 
-#define PATH_TO_SAVE_1 "Saves\\1.txt"
+#define PATH_TO_SAVE_1 "Saves\\1.tlog"
 
 //ICONS
 #define PATH_TO_ICON_TOWN "Icons\\Town.png"
@@ -45,5 +45,3 @@
 #define PATH_TO_RESOURCES_OASIS "Resources\\Oasis.png"
 
 #define PATH_TO_RESOURCES_GOLD "Resources\\Gold.png"
-
-
