@@ -166,6 +166,14 @@ void Actor::pushbackEnemyID(int ID)
 	this->enemyListID.push_back(ID);
 }
 
+bool Actor::didLose()
+{
+	if (this->units.size() > 0 || this->towns.size() > 0)
+		return false;
+	else
+		return true;
+}
+
 void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, Actor& actorEnemy)
 {
 	//CHECK IS VECTOR EMTPY

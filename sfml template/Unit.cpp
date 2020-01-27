@@ -10,12 +10,9 @@ void Unit::checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::
 		{
 			for (auto j : enemies)//
 			{
-				/*			std::cout << "WE TRY TO FIND" << std::endl;*/
 				if (j.getIndex() == (map.getUnitInd(mouse_x, mouse_y) % 100))//find enemy in enemy vector
 				{
 					tmp = false;
-					//std::cout << "YOU HIT HIM" << std::endl;
-					//std::cout << enemies_id.size() << std::endl;
 					attack(enemies.at(time), map, mouse_x, mouse_y);//attack him
 					animationOfAttack(direction, w, map);
 					break;
@@ -28,14 +25,13 @@ void Unit::checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::
 	if (map.getUnitInd(mouse_x, mouse_y) / 100 != this->playerID && map.getUnitInd(mouse_x, mouse_y) != 0 && tmp == true)
 	{
 		enemies_id.push_back(map.getUnitInd(mouse_x, mouse_y) / 100);
-		std::cout << "YOU START WAR" << std::endl;
-		std::cout << map.getUnitInd(mouse_x, mouse_y) / 100 << std::endl;
 	}
 
 }
 
 void Unit::animationOfAttack(int value, sf::RenderWindow& w, Map& map)
 {
+	
 	sf::Texture textureTMP;
 	textureTMP.loadFromFile("Icons\\swordicon.png");
 	sf::Sprite tmp(textureTMP);

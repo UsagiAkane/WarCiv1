@@ -10,7 +10,6 @@
 
 class Actor {
 protected: 
-	////WorldStat wStat;
 	int playerID;
 	sf::Sprite target;
 	std::vector<int> enemyListID;
@@ -27,11 +26,13 @@ protected:
 public:
 	Actor(std::string name,int playerID = 1);
 
-	//--------------
 	bool takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& year);
 	void draw(sf::RenderWindow& w, Map& map);
 	void takeTax();
 	void pushbackEnemyID(int id);
+	bool didLose();
+
+
 
 	//--------GETERS
 	std::vector<int> getEnemyListID();

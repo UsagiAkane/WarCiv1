@@ -17,12 +17,16 @@ private:
 	sf::Sprite vScrollSprite;
 public:
 	bool isLog = false;
+	int currentLog = 0;
 
 	Ui();
 	void gameLog(sf::RenderWindow& w);
 	void resize(sf::RenderWindow& w);
 	void draw(sf::RenderWindow& w);
 	void setParams(int gold, int sience, int turn, int year);
+
+	//for user
+	void setStringLogs(std::string text, bool doesClear = false);
 
 
 

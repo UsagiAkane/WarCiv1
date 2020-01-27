@@ -2,7 +2,7 @@
 
 
 WindowManager::WindowManager() {
-	this->w.create(sf::VideoMode(1000, 600), "WC" /*sf::Style::Fullscreen*/);
+	this->w.create(sf::VideoMode(1000, 600), "WC" /*,sf::Style::Fullscreen*/);
 	this->w.setFramerateLimit(60);
 }
 
@@ -14,28 +14,24 @@ void WindowManager::newGameWindow(bool doesLoad) {
 		{
 			game.loadGame();
 		}
-		
+
 		sf::View view(w.getView());
 
 		while (w.isOpen()) {
 			sf::Event event;			
-
+      
 			while (w.pollEvent(event)) {
 
 				if (event.type == sf::Event::KeyPressed)
 				{
 					if (event.key.code == sf::Keyboard::Escape)
-					{
 						isMenu = !isMenu;
-					}
 				}
 
 				if (event.type == sf::Event::KeyPressed)
 				{
 					if (event.key.code == sf::Keyboard::F1)
-					{
 						game.getUi().isLog = !(game.getUi().isLog);
-					}
 				}
 
 				//CLOSE--------------
@@ -45,26 +41,35 @@ void WindowManager::newGameWindow(bool doesLoad) {
 					view.setSize(sf::Vector2f(event.size.width, event.size.height));
 				}
 
+
 				if (!isMenu)
 				{
-					//Check is mouse in window
-					if (isMouseInWindow(w))
+					if (!(game.getActors().at(0).didLose()))
 					{
-						//all other control
-						if (game.getActors().at(0).takeControl(event, game.getMap(), w, game.getYear()))
+						//Check is mouse in window
+						if (isMouseInWindow(w))
 						{
-							for (int i = 1; i < game.getActors().size(); i++) {
-								game.getActors().at(i).endOfTurnBot(game.getMap(), game.getActors().at(0));
-							
+							//all other control
+							if (game.getActors().at(0).takeControl(event, game.getMap(), w, game.getYear()))
+							{
+								for (int i = 1; i < game.getActors().size(); i++) 
+									game.getActors().at(i).endOfTurnBot(game.getMap(), game.getActors().at(0));	
+							}
+							if (sf::Mouse::isButtonPressed(sf::Mouse::Left))//If you want to attack or move unit
+							{
+								if (event.MouseButtonReleased)
+									game.getActors().at(0).takeControlUnit(event, game.getMap(), w, game.findActor(getPosMouseByWindowX(w), getPosMouseByWindowY(w)));
 							}
 						}
-						if (sf::Mouse::isButtonPressed(sf::Mouse::Left))//If you want to attack or move unit
-						{
-							if (event.MouseButtonReleased)
-								game.getActors().at(0).takeControlUnit(event, game.getMap(), w, game.findActor(getPosMouseByWindowX(w), getPosMouseByWindowY(w)));
-						}
 					}
+					else
+						game.getUi().setStringLogs("ALL YOUR UNITS ARE DEAD, TOWN BURNED YOU LOST");
+					
+					
 				}
+
+
+
 			}
 			//CAMERA CONTROL
 
@@ -330,7 +335,7 @@ void WindowManager::mainMenu(sf::RenderWindow& w)
 							isMenu = false;
 							newGameWindow(true);
 						}
-						
+
 						if ((sf::IntRect(bExit.getGlobalBounds()).contains(sf::Mouse::getPosition(w))))
 							w.close();
 						if ((sf::IntRect(bLoadGame.getGlobalBounds()).contains(sf::Mouse::getPosition(w))))

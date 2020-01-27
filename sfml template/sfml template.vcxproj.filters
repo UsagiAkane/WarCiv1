@@ -23,21 +23,6 @@
     <Filter Include="Units">
       <UniqueIdentifier>{e868262c-a863-48e1-a0d1-f5cb390abf89}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Units\Childs">
-      <UniqueIdentifier>{0b84d046-fa1b-43a6-9da1-fa17827a733d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Units\Childs\Legion">
-      <UniqueIdentifier>{7b4c6142-4f77-4a09-8c9b-ba7a37344a24}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Units\Childs\Militia">
-      <UniqueIdentifier>{98431bd5-bd63-484c-830b-68e5d5e23230}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Units\Childs\Cavalry">
-      <UniqueIdentifier>{89f30964-4007-4b55-b415-873d6218380b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Units\Childs\Settlers">
-      <UniqueIdentifier>{5d7b5a5f-f208-441c-b660-589b4a6e3321}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Units\Parent Unit">
       <UniqueIdentifier>{d0c4990a-a536-43b8-8b7e-1d59740fd51b}</UniqueIdentifier>
     </Filter>
@@ -137,7 +122,22 @@
     <Filter Include="System\Actor\AI">
       <UniqueIdentifier>{d1bfa892-d7a1-4641-96ae-5c983ba0cccc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Units\Childs\Chariot">
+    <Filter Include="Units\Parent Unit\Childs">
+      <UniqueIdentifier>{0b84d046-fa1b-43a6-9da1-fa17827a733d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Units\Parent Unit\Childs\Legion">
+      <UniqueIdentifier>{7b4c6142-4f77-4a09-8c9b-ba7a37344a24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Units\Parent Unit\Childs\Militia">
+      <UniqueIdentifier>{98431bd5-bd63-484c-830b-68e5d5e23230}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Units\Parent Unit\Childs\Cavalry">
+      <UniqueIdentifier>{89f30964-4007-4b55-b415-873d6218380b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Units\Parent Unit\Childs\Settlers">
+      <UniqueIdentifier>{5d7b5a5f-f208-441c-b660-589b4a6e3321}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Units\Parent Unit\Childs\Chariot">
       <UniqueIdentifier>{77a53d09-ce06-4394-afa0-bb1c247953a9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -191,10 +191,10 @@
       <Filter>Map\Terrains\All</Filter>
     </ClCompile>
     <ClCompile Include="Legion.cpp">
-      <Filter>Units\Childs\Legion</Filter>
+      <Filter>Units\Parent Unit\Childs\Legion</Filter>
     </ClCompile>
     <ClCompile Include="Militia.cpp">
-      <Filter>Units\Childs\Militia</Filter>
+      <Filter>Units\Parent Unit\Childs\Militia</Filter>
     </ClCompile>
     <ClCompile Include="Alphabet.cpp">
       <Filter>Technologies\Childs\Alphabet</Filter>
@@ -239,10 +239,10 @@
       <Filter>Technologies\Childs\Writing</Filter>
     </ClCompile>
     <ClCompile Include="Cavalry.cpp">
-      <Filter>Units\Childs\Cavalry</Filter>
+      <Filter>Units\Parent Unit\Childs\Cavalry</Filter>
     </ClCompile>
     <ClCompile Include="Settlers.cpp">
-      <Filter>Units\Childs\Settlers</Filter>
+      <Filter>Units\Parent Unit\Childs\Settlers</Filter>
     </ClCompile>
     <ClCompile Include="Building.cpp">
       <Filter>Buildings\Parent</Filter>
@@ -287,7 +287,7 @@
       <Filter>Map\Terrains\All</Filter>
     </ClCompile>
     <ClCompile Include="Chariot.cpp">
-      <Filter>Units\Childs\Chariot</Filter>
+      <Filter>Units\Parent Unit\Childs\Chariot</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -343,10 +343,10 @@
       <Filter>Map\Terrains\All</Filter>
     </ClInclude>
     <ClInclude Include="Legion.h">
-      <Filter>Units\Childs\Legion</Filter>
+      <Filter>Units\Parent Unit\Childs\Legion</Filter>
     </ClInclude>
     <ClInclude Include="Militia.h">
-      <Filter>Units\Childs\Militia</Filter>
+      <Filter>Units\Parent Unit\Childs\Militia</Filter>
     </ClInclude>
     <ClInclude Include="Alphabet.h">
       <Filter>Technologies\Childs\Alphabet</Filter>
@@ -391,10 +391,10 @@
       <Filter>Technologies\Childs\Writing</Filter>
     </ClInclude>
     <ClInclude Include="Cavalry.h">
-      <Filter>Units\Childs\Cavalry</Filter>
+      <Filter>Units\Parent Unit\Childs\Cavalry</Filter>
     </ClInclude>
     <ClInclude Include="Settlers.h">
-      <Filter>Units\Childs\Settlers</Filter>
+      <Filter>Units\Parent Unit\Childs\Settlers</Filter>
     </ClInclude>
     <ClInclude Include="Building.h">
       <Filter>Buildings\Parent</Filter>
@@ -439,7 +439,7 @@
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
     <ClInclude Include="Chariot.h">
-      <Filter>Units\Childs\Chariot</Filter>
+      <Filter>Units\Parent Unit\Childs\Chariot</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

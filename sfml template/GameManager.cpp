@@ -102,11 +102,11 @@ Actor& GameManager::findActor(int mouse_x, int mouse_y)
 
 void GameManager::saveGame()
 {
-	std::cout<<"Does deleted: " << std::remove(PATH_TO_SAVE_1) << std::endl;
-
+	remove(PATH_TO_SAVE_1);
 	map.saveMap();
 	for (auto i : actors)
 		i.saveTotalnfo();
+	this->ui.setStringLogs("Game successfully saved");
 }
 
 #pragma region UNitsMap_LOAD
@@ -705,9 +705,10 @@ void GameManager::loadGame()
 		else
 		{
 		}
+		this->ui.setStringLogs("Successfully load",true);
 	}
 	else
-		std::cout << "\nCant find this file : " << PATH_TO_SAVE_1<< " (game has started in NEW GAME order)";
+		this->ui.setStringLogs("\nCant find this file : " PATH_TO_SAVE_1  " (game has started in NEW GAME order)");
 	
 
 	file.close();
