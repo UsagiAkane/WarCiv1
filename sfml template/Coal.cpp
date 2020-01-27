@@ -2,7 +2,7 @@
 
 Coal::Coal()
 {
-	this->texture.loadFromFile("Resources\\Coal.png");
+	this->texture.loadFromFile(PATH_TO_RESOURCES_COAL);
 	this->sprite.setTexture(texture);
 	this->prodaction = 2;
 }

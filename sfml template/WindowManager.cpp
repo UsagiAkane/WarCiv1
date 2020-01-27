@@ -2,64 +2,81 @@
 
 
 WindowManager::WindowManager() {
-	this->w.create(sf::VideoMode(1000, 600), "WC" /*sf::Style::Fullscreen*/);
+	this->w.create(sf::VideoMode(1000, 600), "WC" /*,sf::Style::Fullscreen*/);
 	this->w.setFramerateLimit(60);
 }
 
-void WindowManager::newGameWindow() {
+void WindowManager::newGameWindow(bool doesLoad) {
 	try {
 		GameManager game;
+
+		if (doesLoad)
+		{
+			game.loadGame();
+		}
+
 		sf::View view(w.getView());
 
 		while (w.isOpen()) {
 			sf::Event event;
 
-			//CAMERA CONTROL
-
-			if (isMouseInWindow(w))
-				cameraControl(view, w);
-
-
 
 
 			while (w.pollEvent(event)) {
-				//CLOSE--------------
-				if (event.type == event.Closed)
-					w.close();
 
 				if (event.type == sf::Event::KeyPressed)
 				{
 					if (event.key.code == sf::Keyboard::Escape)
-					{
-						if (isMenu)isMenu = 0;
-						else isMenu = 1;
-					}
+						isMenu = !isMenu;
 				}
+
+				if (event.type == sf::Event::KeyPressed)
+				{
+					if (event.key.code == sf::Keyboard::F1)
+						game.getUi().isLog = !(game.getUi().isLog);
+				}
+
+				//CLOSE--------------
+				if (event.type == event.Closed)
+					w.close();
 				if (event.type == sf::Event::Resized) {
 					view.setSize(sf::Vector2f(event.size.width, event.size.height));
 				}
 
+
 				if (!isMenu)
 				{
-					//Check is mouse in window
-					if (isMouseInWindow(w))
+					if (!(game.getActors().at(0).didLose()))
 					{
-						//all other control
-						if (game.getActors().at(0).takeControl(event, game.getMap(), w, game.getYear()))
+						//Check is mouse in window
+						if (isMouseInWindow(w))
 						{
-							for (int i = 1; i < game.getActors().size(); i++) {
-								game.getActors().at(i).endOfTurnBot(game.getMap(), game.getActors().at(0));
-							
+							//all other control
+							if (game.getActors().at(0).takeControl(event, game.getMap(), w, game.getYear()))
+							{
+								for (int i = 1; i < game.getActors().size(); i++) 
+									game.getActors().at(i).endOfTurnBot(game.getMap(), game.getActors().at(0));	
+							}
+							if (sf::Mouse::isButtonPressed(sf::Mouse::Left))//If you want to attack or move unit
+							{
+								if (event.MouseButtonReleased)
+									game.getActors().at(0).takeControlUnit(event, game.getMap(), w, game.findActor(getPosMouseByWindowX(w), getPosMouseByWindowY(w)));
 							}
 						}
-						if (sf::Mouse::isButtonPressed(sf::Mouse::Left))//If you want to attack or move unit
-						{
-							if (event.MouseButtonReleased)
-								game.getActors().at(0).takeControlUnit(event, game.getMap(), w, game.findActor(getPosMouseByWindowX(w), getPosMouseByWindowY(w)));
-						}
 					}
+					else
+						game.getUi().setStringLogs("ALL YOUR UNITS ARE DEAD, TOWN BURNED YOU LOST");
+					
+					
 				}
+
+
+
 			}
+			//CAMERA CONTROL
+
+			if (isMouseInWindow(w))
+				cameraControl(view, w);
 
 			w.setView(view);
 			//WINDOW-FILL-COLOR
@@ -189,6 +206,8 @@ void WindowManager::gameMenu(sf::RenderWindow& w, GameManager& game) {
 		w.draw(tExit);
 
 		w.display();
+
+
 	}
 
 }
@@ -283,8 +302,6 @@ void WindowManager::mainMenu(sf::RenderWindow& w)
 	{
 		sf::Event ev;
 		while (w.pollEvent(ev)) {
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-				isMenu = false;
 			if (ev.type == sf::Event::Closed)
 				w.close();
 			if (isMouseInWindow(w))
@@ -312,13 +329,24 @@ void WindowManager::mainMenu(sf::RenderWindow& w)
 					if (ev.MouseButtonReleased)
 					{
 						if ((sf::IntRect(bNewGame.getGlobalBounds()).contains(sf::Mouse::getPosition(w))))
+						{
 							isMenu = false;
+							newGameWindow();
+						}
+						if ((sf::IntRect(bContinue.getGlobalBounds()).contains(sf::Mouse::getPosition(w))))
+						{
+							isMenu = false;
+							newGameWindow(true);
+						}
+
 						if ((sf::IntRect(bExit.getGlobalBounds()).contains(sf::Mouse::getPosition(w))))
 							w.close();
 						if ((sf::IntRect(bLoadGame.getGlobalBounds()).contains(sf::Mouse::getPosition(w))))
 						{
 							isMenu = false;
+							newGameWindow(true);
 						}
+
 
 
 					}
@@ -356,18 +384,3 @@ sf::RenderWindow& WindowManager::getWindow()
 {
 	return this->w;
 }
-
-
-
-//////////////////////////////////DON'T USE THIS////////////////////////////
-		/*	if (event.type ==sf::Event::MouseWheelScrolled)
-			{
-				if (event.mouseWheelScroll.delta > 0)
-				{
-					view.zoom(0.99f);
-				}
-				else if (event.mouseWheelScroll.delta < 0)
-				{
-					view.zoom(1.01f);
-				}
-			}*/

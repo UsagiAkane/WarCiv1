@@ -1,7 +1,7 @@
 #include "Ocean.h"
 
 Ocean::Ocean(int res){
-	texture.loadFromFile("Terrains\\Ocean.png");
+	texture.loadFromFile(PATH_TO_TERRAINS_OCEAN);
 	this->sprite.setTexture(this->texture);
 	this->name = "ocean";
 	this->move = 1;

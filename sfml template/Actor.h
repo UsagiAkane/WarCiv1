@@ -10,7 +10,6 @@
 
 class Actor {
 protected: 
-	////WorldStat wStat;
 	int playerID;
 	sf::Sprite target;
 	std::vector<int> enemyListID;
@@ -33,11 +32,16 @@ public:
 	void __SHOW_INFO_DEBUG();
 	void __PUSH_UNIT_DEBUG(Unit* unit);
 	void __PUSH_TOWN_DEBUG(Town* town);
-	//--------------
+
+
+	//--------------METHODS
 	bool takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& year);
 	void draw(sf::RenderWindow& w, Map& map);
 	void takeTax();
 	void pushbackEnemyID(int id);
+	bool didLose();
+
+
 
 	//--------GETERS
 	std::vector<int> getEnemyListID();
@@ -57,6 +61,7 @@ public:
 	void setTotalScience(int totalScience);
 	void setUnitVector(std::vector<Unit>units);
 	void setUnitTown(std::vector<Town>towns);
+	
 	
 
 

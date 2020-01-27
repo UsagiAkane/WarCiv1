@@ -10,12 +10,9 @@ void Unit::checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::
 		{
 			for (auto j : enemies)//
 			{
-				/*			std::cout << "WE TRY TO FIND" << std::endl;*/
 				if (j.getIndex() == (map.getUnitInd(mouse_x, mouse_y) % 100))//find enemy in enemy vector
 				{
 					tmp = false;
-					//std::cout << "YOU HIT HIM" << std::endl;
-					//std::cout << enemies_id.size() << std::endl;
 					attack(enemies.at(time), map, mouse_x, mouse_y);//attack him
 					animationOfAttack(direction, w, map);
 					break;
@@ -28,14 +25,13 @@ void Unit::checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::
 	if (map.getUnitInd(mouse_x, mouse_y) / 100 != this->playerID && map.getUnitInd(mouse_x, mouse_y) != 0 && tmp == true)
 	{
 		enemies_id.push_back(map.getUnitInd(mouse_x, mouse_y) / 100);
-		std::cout << "YOU START WAR" << std::endl;
-		std::cout << map.getUnitInd(mouse_x, mouse_y) / 100 << std::endl;
 	}
 
 }
 
 void Unit::animationOfAttack(int value, sf::RenderWindow& w, Map& map)
 {
+	
 	sf::Texture textureTMP;
 	textureTMP.loadFromFile("Icons\\swordicon.png");
 	sf::Sprite tmp(textureTMP);
@@ -216,6 +212,10 @@ void Unit::attack(Unit& uEnemy, Map& map, int x, int y)
 {
 
 	//damage to attacker
+	if (this->health <=0)
+	{
+
+	}
 	this->health -= ((uEnemy.getDamage() + uEnemy.getRank()) - (this->armor));
 	this->setArmor(this->armor - (uEnemy.getDamage() + uEnemy.getRank()));
 	//damage to defender unit
@@ -246,6 +246,20 @@ void Unit::recharge()
 {
 	this->steps = maxSteps;
 	this->isActive = true;
+}
+
+void Unit::GET_SHOW_INFO_DEBUG()
+{
+	std::cout << "============================================" << this->health << std::endl;
+	std::cout<< "Health: "<< this->health<< std::endl;
+	std::cout<<"Armor: " <<this->armor << std::endl;
+	std::cout<<"Damage:" << this->damage<< std::endl;
+	std::cout <<"Count of kill: " <<this->countOfKill << std::endl;
+	std::cout <<"Index: " << this->index<< std::endl;
+	std::cout <<"Rank: "<<this->rank<< std::endl;
+	std::cout <<"Alive: " <<this->isAlive<< std::endl;
+	std::cout <<"X: " <<this->positionX<< std::endl;
+	std::cout <<"Y: " <<this->positionY<< std::endl;
 }
 
 void Unit::skipTurn()

@@ -9,7 +9,7 @@ Actor::Actor(std::string name, int playerID) {
 	this->unitController = 0;
 	this->townController = 0;
 	sf::Texture* tmp = new sf::Texture;
-	tmp->loadFromFile("Icons\\target.png");
+	tmp->loadFromFile(PATH_TO_ICON_TARGET);
 	this->target.setTexture(*tmp);
 }
 
@@ -97,6 +97,10 @@ bool Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& yea
 			if (this->towns.size() > 0)
 				this->towns.at(townController).createUnit(map, 4, this->units);
 			break;
+		case sf::Keyboard::Num5:
+			if (this->towns.size() > 0)
+				this->towns.at(townController).createUnit(map, 5, this->units);
+			break;
 		case sf::Keyboard::D:
 			if (this->towns.size() > 0)
 				this->towns.at(townController).createBuilding(1);
@@ -143,6 +147,14 @@ void Actor::pushbackEnemyID(int ID)
 	this->enemyListID.push_back(ID);
 }
 
+bool Actor::didLose()
+{
+	if (this->units.size() > 0 || this->towns.size() > 0)
+		return false;
+	else
+		return true;
+}
+
 void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, Actor& actorEnemy)
 {
 	//CHECK IS VECTOR EMTPY
@@ -160,6 +172,7 @@ void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, Acto
 		//CHECK IS UNIT ALIVE
 		if (this->units.at(this->unitController).getHealth() > 0)
 		{
+			/*this->units.at(this->unitController).GET_SHOW_INFO_DEBUG();*/
 			//top
 			//check position of mouse
 			if (((mouse_x <= UnPosX + BORDER_PIXEL_60 && mouse_x >= UnPosX + BORDER_PIXEL_30) && (mouse_y >= UnPosY && mouse_y <= UnPosY + BORDER_PIXEL_30)))

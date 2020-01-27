@@ -97,17 +97,16 @@ Actor& GameManager::findActor(int mouse_x, int mouse_y)
 
 	if ((map.getUnitInd(mouse_x, mouse_y)) / 100 != 0 && (map.getUnitInd(mouse_x, mouse_y)) / 100 != this->actors.at(0).getPlayerID()) //check index of unit
 		return findActorHidden((map.getUnitInd(mouse_x, mouse_y)) / 100);
-	//else
-	/*	std::cout << "CAN'T FIND UNIT" << std::endl;*/
+
 }
 
 void GameManager::saveGame()
 {
+	remove(PATH_TO_SAVE_1);
 	map.saveMap();
 	for (auto i : actors)
-	{
 		i.saveTotalnfo();
-	}
+	this->ui.setStringLogs("Game successfully saved");
 }
 
 #pragma region UNitsMap_LOAD
@@ -289,6 +288,20 @@ std::vector<Unit> getUnitVectorByActorInd(int actorInd)
 			cavalry->setPosition(getIntFromStringByIndex(slisedStr, 9), getIntFromStringByIndex(slisedStr, 10));
 			cavalry->setColorByID();
 			tmp.push_back(*cavalry);
+			//std::cout << "\nPushed c";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
+		}
+		if (tmpUnitIndex == 5) {
+			Chariot* chariot = new Chariot();
+			chariot->setHealth(getIntFromStringByIndex(slisedStr, 1));
+			chariot->setArmor(getIntFromStringByIndex(slisedStr, 2));
+			chariot->setDamage(getIntFromStringByIndex(slisedStr, 3));
+			chariot->setSteps(getIntFromStringByIndex(slisedStr, 4));
+			chariot->setRank(getIntFromStringByIndex(slisedStr, 5));
+			chariot->setCountOfKill(getIntFromStringByIndex(slisedStr, 6));
+			chariot->setPlayerID(getIntFromStringByIndex(slisedStr, 8));
+			chariot->setPosition(getIntFromStringByIndex(slisedStr, 9), getIntFromStringByIndex(slisedStr, 10));
+			chariot->setColorByID();
+			tmp.push_back(*chariot);
 			//std::cout << "\nPushed c";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 		}
 
@@ -669,39 +682,46 @@ std::vector<Town> getTownVectorByActorInd(int actorInd)
 //-------------------LOAD GAME
 void GameManager::loadGame()
 {
-	map.loadUnits(getMapUnitDataFromFile());
-	map.loadTerrains(getMapTerrainDataFromFile());
-	if (this->actors.size() > 0)
+	bool isEmpty = false;
+	std::ifstream file;
+	file.open(PATH_TO_SAVE_1);
+
+	if (file)
 	{
-		this->deleteAllActors();
-		//getActorInfoFromFile();
-
-		for (int i = 1; i <= getActorsCount(); i++) {
-			this->actors.push_back(Actor(getActorName(i), i));
-			this->actors[i - 1].setTotalGold(getActorTG(i));
-			this->actors[i - 1].setTotalScience(getActorTS(i));
-
-			this->actors[i - 1].setUnitVector(getUnitVectorByActorInd(i));
-
-
-			this->actors[i - 1].setUnitTown(getTownVectorByActorInd(i));
-
-
-
-
+		map.loadUnits(getMapUnitDataFromFile());
+		map.loadTerrains(getMapTerrainDataFromFile());
+		if (this->actors.size() > 0)
+		{
+			this->deleteAllActors();
+			//getActorInfoFromFile();
+			for (int i = 1; i <= getActorsCount(); i++) {
+				this->actors.push_back(Actor(getActorName(i), i));
+				this->actors[i - 1].setTotalGold(getActorTG(i));
+				this->actors[i - 1].setTotalScience(getActorTS(i));
+				this->actors[i - 1].setUnitVector(getUnitVectorByActorInd(i));
+				this->actors[i - 1].setUnitTown(getTownVectorByActorInd(i));
+			}
 		}
-
+		else
+		{
+		}
+		this->ui.setStringLogs("Successfully load",true);
 	}
 	else
-	{
-	}
+		this->ui.setStringLogs("\nCant find this file : " PATH_TO_SAVE_1  " (game has started in NEW GAME order)");
+	
 
-
+	file.close();
 
 }
 
 void GameManager::deleteAllActors()
 {
 	this->actors.clear();
+}
+
+Ui& GameManager::getUi()
+{
+	return this->ui;
 }
 

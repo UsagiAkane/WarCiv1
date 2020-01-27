@@ -2,7 +2,7 @@
 
 Horses::Horses()
 {
-	this->texture.loadFromFile("Resources\\Horses.png");
+	this->texture.loadFromFile(PATH_TO_RESOURCES_HORSES);
 	this->sprite.setTexture(texture);
 	this->prodaction = 2;
 }

@@ -2,7 +2,7 @@
 
 Forest::Forest(int res)
 {
-	texture.loadFromFile("Terrains\\Forest.png");
+	texture.loadFromFile(PATH_TO_TERRAINS_FOREST);
 	this->sprite.setTexture(this->texture);
 	this->name = "forest";
 	this->move = 1;

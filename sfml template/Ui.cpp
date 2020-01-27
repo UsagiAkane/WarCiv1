@@ -2,9 +2,6 @@
 
 Ui::Ui()
 {
-	//this->DownLeftRect.setFillColor(sf::Color(50,50,50));
-	//this->DownMiddleRect.setFillColor(sf::Color(50, 50, 50));
-	//this->DownRightRect.setFillColor(sf::Color(50, 50, 50));
 	sf::Texture* tex = new sf::Texture;
 	tex->loadFromFile("Icons\\VerticalScroll.png");
 	vScrollSprite.setTexture(*tex);
@@ -14,22 +11,37 @@ Ui::Ui()
 	this->tturn.setFont(this->font);
 	this->tyear.setFont(this->font);
 
+	
+
 	this->tgold.setFillColor(sf::Color(0, 0, 0));
 	this->tsience.setFillColor(sf::Color(0, 0, 0));
 	this->tturn.setFillColor(sf::Color(0, 0, 0));
 	this->tyear.setFillColor(sf::Color(0, 0, 0));
+
+
+	sf::Text log;
+	for (int i = 0; i < LOGS_COUNT; i++)
+	{
+		this->gLog.push_back(log);
+		this->gLog[i].setFont(this->font);
+		this->gLog[i].setFillColor(sf::Color(255, 255, 255));
+		this->gLog[i].setString("");
+		//this->gLog[i].setScale(0.7, 0.7);
+	
+	}
+
+}
+
+void Ui::gameLog(sf::RenderWindow& w)
+{
+
+
+
 }
 
 void Ui::resize(sf::RenderWindow& w)
 {
-	//this->DownLeftRect.setSize(sf::Vector2f(w.getSize().x / 10, w.getSize().x / 10));
-	//this->DownMiddleRect.setSize(sf::Vector2f(w.getSize().x / 2, w.getSize().x / 10));
-	//this->DownRightRect.setSize(sf::Vector2f(w.getSize().x / 10, w.getSize().x / 10));
-	//DownLeftRect.setPosition(static_cast<float>(w.getView().getCenter().x - w.getSize().x / 2), static_cast<float>(w.getView().getCenter().y + w.getSize().y / 2 - DownLeftRect.getSize().y));
-	//DownMiddleRect.setPosition(static_cast<float>(w.getView().getCenter().x - DownMiddleRect.getSize().x / 2 * DownMiddleRect.getScale().x), static_cast<float>(w.getView().getCenter().y + w.getSize().y / 2 - DownMiddleRect.getSize().y));
-	//DownRightRect.setPosition(static_cast<float>(w.getView().getCenter().x + w.getSize().x / 2 - DownRightRect.getSize().x), static_cast<float>(w.getView().getCenter().y + w.getSize().y / 2 - DownRightRect.getSize().y));
-
-
+	
 	vScrollSprite.setScale(sf::Vector2f(static_cast<float>(w.getSize().x) / 300, static_cast<float>(w.getSize().x) / 300));
 	this->vScrollSprite.setPosition(static_cast<float>(w.getView().getCenter().x - w.getSize().x / 2), static_cast<float>(w.getView().getCenter().y + w.getSize().y / 2 - 57 * vScrollSprite.getScale().y));
 
@@ -68,6 +80,32 @@ void Ui::setParams(int gold, int sience, int turn, int year)
 	this->tyear.setString(tmp);
 }
 
+void Ui::setStringLogs(std::string text,bool doesClear)
+{
+	if (!doesClear)
+	{
+		if (currentLog < LOGS_COUNT)
+		{
+			this->gLog.at(currentLog).setString(text);
+			currentLog++;
+
+		}
+		else
+			this->currentLog = 0;
+	}
+	else
+	{
+		for (int i = 0; i < LOGS_COUNT; i++)
+		{
+			this->gLog[i].setString(" ");
+
+		}
+		this->gLog[0].setString(text);
+		currentLog = 0;
+	}
+	
+}
+
 void Ui::draw(sf::RenderWindow& w)
 {
 	w.draw(this->vScrollSprite);
@@ -75,7 +113,25 @@ void Ui::draw(sf::RenderWindow& w)
 	w.draw(this->tsience);
 	w.draw(this->tturn);
 	w.draw(this->tyear);
-	//	w.draw(this->DownLeftRect);
-	//	w.draw(this->DownMiddleRect);
-	//	w.draw(this->DownRightRect);
+
+	for (int i = 0; i < LOGS_COUNT; i++)
+	{
+		//Move all other logs
+		if (i != 0)
+			this->gLog[i].setPosition(gLog[i - 1].getPosition().x , gLog[i - 1].getPosition().y + this->gLog[i].getCharacterSize());
+		else
+			//move first log
+			this->gLog[i].setPosition(w.getView().getCenter().x - w.getSize().x /2, w.getView().getCenter().y - w.getSize().y/2 );
+
+		//change size
+		this->gLog[i].setCharacterSize(static_cast<float>(w.getSize().x) / 60);
+
+		//if player doesn't use log-hide it
+		if (isLog)
+			w.draw(this->gLog[i]);
+
+	}
+
+
+	
 }

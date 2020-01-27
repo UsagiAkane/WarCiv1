@@ -9,6 +9,7 @@
 #include "CityWalls.h"
 #include "Library.h"
 #include "Marketplace.h"
+#include "Chariot.h"
 
 
 class Town {
@@ -77,7 +78,4 @@ public:
 	void draw(sf::RenderWindow& w, Map& map);
 	void endOfTurn(Map& map, int& gold, int& science);
 	std::string getSaveTownInfo();
-
-	void destroy(Map& map);
-	void retake(Map& map);
 };

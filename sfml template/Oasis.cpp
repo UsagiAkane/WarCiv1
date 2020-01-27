@@ -2,7 +2,7 @@
 
 Oasis::Oasis()
 {
-	this->texture.loadFromFile("Resources\\Oasis.png");
+	this->texture.loadFromFile(PATH_TO_RESOURCES_OASIS);
 	this->sprite.setTexture(texture);
 	this->food = 3;
 }
