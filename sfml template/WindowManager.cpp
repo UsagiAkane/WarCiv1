@@ -11,9 +11,7 @@ void WindowManager::newGameWindow(bool doesLoad) {
 		GameManager game;
 
 		if (doesLoad)
-		{
 			game.loadGame();
-		}
 
 		sf::View view(w.getView());
 
@@ -33,13 +31,18 @@ void WindowManager::newGameWindow(bool doesLoad) {
 					if (event.key.code == sf::Keyboard::F1)
 						game.getUi().isLog = !(game.getUi().isLog);
 				}
+				if (event.type == sf::Event::KeyPressed)
+				{
+					if (event.key.code == sf::Keyboard::Tab)
+						game.isRef = !game.isRef;
+				}
 
 				//CLOSE--------------
 				if (event.type == event.Closed)
 					w.close();
-				if (event.type == sf::Event::Resized) {
+				if (event.type == sf::Event::Resized)
 					view.setSize(sf::Vector2f(event.size.width, event.size.height));
-				}
+				
 
 
 				if (!isMenu)
@@ -63,7 +66,7 @@ void WindowManager::newGameWindow(bool doesLoad) {
 						}
 					}
 					else
-						game.getUi().setStringLogs("ALL YOUR UNITS ARE DEAD, TOWN BURNED YOU LOST");
+						game.getUi().setStringLogs("ALL YOUR UNITS ARE DEAD, TOWNS BURNED ,YOU LOST");
 					
 					
 				}
@@ -73,18 +76,19 @@ void WindowManager::newGameWindow(bool doesLoad) {
 			}
 			//CAMERA CONTROL
 
-			if (isMouseInWindow(w))
+			if (isMouseInWindow(w) && !game.isRef)
 				cameraControl(view, w);
 
 			w.setView(view);
 			//WINDOW-FILL-COLOR
 			w.clear(sf::Color::Black);
 			//draw all in game
-			game.draw(w);
+			game.draw(w,view);
+	
 
 			if (isMenu)
 				gameMenu(w, game);
-
+		
 			//DISPLAY
 			w.display();
 

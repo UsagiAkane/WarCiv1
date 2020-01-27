@@ -7,6 +7,8 @@
 
 #define PATH_TO_ICON_TARGET "Icons\\target.png"
 
+#define PATH_TO_ICON_REFERENCE "Icons\\Reference.png"
+
 //TERRAINS
 #define PATH_TO_TERRAINS_PLAINS "Terrains\\Plains.png"
 

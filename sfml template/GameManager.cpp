@@ -49,6 +49,10 @@ GameManager::GameManager()
 	this->actors.push_back(*third);
 
 	this->currentYear = -4000;
+	this->isRef = false;
+	sf::Texture* refer = new sf::Texture;
+	refer->loadFromFile(PATH_TO_ICON_REFERENCE);
+	this->ref.setTexture(*refer);
 }
 
 Map& GameManager::getMap()
@@ -71,8 +75,10 @@ int& GameManager::getYear()
 	return this->currentYear;
 }
 
-void GameManager::draw(sf::RenderWindow& w)
+void GameManager::draw(sf::RenderWindow& w,sf::View & view)
 {
+
+	
 	map.draw(w);
 	for (auto i : this->actors)
 		i.draw(w, this->map);
@@ -80,6 +86,15 @@ void GameManager::draw(sf::RenderWindow& w)
 	ui.resize(w);
 	ui.setParams(this->actors[0].getTotalGold(), this->actors[0].getTotalScience(), (this->currentYear + 4000) / 5, this->currentYear);
 	this->ui.draw(w);
+
+	ref.setScale(sf::Vector2f(static_cast<float>(w.getSize().x) / 1000, static_cast<float>(w.getSize().y) / 600));
+
+	ref.setPosition(static_cast<float>(w.getView().getCenter().x - w.getSize().x / 2), static_cast<float>(w.getView().getCenter().y + w.getSize().y / 2 -600* ref.getScale().y));
+	if (isRef)
+		w.draw(ref);
+
+
+
 }
 
 Actor& GameManager::findActorHidden(int ID)
