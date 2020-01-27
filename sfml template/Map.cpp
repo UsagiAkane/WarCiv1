@@ -165,7 +165,7 @@ void Map::loadTerrains(std::string line) {
 	std::vector<std::vector<int>> newmap;
 	while (line.size() > 3) {
 		INTbuf.push_back(std::stoi(line));
-		if (INTbuf.at(INTbuf.size()-1) >= 1000)
+		if (INTbuf.at(INTbuf.size() - 1) >= 1000)
 			line.erase(0, 5);
 		else
 			line.erase(0, 4);
@@ -212,7 +212,6 @@ Terrain Map::getTile(int x, int y) {
 	y /= 32;
 	return getTileVec(x, y);
 }
-
 Terrain Map::getTileVec(int x, int y) {
 	if (map.at(x).at(y) % _FOG / 100 == 1) {				//HILL DRAW		
 		if (map.at(x).at(y) % 100 == 1) {		//COAL DRAW
@@ -362,14 +361,20 @@ void Map::__getInfo_DEBUG(int x, int y) {
 		}
 	}
 }
+void Map::getInfo(int x, int y, sf::RenderWindow& w) {
+	if (x / 32 >= 0 && x / 32 < static_cast<int>(units.size())) {
+		if (y / 32 >= 0 && y / 32 < static_cast<int>(units.size())) {
+			getTile(x, y).getInfo(w);
+		}
+	}
+}
+
 void Map::reTakeTown(int x, int y, int newPlayerID) {
 	x /= 32;
 	y /= 32;
-
 	int tmp = units.at(x).at(y) % 100;
 	tmp += (newPlayerID * 100);
 	units.at(x).at(y) = tmp;
-
 }
 void Map::draw(sf::RenderWindow& w) {
 	Hills hill;

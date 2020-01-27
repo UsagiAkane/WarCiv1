@@ -15,6 +15,7 @@ protected:
 	int trade;
 	int defense;
 public:
+
 	Terrain();
 
 	sf::Texture getTexture();
@@ -27,8 +28,8 @@ public:
 	bool isWater();
 
 	void __getInfo_DEBUG();
-
-	virtual void draw(sf::RenderWindow& w) { w.draw(sprite); }
+	void getInfo(sf::RenderWindow& w);
+	virtual void draw(sf::RenderWindow& w);
 	virtual void setPosition(float x, float y) { sprite.setPosition(x, y); }
 
 };
