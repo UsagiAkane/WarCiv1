@@ -6,5 +6,5 @@ class Forest :public Terrain {
 private:
 	Game game;
 public:
-	Forest(int res=0);
+	Forest(int res = 0);
 };

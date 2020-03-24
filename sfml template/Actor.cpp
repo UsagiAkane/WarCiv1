@@ -19,7 +19,6 @@ void Actor::__SHOW_INFO_DEBUG()
 	std::cout << this->playerID << std::endl;
 	std::cout << this->totalGold << std::endl;
 	std::cout << this->totalScience << std::endl;
-
 }
 
 void Actor::__PUSH_UNIT_DEBUG(Unit* unit) { this->units.push_back(*unit); }
@@ -46,13 +45,10 @@ bool Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& yea
 				}
 			}
 			map.__getInfo_DEBUG(mouse_x, mouse_y);//DEBUG
-
-			
 		}
 	}
 
 	if (event.type == sf::Event::KeyPressed) {
-
 		switch (event.key.code) {
 			//UNIT-TARGET--------
 		case sf::Keyboard::Right:
@@ -64,7 +60,7 @@ bool Actor::takeControl(sf::Event event, Map& map, sf::RenderWindow& w, int& yea
 			break;
 			//CREATE-TOWN--------
 		case sf::Keyboard::T:
-			if (this->units.size() != 0) { //yesn`t hasn`t units 
+			if (this->units.size() != 0) { //yesn`t hasn`t units
 				if (this->units.at(this->unitController).getHealth() > 0) {
 					if (this->units.at(this->unitController).getIndex() == 1) { //settlers?
 						//std::cout << map.getUnitInd(this->units.at(unitController).getPositionX(), this->units.at(unitController).getPositionY()) << std::endl;//debug
@@ -236,7 +232,6 @@ void Actor::takeControlUnit(sf::Event event, Map& map, sf::RenderWindow& w, Acto
 					if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
 						this->units.at(this->unitController).moveTopHidden(map, mouse_x, mouse_y);//move to this position if empty;
 				}
-
 			}
 			else if ((mouse_y <= UnPosY + BORDER_PIXEL_60 && mouse_y >= UnPosY + BORDER_PIXEL_30) && (mouse_x >= UnPosX && mouse_x <= UnPosX + BORDER_PIXEL_30))//check position of mouse
 			{
@@ -527,7 +522,7 @@ void Actor::botAttackTown(Map& map, Actor& eActor, int x, int y, int i, int dire
 			}
 			else
 			{
-				//if damage is less than armor you will damage only 1 
+				//if damage is less than armor you will damage only 1
 				/*eActor.getTownsLink().at(time).setHealth(eActor.getTownsLink().at(time).getHealth() - 1);*/
 				eActor.getTownsLink().at(time).setHealth(eActor.getTownsLink().at(time).getHealth() - (this->units.at(i).getDamage() + BOT_DAMAGE_MOD));
 			}
@@ -558,8 +553,6 @@ void Actor::botAttackTown(Map& map, Actor& eActor, int x, int y, int i, int dire
 		}
 		time++;
 	}
-
-
 }
 
 #pragma region GETTERS
@@ -625,7 +618,6 @@ void Actor::setPlayerID(int playerID)
 {
 	this->playerID = playerID;
 }
-
 
 void Actor::setTotalGold(int totalGold)
 {
@@ -742,7 +734,6 @@ void Actor::checkIsEnemy(int mouse_x, int mouse_y, Map& map, std::vector<Unit>& 
 		{
 			for (auto j : enemies)//
 			{
-
 				if (j.getIndex() == (map.getUnitInd(mouse_x, mouse_y) % 100) && (j.getPositionX() == mouse_x / 32 * 32 && j.getPositionY() == mouse_y / 32 * 32))//find enemy in enemy vector
 				{
 					tmp = false;
@@ -754,7 +745,6 @@ void Actor::checkIsEnemy(int mouse_x, int mouse_y, Map& map, std::vector<Unit>& 
 			}
 			break;
 		}
-
 	}
 	if (map.getUnitInd(mouse_x, mouse_y) / 100 != this->playerID && map.getUnitInd(mouse_x, mouse_y) != 0 && tmp == true)
 	{
@@ -762,8 +752,6 @@ void Actor::checkIsEnemy(int mouse_x, int mouse_y, Map& map, std::vector<Unit>& 
 		std::cout << "YOU START WAR" << std::endl;
 		std::cout << map.getUnitInd(mouse_x, mouse_y) / 100 << std::endl;
 	}
-
-
 }
 
 void Actor::unitAttackTown(int mouse_x, int mouse_y, Map& map, std::vector<Town>& townsEnemy, sf::RenderWindow& w, int direction)
@@ -778,7 +766,6 @@ void Actor::unitAttackTown(int mouse_x, int mouse_y, Map& map, std::vector<Town>
 			isEnemy = true;
 			for (auto j : townsEnemy)
 			{
-
 				if (j.getPositionX() == mouse_x / 32 * 32 && j.getPositionY() == mouse_y / 32 * 32)//find enemy in enemy vector
 				{
 					//animation
@@ -791,7 +778,7 @@ void Actor::unitAttackTown(int mouse_x, int mouse_y, Map& map, std::vector<Town>
 					}
 					else
 					{
-						//if damage is less than armor you will damage only 1 
+						//if damage is less than armor you will damage only 1
 						townsEnemy.at(time).setHealth(townsEnemy.at(time).getHealth() - 1);
 					}
 
@@ -821,7 +808,6 @@ void Actor::unitAttackTown(int mouse_x, int mouse_y, Map& map, std::vector<Town>
 						this->units.at(this->unitController).death(map);
 					}
 
-
 					tmp = false;
 					break;
 				}
@@ -829,13 +815,11 @@ void Actor::unitAttackTown(int mouse_x, int mouse_y, Map& map, std::vector<Town>
 			}
 			break;
 		}
-
 	}
 	if (map.getUnitInd(mouse_x, mouse_y) / 100 != this->playerID && map.getUnitInd(mouse_x, mouse_y) != 0 && tmp == true)
 	{
 		if (isEnemy == false)
 			enemyListID.push_back(map.getUnitInd(mouse_x, mouse_y) / 100);
-
 
 		std::cout << "YOU START WAR (TOWN)" << std::endl;
 		std::cout << "With player: " << map.getUnitInd(mouse_x, mouse_y) / 100 << std::endl;

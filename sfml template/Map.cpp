@@ -213,7 +213,7 @@ Terrain Map::getTile(int x, int y) {
 	return getTileVec(x, y);
 }
 Terrain Map::getTileVec(int x, int y) {
-	if (map.at(x).at(y) % _FOG / 100 == 1) {				//HILL DRAW		
+	if (map.at(x).at(y) % _FOG / 100 == 1) {				//HILL DRAW
 		if (map.at(x).at(y) % 100 == 1) {		//COAL DRAW
 			return Hills(1);
 		}
@@ -222,13 +222,13 @@ Terrain Map::getTileVec(int x, int y) {
 		}
 		return Hills();
 	}
-	else if (map.at(x).at(y) % _FOG / 100 == 2) {			//FOREST DRAW		
+	else if (map.at(x).at(y) % _FOG / 100 == 2) {			//FOREST DRAW
 		if (map.at(x).at(y) % 100 == 2) {		//GAME DRAW
 			return Forest(1);
 		}
 		return Forest();
 	}
-	else if (map.at(x).at(y) % _FOG / 100 == 3) {			//GRASSLAND DRAW		
+	else if (map.at(x).at(y) % _FOG / 100 == 3) {			//GRASSLAND DRAW
 		if (map.at(x).at(y) % 100 == 4) {		//HORSES DRAW
 			return Grassland(2);
 		}
@@ -237,7 +237,7 @@ Terrain Map::getTileVec(int x, int y) {
 		}
 		return Grassland();
 	}
-	else if (map.at(x).at(y) % _FOG / 100 == 4) {			//MOUNTAIN DRAW		
+	else if (map.at(x).at(y) % _FOG / 100 == 4) {			//MOUNTAIN DRAW
 		if (map.at(x).at(y) % 100 == 3) {		//GOLD DRAW
 			return Mountain(1);
 		}
@@ -248,7 +248,7 @@ Terrain Map::getTileVec(int x, int y) {
 	}
 	else if (map.at(x).at(y) % _FOG / 100 == 5)				//OCEAN
 		return Ocean();
-	else if (map.at(x).at(y) % _FOG / 100 == 6) {			//PLAINS DRAW		
+	else if (map.at(x).at(y) % _FOG / 100 == 6) {			//PLAINS DRAW
 		if (map.at(x).at(y) % 100 == 2) {		//HORSES DRAW
 			return Plains(1);
 		}

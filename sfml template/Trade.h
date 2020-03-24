@@ -8,5 +8,4 @@ class Trade :public Technologies
 public:
 	Trade();
 	void checkPrevTech(std::vector<Technologies>& b);
-
 };

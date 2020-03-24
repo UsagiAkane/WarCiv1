@@ -1,6 +1,6 @@
 #include "MapMaking.h"
 
-MapMaking::MapMaking():Technologies("Map making",0,0)
+MapMaking::MapMaking() :Technologies("Map making", 0, 0)
 {
 }
 

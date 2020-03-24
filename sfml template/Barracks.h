@@ -6,4 +6,3 @@ private:
 public:
 	Barracks();
 };
-

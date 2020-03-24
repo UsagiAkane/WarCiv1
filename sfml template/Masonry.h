@@ -1,7 +1,7 @@
 #pragma once
 #include "Technologies.h"
 
-class Masonry:public Technologies
+class Masonry :public Technologies
 {
 public:
 	Masonry();
@@ -9,6 +9,4 @@ public:
 	bool getIsLearned() override;
 
 	~Masonry();
-
 };
-

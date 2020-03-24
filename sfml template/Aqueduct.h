@@ -8,6 +8,4 @@ private:
 public:
 	Aqueduct();
 	bool isBuildable(std::vector<Technologies> techno) override;
-
 };
-

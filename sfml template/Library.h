@@ -6,6 +6,4 @@ private:
 public:
 	Library();
 	bool isBuildable(std::vector<Technologies> techno) override;
-
 };
-

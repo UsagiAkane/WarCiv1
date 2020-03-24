@@ -1,9 +1,7 @@
 #include "Monarchy.h"
 
-
-Monarchy::Monarchy():Technologies("Monarchy",0,0)
+Monarchy::Monarchy() :Technologies("Monarchy", 0, 0)
 {
-
 }
 
 void Monarchy::checkPrevTech(std::vector<Technologies>& b)

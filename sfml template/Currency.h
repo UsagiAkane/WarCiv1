@@ -9,4 +9,3 @@ public:
 	Currency();
 	void checkPrevTech(std::vector<Technologies>& b);
 };
-

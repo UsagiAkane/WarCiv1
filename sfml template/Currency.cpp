@@ -1,6 +1,6 @@
 #include "Currency.h"
 
-Currency::Currency():Technologies("Currency",0,0)
+Currency::Currency() :Technologies("Currency", 0, 0)
 {
 }
 

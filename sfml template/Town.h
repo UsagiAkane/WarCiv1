@@ -38,7 +38,6 @@ public:
 	//=====================================================
 	Town(int positionX = 0, int positionY = 0, std::string name = "NoNameTown");
 
-
 	//functions that can be changed
 
 	///1-Settlers, 2-Militia, 3-Legion, 4-Cavalry, 5-Chariot
@@ -65,7 +64,7 @@ public:
 	int getDamage();
 	std::string getName();
 
-	//setters 
+	//setters
 
 	void setPosition(int x, int y);
 	void setHealth(int health);

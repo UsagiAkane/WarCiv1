@@ -19,8 +19,8 @@ protected:
 	int scienceMultiplier;
 	int increaseHP;
 public:
-	Building(std::string,int productionPrice,int goldCost,int goldPerTurn,
-		int incraseLimit,int rankMulti,int moneyMulti,int scieceMulti,int increaseHP);
+	Building(std::string, int productionPrice, int goldCost, int goldPerTurn,
+		int incraseLimit, int rankMulti, int moneyMulti, int scieceMulti, int increaseHP);
 	//getters
 	std::string getName();
 	int getProductionPrice();
@@ -46,6 +46,4 @@ public:
 
 	//destructor
 	~Building();
-
 };
-

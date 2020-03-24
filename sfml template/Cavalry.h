@@ -5,4 +5,3 @@ class Cavalry :public Unit
 public:
 	Cavalry();
 };
-

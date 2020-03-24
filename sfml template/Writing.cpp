@@ -1,6 +1,6 @@
 #include "Writing.h"
 
-Writing::Writing():Technologies("Writing",0,0)
+Writing::Writing() :Technologies("Writing", 0, 0)
 {
 }
 

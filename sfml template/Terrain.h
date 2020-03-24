@@ -31,5 +31,4 @@ public:
 	void getInfo(sf::RenderWindow& w);
 	virtual void draw(sf::RenderWindow& w);
 	virtual void setPosition(float x, float y) { sprite.setPosition(x, y); }
-
 };

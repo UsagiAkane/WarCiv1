@@ -5,4 +5,3 @@ class Legion :public Unit
 public:
 	Legion();
 };
-

@@ -1,6 +1,6 @@
 #include "CityWalls.h"
 
-CityWalls::CityWalls() : Building("City Walls",120,480,-2,0,0,0,1,5)
+CityWalls::CityWalls() : Building("City Walls", 120, 480, -2, 0, 0, 0, 1, 5)
 {
 	sf::Texture* texture = new sf::Texture;
 	texture->loadFromFile("BuildingsIcons\\CityWalls.png");

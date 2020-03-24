@@ -7,4 +7,3 @@ public:
 	Marketplace();
 	bool isBuildable(std::vector<Technologies> techno) override;
 };
-

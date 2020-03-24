@@ -25,7 +25,7 @@ GameManager::GameManager()
 	enemyActor->__PUSH_UNIT_DEBUG(legionEnemy);
 	Town* townEnemy = new Town;
 	townEnemy->setPlayer_id(2);
-	townEnemy->spawn(32 * 10, 32 *10, this->map);
+	townEnemy->spawn(32 * 10, 32 * 10, this->map);
 	enemyActor->__PUSH_TOWN_DEBUG(townEnemy);
 	Town* townEnemy2 = new Town;
 	townEnemy2->setPlayer_id(2);
@@ -75,10 +75,8 @@ int& GameManager::getYear()
 	return this->currentYear;
 }
 
-void GameManager::draw(sf::RenderWindow& w,sf::View & view)
+void GameManager::draw(sf::RenderWindow& w, sf::View& view)
 {
-
-	
 	map.draw(w);
 	for (auto i : this->actors)
 		i.draw(w, this->map);
@@ -89,12 +87,9 @@ void GameManager::draw(sf::RenderWindow& w,sf::View & view)
 
 	ref.setScale(sf::Vector2f(static_cast<float>(w.getSize().x) / 1000, static_cast<float>(w.getSize().y) / 600));
 
-	ref.setPosition(static_cast<float>(w.getView().getCenter().x - w.getSize().x / 2), static_cast<float>(w.getView().getCenter().y + w.getSize().y / 2 -600* ref.getScale().y));
+	ref.setPosition(static_cast<float>(w.getView().getCenter().x - w.getSize().x / 2), static_cast<float>(w.getView().getCenter().y + w.getSize().y / 2 - 600 * ref.getScale().y));
 	if (isRef)
 		w.draw(ref);
-
-
-
 }
 
 Actor& GameManager::findActorHidden(int ID)
@@ -109,10 +104,8 @@ Actor& GameManager::findActorHidden(int ID)
 
 Actor& GameManager::findActor(int mouse_x, int mouse_y)
 {
-
 	if ((map.getUnitInd(mouse_x, mouse_y)) / 100 != 0 && (map.getUnitInd(mouse_x, mouse_y)) / 100 != this->actors.at(0).getPlayerID()) //check index of unit
 		return findActorHidden((map.getUnitInd(mouse_x, mouse_y)) / 100);
-
 }
 
 void GameManager::saveGame()
@@ -153,7 +146,6 @@ std::string getUnitInfoFromFile(int actorInd)
 
 				if (buffer == "&")
 					line.clear();
-
 			}
 			else
 			{
@@ -202,7 +194,6 @@ std::string sliseStrings(std::string str, int index) {
 	if (index == 0) {
 		return tmp;
 	}
-
 }
 
 int getIntFromStringByIndex(std::string com, int index)
@@ -232,9 +223,7 @@ int getIntFromStringByIndex(std::string com, int index)
 		{
 			return stoi(time);
 		}
-
 	}
-
 }
 
 std::vector<Unit> getUnitVectorByActorInd(int actorInd)
@@ -319,7 +308,6 @@ std::vector<Unit> getUnitVectorByActorInd(int actorInd)
 			tmp.push_back(*chariot);
 			//std::cout << "\nPushed c";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 		}
-
 	}
 
 	return tmp;
@@ -405,7 +393,6 @@ std::string getActorInfoFromFile(int actorInd)
 	{
 		while (!fin.eof())
 		{
-
 			if (isnext == 2)
 			{
 				fin >> buffer;
@@ -431,7 +418,6 @@ std::string getActorInfoFromFile(int actorInd)
 					isnext++;
 			}
 		}
-
 	}
 	else
 		std::cout << "Can't open file" << std::endl;
@@ -473,13 +459,10 @@ int getActorTS(int actorInd) {
 		}
 	}
 
-
-
 	return stoi(intbuf);
 }
 
 int getActorsCount() {
-
 	std::string buffer;
 	std::string path = PATH_TO_SAVE_1;
 	std::ifstream fin;
@@ -499,7 +482,6 @@ int getActorsCount() {
 	fin.close();
 
 	return isnext;
-
 }
 #pragma endregion
 
@@ -519,7 +501,6 @@ int getTownsCount(int actorInd)
 		{
 			fin >> buffer;
 
-
 			if (actorInd == 0)
 			{
 				if (buffer == "~")
@@ -532,7 +513,6 @@ int getTownsCount(int actorInd)
 
 			if (buffer == "_")
 				actorInd--;
-
 		}
 	}
 	else
@@ -540,12 +520,10 @@ int getTownsCount(int actorInd)
 	fin.close();
 
 	return isnext;
-
 }
 //work perfectly
 std::string getTownInfoFromFile(int actorInd)
 {
-
 	std::string line;
 	std::string buffer;
 	std::string path = PATH_TO_SAVE_1;
@@ -576,14 +554,10 @@ std::string getTownInfoFromFile(int actorInd)
 				if (buffer == "_")
 				{
 					actorInd--;
-
 				}
 			}
 			else
 			{
-
-
-
 				if (actorInd == 0 && buffer == "~" && count_of_rep > 0)
 				{
 					line += " |";
@@ -609,11 +583,8 @@ std::string getTownInfoFromFile(int actorInd)
 				if (buffer == "_")
 				{
 					actorInd--;
-
 				}
-
 			}
-
 		}
 		//std::cout << line << std::endl;//==============================DEBUG
 	}
@@ -621,7 +592,6 @@ std::string getTownInfoFromFile(int actorInd)
 		std::cout << "Can't open file" << std::endl;
 	fin.close();
 	return line;
-
 }
 //WORK
 std::string getStringFromSringByIndexTowns(std::string com)
@@ -640,14 +610,12 @@ std::string getStringFromSringByIndexTowns(std::string com)
 		}
 	}
 	return time;
-
 }
 //WORK
 int getIntFromStringByIndexTowns(std::string com, int index)
 {
 	int tmp = 0;
 	std::string time;
-
 
 	for (int i = 0; i < com.size(); i++)
 	{
@@ -659,9 +627,6 @@ int getIntFromStringByIndexTowns(std::string com, int index)
 		{
 			time += com[i];
 		}
-
-
-
 	}
 	return stoi(time);
 }
@@ -720,14 +685,12 @@ void GameManager::loadGame()
 		else
 		{
 		}
-		this->ui.setStringLogs("Successfully load",true);
+		this->ui.setStringLogs("Successfully load", true);
 	}
 	else
 		this->ui.setStringLogs("\nCant find this file : " PATH_TO_SAVE_1  " (game has started in NEW GAME order)");
-	
 
 	file.close();
-
 }
 
 void GameManager::deleteAllActors()
@@ -739,4 +702,3 @@ Ui& GameManager::getUi()
 {
 	return this->ui;
 }
-

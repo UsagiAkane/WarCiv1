@@ -8,6 +8,6 @@ void IronWorking::checkPrevTech(std::vector<Technologies>& b)
 	count == 1 ? this->canBeBuildiable = 1 : false;
 }
 
-IronWorking::IronWorking():Technologies("Iron Working",0,0)
+IronWorking::IronWorking() :Technologies("Iron Working", 0, 0)
 {
 }

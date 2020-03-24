@@ -8,5 +8,3 @@ public:
 	MapMaking();
 	void checkPrevTech(std::vector<Technologies>& b);
 };
-
-

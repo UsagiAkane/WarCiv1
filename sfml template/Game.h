@@ -7,4 +7,3 @@ public:
 	Game();
 	int getFood();
 };
-
