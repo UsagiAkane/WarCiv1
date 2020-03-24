@@ -6,4 +6,3 @@ class Militia : public Unit
 public:
 	Militia();
 };
-

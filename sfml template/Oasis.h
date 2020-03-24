@@ -9,4 +9,3 @@ public:
 	Oasis();
 	int getFood();
 };
-

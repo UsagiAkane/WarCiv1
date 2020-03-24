@@ -1,5 +1,5 @@
 #include "BronzeWorking.h"
 
-BronzeWorking::BronzeWorking() : Technologies("Bronze Working",0,1)
+BronzeWorking::BronzeWorking() : Technologies("Bronze Working", 0, 1)
 {
 }

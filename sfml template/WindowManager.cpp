@@ -1,6 +1,5 @@
 #include "WindowManager.h"
 
-
 WindowManager::WindowManager() {
 	this->w.create(sf::VideoMode(1000, 600), "WC" /*,sf::Style::Fullscreen*/);
 	this->w.setFramerateLimit(60);
@@ -16,10 +15,9 @@ void WindowManager::newGameWindow(bool doesLoad) {
 		sf::View view(w.getView());
 
 		while (w.isOpen()) {
-			sf::Event event;			
-      
-			while (w.pollEvent(event)) {
+			sf::Event event;
 
+			while (w.pollEvent(event)) {
 				if (event.type == sf::Event::KeyPressed)
 				{
 					if (event.key.code == sf::Keyboard::Escape)
@@ -42,8 +40,6 @@ void WindowManager::newGameWindow(bool doesLoad) {
 					w.close();
 				if (event.type == sf::Event::Resized)
 					view.setSize(sf::Vector2f(event.size.width, event.size.height));
-				
-
 
 				if (!isMenu)
 				{
@@ -55,8 +51,8 @@ void WindowManager::newGameWindow(bool doesLoad) {
 							//all other control
 							if (game.getActors().at(0).takeControl(event, game.getMap(), w, game.getYear()))
 							{
-								for (int i = 1; i < game.getActors().size(); i++) 
-									game.getActors().at(i).endOfTurnBot(game.getMap(), game.getActors().at(0));	
+								for (int i = 1; i < game.getActors().size(); i++)
+									game.getActors().at(i).endOfTurnBot(game.getMap(), game.getActors().at(0));
 							}
 							if (sf::Mouse::isButtonPressed(sf::Mouse::Left))//If you want to attack or move unit
 							{
@@ -67,12 +63,7 @@ void WindowManager::newGameWindow(bool doesLoad) {
 					}
 					else
 						game.getUi().setStringLogs("ALL YOUR UNITS ARE DEAD, TOWNS BURNED ,YOU LOST");
-					
-					
 				}
-
-
-
 			}
 			//CAMERA CONTROL
 
@@ -83,18 +74,16 @@ void WindowManager::newGameWindow(bool doesLoad) {
 			//WINDOW-FILL-COLOR
 			w.clear(sf::Color::Black);
 			//draw all in game
-			game.draw(w,view);
-	
+			game.draw(w, view);
 
 			if (isMenu)
 				gameMenu(w, game);
-		
+
 			//DISPLAY
 			w.display();
-
 		}
 	}
-	catch (const std::exception & e) {
+	catch (const std::exception& e) {
 		std::cout << e.what();
 	}
 }
@@ -133,7 +122,6 @@ void WindowManager::gameMenu(sf::RenderWindow& w, GameManager& game) {
 
 	localBounds = tExit.getLocalBounds();
 	tExit.setOrigin(localBounds.left + localBounds.width / 2.0f, localBounds.top + localBounds.height / 2.0f);
-
 
 	//BAR---------------------------------------POS
 	bContinue.setPosition(static_cast<float>(w.getView().getCenter().x - 100 * bContinue.getScale().x), static_cast<float>(w.getView().getCenter().y - 45 * bContinue.getScale().y));
@@ -187,13 +175,9 @@ void WindowManager::gameMenu(sf::RenderWindow& w, GameManager& game) {
 							game.saveGame();
 						if ((sf::IntRect(sf::FloatRect(bLoadGame.getGlobalBounds().left - w.getView().getCenter().x + w.getSize().x / 2, bLoadGame.getGlobalBounds().top - w.getView().getCenter().y + w.getSize().y / 2, bLoadGame.getGlobalBounds().width, bLoadGame.getGlobalBounds().height)).contains(sf::Mouse::getPosition(w))))
 							game.loadGame();
-
-
-
 					}
 				}
 			}
-
 		}
 
 		//bar
@@ -208,10 +192,7 @@ void WindowManager::gameMenu(sf::RenderWindow& w, GameManager& game) {
 		w.draw(tExit);
 
 		w.display();
-
-
 	}
-
 }
 
 void WindowManager::cameraControl(sf::View& view, sf::Window& w)
@@ -285,7 +266,6 @@ void WindowManager::mainMenu(sf::RenderWindow& w)
 	localBounds = tExit.getLocalBounds();
 	tExit.setOrigin(localBounds.left + localBounds.width / 2.0f, localBounds.top + localBounds.height / 2.0f);
 
-
 	//BAR---------------------------------------POS
 	bNewGame.setPosition(static_cast<float>(w.getView().getCenter().x - 100 * bNewGame.getScale().x), static_cast<float>(w.getView().getCenter().y - 45 * bNewGame.getScale().y));
 	bContinue.setPosition(static_cast<float>(w.getView().getCenter().x - 100 * bContinue.getScale().x), static_cast<float>(w.getView().getCenter().y - 15 * bContinue.getScale().x));
@@ -297,7 +277,6 @@ void WindowManager::mainMenu(sf::RenderWindow& w)
 	tContinue.setPosition(static_cast<float>(bContinue.getPosition().x + 100 * bContinue.getScale().x), static_cast<float>(bContinue.getPosition().y + 15));
 	tLoadGame.setPosition(static_cast<float>(bLoadGame.getPosition().x + 100 * bLoadGame.getScale().x), static_cast<float>(bLoadGame.getPosition().y + 15));
 	tExit.setPosition(static_cast<float>(bExit.getPosition().x + 100 * bExit.getScale().x), static_cast<float>(bExit.getPosition().y + 15));
-
 
 	while (isMenu)
 	{

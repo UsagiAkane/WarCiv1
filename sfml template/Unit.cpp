@@ -26,12 +26,10 @@ void Unit::checkForAttackAndAttackHide(int mouse_x, int mouse_y, Map& map, std::
 	{
 		enemies_id.push_back(map.getUnitInd(mouse_x, mouse_y) / 100);
 	}
-
 }
 
 void Unit::animationOfAttack(int value, sf::RenderWindow& w, Map& map)
 {
-	
 	sf::Texture textureTMP;
 	textureTMP.loadFromFile("Icons\\swordicon.png");
 	sf::Sprite tmp(textureTMP);
@@ -82,7 +80,6 @@ void Unit::animationOfAttack(int value, sf::RenderWindow& w, Map& map)
 
 void Unit::moveRightHidden(Map& map, int mouse_x, int mouse_y)
 {
-
 	if (this->health > 0)
 	{
 		positionX += BORDER_PIXEL_32;
@@ -94,14 +91,12 @@ void Unit::moveRightHidden(Map& map, int mouse_x, int mouse_y)
 
 void Unit::moveLeftHidden(Map& map, int mouse_x, int mouse_y)
 {
-
 	if (this->health > 0)
 	{
 		positionX -= BORDER_PIXEL_32;
 		this->warriorSprite.setPosition(static_cast<float>(positionX), static_cast<float>(positionY));
 		this->steps -= map.getTile(mouse_x, mouse_y).getMove();
 		map.moveUnit(positionX + BORDER_PIXEL_32, positionY, positionX, positionY, this->playerID);
-
 	}
 }
 
@@ -114,7 +109,6 @@ void Unit::moveDownHidden(Map& map, int mouse_x, int mouse_y)
 		this->steps -= map.getTile(mouse_x, mouse_y).getMove();
 		map.moveUnit(positionX, positionY - BORDER_PIXEL_32, positionX, positionY, this->playerID);
 	}
-
 }
 
 void Unit::moveTopHidden(Map& map, int mouse_x, int mouse_y)
@@ -160,9 +154,8 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 			{
 				if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0) //check index of unit
 					checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 1);   //Checking whether a unit can attack
-				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty 
+				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
 					moveRightHidden(map, mouse_x, mouse_y);//move to this position if empty
-
 			}
 		}
 		////left
@@ -174,7 +167,6 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 					checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 2); //Checking whether a unit can attack
 				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
 					moveLeftHidden(map, mouse_x, mouse_y);//move to this position if empty
-
 			}
 		}
 		////top
@@ -182,12 +174,10 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 		{
 			if (map.getTile(mouse_x, mouse_y).getMove() <= this->steps)
 			{
-
 				if ((map.getUnitInd(mouse_x, mouse_y)) % 100 != 0)//check index of unit
 					checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 3); //Checking whether a unit can attack
 				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
 					moveTopHidden(map, mouse_x, mouse_y);//move to this position if empty
-
 			}
 		}
 		////down
@@ -199,22 +189,18 @@ void Unit::move(int mouse_x, int mouse_y, Map& map, std::vector<int>& enemies_id
 					checkForAttackAndAttackHide(mouse_x, mouse_y, map, enemies_id, enemies, w, 4); //Checking whether a unit can attack
 				if ((map.getUnitInd(mouse_x, mouse_y)) == 0 && !(map.getTile(mouse_x, mouse_y).isWater()))//check is tile empty
 					moveDownHidden(map, mouse_x, mouse_y);//move to this position if empty
-
 			}
 		}
 		this->checkSteps();
 		this->checkUpUnit();
-
 	}
 }
 
 void Unit::attack(Unit& uEnemy, Map& map, int x, int y)
 {
-
 	//damage to attacker
-	if (this->health <=0)
+	if (this->health <= 0)
 	{
-
 	}
 	this->health -= ((uEnemy.getDamage() + uEnemy.getRank()) - (this->armor));
 	this->setArmor(this->armor - (uEnemy.getDamage() + uEnemy.getRank()));
@@ -223,23 +209,17 @@ void Unit::attack(Unit& uEnemy, Map& map, int x, int y)
 	uEnemy.health -= ((this->getDamage() + this->getRank()) - (uEnemy.getArmor() + map.getTile(x, y).getDefense()));
 	uEnemy.setArmor(armor - (this->getDamage() + this->getRank()));
 
-
 	if (this->getHealth() <= 0)
 	{
 		this->death(map);
 		uEnemy.setCountOfKill(+1);
 	}
 
-
-
 	if (uEnemy.getHealth() <= 0)
 	{
 		uEnemy.death(map);
 		this->countOfKill += 1;
 	}
-
-
-
 }
 
 void Unit::recharge()
@@ -251,15 +231,15 @@ void Unit::recharge()
 void Unit::GET_SHOW_INFO_DEBUG()
 {
 	std::cout << "============================================" << this->health << std::endl;
-	std::cout<< "Health: "<< this->health<< std::endl;
-	std::cout<<"Armor: " <<this->armor << std::endl;
-	std::cout<<"Damage:" << this->damage<< std::endl;
-	std::cout <<"Count of kill: " <<this->countOfKill << std::endl;
-	std::cout <<"Index: " << this->index<< std::endl;
-	std::cout <<"Rank: "<<this->rank<< std::endl;
-	std::cout <<"Alive: " <<this->isAlive<< std::endl;
-	std::cout <<"X: " <<this->positionX<< std::endl;
-	std::cout <<"Y: " <<this->positionY<< std::endl;
+	std::cout << "Health: " << this->health << std::endl;
+	std::cout << "Armor: " << this->armor << std::endl;
+	std::cout << "Damage:" << this->damage << std::endl;
+	std::cout << "Count of kill: " << this->countOfKill << std::endl;
+	std::cout << "Index: " << this->index << std::endl;
+	std::cout << "Rank: " << this->rank << std::endl;
+	std::cout << "Alive: " << this->isAlive << std::endl;
+	std::cout << "X: " << this->positionX << std::endl;
+	std::cout << "Y: " << this->positionY << std::endl;
 }
 
 void Unit::skipTurn()
@@ -281,7 +261,6 @@ bool Unit::getIsAlive()
 	}
 	else
 		return true;
-
 }
 
 bool Unit::getIsActive()
@@ -393,7 +372,6 @@ void Unit::setColorByID()
 		warriorSprite.setColor(sf::Color(220, 125, 220));//pink
 	else if (this->playerID > 6)
 		warriorSprite.setColor(sf::Color(50, 50, 50));//dark
-
 }
 
 void Unit::checkUpUnit()
@@ -403,7 +381,6 @@ void Unit::checkUpUnit()
 		this->rank += 1;
 		this->countOfKill = 0;
 	}
-
 }
 
 void Unit::checkSteps()
@@ -414,12 +391,10 @@ void Unit::checkSteps()
 
 bool Unit::isEnemyInEnemyIdList(std::vector<Unit> enemies_id)
 {
-
 }
 
 std::string Unit::getSaveUnitInfo()
 {
-
 	std::string unitInfo;
 	unitInfo += std::to_string(this->health);
 	unitInfo += " ";
@@ -443,7 +418,6 @@ std::string Unit::getSaveUnitInfo()
 	unitInfo += " 1";
 	unitInfo += "|";
 
-
 	return unitInfo;
 }
 
@@ -456,7 +430,6 @@ void Unit::delByPositionInVector(std::vector<Unit>& units)
 		{ if (u.getSprite().getPosition().x == positionX && u.getSprite().getPosition().y == positionY) return tmp;
 		else tmp++; });
 	units.erase(tmp + units.begin());
-
 }
 
 int Unit::findIndexOfEnemy(int mouse_x, int mouse_y, Map& map)

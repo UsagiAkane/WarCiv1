@@ -8,5 +8,5 @@ private:
 	Coal coal;
 	Oil oil;
 public:
-	Hills(int res=0);
+	Hills(int res = 0);
 };

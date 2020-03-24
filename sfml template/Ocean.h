@@ -1,6 +1,6 @@
 #pragma once
 #include "Terrain.h"
-class Ocean : public Terrain{
+class Ocean : public Terrain {
 private:
 
 public:

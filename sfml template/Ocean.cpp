@@ -1,6 +1,6 @@
 #include "Ocean.h"
 
-Ocean::Ocean(int res){
+Ocean::Ocean(int res) {
 	texture.loadFromFile(PATH_TO_TERRAINS_OCEAN);
 	this->sprite.setTexture(this->texture);
 	this->name = "ocean";

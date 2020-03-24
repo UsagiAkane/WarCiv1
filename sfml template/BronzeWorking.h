@@ -6,4 +6,3 @@ class BronzeWorking :public Technologies
 public:
 	BronzeWorking();
 };
-

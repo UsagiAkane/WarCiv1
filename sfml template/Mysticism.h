@@ -10,4 +10,3 @@ public:
 	Mysticism();
 	void checkPrevTech(std::vector<Technologies>& b);
 };
-

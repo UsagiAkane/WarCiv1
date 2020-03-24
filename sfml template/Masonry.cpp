@@ -1,7 +1,6 @@
 #include "Masonry.h"
 
-
-Masonry::Masonry() :Technologies("Masonry",0,1)
+Masonry::Masonry() :Technologies("Masonry", 0, 1)
 {
 }
 
@@ -14,7 +13,6 @@ bool Masonry::getIsLearned()
 {
 	return this->islearned;
 }
-
 
 Masonry::~Masonry()
 {

@@ -7,4 +7,3 @@ public:
 	CityWalls();
 	bool isBuildable(std::vector<Technologies> techno) override;
 };
-

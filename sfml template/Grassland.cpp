@@ -12,6 +12,6 @@ Grassland::Grassland(int res)
 	this->trade = 0;
 	this->defense = 0;
 
-	if (res == 1) {this->prodaction += coal.getProdaction();}
-	else if(res==2){ this->prodaction += horses.getProdaction(); }
+	if (res == 1) { this->prodaction += coal.getProdaction(); }
+	else if (res == 2) { this->prodaction += horses.getProdaction(); }
 }

@@ -12,4 +12,3 @@ public:
 	Writing();
 	void checkPrevTech(std::vector<Technologies>& b);
 };
-

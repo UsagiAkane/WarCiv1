@@ -9,4 +9,3 @@ public:
 	void checkPrevTech(std::vector<Technologies>& b);
 	IronWorking();
 };
-

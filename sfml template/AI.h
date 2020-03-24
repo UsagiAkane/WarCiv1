@@ -6,8 +6,4 @@ class AI : public Actor
 private:
 public:
 	AI(int playerID);
-
-
-
-
 };

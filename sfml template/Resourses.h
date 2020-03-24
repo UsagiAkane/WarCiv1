@@ -2,7 +2,6 @@
 #include <SFML/Graphics.hpp>
 #include "path.h"
 
-
 class Resourses
 {
 protected:

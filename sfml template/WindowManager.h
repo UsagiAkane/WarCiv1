@@ -2,7 +2,7 @@
 #include "Actor.h"
 #include "GameManager.h"
 
-class WindowManager{
+class WindowManager {
 private:
 	sf::RenderWindow w;
 	bool isMenu = true;//true
@@ -14,7 +14,7 @@ public:
 	//move camera
 	void cameraControl(sf::View& view, sf::Window& window);
 	//check is mouse in window coordination
-	bool isMouseInWindow(sf::RenderWindow & w);
+	bool isMouseInWindow(sf::RenderWindow& w);
 	//function to get pos mouse in window
 	int getPosMouseByWindowX(sf::RenderWindow& w);
 	//function to get pos mouse in window
@@ -25,5 +25,4 @@ public:
 	void gameMenu(sf::RenderWindow& w, GameManager& game);
 
 	sf::RenderWindow& getWindow();
-	
 };

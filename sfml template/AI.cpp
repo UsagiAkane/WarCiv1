@@ -2,5 +2,4 @@
 
 AI::AI(int playerID) :Actor("EasyBot", playerID)
 {
-
 }

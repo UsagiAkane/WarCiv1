@@ -11,4 +11,3 @@ void CodeOfLaws::checkPrevTech(std::vector<Technologies>& b)
 		{ if ((t.getName() == "Alphabet" && t.getIsLearned() == true)) { count++; } });
 	count == 1 ? this->canBeBuildiable = 1 : false;
 }
-

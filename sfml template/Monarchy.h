@@ -9,4 +9,3 @@ public:
 	Monarchy();
 	void checkPrevTech(std::vector<Technologies>& b);
 };
-

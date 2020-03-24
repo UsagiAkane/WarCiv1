@@ -27,9 +27,4 @@ public:
 
 	//for user
 	void setStringLogs(std::string text, bool doesClear = false);
-
-
-
-
-
 };

@@ -1,6 +1,6 @@
 #include "Mysticism.h"
 
-Mysticism::Mysticism():Technologies("Mysticism",0,0)
+Mysticism::Mysticism() :Technologies("Mysticism", 0, 0)
 {
 }
 
@@ -11,4 +11,3 @@ void Mysticism::checkPrevTech(std::vector<Technologies>& b)
 		{ if ((t.getName() == "Ceremonial Burial" && t.getIsLearned() == true)) { count++; } });
 	count == 1 ? this->canBeBuildiable = 1 : false;
 }
-

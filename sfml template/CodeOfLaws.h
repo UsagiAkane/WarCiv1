@@ -10,4 +10,3 @@ public:
 	CodeOfLaws();
 	void checkPrevTech(std::vector<Technologies>& b);
 };
-

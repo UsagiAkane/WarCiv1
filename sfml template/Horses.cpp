@@ -9,5 +9,5 @@ Horses::Horses()
 
 int Horses::getProdaction()
 {
-	return this->prodaction ;
+	return this->prodaction;
 }
