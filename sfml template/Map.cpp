@@ -133,21 +133,16 @@ void Map::saveMap() {
 	fout.open(path, std::ofstream::app);
 	if (!fout.is_open())
 		std::cout << "Error, file wasn't opened" << std::endl;
-	else
-	{
-		for (auto i : map)
-		{
-			for (auto j : i)
-			{
+	else {
+		for (auto i : map) {
+			for (auto j : i) {
 				fout << j << " ";
 			}
 			fout << "\n";
 		}
 		fout << "=\n";
-		for (auto i : units)
-		{
-			for (auto j : i)
-			{
+		for (auto i : units) {
+			for (auto j : i) {
 				fout << j << " ";
 			}
 			fout << "\n";

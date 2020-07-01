@@ -1,7 +1,6 @@
 #include "Ui.h"
 
-Ui::Ui()
-{
+Ui::Ui() {
 	sf::Texture* tex = new sf::Texture;
 	tex->loadFromFile("Icons\\VerticalScroll.png");
 	vScrollSprite.setTexture(*tex);
@@ -17,8 +16,7 @@ Ui::Ui()
 	this->tyear.setFillColor(sf::Color(0, 0, 0));
 
 	sf::Text log;
-	for (int i = 0; i < LOGS_COUNT; i++)
-	{
+	for (int i = 0; i < LOGS_COUNT; i++) {
 		this->gLog.push_back(log);
 		this->gLog[i].setFont(this->font);
 		this->gLog[i].setFillColor(sf::Color(255, 255, 255));
@@ -27,12 +25,9 @@ Ui::Ui()
 	}
 }
 
-void Ui::gameLog(sf::RenderWindow& w)
-{
-}
+void Ui::gameLog(sf::RenderWindow& w) {}
 
-void Ui::resize(sf::RenderWindow& w)
-{
+void Ui::resize(sf::RenderWindow& w) {
 	vScrollSprite.setScale(sf::Vector2f(static_cast<float>(w.getSize().x) / 300, static_cast<float>(w.getSize().x) / 300));
 	this->vScrollSprite.setPosition(static_cast<float>(w.getView().getCenter().x - w.getSize().x / 2), static_cast<float>(w.getView().getCenter().y + w.getSize().y / 2 - 57 * vScrollSprite.getScale().y));
 
@@ -49,8 +44,7 @@ void Ui::resize(sf::RenderWindow& w)
 	this->tyear.setPosition(vScrollSprite.getPosition().x + 10 * vScrollSprite.getScale().x, vScrollSprite.getPosition().y + 40 * vScrollSprite.getScale().y);
 }
 
-void Ui::setParams(int gold, int sience, int turn, int year)
-{
+void Ui::setParams(int gold, int sience, int turn, int year) {
 	std::string tmp;
 	tmp = "Gold: ";
 	tmp += std::to_string(gold);
@@ -69,22 +63,17 @@ void Ui::setParams(int gold, int sience, int turn, int year)
 	this->tyear.setString(tmp);
 }
 
-void Ui::setStringLogs(std::string text, bool doesClear)
-{
-	if (!doesClear)
-	{
-		if (currentLog < LOGS_COUNT)
-		{
+void Ui::setStringLogs(std::string text, bool doesClear) {
+	if (!doesClear) {
+		if (currentLog < LOGS_COUNT) {
 			this->gLog.at(currentLog).setString(text);
 			currentLog++;
 		}
 		else
 			this->currentLog = 0;
 	}
-	else
-	{
-		for (int i = 0; i < LOGS_COUNT; i++)
-		{
+	else {
+		for (int i = 0; i < LOGS_COUNT; i++) {
 			this->gLog[i].setString(" ");
 		}
 		this->gLog[0].setString(text);
@@ -92,16 +81,14 @@ void Ui::setStringLogs(std::string text, bool doesClear)
 	}
 }
 
-void Ui::draw(sf::RenderWindow& w)
-{
+void Ui::draw(sf::RenderWindow& w) {
 	w.draw(this->vScrollSprite);
 	w.draw(this->tgold);
 	w.draw(this->tsience);
 	w.draw(this->tturn);
 	w.draw(this->tyear);
 
-	for (int i = 0; i < LOGS_COUNT; i++)
-	{
+	for (int i = 0; i < LOGS_COUNT; i++) {
 		//Move all other logs
 		if (i != 0)
 			this->gLog[i].setPosition(gLog[i - 1].getPosition().x, gLog[i - 1].getPosition().y + this->gLog[i].getCharacterSize());

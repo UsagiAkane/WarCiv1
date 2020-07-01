@@ -18,19 +18,16 @@ void WindowManager::newGameWindow(bool doesLoad) {
 			sf::Event event;
 
 			while (w.pollEvent(event)) {
-				if (event.type == sf::Event::KeyPressed)
-				{
+				if (event.type == sf::Event::KeyPressed) {
 					if (event.key.code == sf::Keyboard::Escape)
 						isMenu = !isMenu;
 				}
 
-				if (event.type == sf::Event::KeyPressed)
-				{
+				if (event.type == sf::Event::KeyPressed) {
 					if (event.key.code == sf::Keyboard::F1)
 						game.getUi().isLog = !(game.getUi().isLog);
 				}
-				if (event.type == sf::Event::KeyPressed)
-				{
+				if (event.type == sf::Event::KeyPressed) {
 					if (event.key.code == sf::Keyboard::Tab)
 						game.isRef = !game.isRef;
 				}
@@ -41,16 +38,12 @@ void WindowManager::newGameWindow(bool doesLoad) {
 				if (event.type == sf::Event::Resized)
 					view.setSize(sf::Vector2f(event.size.width, event.size.height));
 
-				if (!isMenu)
-				{
-					if (!(game.getActors().at(0).didLose()))
-					{
+				if (!isMenu) {
+					if (!(game.getActors().at(0).didLose())) {
 						//Check is mouse in window
-						if (isMouseInWindow(w))
-						{
+						if (isMouseInWindow(w)) {
 							//all other control
-							if (game.getActors().at(0).takeControl(event, game.getMap(), w, game.getYear()))
-							{
+							if (game.getActors().at(0).takeControl(event, game.getMap(), w, game.getYear())) {
 								for (int i = 1; i < game.getActors().size(); i++)
 									game.getActors().at(i).endOfTurnBot(game.getMap(), game.getActors().at(0));
 							}
@@ -135,16 +128,14 @@ void WindowManager::gameMenu(sf::RenderWindow& w, GameManager& game) {
 	tLoadGame.setPosition(static_cast<float>(bLoadGame.getPosition().x + 100 * bLoadGame.getScale().x), static_cast<float>(bLoadGame.getPosition().y + 15));
 	tExit.setPosition(static_cast<float>(bExit.getPosition().x + 100 * bExit.getScale().x), static_cast<float>(bExit.getPosition().y + 15));
 
-	while (isMenu)
-	{
+	while (isMenu) {
 		sf::Event ev;
 		while (w.pollEvent(ev)) {
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 				isMenu = false;
 			if (ev.type == sf::Event::Closed)
 				w.close();
-			if (isMouseInWindow(w))
-			{
+			if (isMouseInWindow(w)) {
 				//all other control
 				if ((sf::IntRect(sf::FloatRect(bContinue.getGlobalBounds().left - w.getView().getCenter().x + w.getSize().x / 2, bContinue.getGlobalBounds().top - w.getView().getCenter().y + w.getSize().y / 2, bContinue.getGlobalBounds().width, bContinue.getGlobalBounds().height)).contains(sf::Mouse::getPosition(w))))
 					bContinue.setColor(sf::Color(150, 150, 150));
@@ -165,8 +156,7 @@ void WindowManager::gameMenu(sf::RenderWindow& w, GameManager& game) {
 
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))//If you want to attack or move unit
 				{
-					if (ev.MouseButtonReleased)
-					{
+					if (ev.MouseButtonReleased) {
 						if ((sf::IntRect(sf::FloatRect(bExit.getGlobalBounds().left - w.getView().getCenter().x + w.getSize().x / 2, bExit.getGlobalBounds().top - w.getView().getCenter().y + w.getSize().y / 2, bExit.getGlobalBounds().width, bExit.getGlobalBounds().height)).contains(sf::Mouse::getPosition(w))))
 							w.close();
 						if ((sf::IntRect(sf::FloatRect(bContinue.getGlobalBounds().left - w.getView().getCenter().x + w.getSize().x / 2, bContinue.getGlobalBounds().top - w.getView().getCenter().y + w.getSize().y / 2, bContinue.getGlobalBounds().width, bContinue.getGlobalBounds().height)).contains(sf::Mouse::getPosition(w))))
@@ -195,8 +185,7 @@ void WindowManager::gameMenu(sf::RenderWindow& w, GameManager& game) {
 	}
 }
 
-void WindowManager::cameraControl(sf::View& view, sf::Window& w)
-{
+void WindowManager::cameraControl(sf::View& view, sf::Window& w) {
 	if (sf::Mouse::getPosition(w).x >= w.getSize().x - BORDER_PIXEL_32)
 		view.move(BORDER_PIXEL_32 / 6, 0);
 	if (sf::Mouse::getPosition(w).x <= BORDER_PIXEL_32)
@@ -207,23 +196,19 @@ void WindowManager::cameraControl(sf::View& view, sf::Window& w)
 		view.move(0, BORDER_PIXEL_32 / 6);
 }
 
-bool WindowManager::isMouseInWindow(sf::RenderWindow& w)
-{
+bool WindowManager::isMouseInWindow(sf::RenderWindow& w) {
 	return (sf::Mouse::getPosition(w).x >= 0 && sf::Mouse::getPosition(w).x < w.getSize().x) && ((sf::Mouse::getPosition(w).y >= 0 && sf::Mouse::getPosition(w).y < w.getSize().y)) ? true : false;
 }
 
-int WindowManager::getPosMouseByWindowX(sf::RenderWindow& w)
-{
+int WindowManager::getPosMouseByWindowX(sf::RenderWindow& w) {
 	return sf::Mouse::getPosition(w).x + (w.getView().getCenter().x - w.getSize().x / 2);
 }
 
-int WindowManager::getPosMouseByWindowY(sf::RenderWindow& w)
-{
+int WindowManager::getPosMouseByWindowY(sf::RenderWindow& w) {
 	return  sf::Mouse::getPosition(w).y + (w.getView().getCenter().y - w.getSize().y / 2);
 }
 
-void WindowManager::mainMenu(sf::RenderWindow& w)
-{
+void WindowManager::mainMenu(sf::RenderWindow& w) {
 	sf::Texture texture;
 	texture.loadFromFile("Icons\\menuBG.png");
 	texture.setSmooth(1);
@@ -278,14 +263,12 @@ void WindowManager::mainMenu(sf::RenderWindow& w)
 	tLoadGame.setPosition(static_cast<float>(bLoadGame.getPosition().x + 100 * bLoadGame.getScale().x), static_cast<float>(bLoadGame.getPosition().y + 15));
 	tExit.setPosition(static_cast<float>(bExit.getPosition().x + 100 * bExit.getScale().x), static_cast<float>(bExit.getPosition().y + 15));
 
-	while (isMenu)
-	{
+	while (isMenu) {
 		sf::Event ev;
 		while (w.pollEvent(ev)) {
 			if (ev.type == sf::Event::Closed)
 				w.close();
-			if (isMouseInWindow(w))
-			{
+			if (isMouseInWindow(w)) {
 				//all other control
 				if ((sf::IntRect(bNewGame.getGlobalBounds()).contains(sf::Mouse::getPosition(w))))
 					bNewGame.setColor(sf::Color(150, 150, 150));
@@ -306,23 +289,19 @@ void WindowManager::mainMenu(sf::RenderWindow& w)
 
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))//If you want to attack or move unit
 				{
-					if (ev.MouseButtonReleased)
-					{
-						if ((sf::IntRect(bNewGame.getGlobalBounds()).contains(sf::Mouse::getPosition(w))))
-						{
+					if (ev.MouseButtonReleased) {
+						if ((sf::IntRect(bNewGame.getGlobalBounds()).contains(sf::Mouse::getPosition(w)))) {
 							isMenu = false;
 							newGameWindow();
 						}
-						if ((sf::IntRect(bContinue.getGlobalBounds()).contains(sf::Mouse::getPosition(w))))
-						{
+						if ((sf::IntRect(bContinue.getGlobalBounds()).contains(sf::Mouse::getPosition(w)))) {
 							isMenu = false;
 							newGameWindow(true);
 						}
 
 						if ((sf::IntRect(bExit.getGlobalBounds()).contains(sf::Mouse::getPosition(w))))
 							w.close();
-						if ((sf::IntRect(bLoadGame.getGlobalBounds()).contains(sf::Mouse::getPosition(w))))
-						{
+						if ((sf::IntRect(bLoadGame.getGlobalBounds()).contains(sf::Mouse::getPosition(w)))) {
 							isMenu = false;
 							newGameWindow(true);
 						}
@@ -348,7 +327,6 @@ void WindowManager::mainMenu(sf::RenderWindow& w)
 	}
 }
 
-sf::RenderWindow& WindowManager::getWindow()
-{
+sf::RenderWindow& WindowManager::getWindow() {
 	return this->w;
 }

@@ -1,8 +1,7 @@
 #pragma once
 #include "Resourses.h"
 class Horses :
-	public Resourses
-{
+	public Resourses {
 private:
 	int prodaction;
 public:

@@ -4,8 +4,7 @@
 #include <algorithm>
 
 //Нужен алфавит
-class Writing :public Technologies
-{
+class Writing :public Technologies {
 private:
 
 public:

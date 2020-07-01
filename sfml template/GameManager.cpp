@@ -1,7 +1,6 @@
 #include "GameManager.h"
 
-GameManager::GameManager()
-{
+GameManager::GameManager() {
 	Actor* player = new Actor("player");
 	player->setPlayerID(1);
 	Settlers* firstS = new Settlers;
@@ -55,28 +54,23 @@ GameManager::GameManager()
 	this->ref.setTexture(*refer);
 }
 
-Map& GameManager::getMap()
-{
+Map& GameManager::getMap() {
 	return this->map;
 }
 
-std::vector<Actor>& GameManager::getActors()
-{
+std::vector<Actor>& GameManager::getActors() {
 	return this->actors;
 }
 
-void GameManager::setYear(int year)
-{
+void GameManager::setYear(int year) {
 	this->currentYear = year;
 }
 
-int& GameManager::getYear()
-{
+int& GameManager::getYear() {
 	return this->currentYear;
 }
 
-void GameManager::draw(sf::RenderWindow& w, sf::View& view)
-{
+void GameManager::draw(sf::RenderWindow& w, sf::View& view) {
 	map.draw(w);
 	for (auto i : this->actors)
 		i.draw(w, this->map);
@@ -92,24 +86,20 @@ void GameManager::draw(sf::RenderWindow& w, sf::View& view)
 		w.draw(ref);
 }
 
-Actor& GameManager::findActorHidden(int ID)
-{
-	if (ID < 100 && ID > 0)
-	{
+Actor& GameManager::findActorHidden(int ID) {
+	if (ID < 100 && ID > 0) {
 		if (this->actors.at(ID - 1).getPlayerID() == ID)
 			return this->actors.at(ID - 1);
 	}
 	else return this->actors.at(0);
 }
 
-Actor& GameManager::findActor(int mouse_x, int mouse_y)
-{
+Actor& GameManager::findActor(int mouse_x, int mouse_y) {
 	if ((map.getUnitInd(mouse_x, mouse_y)) / 100 != 0 && (map.getUnitInd(mouse_x, mouse_y)) / 100 != this->actors.at(0).getPlayerID()) //check index of unit
 		return findActorHidden((map.getUnitInd(mouse_x, mouse_y)) / 100);
 }
 
-void GameManager::saveGame()
-{
+void GameManager::saveGame() {
 	remove(PATH_TO_SAVE_1);
 	map.saveMap();
 	for (auto i : actors)
@@ -119,8 +109,7 @@ void GameManager::saveGame()
 
 #pragma region UNitsMap_LOAD
 //find digit from heap
-std::string getUnitInfoFromFile(int actorInd)
-{
+std::string getUnitInfoFromFile(int actorInd) {
 	std::string line;
 	std::string buffer;
 	std::string path = PATH_TO_SAVE_1;
@@ -128,12 +117,9 @@ std::string getUnitInfoFromFile(int actorInd)
 	fin.open(path);
 	short isnext = 0;
 	short actori = 0;
-	if (fin.is_open())
-	{
-		while (!fin.eof())
-		{
-			if (isnext == 2)
-			{
+	if (fin.is_open()) {
+		while (!fin.eof()) {
+			if (isnext == 2) {
 				fin >> buffer;
 				if (buffer == "#")
 					actorInd--;
@@ -147,8 +133,7 @@ std::string getUnitInfoFromFile(int actorInd)
 				if (buffer == "&")
 					line.clear();
 			}
-			else
-			{
+			else {
 				fin >> buffer;
 				if (buffer == "=")
 					isnext++;
@@ -165,8 +150,7 @@ std::string getUnitInfoFromFile(int actorInd)
 int getUnitsCount(int actorInd) {
 	std::string buffer = getUnitInfoFromFile(actorInd);
 	short counter = 0;
-	for (int i = 0; i < buffer.size(); i++)
-	{
+	for (int i = 0; i < buffer.size(); i++) {
 		if (buffer[i] == '|')
 			counter++;
 	}
@@ -196,38 +180,31 @@ std::string sliseStrings(std::string str, int index) {
 	}
 }
 
-int getIntFromStringByIndex(std::string com, int index)
-{
+int getIntFromStringByIndex(std::string com, int index) {
 	int tmp = 0;
 	std::string time;
 	if (index == 1) {
-		for (int i = 0; i < com.size(); i++)
-		{
+		for (int i = 0; i < com.size(); i++) {
 			if (!std::isdigit(com[i]))
 				break;
 			time += com[i];
 		}
 		return stoi(time);
 	}
-	for (int i = 1; i < com.size(); i++)
-	{
-		if ((std::isdigit(com[i]) || com[i] == '|') && (com[i - 1] == ' '))
-		{
+	for (int i = 1; i < com.size(); i++) {
+		if ((std::isdigit(com[i]) || com[i] == '|') && (com[i - 1] == ' ')) {
 			index--;
 		}
-		if (index == 1)
-		{
+		if (index == 1) {
 			time += com[i];
 		}
-		if (index == 0)
-		{
+		if (index == 0) {
 			return stoi(time);
 		}
 	}
 }
 
-std::vector<Unit> getUnitVectorByActorInd(int actorInd)
-{
+std::vector<Unit> getUnitVectorByActorInd(int actorInd) {
 	//std::cout << "\n\nplayerID: " << actorInd;//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 	std::vector<Unit> tmp;
 	//1 0 1 1 0 0 2 2 128 128 |1 1 3 3 0 0 3 2 96 96 |
@@ -313,17 +290,14 @@ std::vector<Unit> getUnitVectorByActorInd(int actorInd)
 	return tmp;
 }
 
-std::string getMapTerrainDataFromFile()
-{
+std::string getMapTerrainDataFromFile() {
 	std::string line;
 	std::string buffer;
 	std::string path = PATH_TO_SAVE_1;
 	std::ifstream fin;
 	fin.open(path);
-	if (fin.is_open())
-	{
-		while (!fin.eof())
-		{
+	if (fin.is_open()) {
+		while (!fin.eof()) {
 			fin >> buffer;
 			if (buffer == "=") {
 				break;
@@ -343,20 +317,16 @@ std::string getMapTerrainDataFromFile()
 	return line;
 }
 
-std::string getMapUnitDataFromFile()
-{
+std::string getMapUnitDataFromFile() {
 	std::string line;
 	std::string buffer;
 	std::string path = PATH_TO_SAVE_1;
 	std::ifstream fin;
 	fin.open(path);
 	bool isnext = false;
-	if (fin.is_open())
-	{
-		while (!fin.eof())
-		{
-			if (isnext)
-			{
+	if (fin.is_open()) {
+		while (!fin.eof()) {
+			if (isnext) {
 				fin >> buffer;
 				if (buffer == "=") {
 					break;
@@ -364,8 +334,7 @@ std::string getMapUnitDataFromFile()
 				line += buffer;
 				line += " ";
 			}
-			else
-			{
+			else {
 				fin >> buffer;
 				if (buffer == "=")
 					isnext = true;
@@ -380,8 +349,7 @@ std::string getMapUnitDataFromFile()
 #pragma endregion
 
 #pragma region actor_LOAD
-std::string getActorInfoFromFile(int actorInd)
-{
+std::string getActorInfoFromFile(int actorInd) {
 	std::string line;
 	std::string buffer;
 	std::string path = PATH_TO_SAVE_1;
@@ -389,18 +357,14 @@ std::string getActorInfoFromFile(int actorInd)
 	fin.open(path);
 	short isnext = 0;
 	short actori = 0;
-	if (fin.is_open())
-	{
-		while (!fin.eof())
-		{
-			if (isnext == 2)
-			{
+	if (fin.is_open()) {
+		while (!fin.eof()) {
+			if (isnext == 2) {
 				fin >> buffer;
 				if (buffer == "_") {
 					actorInd--;
 				}
-				if (actorInd == 0 && buffer == "_")
-				{
+				if (actorInd == 0 && buffer == "_") {
 					break;
 				}
 
@@ -411,8 +375,7 @@ std::string getActorInfoFromFile(int actorInd)
 					line.clear();
 				}
 			}
-			else
-			{
+			else {
 				fin >> buffer;
 				if (buffer == "=")
 					isnext++;
@@ -468,10 +431,8 @@ int getActorsCount() {
 	std::ifstream fin;
 	fin.open(path);
 	short isnext = 0;
-	if (fin.is_open())
-	{
-		while (!fin.eof())
-		{
+	if (fin.is_open()) {
+		while (!fin.eof()) {
 			fin >> buffer;
 			if (buffer == "_")
 				isnext++;
@@ -487,27 +448,22 @@ int getActorsCount() {
 
 #pragma region TOWNS_LOAD
 //return count of user's towns
-int getTownsCount(int actorInd)
-{
+int getTownsCount(int actorInd) {
 	std::string buffer;
 	std::string path = PATH_TO_SAVE_1;
 	std::ifstream fin;
 	fin.open(path);
 	short isnext = 0;
 
-	if (fin.is_open())
-	{
-		while (!fin.eof())
-		{
+	if (fin.is_open()) {
+		while (!fin.eof()) {
 			fin >> buffer;
 
-			if (actorInd == 0)
-			{
+			if (actorInd == 0) {
 				if (buffer == "~")
 					isnext++;
 			}
-			if (buffer == "_" && actorInd == 0)
-			{
+			if (buffer == "_" && actorInd == 0) {
 				return isnext;
 			}
 
@@ -522,8 +478,7 @@ int getTownsCount(int actorInd)
 	return isnext;
 }
 //work perfectly
-std::string getTownInfoFromFile(int actorInd)
-{
+std::string getTownInfoFromFile(int actorInd) {
 	std::string line;
 	std::string buffer;
 	std::string path = PATH_TO_SAVE_1;
@@ -534,54 +489,41 @@ std::string getTownInfoFromFile(int actorInd)
 	bool does_write = 1;
 	int count_of_rep = getTownsCount(actorInd);
 
-	if (fin.is_open())
-	{
-		while (!fin.eof())
-		{
+	if (fin.is_open()) {
+		while (!fin.eof()) {
 			fin >> buffer;
 
-			if (_check == 0)
-			{
-				if (actorInd == 0 && buffer == "~")
-				{
+			if (_check == 0) {
+				if (actorInd == 0 && buffer == "~") {
 					return line;
 				}
-				if (actorInd == 0)
-				{
+				if (actorInd == 0) {
 					line += buffer;
 					line += " ";
 				}
-				if (buffer == "_")
-				{
+				if (buffer == "_") {
 					actorInd--;
 				}
 			}
-			else
-			{
-				if (actorInd == 0 && buffer == "~" && count_of_rep > 0)
-				{
+			else {
+				if (actorInd == 0 && buffer == "~" && count_of_rep > 0) {
 					line += " |";
 					does_write = 0;
 					count_of_rep--;
 				}
-				if (actorInd == 0 && does_write)
-				{
+				if (actorInd == 0 && does_write) {
 					line += buffer;
 					line += " ";
 				}
-				if (actorInd == 0 && count_of_rep > 0)
-				{
-					if (buffer == "*")
-					{
+				if (actorInd == 0 && count_of_rep > 0) {
+					if (buffer == "*") {
 						does_write = true;
 					}
 				}
-				if (count_of_rep == 0)
-				{
+				if (count_of_rep == 0) {
 					return line;
 				}
-				if (buffer == "_")
-				{
+				if (buffer == "_") {
 					actorInd--;
 				}
 			}
@@ -594,37 +536,29 @@ std::string getTownInfoFromFile(int actorInd)
 	return line;
 }
 //WORK
-std::string getStringFromSringByIndexTowns(std::string com)
-{
+std::string getStringFromSringByIndexTowns(std::string com) {
 	int tmp = 0;
 	std::string time;
-	for (int i = 0; i < com.size(); i++)
-	{
-		if (!std::isdigit(com[i]) && !std::ispunct(com[i]))
-		{
+	for (int i = 0; i < com.size(); i++) {
+		if (!std::isdigit(com[i]) && !std::ispunct(com[i])) {
 			time += com[i];
 		}
-		if (isdigit(com[i]))
-		{
+		if (isdigit(com[i])) {
 			break;
 		}
 	}
 	return time;
 }
 //WORK
-int getIntFromStringByIndexTowns(std::string com, int index)
-{
+int getIntFromStringByIndexTowns(std::string com, int index) {
 	int tmp = 0;
 	std::string time;
 
-	for (int i = 0; i < com.size(); i++)
-	{
-		if ((std::isdigit(com[i]) || com[i] == '|') && (com[i - 1] == ' '))
-		{
+	for (int i = 0; i < com.size(); i++) {
+		if ((std::isdigit(com[i]) || com[i] == '|') && (com[i - 1] == ' ')) {
 			index--;
 		}
-		if (index == 1)
-		{
+		if (index == 1) {
 			time += com[i];
 		}
 	}
@@ -632,8 +566,7 @@ int getIntFromStringByIndexTowns(std::string com, int index)
 }
 #pragma endregion
 
-std::vector<Town> getTownVectorByActorInd(int actorInd)
-{
+std::vector<Town> getTownVectorByActorInd(int actorInd) {
 	std::vector<Town> tmp;
 	//1 0 1 1 0 0 2 2 128 128 |1 1 3 3 0 0 3 2 96 96 |
 	std::string preSlisedStr = getTownInfoFromFile(actorInd);
@@ -660,18 +593,15 @@ std::vector<Town> getTownVectorByActorInd(int actorInd)
 	return tmp;
 }
 //-------------------LOAD GAME
-void GameManager::loadGame()
-{
+void GameManager::loadGame() {
 	bool isEmpty = false;
 	std::ifstream file;
 	file.open(PATH_TO_SAVE_1);
 
-	if (file)
-	{
+	if (file) {
 		map.loadUnits(getMapUnitDataFromFile());
 		map.loadTerrains(getMapTerrainDataFromFile());
-		if (this->actors.size() > 0)
-		{
+		if (this->actors.size() > 0) {
 			this->deleteAllActors();
 			//getActorInfoFromFile();
 			for (int i = 1; i <= getActorsCount(); i++) {
@@ -682,8 +612,7 @@ void GameManager::loadGame()
 				this->actors[i - 1].setUnitTown(getTownVectorByActorInd(i));
 			}
 		}
-		else
-		{
+		else {
 		}
 		this->ui.setStringLogs("Successfully load", true);
 	}
@@ -693,12 +622,10 @@ void GameManager::loadGame()
 	file.close();
 }
 
-void GameManager::deleteAllActors()
-{
+void GameManager::deleteAllActors() {
 	this->actors.clear();
 }
 
-Ui& GameManager::getUi()
-{
+Ui& GameManager::getUi() {
 	return this->ui;
 }

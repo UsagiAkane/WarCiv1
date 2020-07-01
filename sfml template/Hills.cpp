@@ -1,8 +1,7 @@
 #include "Hills.h"
 
 //1=coal, 2=oil
-Hills::Hills(int res)
-{
+Hills::Hills(int res) {
 	texture.loadFromFile(PATH_TO_TERRAINS_HILLS);
 	this->sprite.setTexture(this->texture);
 	this->name = "hills";

@@ -1,8 +1,7 @@
 #include <string>
 #pragma once
 
-class Technologies
-{
+class Technologies {
 protected:
 	std::string name;
 	bool islearned;

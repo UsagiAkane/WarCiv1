@@ -1,8 +1,7 @@
 #include "Grassland.h"
 
 //1=coal, 2=horses
-Grassland::Grassland(int res)
-{
+Grassland::Grassland(int res) {
 	texture.loadFromFile(PATH_TO_TERRAINS_GRASSLAND);
 	this->sprite.setTexture(this->texture);
 	this->name = "grassland";

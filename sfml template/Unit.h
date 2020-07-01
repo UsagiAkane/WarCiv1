@@ -12,8 +12,7 @@
 #define BORDER_PIXEL_30 30
 #define BORDER_PIXEL_32 32
 
-class Unit
-{
+class Unit {
 protected:
 	//general stat
 	sf::Sprite warriorSprite;

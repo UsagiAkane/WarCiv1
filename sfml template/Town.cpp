@@ -238,8 +238,7 @@ int Town::getPlayer_id() {
 int Town::getScience() {
 	return this->science;
 }
-int Town::getDamage()
-{
+int Town::getDamage() {
 	return this->damage;
 }
 std::string Town::getName() {
@@ -293,8 +292,7 @@ void Town::setScience(int science) {
 void Town::setName(std::string name) {
 	this->name = name;
 }
-void Town::setDamage(int damage)
-{
+void Town::setDamage(int damage) {
 	this->damage = damage;
 }
 #pragma endregion

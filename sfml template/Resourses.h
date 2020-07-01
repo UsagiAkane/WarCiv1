@@ -2,8 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "path.h"
 
-class Resourses
-{
+class Resourses {
 protected:
 	sf::Texture texture;
 	sf::Sprite sprite;

@@ -3,8 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "Technologies.h"
 
-class Building
-{
+class Building {
 protected:
 	std::string name;
 	sf::Sprite sprite;

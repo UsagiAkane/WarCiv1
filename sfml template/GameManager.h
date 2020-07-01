@@ -3,8 +3,7 @@
 #include"Map.h"
 #include"Ui.h"
 
-class GameManager
-{
+class GameManager {
 private:
 	Ui ui;
 	std::vector<Actor> actors;

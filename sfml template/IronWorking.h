@@ -3,8 +3,7 @@
 #include <vector>
 #include <algorithm>
 
-class IronWorking :public Technologies
-{
+class IronWorking :public Technologies {
 public:
 	void checkPrevTech(std::vector<Technologies>& b);
 	IronWorking();

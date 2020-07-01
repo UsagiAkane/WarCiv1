@@ -1,7 +1,6 @@
 #include "Forest.h"
 
-Forest::Forest(int res)
-{
+Forest::Forest(int res) {
 	texture.loadFromFile(PATH_TO_TERRAINS_FOREST);
 	this->sprite.setTexture(this->texture);
 	this->name = "forest";

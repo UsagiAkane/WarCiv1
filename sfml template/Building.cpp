@@ -1,7 +1,6 @@
 #include "Building.h"
 
-Building::Building(std::string name, int productionPrice, int goldCost, int goldPerTurn, int incraseLimit, int rankMulti, int moneyMulti, int scieceMulti, int increaseHP)
-{
+Building::Building(std::string name, int productionPrice, int goldCost, int goldPerTurn, int incraseLimit, int rankMulti, int moneyMulti, int scieceMulti, int increaseHP) {
 	this->name = name;
 	this->productionPrice = productionPrice;
 	this->goldCost = goldCost;
@@ -13,101 +12,80 @@ Building::Building(std::string name, int productionPrice, int goldCost, int gold
 	this->increaseHP = increaseHP;
 }
 
-std::string Building::getName()
-{
+std::string Building::getName() {
 	return this->name;
 }
 
-int Building::getProductionPrice()
-{
+int Building::getProductionPrice() {
 	return this->productionPrice;
 }
 
-int Building::getGoldCost()
-{
+int Building::getGoldCost() {
 	return this->goldCost;
 }
 
-int Building::getgoldPerTurn()
-{
+int Building::getgoldPerTurn() {
 	return this->goldPerTurn;
 }
 
-int Building::getIncraiseLimit()
-{
+int Building::getIncraiseLimit() {
 	return this->incraiseLimit;
 }
 
-int Building::getRankMultiplier()
-{
+int Building::getRankMultiplier() {
 	return this->rankMultiplier;
 }
 
-int Building::getMoneyMultiplier()
-{
+int Building::getMoneyMultiplier() {
 	return this->moneyMultiplier;
 }
 
-int Building::getScienceMultiplier()
-{
+int Building::getScienceMultiplier() {
 	return this->scienceMultiplier;
 }
 
-int Building::getIncreaseHP()
-{
+int Building::getIncreaseHP() {
 	return this->increaseHP;
 }
 
-int Building::getSellValue()
-{
+int Building::getSellValue() {
 	return this->goldCost / 4;
 }
 
-void Building::setProductionPrice(int productionPrice)
-{
+void Building::setProductionPrice(int productionPrice) {
 	this->productionPrice = productionPrice;
 }
 
-void Building::setGoldCost(int GoldCost)
-{
+void Building::setGoldCost(int GoldCost) {
 	this->goldCost = GoldCost;
 }
 
-void Building::setGoldPerTurn(int GoldPerTurn)
-{
+void Building::setGoldPerTurn(int GoldPerTurn) {
 	this->goldPerTurn = goldPerTurn;
 }
 
-void Building::setIncraiseLimit(int IncraiseLim)
-{
+void Building::setIncraiseLimit(int IncraiseLim) {
 	this->incraiseLimit = IncraiseLim;
 }
 
-void Building::setRankMultiplier(int RankMultiplier)
-{
+void Building::setRankMultiplier(int RankMultiplier) {
 	this->rankMultiplier = RankMultiplier;
 }
 
-void Building::setMoneyMultiplier(int MoneyMultiplier)
-{
+void Building::setMoneyMultiplier(int MoneyMultiplier) {
 	this->moneyMultiplier = MoneyMultiplier;
 }
 
-void Building::setScienceMultiplier(int ScienceMultiplier)
-{
+void Building::setScienceMultiplier(int ScienceMultiplier) {
 	this->scienceMultiplier = ScienceMultiplier;
 }
 
-void Building::setIncreaseHp(int IncreaseHp)
-{
+void Building::setIncreaseHp(int IncreaseHp) {
 	this->increaseHP = IncreaseHp;
 }
 
-bool Building::isBuildable(std::vector<Technologies> techno)
-{
+bool Building::isBuildable(std::vector<Technologies> techno) {
 	return true;
 }
 
-Building::~Building()
-{
-}
+Building::~Building() {}

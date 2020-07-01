@@ -1,7 +1,6 @@
 #include "Plains.h"
 
-Plains::Plains(int res)
-{
+Plains::Plains(int res) {
 	texture.loadFromFile(PATH_TO_TERRAINS_PLAINS);
 	this->sprite.setTexture(this->texture);
 	this->name = "plains";
