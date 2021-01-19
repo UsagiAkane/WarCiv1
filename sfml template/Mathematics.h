@@ -3,8 +3,7 @@
 #include <vector>
 #include <algorithm>
 
-class Mathematics :public Technologies
-{
+class Mathematics :public Technologies {
 protected:
 public:
 	Mathematics();

@@ -1,19 +1,13 @@
 #include "Masonry.h"
 
-Masonry::Masonry() :Technologies("Masonry", 0, 1)
-{
+Masonry::Masonry() :Technologies("Masonry", 0, 1) {}
+
+std::string Masonry::get_name() {
+	return this->name_;
 }
 
-std::string Masonry::getName()
-{
-	return this->name;
+bool Masonry::get_is_learned() {
+	return this->is_learned_;
 }
 
-bool Masonry::getIsLearned()
-{
-	return this->islearned;
-}
-
-Masonry::~Masonry()
-{
-}
+Masonry::~Masonry() {}

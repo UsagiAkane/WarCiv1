@@ -44,82 +44,82 @@ void baseNoise8(int val, int sizex, int sizey, std::vector<std::vector<int>>& ar
 	}
 }
 
-Map::Map(int sizeX, int sizeY, int resGenChanse) {
+Map::Map(int size_x, int size_y, int res_gen_chanse) {
 	//1-hill  2-forest  3-grass  4-mountain
-	for (int i = 0; i < sizeX; i++) {
+	for (int i = 0; i < size_x; i++) {
 		std::vector<int>unitstmp;
-		for (int j = 0; j < sizeY; j++) {
+		for (int j = 0; j < size_y; j++) {
 			unitstmp.push_back(0);
 		}
 		this->units.push_back(unitstmp);
 	}
 
-	for (int x = 0; x < sizeX; x++) {
+	for (int x = 0; x < size_x; x++) {
 		std::vector<int>arr_t;
-		for (int y = 0; y < sizeY; y++) {
+		for (int y = 0; y < size_y; y++) {
 			arr_t.push_back(3);
 		}
 		map.push_back(arr_t);
 	}
 	//NOISE GENERATION
 	//1-hill  2-forest  3-grass  4-mountain 5-Ocean 6-Plain
-	baseNoise4(4, sizeX, sizeY, map);
-	baseNoise4(1, sizeX, sizeY, map);
-	baseNoise4(2, sizeX, sizeY, map);
-	baseNoise4(3, sizeX, sizeY, map);
-	baseNoise8(6, sizeX, sizeY, map);
-	baseNoise8(5, sizeX, sizeY, map);
-	baseNoise4(1, sizeX, sizeY, map);
-	baseNoise4(2, sizeX, sizeY, map);
-	for (int x = 0; x < sizeX; x++) {
+	baseNoise4(4, size_x, size_y, map);
+	baseNoise4(1, size_x, size_y, map);
+	baseNoise4(2, size_x, size_y, map);
+	baseNoise4(3, size_x, size_y, map);
+	baseNoise8(6, size_x, size_y, map);
+	baseNoise8(5, size_x, size_y, map);
+	baseNoise4(1, size_x, size_y, map);
+	baseNoise4(2, size_x, size_y, map);
+	for (int x = 0; x < size_x; x++) {
 		map[x][0] = 5;
 		map[x][map[x].size() - 1] = 5;
 	}
-	for (int y = 0; y < sizeY; y++) {
+	for (int y = 0; y < size_y; y++) {
 		map[0][y] = 5;
 		map[map.size() - 1][y] = 5;
 	}
 	//Terrains normalize
-	for (int x = 0; x < sizeX; x++) {
-		for (int y = 0; y < sizeY; y++) {
+	for (int x = 0; x < size_x; x++) {
+		for (int y = 0; y < size_y; y++) {
 			map[x][y] *= 100;
 		}
 	}
 	//FOG
-	for (int x = 0; x < sizeX; x++) {
-		for (int y = 0; y < sizeY; y++) {
+	for (int x = 0; x < size_x; x++) {
+		for (int y = 0; y < size_y; y++) {
 			map[x][y] += _FOG;
 		}
 	}
 
 	//1-Coal  2-Game  3-Gold  4-Horses  5-Oasis  6-Oil
-	for (int i = 0; i < sizeX; i++) {
-		for (int j = 0; j < sizeY; j++) {
-			if (!(rand() % resGenChanse)) {
+	for (int i = 0; i < size_x; i++) {
+		for (int j = 0; j < size_y; j++) {
+			if (!(rand() % res_gen_chanse)) {
 				if (map.at(i).at(j) % _FOG == 100) {			//HILL
-					if (rand() % resGenChanse == 1)
+					if (rand() % res_gen_chanse == 1)
 						map.at(i).at(j) += 1;//COAL GEN
-					else if (rand() % resGenChanse == 1)
+					else if (rand() % res_gen_chanse == 1)
 						map.at(i).at(j) += 6;//OIL GEN
 				}
 				else if (map.at(i).at(j) % _FOG == 200) {		//FOREST
-					if (rand() % resGenChanse == 1)
+					if (rand() % res_gen_chanse == 1)
 						map.at(i).at(j) += 2;//GAME GEN
 				}
 				else if (map.at(i).at(j) % _FOG == 300) {		//GRASS
-					if (rand() % resGenChanse == 1)
+					if (rand() % res_gen_chanse == 1)
 						map.at(i).at(j) += 1;//COAL GEN
-					else if (rand() % resGenChanse == 1)
+					else if (rand() % res_gen_chanse == 1)
 						map.at(i).at(j) += 4;//HORSES GEN
 				}
 				else if (map.at(i).at(j) % _FOG == 400) {		//MOUNTAIN
-					if (rand() % resGenChanse == 1)
+					if (rand() % res_gen_chanse == 1)
 						map.at(i).at(j) += 3;//GOLD GEN
-					else if (rand() % resGenChanse == 1)
+					else if (rand() % res_gen_chanse == 1)
 						map.at(i).at(j) += 5;//OASIS GEN
 				}
 				else if (map.at(i).at(j) % _FOG == 600) {		//FOREST
-					if (rand() % resGenChanse == 1)
+					if (rand() % res_gen_chanse == 1)
 						map.at(i).at(j) += 2;//GAME GEN
 				}
 			}
@@ -127,27 +127,22 @@ Map::Map(int sizeX, int sizeY, int resGenChanse) {
 	}
 }
 
-void Map::saveMap() {
+void Map::save_map() {
 	std::string path = PATH_TO_SAVE_1;
 	std::ofstream fout;
 	fout.open(path, std::ofstream::app);
 	if (!fout.is_open())
 		std::cout << "Error, file wasn't opened" << std::endl;
-	else
-	{
-		for (auto i : map)
-		{
-			for (auto j : i)
-			{
+	else {
+		for (auto i : map) {
+			for (auto j : i) {
 				fout << j << " ";
 			}
 			fout << "\n";
 		}
 		fout << "=\n";
-		for (auto i : units)
-		{
-			for (auto j : i)
-			{
+		for (auto i : units) {
+			for (auto j : i) {
 				fout << j << " ";
 			}
 			fout << "\n";
@@ -159,7 +154,7 @@ void Map::saveMap() {
 	fout.close();
 }
 
-void Map::loadTerrains(std::string line) {
+void Map::load_terrains(std::string line) {
 	//  line  =  103 100 200 505
 	std::vector<int> INTbuf;
 	std::vector<std::vector<int>> newmap;
@@ -183,7 +178,7 @@ void Map::loadTerrains(std::string line) {
 
 	map = newmap;
 }
-void Map::loadUnits(std::string line) {
+void Map::load_units(std::string line) {
 	//  line  =  0 100 0 251
 	std::vector<int> INTbuf;
 	std::vector<std::vector<int>> newmap;
@@ -207,12 +202,12 @@ void Map::loadUnits(std::string line) {
 	units = newmap;
 }
 
-Terrain Map::getTile(int x, int y) {
+Terrain Map::get_tile(int x, int y) {
 	x /= 32;
 	y /= 32;
-	return getTileVec(x, y);
+	return get_tile_vec(x, y);
 }
-Terrain Map::getTileVec(int x, int y) {
+Terrain Map::get_tile_vec(int x, int y) {
 	if (map.at(x).at(y) % _FOG / 100 == 1) {				//HILL DRAW
 		if (map.at(x).at(y) % 100 == 1) {		//COAL DRAW
 			return Hills(1);
@@ -255,7 +250,7 @@ Terrain Map::getTileVec(int x, int y) {
 		return Plains();
 	}
 }
-int Map::getUnitInd(int x, int y) {
+int Map::get_unit_ind(int x, int y) {
 	x /= 32;
 	y /= 32;
 	if (x >= 0 && x < static_cast<int>(units.size())) {
@@ -266,21 +261,21 @@ int Map::getUnitInd(int x, int y) {
 	}
 	else return 0;
 }
-int Map::getUnitID(int x, int y) {
-	return getUnitInd(x, y) % 100;
+int Map::get_unit_id(int x, int y) {
+	return get_unit_ind(x, y) % 100;
 }
-bool Map::isTown(int x, int y) {
-	return getUnitInd(x, y) % _FOG / 100 % 10;
+bool Map::is_town(int x, int y) {
+	return get_unit_ind(x, y) % _FOG / 100 % 10;
 }
-bool Map::isFog(int x, int y) {
+bool Map::is_fog(int x, int y) {
 	x /= 32;
 	y /= 32;
 	return map[x][y] / _FOG;
 }
-int Map::getUnitPlayerID(int x, int y) {
-	return getUnitInd(x, y) % _FOG / 100;
+int Map::get_unit_player_id(int x, int y) {
+	return get_unit_ind(x, y) % _FOG / 100;
 }
-void Map::pushUnit(int x, int y, int unit) {
+void Map::push_unit(int x, int y, int unit) {
 	x /= 32;
 	y /= 32;
 	if (x > 0 && x < static_cast<int>(units.size())) {
@@ -291,7 +286,7 @@ void Map::pushUnit(int x, int y, int unit) {
 		}
 	}
 }
-void Map::moveUnit(int x, int y, int newx, int newy, int unitPlayerID) {
+void Map::move_unit(int x, int y, int newx, int newy, int unitPlayerID) {
 	x /= 32;
 	y /= 32;
 	newx /= 32;
@@ -307,13 +302,13 @@ void Map::moveUnit(int x, int y, int newx, int newy, int unitPlayerID) {
 				this->units.at(x).at(y) = 0;
 
 				if (unitPlayerID == 1)
-					radarFog(newx, newy);
+					radar_fog(newx, newy);
 			}
 		}
 	}
 }
 
-void Map::radarFog(int newx, int newy) {
+void Map::radar_fog(int newx, int newy) {
 	if (map.at(newx).at(newy) / _FOG)
 		this->map.at(newx).at(newy) -= 1000;
 
@@ -342,7 +337,7 @@ void Map::radarFog(int newx, int newy) {
 		this->map.at(newx).at(newy + 1) -= 1000;
 }
 
-void Map::delUnit(int x, int y) {
+void Map::del_unit(int x, int y) {
 	x /= 32;
 	y /= 32;
 	if (this->units.at(x).at(y) % 100 / 10 == 5)
@@ -350,26 +345,26 @@ void Map::delUnit(int x, int y) {
 	else
 		this->units.at(x).at(y) = 0;
 }
-std::vector<std::vector<int>>& Map::_getVecTerrainsInt() { return this->map; }
-std::vector<std::vector<int>>& Map::_getVecUnitsInt() { return this->units; }
+std::vector<std::vector<int>>& Map::get_vec_terrains_int() { return this->map; }
+std::vector<std::vector<int>>& Map::get_vec_units_int() { return this->units; }
 void Map::__getInfo_DEBUG(int x, int y) {
 	if (x / 32 >= 0 && x / 32 < static_cast<int>(units.size())) {
 		if (y / 32 >= 0 && y / 32 < static_cast<int>(units.size())) {
-			getTile(x, y).__getInfo_DEBUG();
+			get_tile(x, y).__getInfo_DEBUG();
 			std::cout << "unut_index = " << this->units[x / 32][y / 32];
 			std::cout << "\n-map-tile-end-\n";
 		}
 	}
 }
-void Map::getInfo(int x, int y, sf::RenderWindow& w) {
+void Map::get_info(int x, int y, sf::RenderWindow& w) {
 	if (x / 32 >= 0 && x / 32 < static_cast<int>(units.size())) {
 		if (y / 32 >= 0 && y / 32 < static_cast<int>(units.size())) {
-			getTile(x, y).getInfo(w);
+			get_tile(x, y).get_info(w);
 		}
 	}
 }
 
-void Map::reTakeTown(int x, int y, int newPlayerID) {
+void Map::re_take_town(int x, int y, int newPlayerID) {
 	x /= 32;
 	y /= 32;
 	int tmp = units.at(x).at(y) % 100;
@@ -397,63 +392,63 @@ void Map::draw(sf::RenderWindow& w) {
 			if (map[i][j] / _FOG) {}
 			else {
 				if (map[i][j] % _FOG / 100 == 1) {					//HILL DRAW
-					hill.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
+					hill.set_position(static_cast<float>(i * 32), static_cast<float>(j * 32));
 					hill.draw(w);
 					//1-Coal  2-Game  3-Gold  4-Horses  5-Oasis  6-Oil
 					if (map[i][j] % _FOG % 100 == 1) {			//COAL DRAW
-						coal.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
+						coal.set_position(static_cast<float>(i * 32), static_cast<float>(j * 32));
 						coal.draw(w);
 					}
 					else if (map[i][j] % _FOG % 100 == 6) {	//OIL DRAW
-						oil.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
+						oil.set_position(static_cast<float>(i * 32), static_cast<float>(j * 32));
 						oil.draw(w);
 					}
 				}
 				else if (map[i][j] % _FOG / 100 == 2) {			//FOREST DRAW
-					forest.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
+					forest.set_position(static_cast<float>(i * 32), static_cast<float>(j * 32));
 					forest.draw(w);
 					//1-Coal  2-Game  3-Gold  4-Horses  5-Oasis  6-Oil
 					if (map[i][j] % _FOG % 100 == 2) {			//GAME DRAW
-						game.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
+						game.set_position(static_cast<float>(i * 32), static_cast<float>(j * 32));
 						game.draw(w);
 					}
 				}
 				else if (map[i][j] % _FOG / 100 == 3) {			//GRASSLAND DRAW
-					grass.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
+					grass.set_position(static_cast<float>(i * 32), static_cast<float>(j * 32));
 					grass.draw(w);
 					//1-Coal  2-Game  3-Gold  4-Horses  5-Oasis  6-Oil
 					if (map[i][j] % _FOG % 100 == 4) {			//HORSES DRAW
-						horses.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
+						horses.set_position(static_cast<float>(i * 32), static_cast<float>(j * 32));
 						horses.draw(w);
 					}
 					else if (map[i][j] % _FOG % 100 == 1) {	//COAL DRAW
-						coal.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
+						coal.set_position(static_cast<float>(i * 32), static_cast<float>(j * 32));
 						coal.draw(w);
 					}
 				}
 				else if (map[i][j] % _FOG / 100 == 4) {			//MOUNTAIN DRAW
-					mountain.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
+					mountain.set_position(static_cast<float>(i * 32), static_cast<float>(j * 32));
 					mountain.draw(w);
 					//1-Coal  2-Game  3-Gold  4-Horses  5-Oasis  6-Oil
 					if (map[i][j] % _FOG % 100 == 3) {			//GOLD DRAW
-						gold.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
+						gold.set_position(static_cast<float>(i * 32), static_cast<float>(j * 32));
 						gold.draw(w);
 					}
 					else if (map[i][j] % _FOG % 100 == 5) {	//OASIS DRAW
-						oasis.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
+						oasis.set_position(static_cast<float>(i * 32), static_cast<float>(j * 32));
 						oasis.draw(w);
 					}
 				}
 				else if (map[i][j] % _FOG / 100 == 5) {			//OCEAN
-					ocean.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
+					ocean.set_position(static_cast<float>(i * 32), static_cast<float>(j * 32));
 					ocean.draw(w);
 				}
 				else if (map[i][j] % _FOG / 100 == 6) {			//PLAINS DRAW
-					plains.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
+					plains.set_position(static_cast<float>(i * 32), static_cast<float>(j * 32));
 					plains.draw(w);
 					//1-Coal  2-Game  3-Gold  4-Horses  5-Oasis  6-Oil
 					if (map[i][j] % _FOG % 100 == 2) {			//HORSES DRAW
-						horses.setPosition(static_cast<float>(i * 32), static_cast<float>(j * 32));
+						horses.set_position(static_cast<float>(i * 32), static_cast<float>(j * 32));
 						horses.draw(w);
 					}
 				}

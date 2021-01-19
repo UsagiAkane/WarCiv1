@@ -2,8 +2,7 @@
 #include "Building.h"
 #include <algorithm>
 
-class Aqueduct :public Building
-{
+class Aqueduct :public Building {
 private:
 public:
 	Aqueduct();

@@ -4,25 +4,25 @@
 
 class WindowManager {
 private:
-	sf::RenderWindow w;
-	bool isMenu = true;//true
+	sf::RenderWindow w_;
+	bool is_menu_ = true; //true
 
 public:
 	WindowManager();
 	//create new game if false or empty, load game if true
-	void newGameWindow(bool doesLoad = false);
+	void new_game_window(bool doesLoad = false);
 	//move camera
-	void cameraControl(sf::View& view, sf::Window& window);
+	void camera_control(sf::View& view, sf::Window& window);
 	//check is mouse in window coordination
-	bool isMouseInWindow(sf::RenderWindow& w);
+	bool is_mouse_in_window(sf::RenderWindow& w);
 	//function to get pos mouse in window
-	int getPosMouseByWindowX(sf::RenderWindow& w);
+	int get_pos_mouse_by_window_x(sf::RenderWindow& w);
 	//function to get pos mouse in window
-	int getPosMouseByWindowY(sf::RenderWindow& w);
+	int get_pos_mouse_by_window_y(sf::RenderWindow& w);
 	//main menu function has a few buttons
-	void mainMenu(sf::RenderWindow& w);
+	void main_menu(sf::RenderWindow& w);
 	//game menu function has a few buttons but is a little bit another
-	void gameMenu(sf::RenderWindow& w, GameManager& game);
+	void game_menu(sf::RenderWindow& w, GameManager& game);
 
-	sf::RenderWindow& getWindow();
+	sf::RenderWindow& get_window();
 };

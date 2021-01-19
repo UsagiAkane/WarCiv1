@@ -5,5 +5,5 @@ Militia::Militia() : Unit("Militia", 1, 0, 1, 3, 0, 0, 10, 50, 2, 1, 3)
 {
 	sf::Texture* texture = new sf::Texture;
 	texture->loadFromFile(PATH_TO_UNITES_MILITIA);
-	warriorSprite.setTexture(*texture);
+	warrior_sprite_.setTexture(*texture);
 }

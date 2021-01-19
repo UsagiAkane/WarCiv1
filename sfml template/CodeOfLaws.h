@@ -3,8 +3,7 @@
 #include <vector>
 #include <algorithm>
 
-class CodeOfLaws :public Technologies
-{
+class CodeOfLaws :public Technologies {
 private:
 public:
 	CodeOfLaws();

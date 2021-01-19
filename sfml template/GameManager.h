@@ -3,29 +3,28 @@
 #include"Map.h"
 #include"Ui.h"
 
-class GameManager
-{
+class GameManager {
 private:
-	Ui ui;
-	std::vector<Actor> actors;
-	Map map;
-	int currentYear;
+	Ui ui_;
+	std::vector<Actor> actors_;
+	Map map_;
+	int current_year_;
 public:
 	sf::Sprite ref;
-	bool isRef;
+	bool is_ref;
 
 	GameManager();
 
-	Map& getMap();
-	std::vector<Actor>& getActors();
+	Map& get_map();
+	std::vector<Actor>& get_actors();
 
-	void setYear(int year);//set current year
-	int& getYear();//return current year
+	void set_year(int year); //set current year
+	auto getYear() -> int&; //return current year
 	void draw(sf::RenderWindow& w, sf::View& v);
-	Actor& findActorHidden(int ID); // find and return vector by ID
-	Actor& findActor(int mouse_x, int mouse_y);//get mouse position and return vector of units of actor
-	void saveGame();
-	void loadGame();
+	Actor& find_actor_hidden(int ID); // find and return vector by ID
+	Actor& find_actor(int mouse_x, int mouse_y); //get mouse position and return vector of units of actor
+	void save_game();
+	void load_game();
 	void deleteAllActors();
-	Ui& getUi();
+	Ui& get_ui();
 };

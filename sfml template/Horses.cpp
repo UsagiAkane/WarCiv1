@@ -1,13 +1,11 @@
 #include "Horses.h"
 
-Horses::Horses()
-{
-	this->texture.loadFromFile(PATH_TO_RESOURCES_HORSES);
-	this->sprite.setTexture(texture);
+Horses::Horses() {
+	this->texture_.loadFromFile(PATH_TO_RESOURCES_HORSES);
+	this->sprite_.setTexture(texture_);
 	this->prodaction = 2;
 }
 
-int Horses::getProdaction()
-{
+int Horses::getProdaction() {
 	return this->prodaction;
 }

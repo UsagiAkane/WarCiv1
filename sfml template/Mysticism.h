@@ -3,8 +3,7 @@
 #include <vector>
 #include <algorithm>
 
-class Mysticism :public Technologies
-{
+class Mysticism :public Technologies {
 private:
 public:
 	Mysticism();

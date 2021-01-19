@@ -1,8 +1,7 @@
 #pragma once
 #include "Resourses.h"
 class Oasis :
-	public Resourses
-{
+	public Resourses {
 private:
 	int food;
 public:

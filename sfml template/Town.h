@@ -13,76 +13,76 @@
 
 class Town {
 private:
-	sf::Font font;
-	sf::Text populationText;
-	sf::Sprite townSprite;
-	sf::Texture texture;
-	std::string name;
-	std::vector<Building>buildings;
+	sf::Font font_;
+	sf::Text population_text_;
+	sf::Sprite town_sprite_;
+	sf::Texture texture_;
+	std::string name_;
+	std::vector<Building>buildings_;
 	//std::vector<Disasters>disasters;
-	int positionX, positionY;
-	int health;
-	int damage;
-	int population;
-	int population_limit;
-	int production;
-	int food;
-	int trade;
-	int happines;
-	int goldIncome;
-	int science;
-	int playerID;
+	int position_x_, position_y_;
+	int health_;
+	int damage_;
+	int population_;
+	int population_limit_;
+	int production_;
+	int food_;
+	int trade_;
+	int happines_;
+	int gold_income_;
+	int science_;
+	int player_id_;
 	void statInfo(sf::RenderWindow& w);
 public:
 	bool isMenu;
 	//=====================================================
-	Town(int positionX = 0, int positionY = 0, std::string name = "NoNameTown");
+	explicit Town(int position_x = 0, int position_y = 0, std::string name = "NoNameTown");
 
 	//functions that can be changed
 
 	///1-Settlers, 2-Militia, 3-Legion, 4-Cavalry, 5-Chariot
-	void createUnit(Map& map, int unit, std::vector<Unit>& actor);
+	void create_unit(Map& map, int unit, std::vector<Unit>& actor);
 	///1-Aqueduct, 2-Barracks, 3-Walls, 4-Lib, 5-Market
-	void createBuilding(int building);
-	void setColorByID();
+	void create_building(int building);
+	void set_color_by_id();
 	void spawn(int x, int y, Map& map);
 
 	//getters
 
-	int getPositionX();
-	int getPositionY();
-	int getHealth();
-	int getProduction();
-	int getGoldIncome();
-	int getFood();
-	int getTrade();
-	int getPopulation();
-	int getHappines();
-	int getPlayer_id();
-	int getPopulation_limit();
-	int getScience();
-	int getDamage();
-	std::string getName();
+	int get_position_x();
+	int get_position_y();
+	int get_health();
+	int get_production();
+	int get_gold_income();
+	int get_food();
+	int get_trade();
+	int get_population();
+	int get_happines();
+	int get_player_id();
+	int get_population_limit();
+	int get_science();
+	int get_damage();
+	std::string get_name();
 
 	//setters
 
-	void setPosition(int x, int y);
-	void setHealth(int health);
-	void setProduction(int prod);
-	void setgoldIncome(int goldIncome);
-	void setFood(int food);
-	void setTrade(int trade);
-	void setPopulation(int population);
-	void setHappines(int happines);
-	void setPlayer_id(int player_id);
-	void setPopulation_limit(int population_limit);
-	void setScience(int science);
-	void setName(std::string name);
-	void setDamage(int damage);
+	void set_position(int x, int y);
+	auto set_health(int health) -> void;
+	void set_production(int prod);
+	void set_gold_income(int goldIncome);
+	void set_food(int food);
+	void set_trade(int trade);
+	void set_population(int population);
+	void set_happines(int happines);
+	void set_player_id(int player_id);
+	void set_population_limit(int population_limit);
+	void set_science(int science);
+	void set_name(std::string name);
+	void set_damage(int damage);
 
 	//needed
 
 	void draw(sf::RenderWindow& w, Map& map);
-	void endOfTurn(Map& map, int& gold, int& science);
-	std::string getSaveTownInfo();
+	void end_of_turn(Map& map, int& gold, int& science);
+	std::string get_save_town_info();
 };

@@ -1,8 +1,7 @@
 #pragma once
 #include "Resourses.h"
 class Oil :
-	public Resourses
-{
+	public Resourses {
 private:
 	int prodaction;
 public:

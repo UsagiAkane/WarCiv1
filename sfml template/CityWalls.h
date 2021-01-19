@@ -1,7 +1,6 @@
 #pragma once
 #include "Building.h"
-class CityWalls :public Building
-{
+class CityWalls :public Building {
 private:
 public:
 	CityWalls();

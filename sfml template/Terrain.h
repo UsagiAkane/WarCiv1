@@ -6,29 +6,29 @@
 
 class Terrain {
 protected:
-	sf::Texture texture;
-	sf::Sprite sprite;
-	std::string name;
-	int move;
-	int food;
-	int prodaction;
-	int trade;
-	int defense;
+	sf::Texture texture_;
+	sf::Sprite sprite_;
+	std::string name_;
+	int move_;
+	int food_;
+	int production_;
+	int trade_;
+	int defense_;
 public:
 
 	Terrain();
 
-	sf::Texture getTexture();
-	std::string getName();
-	int getMove();
-	int getFood();
-	int getProdaction();
-	int getTrade();
-	int getDefense();
-	bool isWater();
+	sf::Texture get_texture();
+	std::string get_name();
+	int get_move();
+	int get_food();
+	int get_production();
+	int get_trade();
+	int get_defense();
+	bool is_water();
 
 	void __getInfo_DEBUG();
-	void getInfo(sf::RenderWindow& w);
+	void get_info(sf::RenderWindow& w);
 	virtual void draw(sf::RenderWindow& w);
-	virtual void setPosition(float x, float y) { sprite.setPosition(x, y); }
+	virtual void set_position(float x, float y) { sprite_.setPosition(x, y); }
 };

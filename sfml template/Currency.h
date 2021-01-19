@@ -3,8 +3,7 @@
 #include <vector>
 #include <algorithm>
 
-class Currency :public Technologies
-{
+class Currency :public Technologies {
 public:
 	Currency();
 	void checkPrevTech(std::vector<Technologies>& b);

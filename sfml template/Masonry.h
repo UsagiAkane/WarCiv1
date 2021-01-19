@@ -1,12 +1,11 @@
 #pragma once
 #include "Technologies.h"
 
-class Masonry :public Technologies
-{
+class Masonry :public Technologies {
 public:
 	Masonry();
-	std::string getName() override;
-	bool getIsLearned() override;
+	std::string get_name() override;
+	bool get_is_learned() override;
 
 	~Masonry();
 };
