@@ -4,8 +4,8 @@ GameManager::GameManager() {
 	Actor* player = new Actor("player");
 	player->setPlayerID(1);
 	Settlers* firstS = new Settlers;
-	firstS->setPlayerID(player->getPlayerID());
-	firstS->spawn(/*(1 + rand() % map._getVecTerrainsInt().size() - 2) * 32*/32 * 15, /*(1 + rand() % map._getVecTerrainsInt().at(0).size() - 2) * 32*/32 * 15, this->map);
+	firstS->set_player_id(player->getPlayerID());
+	firstS->spawn(/*(1 + rand() % map._getVecTerrainsInt().size() - 2) * 32*/32 * 15, /*(1 + rand() % map._getVecTerrainsInt().at(0).size() - 2) * 32*/32 * 15, this->map_);
 	player->__PUSH_UNIT_DEBUG(firstS);
 
 	//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
@@ -14,21 +14,21 @@ GameManager::GameManager() {
 	////////////////////////////CREATING UNITS
 	Legion* legionEnemy = new Legion;
 	Militia* militiaEnemy = new Militia;
-	militiaEnemy->setPlayerID(2);
-	militiaEnemy->spawn(32 * 10, 32 * 9, map);
+	militiaEnemy->set_player_id(2);
+	militiaEnemy->spawn(32 * 10, 32 * 9, map_);
 	//EnemyUnitVector.push_back(militiaEnemy);
 	enemyActor->__PUSH_UNIT_DEBUG(militiaEnemy);
-	legionEnemy->setPlayerID(2);
-	legionEnemy->spawn(32 * 9, 32 * 10, map);
+	legionEnemy->set_player_id(2);
+	legionEnemy->spawn(32 * 9, 32 * 10, map_);
 	//EnemyUnitVector.push_back(legionEnemy);
 	enemyActor->__PUSH_UNIT_DEBUG(legionEnemy);
 	Town* townEnemy = new Town;
-	townEnemy->setPlayer_id(2);
-	townEnemy->spawn(32 * 10, 32 * 10, this->map);
+	townEnemy->set_player_id(2);
+	townEnemy->spawn(32 * 10, 32 * 10, this->map_);
 	enemyActor->__PUSH_TOWN_DEBUG(townEnemy);
 	Town* townEnemy2 = new Town;
-	townEnemy2->setPlayer_id(2);
-	townEnemy2->spawn(32 * 7, 32 * 7, this->map);
+	townEnemy2->set_player_id(2);
+	townEnemy2->spawn(32 * 7, 32 * 7, this->map_);
 	enemyActor->__PUSH_TOWN_DEBUG(townEnemy2);
 	//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 
@@ -36,75 +36,75 @@ GameManager::GameManager() {
 	third->setPlayerID(3);
 	Settlers* settlers3 = new Settlers;
 	Legion* legionEnemy3 = new Legion;
-	legionEnemy3->setPlayerID(3);
-	legionEnemy3->spawn(32 * 20, 32 * 20, map);
-	settlers3->setPlayerID(3);
-	settlers3->spawn(32 * 19, 32 * 19, map);
+	legionEnemy3->set_player_id(3);
+	legionEnemy3->spawn(32 * 20, 32 * 20, map_);
+	settlers3->set_player_id(3);
+	settlers3->spawn(32 * 19, 32 * 19, map_);
 	third->__PUSH_UNIT_DEBUG(settlers3);
 	third->__PUSH_UNIT_DEBUG(legionEnemy3);
 
-	this->actors.push_back(*player);
-	this->actors.push_back(*enemyActor);
-	this->actors.push_back(*third);
+	this->actors_.push_back(*player);
+	this->actors_.push_back(*enemyActor);
+	this->actors_.push_back(*third);
 
-	this->currentYear = -4000;
-	this->isRef = false;
+	this->current_year_ = -4000;
+	this->is_ref = false;
 	sf::Texture* refer = new sf::Texture;
 	refer->loadFromFile(PATH_TO_ICON_REFERENCE);
 	this->ref.setTexture(*refer);
 }
 
-Map& GameManager::getMap() {
-	return this->map;
+Map& GameManager::get_map() {
+	return this->map_;
 }
 
-std::vector<Actor>& GameManager::getActors() {
-	return this->actors;
+std::vector<Actor>& GameManager::get_actors() {
+	return this->actors_;
 }
 
-void GameManager::setYear(int year) {
-	this->currentYear = year;
+void GameManager::set_year(int year) {
+	this->current_year_ = year;
 }
 
 int& GameManager::getYear() {
-	return this->currentYear;
+	return this->current_year_;
 }
 
 void GameManager::draw(sf::RenderWindow& w, sf::View& view) {
-	map.draw(w);
-	for (auto i : this->actors)
-		i.draw(w, this->map);
+	map_.draw(w);
+	for (auto i : this->actors_)
+		i.draw(w, this->map_);
 	//if(IsMenu)
-	ui.resize(w);
-	ui.setParams(this->actors[0].getTotalGold(), this->actors[0].getTotalScience(), (this->currentYear + 4000) / 5, this->currentYear);
-	this->ui.draw(w);
+	ui_.resize(w);
+	ui_.set_params(this->actors_[0].getTotalGold(), this->actors_[0].getTotalScience(), (this->current_year_ + 4000) / 5, this->current_year_);
+	this->ui_.draw(w);
 
 	ref.setScale(sf::Vector2f(static_cast<float>(w.getSize().x) / 1000, static_cast<float>(w.getSize().y) / 600));
 
 	ref.setPosition(static_cast<float>(w.getView().getCenter().x - w.getSize().x / 2), static_cast<float>(w.getView().getCenter().y + w.getSize().y / 2 - 600 * ref.getScale().y));
-	if (isRef)
+	if (is_ref)
 		w.draw(ref);
 }
 
-Actor& GameManager::findActorHidden(int ID) {
+Actor& GameManager::find_actor_hidden(int ID) {
 	if (ID < 100 && ID > 0) {
-		if (this->actors.at(ID - 1).getPlayerID() == ID)
-			return this->actors.at(ID - 1);
+		if (this->actors_.at(ID - 1).getPlayerID() == ID)
+			return this->actors_.at(ID - 1);
 	}
-	else return this->actors.at(0);
+	else return this->actors_.at(0);
 }
 
-Actor& GameManager::findActor(int mouse_x, int mouse_y) {
-	if ((map.getUnitInd(mouse_x, mouse_y)) / 100 != 0 && (map.getUnitInd(mouse_x, mouse_y)) / 100 != this->actors.at(0).getPlayerID()) //check index of unit
-		return findActorHidden((map.getUnitInd(mouse_x, mouse_y)) / 100);
+Actor& GameManager::find_actor(int mouse_x, int mouse_y) {
+	if ((map_.get_unit_ind(mouse_x, mouse_y)) / 100 != 0 && (map_.get_unit_ind(mouse_x, mouse_y)) / 100 != this->actors_.at(0).getPlayerID()) //check index of unit
+		return find_actor_hidden((map_.get_unit_ind(mouse_x, mouse_y)) / 100);
 }
 
-void GameManager::saveGame() {
+void GameManager::save_game() {
 	remove(PATH_TO_SAVE_1);
-	map.saveMap();
-	for (auto i : actors)
+	map_.save_map();
+	for (auto i : actors_)
 		i.saveTotalnfo();
-	this->ui.setStringLogs("Game successfully saved");
+	this->ui_.set_string_logs("Game successfully saved");
 }
 
 #pragma region UNitsMap_LOAD
@@ -217,71 +217,71 @@ std::vector<Unit> getUnitVectorByActorInd(int actorInd) {
 		//std::cout << "\nuID: " << tmpUnitIndex;//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 		if (tmpUnitIndex == 1) {
 			Settlers* settlers = new Settlers;
-			settlers->setHealth(getIntFromStringByIndex(slisedStr, 1));
-			settlers->setArmor(getIntFromStringByIndex(slisedStr, 2));
-			settlers->setDamage(getIntFromStringByIndex(slisedStr, 3));
-			settlers->setSteps(getIntFromStringByIndex(slisedStr, 4));
-			settlers->setRank(getIntFromStringByIndex(slisedStr, 5));
-			settlers->setCountOfKill(getIntFromStringByIndex(slisedStr, 6));
-			settlers->setPlayerID(getIntFromStringByIndex(slisedStr, 8));
-			settlers->setPosition(getIntFromStringByIndex(slisedStr, 9), getIntFromStringByIndex(slisedStr, 10));
-			settlers->setColorByID();
+			settlers->set_health(getIntFromStringByIndex(slisedStr, 1));
+			settlers->set_armor(getIntFromStringByIndex(slisedStr, 2));
+			settlers->set_damage(getIntFromStringByIndex(slisedStr, 3));
+			settlers->set_steps(getIntFromStringByIndex(slisedStr, 4));
+			settlers->set_rank(getIntFromStringByIndex(slisedStr, 5));
+			settlers->set_count_of_kill(getIntFromStringByIndex(slisedStr, 6));
+			settlers->set_player_id(getIntFromStringByIndex(slisedStr, 8));
+			settlers->set_position(getIntFromStringByIndex(slisedStr, 9), getIntFromStringByIndex(slisedStr, 10));
+			settlers->set_color_by_id();
 			tmp.push_back(*settlers);
 			//std::cout << "\nPushed s";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 		}
 		if (tmpUnitIndex == 2) {
 			Militia* militia = new Militia();
-			militia->setHealth(getIntFromStringByIndex(slisedStr, 1));
-			militia->setArmor(getIntFromStringByIndex(slisedStr, 2));
-			militia->setDamage(getIntFromStringByIndex(slisedStr, 3));
-			militia->setSteps(getIntFromStringByIndex(slisedStr, 4));
-			militia->setRank(getIntFromStringByIndex(slisedStr, 5));
-			militia->setCountOfKill(getIntFromStringByIndex(slisedStr, 6));
-			militia->setPlayerID(getIntFromStringByIndex(slisedStr, 8));
-			militia->setPosition(getIntFromStringByIndex(slisedStr, 9), getIntFromStringByIndex(slisedStr, 10));
-			militia->setColorByID();
+			militia->set_health(getIntFromStringByIndex(slisedStr, 1));
+			militia->set_armor(getIntFromStringByIndex(slisedStr, 2));
+			militia->set_damage(getIntFromStringByIndex(slisedStr, 3));
+			militia->set_steps(getIntFromStringByIndex(slisedStr, 4));
+			militia->set_rank(getIntFromStringByIndex(slisedStr, 5));
+			militia->set_count_of_kill(getIntFromStringByIndex(slisedStr, 6));
+			militia->set_player_id(getIntFromStringByIndex(slisedStr, 8));
+			militia->set_position(getIntFromStringByIndex(slisedStr, 9), getIntFromStringByIndex(slisedStr, 10));
+			militia->set_color_by_id();
 			tmp.push_back(*militia);
 			//std::cout << "\nPushed m";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 		}
 		if (tmpUnitIndex == 3) {
 			Legion* legion = new Legion();
-			legion->setHealth(getIntFromStringByIndex(slisedStr, 1));
-			legion->setArmor(getIntFromStringByIndex(slisedStr, 2));
-			legion->setDamage(getIntFromStringByIndex(slisedStr, 3));
-			legion->setSteps(getIntFromStringByIndex(slisedStr, 4));
-			legion->setRank(getIntFromStringByIndex(slisedStr, 5));
-			legion->setCountOfKill(getIntFromStringByIndex(slisedStr, 6));
-			legion->setPlayerID(getIntFromStringByIndex(slisedStr, 8));
-			legion->setPosition(getIntFromStringByIndex(slisedStr, 9), getIntFromStringByIndex(slisedStr, 10));
-			legion->setColorByID();
+			legion->set_health(getIntFromStringByIndex(slisedStr, 1));
+			legion->set_armor(getIntFromStringByIndex(slisedStr, 2));
+			legion->set_damage(getIntFromStringByIndex(slisedStr, 3));
+			legion->set_steps(getIntFromStringByIndex(slisedStr, 4));
+			legion->set_rank(getIntFromStringByIndex(slisedStr, 5));
+			legion->set_count_of_kill(getIntFromStringByIndex(slisedStr, 6));
+			legion->set_player_id(getIntFromStringByIndex(slisedStr, 8));
+			legion->set_position(getIntFromStringByIndex(slisedStr, 9), getIntFromStringByIndex(slisedStr, 10));
+			legion->set_color_by_id();
 			tmp.push_back(*legion);
 			//std::cout << "\nPushed l";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 		}
 		if (tmpUnitIndex == 4) {
 			Cavalry* cavalry = new Cavalry();
-			cavalry->setHealth(getIntFromStringByIndex(slisedStr, 1));
-			cavalry->setArmor(getIntFromStringByIndex(slisedStr, 2));
-			cavalry->setDamage(getIntFromStringByIndex(slisedStr, 3));
-			cavalry->setSteps(getIntFromStringByIndex(slisedStr, 4));
-			cavalry->setRank(getIntFromStringByIndex(slisedStr, 5));
-			cavalry->setCountOfKill(getIntFromStringByIndex(slisedStr, 6));
-			cavalry->setPlayerID(getIntFromStringByIndex(slisedStr, 8));
-			cavalry->setPosition(getIntFromStringByIndex(slisedStr, 9), getIntFromStringByIndex(slisedStr, 10));
-			cavalry->setColorByID();
+			cavalry->set_health(getIntFromStringByIndex(slisedStr, 1));
+			cavalry->set_armor(getIntFromStringByIndex(slisedStr, 2));
+			cavalry->set_damage(getIntFromStringByIndex(slisedStr, 3));
+			cavalry->set_steps(getIntFromStringByIndex(slisedStr, 4));
+			cavalry->set_rank(getIntFromStringByIndex(slisedStr, 5));
+			cavalry->set_count_of_kill(getIntFromStringByIndex(slisedStr, 6));
+			cavalry->set_player_id(getIntFromStringByIndex(slisedStr, 8));
+			cavalry->set_position(getIntFromStringByIndex(slisedStr, 9), getIntFromStringByIndex(slisedStr, 10));
+			cavalry->set_color_by_id();
 			tmp.push_back(*cavalry);
 			//std::cout << "\nPushed c";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 		}
 		if (tmpUnitIndex == 5) {
 			Chariot* chariot = new Chariot();
-			chariot->setHealth(getIntFromStringByIndex(slisedStr, 1));
-			chariot->setArmor(getIntFromStringByIndex(slisedStr, 2));
-			chariot->setDamage(getIntFromStringByIndex(slisedStr, 3));
-			chariot->setSteps(getIntFromStringByIndex(slisedStr, 4));
-			chariot->setRank(getIntFromStringByIndex(slisedStr, 5));
-			chariot->setCountOfKill(getIntFromStringByIndex(slisedStr, 6));
-			chariot->setPlayerID(getIntFromStringByIndex(slisedStr, 8));
-			chariot->setPosition(getIntFromStringByIndex(slisedStr, 9), getIntFromStringByIndex(slisedStr, 10));
-			chariot->setColorByID();
+			chariot->set_health(getIntFromStringByIndex(slisedStr, 1));
+			chariot->set_armor(getIntFromStringByIndex(slisedStr, 2));
+			chariot->set_damage(getIntFromStringByIndex(slisedStr, 3));
+			chariot->set_steps(getIntFromStringByIndex(slisedStr, 4));
+			chariot->set_rank(getIntFromStringByIndex(slisedStr, 5));
+			chariot->set_count_of_kill(getIntFromStringByIndex(slisedStr, 6));
+			chariot->set_player_id(getIntFromStringByIndex(slisedStr, 8));
+			chariot->set_position(getIntFromStringByIndex(slisedStr, 9), getIntFromStringByIndex(slisedStr, 10));
+			chariot->set_color_by_id();
 			tmp.push_back(*chariot);
 			//std::cout << "\nPushed c";//DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-DEBUG-
 		}
@@ -574,18 +574,18 @@ std::vector<Town> getTownVectorByActorInd(int actorInd) {
 	for (int i = 0; i < getTownsCount(actorInd); i++) {
 		std::string slisedStr = sliseStrings(preSlisedStr, i + 1);
 		Town* town = new Town;
-		town->setPlayer_id(getIntFromStringByIndexTowns(slisedStr, 2));
-		town->setPosition(getIntFromStringByIndexTowns(slisedStr, 3), getIntFromStringByIndexTowns(slisedStr, 4));
-		town->setHealth(getIntFromStringByIndexTowns(slisedStr, 5));
-		town->setDamage(getIntFromStringByIndexTowns(slisedStr, 6));
-		town->setPopulation(getIntFromStringByIndexTowns(slisedStr, 7));
-		town->setPopulation_limit(getIntFromStringByIndexTowns(slisedStr, 8));
-		town->setProduction(getIntFromStringByIndexTowns(slisedStr, 9));
-		town->setTrade(getIntFromStringByIndexTowns(slisedStr, 10));
-		town->setHappines(getIntFromStringByIndexTowns(slisedStr, 11));
-		town->setgoldIncome(getIntFromStringByIndexTowns(slisedStr, 12));
-		town->setScience(getIntFromStringByIndexTowns(slisedStr, 13));
-		town->setColorByID();
+		town->set_player_id(getIntFromStringByIndexTowns(slisedStr, 2));
+		town->set_position(getIntFromStringByIndexTowns(slisedStr, 3), getIntFromStringByIndexTowns(slisedStr, 4));
+		town->set_health(getIntFromStringByIndexTowns(slisedStr, 5));
+		town->set_damage(getIntFromStringByIndexTowns(slisedStr, 6));
+		town->set_population(getIntFromStringByIndexTowns(slisedStr, 7));
+		town->set_population_limit(getIntFromStringByIndexTowns(slisedStr, 8));
+		town->set_production(getIntFromStringByIndexTowns(slisedStr, 9));
+		town->set_trade(getIntFromStringByIndexTowns(slisedStr, 10));
+		town->set_happines(getIntFromStringByIndexTowns(slisedStr, 11));
+		town->set_gold_income(getIntFromStringByIndexTowns(slisedStr, 12));
+		town->set_science(getIntFromStringByIndexTowns(slisedStr, 13));
+		town->set_color_by_id();
 
 		tmp.push_back(*town);
 	}
@@ -593,39 +593,39 @@ std::vector<Town> getTownVectorByActorInd(int actorInd) {
 	return tmp;
 }
 //-------------------LOAD GAME
-void GameManager::loadGame() {
+void GameManager::load_game() {
 	bool isEmpty = false;
 	std::ifstream file;
 	file.open(PATH_TO_SAVE_1);
 
 	if (file) {
-		map.loadUnits(getMapUnitDataFromFile());
-		map.loadTerrains(getMapTerrainDataFromFile());
-		if (this->actors.size() > 0) {
+		map_.load_units(getMapUnitDataFromFile());
+		map_.load_terrains(getMapTerrainDataFromFile());
+		if (this->actors_.size() > 0) {
 			this->deleteAllActors();
 			//getActorInfoFromFile();
 			for (int i = 1; i <= getActorsCount(); i++) {
-				this->actors.push_back(Actor(getActorName(i), i));
-				this->actors[i - 1].setTotalGold(getActorTG(i));
-				this->actors[i - 1].setTotalScience(getActorTS(i));
-				this->actors[i - 1].setUnitVector(getUnitVectorByActorInd(i));
-				this->actors[i - 1].setUnitTown(getTownVectorByActorInd(i));
+				this->actors_.push_back(Actor(getActorName(i), i));
+				this->actors_[i - 1].setTotalGold(getActorTG(i));
+				this->actors_[i - 1].setTotalScience(getActorTS(i));
+				this->actors_[i - 1].setUnitVector(getUnitVectorByActorInd(i));
+				this->actors_[i - 1].setUnitTown(getTownVectorByActorInd(i));
 			}
 		}
 		else {
 		}
-		this->ui.setStringLogs("Successfully load", true);
+		this->ui_.set_string_logs("Successfully load", true);
 	}
 	else
-		this->ui.setStringLogs("\nCant find this file : " PATH_TO_SAVE_1  " (game has started in NEW GAME order)");
+		this->ui_.set_string_logs("\nCant find this file : " PATH_TO_SAVE_1  " (game has started in NEW GAME order)");
 
 	file.close();
 }
 
 void GameManager::deleteAllActors() {
-	this->actors.clear();
+	this->actors_.clear();
 }
 
-Ui& GameManager::getUi() {
-	return this->ui;
+Ui& GameManager::get_ui() {
+	return this->ui_;
 }

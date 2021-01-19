@@ -1,8 +1,8 @@
 #include "Oasis.h"
 
 Oasis::Oasis() {
-	this->texture.loadFromFile(PATH_TO_RESOURCES_OASIS);
-	this->sprite.setTexture(texture);
+	this->texture_.loadFromFile(PATH_TO_RESOURCES_OASIS);
+	this->sprite_.setTexture(texture_);
 	this->food = 3;
 }
 

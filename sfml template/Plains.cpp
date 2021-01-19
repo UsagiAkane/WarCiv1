@@ -1,15 +1,15 @@
 #include "Plains.h"
 
 Plains::Plains(int res) {
-	texture.loadFromFile(PATH_TO_TERRAINS_PLAINS);
-	this->sprite.setTexture(this->texture);
-	this->name = "plains";
-	this->move = 1;
-	this->food = 1;
-	this->prodaction = 1;
-	this->trade = 0;
-	this->defense = 1;
+	texture_.loadFromFile(PATH_TO_TERRAINS_PLAINS);
+	this->sprite_.setTexture(this->texture_);
+	this->name_ = "plains";
+	this->move_ = 1;
+	this->food_ = 1;
+	this->production_ = 1;
+	this->trade_ = 0;
+	this->defense_ = 1;
 
 	if (res == 1)
-		this->prodaction += this->horses.getProdaction();
+		this->production_ += this->horses.getProdaction();
 }

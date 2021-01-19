@@ -4,9 +4,9 @@
 
 class Resourses {
 protected:
-	sf::Texture texture;
-	sf::Sprite sprite;
+	sf::Texture texture_;
+	sf::Sprite sprite_;
 public:
 	void draw(sf::RenderWindow& w);
-	virtual void setPosition(float x, float y) { sprite.setPosition(x, y); }
+	virtual void set_position(float x, float y) { sprite_.setPosition(x, y); }
 };

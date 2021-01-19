@@ -1,8 +1,8 @@
 #include "Coal.h"
 
 Coal::Coal() {
-	this->texture.loadFromFile(PATH_TO_RESOURCES_COAL);
-	this->sprite.setTexture(texture);
+	this->texture_.loadFromFile(PATH_TO_RESOURCES_COAL);
+	this->sprite_.setTexture(texture_);
 	this->prodaction = 2;
 }
 

@@ -1,8 +1,8 @@
 #include "Oil.h"
 
 Oil::Oil() {
-	this->texture.loadFromFile(PATH_TO_RESOURCES_OIL);
-	this->sprite.setTexture(texture);
+	this->texture_.loadFromFile(PATH_TO_RESOURCES_OIL);
+	this->sprite_.setTexture(texture_);
 	this->prodaction = 4;
 }
 

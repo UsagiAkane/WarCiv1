@@ -18,30 +18,30 @@ private:
 	std::vector<std::vector<int>> map;
 	std::vector<std::vector<int>> units;
 public:
-	Map(int sizeX = 50, int sizeY = 50, int resGenChanse = 8);
+	explicit Map(int size_x = 50, int size_y = 50, int res_gen_chanse = 8);
 
 	//CHECKERS
-	Terrain getTile(int x, int y);
-	Terrain getTileVec(int x, int y);
-	bool isTown(int x, int y);
-	bool isFog(int x, int y);
+	Terrain get_tile(int x, int y);
+	Terrain get_tile_vec(int x, int y);
+	bool is_town(int x, int y);
+	bool is_fog(int x, int y);
 	//UNITS
-	int getUnitID(int x, int y);
-	int getUnitInd(int x, int y);
-	int getUnitPlayerID(int x, int y);
-	void pushUnit(int x, int y, int unit);
-	void moveUnit(int x, int y, int newx, int newy, int unitPlayerID);
-	void delUnit(int x, int y);
+	int get_unit_id(int x, int y);
+	int get_unit_ind(int x, int y);
+	int get_unit_player_id(int x, int y);
+	void push_unit(int x, int y, int unit);
+	void move_unit(int x, int y, int newx, int newy, int unitPlayerID);
+	void del_unit(int x, int y);
 	//SYSTEM/SAVES
-	std::vector<std::vector<int>>& _getVecTerrainsInt();
-	std::vector<std::vector<int>>& _getVecUnitsInt();
-	void saveMap();
-	void loadTerrains(std::string line);
-	void loadUnits(std::string line);
-	void reTakeTown(int x, int y, int newPlayerID);
-	void radarFog(int newx, int newy);
+	std::vector<std::vector<int>>& get_vec_terrains_int();
+	std::vector<std::vector<int>>& get_vec_units_int();
+	void save_map();
+	void load_terrains(std::string line);
+	void load_units(std::string line);
+	void re_take_town(int x, int y, int newPlayerID);
+	void radar_fog(int newx, int newy);
 	void __getInfo_DEBUG(int x, int y);
-	void getInfo(int x, int y, sf::RenderWindow& w);
+	void get_info(int x, int y, sf::RenderWindow& w);
 
 	void draw(sf::RenderWindow& w);
 };
